@@ -72,7 +72,7 @@ install:
   # Copy the plugin to the plugins directory.
   - cp -r $TRAVIS_BUILD_DIR/tests/_support/plugins/$WP_TEST_PLUGIN_SLUG $WP_ROOT_FOLDER/wp-content/plugins/
   - cd $WP_ROOT_FOLDER/wp-content/plugins/$WP_TEST_PLUGIN_SLUG
-  - composer install --prefer-source --no-interaction --no-div
+  - composer install --prefer-source --no-interaction --no-dev
   - rm -rf $WP_ROOT_FOLDER/wp-content/plugins/$WP_TEST_PLUGIN_SLUG/vendor/deep-web-solutions/wp-framework-helpers/*
   - cp -r $TRAVIS_BUILD_DIR $WP_ROOT_FOLDER/wp-content/plugins/$WP_TEST_PLUGIN_SLUG/vendor/deep-web-solutions/wp-framework-helpers
   # Generate the db export.
