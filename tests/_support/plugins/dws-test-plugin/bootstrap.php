@@ -34,6 +34,20 @@ define( 'DWS_TEST_PLUGIN_SLUG', 'dws-test-plugin' );
 define( 'DWS_TEST_PLUGIN_MIN_PHP', '7.4' );
 define( 'DWS_TEST_PLUGIN_MIN_WP', '5.4' );
 
+if ( file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
+	require_once __DIR__ . '/vendor/autoload.php'; // The conditional check makes the whole thing compatible with Bedrock.
+}
+
+if ( ! function_exists( 'dws_wp_framework_check_php_wp_requirements_met' ) ) {
+	add_action(
+		'admin_notices',
+		function() {
+			require_once __DIR__ . '/templates/installation-error.php';
+		}
+	);
+	return; // DWS WP Framework Core is NOT loaded. Do NOT continue.
+}
+
 define( 'DWS_TEST_PLUGIN_TEMP_DIR_NAME', 'test-plugin' );
 define( 'DWS_TEST_PLUGIN_TEMP_DIR_PATH', DWS_WP_FRAMEWORK_TEMP_DIR_PATH . DWS_TEST_PLUGIN_TEMP_DIR_NAME );
 define( 'DWS_TEST_PLUGIN_TEMP_DIR_URL', DWS_WP_FRAMEWORK_TEMP_DIR_URL . DWS_TEST_PLUGIN_TEMP_DIR_NAME );
@@ -102,23 +116,11 @@ function dws_test_plugin_deactivate() {
 	dws_test_plugin()->deactivate();
 }
 
-if ( file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
-	require_once __DIR__ . '/vendor/autoload.php'; // The conditional check makes the whole thing compatible with Bedrock.
-}
-
-if ( function_exists( 'dws_wp_framework_check_php_wp_requirements_met' ) ) {
-	if ( dws_wp_framework_check_php_wp_requirements_met( DWS_TEST_PLUGIN_MIN_PHP, DWS_TEST_PLUGIN_MIN_WP ) ) {
-		add_action( 'plugins_loaded', 'dws_test_plugin_init', 100 );
-		register_activation_hook( __FILE__, 'dws_test_plugin_activate' );
-		register_deactivation_hook( __FILE__, 'dws_test_plugin_deactivate' );
-	} else {
-		dws_wp_framework_output_requirements_error( DWS_TEST_PLUGIN_NAME, DWS_TEST_PLUGIN_MIN_PHP, DWS_TEST_PLUGIN_MIN_WP );
-	}
+/** Start plugin initialization if system requirements check out. */
+if ( dws_wp_framework_check_php_wp_requirements_met( DWS_TEST_PLUGIN_MIN_PHP, DWS_TEST_PLUGIN_MIN_WP ) ) {
+	add_action( 'plugins_loaded', 'dws_test_plugin_init', 100 );
+	register_activation_hook( __FILE__, 'dws_test_plugin_activate' );
+	register_deactivation_hook( __FILE__, 'dws_test_plugin_deactivate' );
 } else {
-	add_action(
-		'admin_notices',
-		function() {
-			require_once __DIR__ . '/templates/installation-error.php';
-		}
-	);
+	dws_wp_framework_output_requirements_error( DWS_TEST_PLUGIN_NAME, DWS_TEST_PLUGIN_MIN_PHP, DWS_TEST_PLUGIN_MIN_WP );
 }
