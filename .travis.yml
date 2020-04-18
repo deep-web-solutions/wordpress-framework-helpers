@@ -62,6 +62,7 @@ before_install:
 install:
   - composer self-update
   - composer install --prefer-source --no-interaction
+
   # Install and configure WordPress.
   - cd $WP_ROOT_FOLDER
   - wp core download --version=$WP_VERSION
@@ -69,14 +70,23 @@ install:
   - wp core install --url="$WP_URL" --title="Test" --admin_user="$ADMIN_USERNAME" --admin_password="$ADMIN_PASSWORD" --admin_email="$ADMIN_EMAIL" --skip-email
   - wp rewrite structure '/%postname%/' --hard
   - wp core update-db
+
   # Copy the plugin to the plugins directory.
   - cp -r $TRAVIS_BUILD_DIR/tests/_support/plugins/$WP_TEST_PLUGIN_SLUG $WP_ROOT_FOLDER/wp-content/plugins/
   - cd $WP_ROOT_FOLDER/wp-content/plugins/$WP_TEST_PLUGIN_SLUG
   - composer install --prefer-source --no-interaction --no-dev
   - rm -rf $WP_ROOT_FOLDER/wp-content/plugins/$WP_TEST_PLUGIN_SLUG/vendor/deep-web-solutions/wp-framework-helpers/*
   - cp -r $TRAVIS_BUILD_DIR $WP_ROOT_FOLDER/wp-content/plugins/$WP_TEST_PLUGIN_SLUG/vendor/deep-web-solutions/wp-framework-helpers
+
+  # Activate the test plugin.
+  - wp plugin activate $WP_TEST_PLUGIN_SLUG
+
+  # Verify the active plugins.
+  - wp plugin list --status=active
+
   # Generate the db export.
   - wp db export $TRAVIS_BUILD_DIR/tests/_data/dump.sql
+
   # Make sure directory is writeable.
   - cd $TRAVIS_BUILD_DIR
   - chmod -R 777 $WP_ROOT_FOLDER
