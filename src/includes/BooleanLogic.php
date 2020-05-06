@@ -1,0 +1,47 @@
+<?php
+
+namespace DeepWebSolutions\Framework\Helpers\v1_0_0;
+
+defined( 'ABSPATH' ) || exit;
+
+/**
+ * A collection of very useful boolean logic helpers to be used throughout the projects.
+ *
+ * @since   1.0.0
+ * @version 1.0.0
+ * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.de>
+ * @package DeepWebSolutions\Framework\Helpers\v1_0_0
+ */
+final class BooleanLogic {
+	/**
+	 * Useful class for calls to functional programming constructs, such as 'map_reduce'. Returns the logical or result
+	 * of the two parameters.
+	 *
+	 * @since   1.0.0
+	 * @version 1.0.0
+	 *
+	 * @param   bool    $boolean1   The first boolean value.
+	 * @param   bool    $boolean2   The second boolean value.
+	 *
+	 * @return  bool    The result of "or-ing" the two boolean parameters.
+	 */
+	public static function logical_or( $boolean1, $boolean2 ) {
+		return $boolean1 || $boolean2;
+	}
+
+	/**
+	 * Useful class for calls to functional programming constructs, such as 'map_reduce'. Returns the logical or result
+	 * of the two parameters.
+	 *
+	 * @since   1.0.0
+	 * @version 1.0.0
+	 *
+	 * @param   bool    $boolean1   The first boolean value.
+	 * @param   bool    $boolean2   The second boolean value.
+	 *
+	 * @return  bool    The result of "and-ing" the two boolean parameters.
+	 */
+	public static function logical_and( $boolean1, $boolean2 ) {
+		return $boolean1 && $boolean2;
+	}
+}
