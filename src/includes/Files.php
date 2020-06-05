@@ -1,6 +1,6 @@
 <?php
 
-namespace DeepWebSolutions\Framework\Helpers\v1_0_0;
+namespace DeepWebSolutions\Framework\Helpers;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -10,7 +10,7 @@ defined( 'ABSPATH' ) || exit;
  * @since   1.0.0
  * @version 1.0.0
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.de>
- * @package DeepWebSolutions\Framework\Helpers\v1_0_0
+ * @package DeepWebSolutions\Framework\Helpers
  */
 final class Files {
 	// region PUBLIC

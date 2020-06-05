@@ -15,19 +15,19 @@
     },
     {
       "name": "Contributors",
-      "homepage": "https://github.com/Deep-Web-Solutions-GmbH/wordpress-framework-helpers/graphs/contributors"
+      "homepage": "https://github.com/deep-web-solutions/wordpress-framework-helpers/graphs/contributors"
     }
   ],
 
   "repositories": [
     {
       "type": "vcs",
-      "url": "https://github.com/Deep-Web-Solutions-GmbH/wordpress-framework-core/"
+      "url": "https://github.com/deep-web-solutions/wordpress-framework-bootstrapper"
     }
   ],
   "require": {
     "php": ">=7.4",
-    "deep-web-solutions/wp-framework-core": "master@dev"
+    "deep-web-solutions/wp-framework-bootstrapper": "master@dev"
   },
   "require-dev": {
     "phpmd/phpmd": "*",
@@ -37,6 +37,7 @@
     "phpcompatibility/php-compatibility": "*",
     "phpcompatibility/phpcompatibility-wp": "*",
     "wp-coding-standards/wpcs": "*",
+    "sllh/composer-versions-check": "*",
 
     "lucatume/wp-browser": "^2.4",
     "codeception/module-asserts": "^1.0",
@@ -49,7 +50,7 @@
   },
   "autoload": {
     "psr-4": {
-      "DeepWebSolutions\\Framework\\Helpers\\v1_0_0\\": "src/includes"
+      "DeepWebSolutions\\Framework\\Helpers\\": "src/includes"
     },
     "files": [
       "bootstrap.php"

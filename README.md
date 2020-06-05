@@ -11,7 +11,7 @@
 
 ## Description 
 
-[![Build Status](https://travis-ci.org/Deep-Web-Solutions-GmbH/wordpress-framework-helpers.svg?branch=master)](https://travis-ci.org/Deep-Web-Solutions-GmbH/wordpress-framework-helpers)
+[![Build Status](https://travis-ci.com/deep-web-solutions/wordpress-framework-helpers.svg?branch=master)](https://travis-ci.com/deep-web-solutions/wordpress-framework-helpers)
 
 A set of related helpers to kick start WordPress development.
 
@@ -25,5 +25,5 @@ A set of related helpers to kick start WordPress development.
 ## Changelog 
 
 
-### 1.0.0 (May 1, 2020) 
+### 1.0.0 (September 1, 2020) 
 * First official release.

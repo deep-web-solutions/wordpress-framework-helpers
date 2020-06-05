@@ -35,7 +35,7 @@
     <rule ref="WordPress.WP.I18n">
         <properties>
             <property name="text_domain" type="array">
-                <element value="dws-wp-framework-helpers-v1-0-0"/>
+                <element value="dws-wp-framework-helpers"/>
             </property>
         </properties>
     </rule>
