@@ -4,7 +4,7 @@
  *
  * @since               1.0.0
  * @version             1.0.0
- * @package             DeepWebSolutions\WP-Helpers
+ * @package             DeepWebSolutions\WP-Framework\Helpers
  * @author              Deep Web Solutions GmbH
  * @copyright           2021 Deep Web Solutions GmbH
  * @license             GPL-3.0-or-later
