@@ -10,7 +10,7 @@ defined( 'ABSPATH' ) || exit;
  * @since   1.0.0
  * @version 1.0.0
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.de>
- * @package DeepWebSolutions\Framework\Helpers
+ * @package DeepWebSolutions\WP-Helpers
  */
 final class Templating {
 	/**
@@ -24,7 +24,7 @@ final class Templating {
 	 * @param   string  $name               Template name.
 	 * @param   string  $path               Relative path inside the theme's directory.
 	 */
-	public static function get_template_part( $default_template, $slug, $name, $path ) {
+	public static function get_template_part( string $default_template, string $slug, string $name, string $path ): void {
 		$path = trailingslashit( $path );
 
 		$template = locate_template( $path . "{$slug}-{$name}.php" );

@@ -10,7 +10,7 @@ defined( 'ABSPATH' ) || exit;
  * @since   1.0.0
  * @version 1.0.0
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.de>
- * @package DeepWebSolutions\Framework\Helpers
+ * @package DeepWebSolutions\WP-Helpers
  */
 final class BooleanLogic {
 	/**
@@ -25,7 +25,7 @@ final class BooleanLogic {
 	 *
 	 * @return  bool    The result of "or-ing" the two boolean parameters.
 	 */
-	public static function logical_or( $boolean1, $boolean2 ) {
+	public static function logical_or( bool $boolean1, bool $boolean2 ): bool {
 		return $boolean1 || $boolean2;
 	}
 
@@ -41,7 +41,7 @@ final class BooleanLogic {
 	 *
 	 * @return  bool    The result of "and-ing" the two boolean parameters.
 	 */
-	public static function logical_and( $boolean1, $boolean2 ) {
+	public static function logical_and( bool $boolean1, bool $boolean2 ): bool {
 		return $boolean1 && $boolean2;
 	}
 }

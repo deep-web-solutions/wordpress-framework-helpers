@@ -10,7 +10,7 @@ defined( 'ABSPATH' ) || exit;
  * @since   1.0.0
  * @version 1.0.0
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.de>
- * @package DeepWebSolutions\Framework\Helpers
+ * @package DeepWebSolutions\WP-Helpers
  */
 final class Arrays {
 	/**
@@ -19,14 +19,14 @@ final class Arrays {
 	 * @since   1.0.0
 	 * @version 1.0.0
 	 *
-	 * @param   array       $array      The original array passed by reference.
-	 * @param   mixed       $value      The value that should be unset.
-	 * @param   callable    $callback   The callback to use to determine whether the value is the one looked for or not.
-	 *                                  If not provided, the key search defaults to the function array_keys.
+	 * @param   array           $array      The original array passed by reference.
+	 * @param   mixed           $value      The value that should be unset.
+	 * @param   callable|null   $callback   The callback to use to determine whether the value is the one looked for or not.
+	 *                                      If not provided, the key search defaults to the function array_keys.
 	 *
 	 * @return  int     The number of items removed from the array.
 	 */
-	public static function unset_array_element_by_value( array &$array, $value, callable $callback = null ) {
+	public static function unset_array_element_by_value( array &$array, $value, callable $callback = null ): int {
 		if ( is_callable( $callback ) ) {
 			$keys = array();
 			foreach ( $array as $key => $value ) {
