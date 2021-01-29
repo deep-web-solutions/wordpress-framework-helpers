@@ -39,6 +39,18 @@ final class WordPress {
 	}
 
 	/**
+	 * Returns the current priority of the hook currently executing.
+	 *
+	 * @since   1.0.0
+	 * @version 1.0.0
+	 *
+	 * @return  int
+	 */
+	public static function get_current_hook_priority(): int {
+		return $GLOBALS['wp_filter'][ current_filter() ]->current_priority();
+	}
+
+	/**
 	 * A copy of WooCommerce's private built-in function for determining what type of request we're dealing with.
 	 *
 	 * @since   1.0.0
