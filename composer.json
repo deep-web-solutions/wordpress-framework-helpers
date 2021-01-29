@@ -26,7 +26,6 @@
     }
   ],
   "require": {
-    "php": ">=7.4",
     "deep-web-solutions/wp-framework-bootstrapper": "master@dev"
   },
   "require-dev": {
