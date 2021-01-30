@@ -2,6 +2,9 @@
 
 namespace DeepWebSolutions\Framework\Helpers;
 
+use Psr\Log\LoggerInterface;
+use Psr\Log\LogLevel;
+
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -94,5 +97,21 @@ final class WordPress {
 		}
 
 		return ( false !== strpos( $_SERVER['REQUEST_URI'], trailingslashit( rest_get_url_prefix() ) ) ); // phpcs:disable WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+	}
+
+	/**
+	 * Logs an event with an appropriate level and returns an exception with the same message.
+	 *
+	 * @param   LoggerInterface     $logger         The PSR3 logger to use.
+	 * @param   LogLevel            $log_level      The PSR3 log level.
+	 * @param   string              $exception      The exception to instantiate.
+	 * @param   string              $message        The message to log/return as exception.
+	 * @param   array               $context        The PSR3 context.
+	 *
+	 * @return  \Exception
+	 */
+	public static function log_event_and_return_exception( LoggerInterface $logger, LogLevel $log_level, string $exception, string $message, array $context = array() ) {
+		$logger->log( $log_level, $message, $context );
+		return new $exception( $message );
 	}
 }
