@@ -92,7 +92,10 @@ if ( dws_wp_framework_check_php_wp_requirements_met( dws_wp_framework_get_helper
 	add_action(
 		'plugins_loaded',
 		function() {
-			define( __NAMESPACE__ . '\DWS_WP_FRAMEWORK_HELPERS_INIT', DWS_WP_FRAMEWORK_BOOTSTRAPPER_INIT );
+			define(
+				__NAMESPACE__ . '\DWS_WP_FRAMEWORK_HELPERS_INIT',
+				defined( __NAMESPACE__ . '\DWS_WP_FRAMEWORK_BOOTSTRAPPER_INIT' ) && DWS_WP_FRAMEWORK_BOOTSTRAPPER_INIT
+			);
 		},
 		PHP_INT_MIN
 	);
