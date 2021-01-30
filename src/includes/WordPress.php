@@ -103,14 +103,14 @@ final class WordPress {
 	 * Logs an event with an appropriate level and returns an exception with the same message.
 	 *
 	 * @param   LoggerInterface     $logger         The PSR3 logger to use.
-	 * @param   LogLevel            $log_level      The PSR3 log level.
+	 * @param   string              $log_level      The PSR3 log level.
 	 * @param   string              $exception      The exception to instantiate.
 	 * @param   string              $message        The message to log/return as exception.
 	 * @param   array               $context        The PSR3 context.
 	 *
 	 * @return  \Exception
 	 */
-	public static function log_event_and_return_exception( LoggerInterface $logger, LogLevel $log_level, string $exception, string $message, array $context = array() ) {
+	public static function log_event_and_return_exception( LoggerInterface $logger, string $log_level, string $exception, string $message, array $context = array() ) {
 		$logger->log( $log_level, $message, $context );
 		return new $exception( $message );
 	}
