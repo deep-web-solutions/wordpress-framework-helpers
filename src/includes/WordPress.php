@@ -110,8 +110,22 @@ final class WordPress {
 	 *
 	 * @return  \Exception
 	 */
-	public static function log_event_and_return_exception( LoggerInterface $logger, string $log_level, string $exception, string $message, array $context = array() ) {
+	public static function log_event_and_return_exception( LoggerInterface $logger, string $log_level, string $exception, string $message, array $context = array() ): \Exception {
 		$logger->log( $log_level, $message, $context );
 		return new $exception( $message );
+	}
+
+	/**
+	 * Logs a debug-level event and also runs a '_doing_it_wrong' call with the same message.
+	 *
+	 * @param   LoggerInterface     $logger         The PSR3 logger to use.
+	 * @param   string              $function       The function being used incorrectly.
+	 * @param   string              $message        The message to log/return as exception.
+	 * @param   string              $since_version  The plugin version that introduced this warning message.
+	 * @param   array               $context        The PSR3 context.
+	 */
+	public static function log_event_and_doing_it_wrong( LoggerInterface $logger, string $function, string $message, string $since_version, array $context = array() ): void {
+		$logger->log( LogLevel::DEBUG, $message, $context );
+		_doing_it_wrong( $function, $message, $since_version ); // phpcs:ignore
 	}
 }
