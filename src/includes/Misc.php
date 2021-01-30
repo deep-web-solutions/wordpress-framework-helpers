@@ -14,6 +14,8 @@ defined( 'ABSPATH' ) || exit;
  */
 final class Misc {
 	/**
+	 * Gets the recursive list of traits used by a given class.
+	 *
 	 * @since   1.0.0
 	 * @version 1.0.0
 	 *
@@ -44,5 +46,37 @@ final class Misc {
 		};
 
 		return array_unique( $traits );
+	}
+
+	/**
+	 * Transforms the php.ini notation for numbers (like 2M) to an integer.
+	 *
+	 * @since   1.0.0
+	 * @version 1.0.0
+	 *
+	 * @noinspection PhpMissingBreakStatementInspection
+	 *
+	 * @param   string  $size   The php.ini size to transform into an integer.
+	 *
+	 * @return  int
+	 */
+	public static function let_to_num( string $size ): int {
+		$l   = substr( $size, -1 );
+		$ret = substr( $size, 0, -1 );
+
+		switch ( strtoupper( $l ) ) {
+			case 'P': // phpcs:ignore
+				$ret *= 1024;
+			case 'T': // phpcs:ignore
+				$ret *= 1024;
+			case 'G': // phpcs:ignore
+				$ret *= 1024;
+			case 'M': // phpcs:ignore
+				$ret *= 1024;
+			case 'K': // phpcs:ignore
+				$ret *= 1024;
+		}
+
+		return $ret;
 	}
 }
