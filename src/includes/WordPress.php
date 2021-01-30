@@ -116,16 +116,36 @@ final class WordPress {
 	}
 
 	/**
-	 * Logs a debug-level event and also runs a '_doing_it_wrong' call with the same message.
+	 * Logs an event with an appropriate level and also runs a '_doing_it_wrong' call with the same message.
 	 *
 	 * @param   LoggerInterface     $logger         The PSR3 logger to use.
 	 * @param   string              $function       The function being used incorrectly.
 	 * @param   string              $message        The message to log/return as exception.
 	 * @param   string              $since_version  The plugin version that introduced this warning message.
+	 * @param   string              $log_level      The PSR3 log level.
 	 * @param   array               $context        The PSR3 context.
 	 */
-	public static function log_event_and_doing_it_wrong( LoggerInterface $logger, string $function, string $message, string $since_version, array $context = array() ): void {
-		$logger->log( LogLevel::DEBUG, $message, $context );
+	public static function log_event_and_doing_it_wrong( LoggerInterface $logger, string $function, string $message, string $since_version, string $log_level = LogLevel::DEBUG, array $context = array() ): void {
+		$logger->log( $log_level, $message, $context );
 		_doing_it_wrong( $function, $message, $since_version ); // phpcs:ignore
+	}
+
+	/**
+	 * Logs an event with an appropriate level, runs a '_doing_it_wrong' call, and returns an exception with the same message.
+	 *
+	 * @param   LoggerInterface     $logger         The PSR3 logger to use.
+	 * @param   string              $function       The function being used incorrectly.
+	 * @param   string              $message        The message to log/return as exception.
+	 * @param   string              $since_version  The plugin version that introduced this warning message.
+	 * @param   string              $exception      The exception to instantiate.
+	 * @param   string              $log_level      The PSR3 log level.
+	 * @param   array               $context        The PSR3 context.
+	 *
+	 * @return  \Exception
+	 */
+	public static function log_event_and_doing_it_wrong_and_return_exception( LoggerInterface $logger, string $function, string $message, string $since_version, string $exception, string $log_level = LogLevel::DEBUG, array $context = array() ): \Exception {
+		$logger->log( $log_level, $message, $context );
+		_doing_it_wrong( $function, $message, $since_version ); // phpcs:ignore
+		return new $exception( $message );
 	}
 }
