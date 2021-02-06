@@ -1,6 +1,9 @@
 <?php
 
-namespace DeepWebSolutions\Framework\Helpers;
+namespace DeepWebSolutions\Framework\Helpers\WordPress;
+
+use DeepWebSolutions\Framework\Helpers\PHP\Files;
+use DeepWebSolutions\Framework\Helpers\PHP\Strings;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -10,7 +13,7 @@ defined( 'ABSPATH' ) || exit;
  * @since   1.0.0
  * @version 1.0.0
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.de>
- * @package DeepWebSolutions\WP-Framework\Helpers
+ * @package DeepWebSolutions\WP-Framework\Helpers\WordPress
  */
 final class Assets {
 	// region CSS-specific
@@ -247,12 +250,13 @@ final class Assets {
 	 * @since   1.0.0
 	 * @version 1.0.0
 	 *
-	 * @param   string  $handle             A string that should uniquely identify the CSS asset.
-	 * @param   string  $relative_path      The path to the CSS file relative to the child theme's directory.
-	 * @param   string  $fallback_version   The string to be used as a cache-busting fallback if everything else fails.
-	 * @param   array   $deps               Array of dependent CSS handles that should be loaded first.
-	 * @param   bool    $in_footer          Whether the file should be enqueued to the footer or header of the site.
-	 * @param   string  $constant_name      The name of the constant to check for truthful values in case the assets should be loaded in a minified state.
+	 * @param   string  $handle                 A string that should uniquely identify the CSS asset.
+	 * @param   string  $relative_path          The path to the CSS file relative to the child theme's directory.
+	 * @param   string  $assets_directory_path  Absolute path that should be prepended to the relative path to get the full path.
+	 * @param   string  $fallback_version       The string to be used as a cache-busting fallback if everything else fails.
+	 * @param   array   $deps                   Array of dependent CSS handles that should be loaded first.
+	 * @param   bool    $in_footer              Whether the file should be enqueued to the footer or header of the site.
+	 * @param   string  $constant_name          The name of the constant to check for truthful values in case the assets should be loaded in a minified state.
 	 *
 	 * @return  bool
 	 */
