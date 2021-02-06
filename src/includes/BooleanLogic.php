@@ -14,7 +14,7 @@ defined( 'ABSPATH' ) || exit;
  */
 final class BooleanLogic {
 	/**
-	 * Useful class for calls to functional programming constructs, such as 'map_reduce'. Returns the logical or result
+	 * Useful class for calls to functional programming constructs, such as 'array_reduce'. Returns the logical or result
 	 * of the two parameters.
 	 *
 	 * @since   1.0.0
@@ -30,7 +30,7 @@ final class BooleanLogic {
 	}
 
 	/**
-	 * Useful class for calls to functional programming constructs, such as 'map_reduce'. Returns the logical or result
+	 * Useful class for calls to functional programming constructs, such as 'array_reduce'. Returns the logical or result
 	 * of the two parameters.
 	 *
 	 * @since   1.0.0
