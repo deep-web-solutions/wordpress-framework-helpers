@@ -52,6 +52,25 @@ final class Assets {
 	}
 
 	/**
+	 * Register and enqueue a stylesheet.
+	 *
+	 * @since   1.0.0
+	 * @version 1.0.0
+	 *
+	 * @param   string  $handle             A string that should uniquely identify the CSS asset.
+	 * @param   string  $relative_path      The path to the CSS file relative to the child theme's directory.
+	 * @param   string  $absolute_path_stub Absolute path that should be prepended to the relative path to get the full path.
+	 * @param   string  $fallback_version   The string to be used as a cache-busting fallback if everything else fails.
+	 * @param   array   $deps               Array of dependent CSS handles that should be loaded first.
+	 * @param   string  $media              The media query that the CSS asset should be loaded on.
+	 * @param   string  $constant_name      The name of the constant to check for truthful values in case the assets should be loaded in a minified state.
+	 */
+	public static function enqueue_style( string $handle, string $relative_path, string $absolute_path_stub, string $fallback_version, array $deps = array(), string $media = 'all', string $constant_name = 'SCRIPT_DEBUG' ): void {
+		self::register_style( $handle, $relative_path, $absolute_path_stub, $fallback_version, $deps, $media, $constant_name );
+		wp_enqueue_style( $handle );
+	}
+
+	/**
 	 * Returns a string wrapped in CSS tags.
 	 *
 	 * @since   1.0.0
@@ -136,6 +155,25 @@ final class Assets {
 	}
 
 	/**
+	 * Register and enqueue a JavaScript file.
+	 *
+	 * @since   1.0.0
+	 * @version 1.0.0
+	 *
+	 * @param   string  $handle             A string that should uniquely identify the CSS asset.
+	 * @param   string  $relative_path      The path to the CSS file relative to the child theme's directory.
+	 * @param   string  $absolute_path_stub Absolute path that should be prepended to the relative path to get the full path.
+	 * @param   string  $fallback_version   The string to be used as a cache-busting fallback if everything else fails.
+	 * @param   array   $deps               Array of dependent CSS handles that should be loaded first.
+	 * @param   bool    $in_footer          Whether the file should be enqueued to the footer or header of the site.
+	 * @param   string  $constant_name      The name of the constant to check for truthful values in case the assets should be loaded in a minified state.
+	 */
+	public static function enqueue_script( string $handle, string $relative_path, string $absolute_path_stub, string $fallback_version, array $deps = array(), bool $in_footer = true, string $constant_name = 'SCRIPT_DEBUG' ): void {
+		self::register_script( $handle, $relative_path, $absolute_path_stub, $fallback_version, $deps, $in_footer, $constant_name );
+		wp_enqueue_script( $handle );
+	}
+
+	/**
 	 * Returns a string wrapped in JS tags.
 	 *
 	 * @since   1.0.0
@@ -206,6 +244,23 @@ final class Assets {
 	}
 
 	/**
+	 * Register and enqueue a stylesheet that exists in the child theme.
+	 *
+	 * @since   1.0.0
+	 * @version 1.0.0
+	 *
+	 * @param   string  $handle             A string that should uniquely identify the CSS asset.
+	 * @param   string  $relative_path      The path to the CSS file relative to the child theme's directory.
+	 * @param   string  $fallback_version   The string to be used as a cache-busting fallback if everything else fails.
+	 * @param   array   $deps               Array of dependent CSS handles that should be loaded first.
+	 * @param   string  $media              The media query that the CSS asset should be loaded on.
+	 * @param   string  $constant_name      The name of the constant to check for truthful values in case the assets should be loaded in a minified state.
+	 */
+	public static function enqueue_child_theme_style( string $handle, string $relative_path, string $fallback_version, array $deps = array(), string $media = 'all', string $constant_name = 'SCRIPT_DEBUG' ): void {
+		self::enqueue_style( $handle, $relative_path, get_stylesheet_directory(), $fallback_version, $deps, $media, $constant_name );
+	}
+
+	/**
 	 * Register a stylesheet that exists in a plugin.
 	 *
 	 * @since   1.0.0
@@ -223,6 +278,26 @@ final class Assets {
 	 */
 	public static function register_plugin_style( string $handle, string $relative_path, string $assets_directory_path, string $fallback_version, array $deps = array(), string $media = 'all', string $constant_name = 'SCRIPT_DEBUG' ): bool {
 		return self::register_style( $handle, $relative_path, $assets_directory_path, $fallback_version, $deps, $media, $constant_name );
+	}
+
+	/**
+	 * Register and enqueue a stylesheet that exists in a plugin.
+	 *
+	 * @since   1.0.0
+	 * @version 1.0.0
+	 *
+	 * @param   string  $handle                 A string that should uniquely identify the CSS asset.
+	 * @param   string  $relative_path          The path to the CSS file relative to the plugin's assets directory.
+	 * @param   string  $assets_directory_path  The absolute path to the plugin's assets directory.
+	 * @param   string  $fallback_version       The string to be used as a cache-busting fallback if everything else fails.
+	 * @param   array   $deps                   Array of dependent CSS handles that should be loaded first.
+	 * @param   string  $media                  The media query that the CSS asset should be loaded on.
+	 * @param   string  $constant_name          The name of the constant to check for truthful values in case the assets should be loaded in a minified state.
+	 *
+	 * @return  bool
+	 */
+	public static function enqueue_plugin_style( string $handle, string $relative_path, string $assets_directory_path, string $fallback_version, array $deps = array(), string $media = 'all', string $constant_name = 'SCRIPT_DEBUG' ): void {
+		self::enqueue_style( $handle, $relative_path, $assets_directory_path, $fallback_version, $deps, $media, $constant_name );
 	}
 
 	/**
@@ -245,6 +320,23 @@ final class Assets {
 	}
 
 	/**
+	 * Register and enqueue a JavaScript file that exists in the child theme.
+	 *
+	 * @since   1.0.0
+	 * @version 1.0.0
+	 *
+	 * @param   string  $handle             A string that should uniquely identify the CSS asset.
+	 * @param   string  $relative_path      The path to the CSS file relative to the child theme's directory.
+	 * @param   string  $fallback_version   The string to be used as a cache-busting fallback if everything else fails.
+	 * @param   array   $deps               Array of dependent CSS handles that should be loaded first.
+	 * @param   bool    $in_footer          Whether the file should be enqueued to the footer or header of the site.
+	 * @param   string  $constant_name      The name of the constant to check for truthful values in case the assets should be loaded in a minified state.
+	 */
+	public static function enqueue_child_theme_script( string $handle, string $relative_path, string $fallback_version, array $deps = array(), bool $in_footer = true, string $constant_name = 'SCRIPT_DEBUG' ): void {
+		self::enqueue_script( $handle, $relative_path, get_stylesheet_directory(), $fallback_version, $deps, $in_footer, $constant_name );
+	}
+
+	/**
 	 * Register a JavaScript file that exists in a plugin.
 	 *
 	 * @since   1.0.0
@@ -262,6 +354,24 @@ final class Assets {
 	 */
 	public static function register_plugin_script( string $handle, string $relative_path, string $assets_directory_path, string $fallback_version, array $deps = array(), bool $in_footer = true, string $constant_name = 'SCRIPT_DEBUG' ): bool {
 		return self::register_script( $handle, $relative_path, $assets_directory_path, $fallback_version, $deps, $in_footer, $constant_name );
+	}
+
+	/**
+	 * Register and enqueue a JavaScript file that exists in a plugin.
+	 *
+	 * @since   1.0.0
+	 * @version 1.0.0
+	 *
+	 * @param   string  $handle                 A string that should uniquely identify the CSS asset.
+	 * @param   string  $relative_path          The path to the CSS file relative to the child theme's directory.
+	 * @param   string  $assets_directory_path  Absolute path that should be prepended to the relative path to get the full path.
+	 * @param   string  $fallback_version       The string to be used as a cache-busting fallback if everything else fails.
+	 * @param   array   $deps                   Array of dependent CSS handles that should be loaded first.
+	 * @param   bool    $in_footer              Whether the file should be enqueued to the footer or header of the site.
+	 * @param   string  $constant_name          The name of the constant to check for truthful values in case the assets should be loaded in a minified state.
+	 */
+	public static function enqueue_plugin_script( string $handle, string $relative_path, string $assets_directory_path, string $fallback_version, array $deps = array(), bool $in_footer = true, string $constant_name = 'SCRIPT_DEBUG' ): void {
+		self::enqueue_script( $handle, $relative_path, $assets_directory_path, $fallback_version, $deps, $in_footer, $constant_name );
 	}
 
 	/**
