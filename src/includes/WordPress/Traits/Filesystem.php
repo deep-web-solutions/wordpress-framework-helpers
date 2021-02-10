@@ -2,6 +2,7 @@
 
 namespace DeepWebSolutions\Framework\Helpers\WordPress\Traits;
 
+use DeepWebSolutions\Framework\Helpers\WordPress\Requests;
 use WP_Filesystem_Base;
 
 defined( 'ABSPATH' ) || exit;
@@ -40,14 +41,14 @@ trait Filesystem {
 		$credentials = request_filesystem_credentials( $form_url, '', false, $context, $extra_fields );
 
 		if ( false === $credentials ) {
-			if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+			if ( Requests::has_debug() ) {
 				// phpcs:disable WordPress.PHP.DevelopmentFunctions
 				error_log( 'Failed to retrieve WP Filesystem credentials.' );
 				// phpcs:enable
 			}
 			return null;
 		} elseif ( ! wp_filesystem( $credentials ) ) {
-			if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+			if ( Requests::has_debug() ) {
 				// phpcs:disable WordPress.PHP.DevelopmentFunctions
 				error_log( 'Failed to connect to the WP Filesystem.' );
 				// phpcs:enable

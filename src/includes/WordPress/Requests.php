@@ -120,5 +120,19 @@ final class Requests {
 		return ( false !== strpos( $_SERVER['REQUEST_URI'], trailingslashit( rest_get_url_prefix() ) ) ); // phpcs:disable WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 	}
 
+	/**
+	 * Checks whether a debugging constant is set and true-ish.
+	 *
+	 * @since   1.0.0
+	 * @version 1.0.0
+	 *
+	 * @param   string  $constant   The constant to check for. Default is WP_DEBUG.
+	 *
+	 * @return  bool    True if the constant is defined and true.
+	 */
+	public static function has_debug( string $constant = 'WP_DEBUG' ): bool {
+		return defined( $constant ) && constant( $constant );
+	}
+
 	// endregion
 }
