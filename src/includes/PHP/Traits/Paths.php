@@ -1,6 +1,6 @@
 <?php
 
-namespace DeepWebSolutions\Framework\Helpers\Traits;
+namespace DeepWebSolutions\Framework\Helpers\PHP\Traits;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -10,7 +10,7 @@ defined( 'ABSPATH' ) || exit;
  * @since   1.0.0
  * @version 1.0.0
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.de>
- * @package DeepWebSolutions\WP-Framework\Helpers\Traits
+ * @package DeepWebSolutions\WP-Framework\Helpers\PHP\Traits
  */
 trait Paths {
 	use Reflection;

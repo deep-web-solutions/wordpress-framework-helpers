@@ -54,6 +54,8 @@ final class Misc {
 	 * @since   1.0.0
 	 * @version 1.0.0
 	 *
+	 * @see     http://hookr.io/functions/wc_let_to_num/
+	 *
 	 * @noinspection PhpMissingBreakStatementInspection
 	 *
 	 * @param   string  $size   The php.ini size to transform into an integer.

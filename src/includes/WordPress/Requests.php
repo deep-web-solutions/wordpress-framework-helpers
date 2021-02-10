@@ -5,14 +5,75 @@ namespace DeepWebSolutions\Framework\Helpers\WordPress;
 defined( 'ABSPATH' ) || exit;
 
 /**
- * A collection of very useful misc WP helpers to be used throughout the projects.
+ * A collection of very useful WP request helpers to be used throughout the projects.
  *
  * @since   1.0.0
  * @version 1.0.0
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.de>
  * @package DeepWebSolutions\WP-Framework\Helpers\WordPress
  */
-final class Misc {
+final class Requests {
+	// region FIELDS AND CONSTANTS
+
+	/**
+	 * Enum-type constant for identifying an admin request.
+	 *
+	 * @since   1.0.0
+	 * @version 1.0.0
+	 *
+	 * @access  public
+	 * @var     string  ADMIN_REQUEST
+	 */
+	public const ADMIN_REQUEST = 'admin';
+
+	/**
+	 * Enum-type constant for identifying an ajax request.
+	 *
+	 * @since   1.0.0
+	 * @version 1.0.0
+	 *
+	 * @access  public
+	 * @var     string  AJAX_REQUEST
+	 */
+	public const AJAX_REQUEST = 'ajax';
+
+	/**
+	 * Enum-type constant for identifying a cron request.
+	 *
+	 * @since   1.0.0
+	 * @version 1.0.0
+	 *
+	 * @access  public
+	 * @var     string  CRON_REQUEST
+	 */
+	public const CRON_REQUEST = 'cron';
+
+	/**
+	 * Enum-type constant for identifying a REST request.
+	 *
+	 * @since   1.0.0
+	 * @version 1.0.0
+	 *
+	 * @access  public
+	 * @var     string  REST_REQUEST
+	 */
+	public const REST_REQUEST = 'rest';
+
+	/**
+	 * Enum-type constant for identifying a frontend request.
+	 *
+	 * @since   1.0.0
+	 * @version 1.0.0
+	 *
+	 * @access  public
+	 * @var     string  FRONTEND_REQUEST
+	 */
+	public const FRONTEND_REQUEST = 'frontend';
+
+	// endregion
+
+	// region METHODS
+
 	/**
 	 * A copy of WooCommerce's private built-in function for determining what type of request we're dealing with.
 	 *
@@ -27,15 +88,15 @@ final class Misc {
 	 */
 	public static function is_request( string $type ): bool {
 		switch ( $type ) {
-			case 'admin':
+			case self::ADMIN_REQUEST:
 				return is_admin();
-			case 'ajax':
+			case self::AJAX_REQUEST:
 				return defined( 'DOING_AJAX' );
-			case 'cron':
+			case self::CRON_REQUEST:
 				return defined( 'DOING_CRON' );
-			case 'rest':
+			case self::REST_REQUEST:
 				return self::is_rest_api_request();
-			case 'frontend':
+			case self::FRONTEND_REQUEST:
 				return ( ! is_admin() || defined( 'DOING_AJAX' ) ) && ! defined( 'DOING_CRON' ) && ! self::is_rest_api_request();
 		}
 
@@ -58,4 +119,6 @@ final class Misc {
 
 		return ( false !== strpos( $_SERVER['REQUEST_URI'], trailingslashit( rest_get_url_prefix() ) ) ); // phpcs:disable WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 	}
+
+	// endregion
 }
