@@ -57,6 +57,6 @@ trait Filesystem {
 			return null;
 		}
 
-		return $wp_filesystem ?? new WP_Filesystem_Base();
+		return $wp_filesystem;
 	}
 }

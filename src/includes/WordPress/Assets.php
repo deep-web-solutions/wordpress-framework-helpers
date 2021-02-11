@@ -52,6 +52,6 @@ final class Assets {
 	 * @return  string
 	 */
 	public static function get_assets_minified_state( string $constant_name = 'SCRIPT_DEBUG' ): string {
-		return ( defined( $constant_name ) && constant( $constant_name ) ) ? '' : '.min';
+		return Requests::has_debug( $constant_name ) ? '' : '.min';
 	}
 }
