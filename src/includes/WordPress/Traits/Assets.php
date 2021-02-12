@@ -28,7 +28,7 @@ trait Assets {
 	public function get_asset_handle( string $name = '', array $extra = array(), string $root = '' ): string {
 		return str_replace(
 			array( ' ', '/', '\\' ),
-			array( '-', '', '' ),
+			array( '-', '', '_' ),
 			strtolower(
 				join(
 					'_',

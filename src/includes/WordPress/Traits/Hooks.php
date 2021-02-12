@@ -28,7 +28,7 @@ trait Hooks {
 	public function get_hook_name( string $name, array $extra = array(), string $root = '' ): string {
 		return str_replace(
 			array( ' ', '/', '\\' ),
-			array( '-', '', '' ),
+			array( '-', '', '_' ),
 			strtolower(
 				join(
 					'_',
