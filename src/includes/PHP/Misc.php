@@ -32,7 +32,7 @@ final class Misc {
 		// Get all the traits of $class and its parent classes
 		do {
 			$class_name = is_object( $class ) ? get_class( $class ) : $class;
-			if ( class_exists( $class_name, $autoload ) ) {
+			if ( class_exists( $class_name, $autoload ) || trait_exists( $class_name, $autoload ) ) {
 				$traits = array_merge( class_uses( $class, $autoload ), $traits );
 			}
 		} while ( $class = get_parent_class( $class ) ); // phpcs:ignore
