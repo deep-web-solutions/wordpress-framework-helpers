@@ -14,38 +14,66 @@ defined( 'ABSPATH' ) || exit;
  */
 final class Misc {
 	/**
-	 * Gets the recursive list of traits used by a given class.
+	 * Gets the recursive list of traits used by a given class or trait.
 	 *
 	 * @since   1.0.0
 	 * @version 1.0.0
 	 *
 	 * @see     https://www.php.net/manual/en/function.class-uses.php#122427
 	 *
-	 * @param   object|string   $class      An object (class instance) or a string (class name).
-	 * @param   bool            $autoload   Whether to allow this function to load the class automatically through the __autoload() magic method.
+	 * @param   string  $class_name     Class/trait name.
+	 * @param   bool    $autoload       Whether to allow this function to load the class automatically through the __autoload() magic method.
 	 *
 	 * @return  array
 	 */
-	public static function class_uses_deep( $class, $autoload = true ): array {
-		$traits = array();
+	public static function class_uses_deep( string $class_name, bool $autoload = true ): array {
+		static $results = array();
 
-		// Get all the traits of $class and its parent classes
-		do {
-			$class_name = is_object( $class ) ? get_class( $class ) : $class;
-			if ( class_exists( $class_name, $autoload ) || trait_exists( $class_name, $autoload ) ) {
-				$traits = array_merge( class_uses( $class, $autoload ), $traits );
+		if ( isset( $results[ $class_name ] ) ) {
+			$traits = $results[ $class_name ];
+		} else {
+			$traits = array();
+
+			// Get all the traits of $class and its parent classes
+			do {
+				if ( class_exists( $class_name, $autoload ) || trait_exists( $class_name, $autoload ) ) {
+					$traits[ $class_name ] = class_uses( $class_name, $autoload );
+				}
+			} while ( $class_name = get_parent_class( $class_name ) ); // phpcs:ignore
+
+			// Get traits of all parent traits
+			$traits_to_search = array_merge( ...$traits );
+			while ( ! empty( $traits_to_search ) ) {
+				$trait_name = array_pop( $traits_to_search );
+				if ( ! isset( $traits[ $trait_name ] ) ) {
+					$traits[ $trait_name ] = class_uses( $trait_name, $autoload );
+					$traits_to_search      = array_merge( $traits[ $trait_name ], $traits_to_search );
+				}
 			}
-		} while ( $class = get_parent_class( $class ) ); // phpcs:ignore
 
-		// Get traits of all parent traits
-		$traits_to_search = $traits;
-		while ( ! empty( $traits_to_search ) ) {
-			$new_traits       = class_uses( array_pop( $traits_to_search ), $autoload );
-			$traits           = array_merge( $new_traits, $traits );
-			$traits_to_search = array_merge( $new_traits, $traits_to_search );
-		};
+			// Cache the result if autoload is active.
+			if ( true === $autoload ) {
+				$results[ $class_name ] = $traits;
+			}
+		}
 
-		return array_unique( $traits );
+		return $traits;
+	}
+
+	/**
+	 * Gets the recursive list of traits used by a given class or trait as a list with no parent information.
+	 *
+	 * @since   1.0.0
+	 * @version 1.0.0
+	 *
+	 * @param   string  $class_name     Class/trait name.
+	 * @param   bool    $autoload       Whether to allow this function to load the class automatically through the __autoload() magic method.
+	 *
+	 * @return  array
+	 */
+	public static function class_uses_deep_list( string $class_name, bool $autoload = true ): array {
+		$traits = self::class_uses_deep( $class_name, $autoload );
+		return array_unique( array_merge( ...$traits ) );
 	}
 
 	/**
