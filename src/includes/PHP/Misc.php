@@ -21,28 +21,31 @@ final class Misc {
 	 *
 	 * @see     https://www.php.net/manual/en/function.class-uses.php#122427
 	 *
-	 * @param   string  $class_name     Class/trait name.
-	 * @param   bool    $autoload       Whether to allow this function to load the class automatically through the __autoload() magic method.
+	 * @param   object|string   $class          An object (class instance) or a string (class name).
+	 * @param   bool            $autoload       Whether to allow this function to load the class automatically through the __autoload() magic method.
 	 *
 	 * @return  array
 	 */
-	public static function class_uses_deep( string $class_name, bool $autoload = true ): array {
+	public static function class_uses_deep( $class, bool $autoload = true ): array {
 		static $results = array();
 
-		if ( isset( $results[ $class_name ] ) ) {
-			$traits = $results[ $class_name ];
+		$original_class_name = is_object( $class ) ? get_class( $class ) : $class;
+
+		if ( isset( $results[ $original_class_name ] ) ) {
+			$traits = $results[ $original_class_name ];
 		} else {
 			$traits = array();
 
 			// Get all the traits of $class and its parent classes
 			do {
+				$class_name = is_object( $class ) ? get_class( $class ) : $class;
 				if ( class_exists( $class_name, $autoload ) || trait_exists( $class_name, $autoload ) ) {
 					$traits[ $class_name ] = class_uses( $class_name, $autoload );
 				}
-			} while ( $class_name = get_parent_class( $class_name ) ); // phpcs:ignore
+			} while ( $class = get_parent_class( $class ) ); // phpcs:ignore
 
 			// Get traits of all parent traits
-			$traits_to_search = array_merge( ...$traits );
+			$traits_to_search = array_merge( ...array_values( $traits ) );
 			while ( ! empty( $traits_to_search ) ) {
 				$trait_name = array_pop( $traits_to_search );
 				if ( ! isset( $traits[ $trait_name ] ) ) {
@@ -53,7 +56,7 @@ final class Misc {
 
 			// Cache the result if autoload is active.
 			if ( true === $autoload ) {
-				$results[ $class_name ] = $traits;
+				$results[ $original_class_name ] = $traits;
 			}
 		}
 
@@ -66,14 +69,28 @@ final class Misc {
 	 * @since   1.0.0
 	 * @version 1.0.0
 	 *
-	 * @param   string  $class_name     Class/trait name.
-	 * @param   bool    $autoload       Whether to allow this function to load the class automatically through the __autoload() magic method.
+	 * @param   object|string   $class          An object (class instance) or a string (class name).
+	 * @param   bool            $autoload       Whether to allow this function to load the class automatically through the __autoload() magic method.
 	 *
 	 * @return  array
 	 */
-	public static function class_uses_deep_list( string $class_name, bool $autoload = true ): array {
-		$traits = self::class_uses_deep( $class_name, $autoload );
-		return array_unique( array_merge( ...$traits ) );
+	public static function class_uses_deep_list( $class, bool $autoload = true ): array {
+		static $results = array();
+
+		$original_class_name = is_object( $class ) ? get_class( $class ) : $class;
+		if ( isset( $results[ $original_class_name ] ) ) {
+			$traits = $results[ $original_class_name ];
+		} else {
+			$traits = self::class_uses_deep( $class, $autoload );
+			$traits = array_unique( array_merge( ...array_values( $traits ) ) );
+
+			// Cache the result if autoload is active.
+			if ( true === $autoload ) {
+				$results[ $original_class_name ] = $traits;
+			}
+		}
+
+		return $traits;
 	}
 
 	/**
