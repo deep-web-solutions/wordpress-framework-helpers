@@ -58,7 +58,7 @@
             "authors": [
                 {
                     "name": "Antonius Hegyes",
-                    "email": "a.hegyes@deep-web-solutions.de",
+                    "email": "a.hegyes@deep-web-solutions.com",
                     "homepage": "https://www.linkedin.com/in/tonyhegyes",
                     "role": "Developer"
                 },
@@ -68,7 +68,7 @@
                 }
             ],
             "description": "A set of related functions that help bootstrap and version the other DWS WordPress Framework components.",
-            "homepage": "https://www.deep-web-solutions.de",
+            "homepage": "https://www.deep-web-solutions.com",
             "keywords": [
                 "Deep Web Solutions",
                 "bootstrapper",
