@@ -30,9 +30,12 @@ trait Paths {
 	final public static function get_base_path( bool $keep_file_name = false ): string {
 		$file_name = self::get_file_name();
 
-		return $keep_file_name
+		$base_path = $keep_file_name
 			? trailingslashit( $file_name )
 			: trailingslashit( plugin_dir_path( $file_name ) );
+
+		// Fix for operating systems where the directory separator is not a forward slash.
+		return str_replace( DIRECTORY_SEPARATOR, '/', $base_path );
 	}
 
 	/**
@@ -53,7 +56,7 @@ trait Paths {
 			: trailingslashit( plugin_dir_url( $file_name ) );
 
 		// Fix for operating systems where the directory separator is not a forward slash.
-		return str_replace( DIRECTORY_SEPARATOR, '/', $relative_url );
+		return str_replace( site_url(), '', $relative_url );
 	}
 
 	/**

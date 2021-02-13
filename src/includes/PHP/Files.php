@@ -25,7 +25,7 @@ final class Files {
 	 * @return  string  Full disk path.
 	 */
 	public static function generate_full_path( string $absolute, string $relative ): string {
-		return trailingslashit( $absolute ) . untrailingslashit( $relative );
+		return trailingslashit( $absolute ) . ltrim( $relative, '/' );
 	}
 
 	/**
