@@ -66,4 +66,20 @@ final class Strings {
 
 		return substr_compare( $haystack, $needle, -strlen( $needle ) ) === 0;
 	}
+
+	/**
+	 * Removes non-alphanumeric characters from the given string and returns the new one.
+	 *
+	 * @since   1.0.0
+	 * @version 1.0.0
+	 *
+	 * @see     https://stackoverflow.com/a/17151182
+	 *
+	 * @param   string  $string     The string to remove non-alphanumeric characters from.
+	 *
+	 * @return string
+	 */
+	public static function remove_non_alphanumeric_characters( string $string ): string {
+		return preg_replace( '/[^[:alnum:][:space:]]/u', '', $string );
+	}
 }
