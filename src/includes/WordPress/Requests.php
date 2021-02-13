@@ -114,10 +114,13 @@ final class Requests {
 	 */
 	public static function is_rest_api_request(): bool {
 		if ( empty( $_SERVER['REQUEST_URI'] ) ) {
-			return false;
+			return wp_is_jsonp_request() || wp_is_json_request();
 		}
 
-		return ( false !== strpos( $_SERVER['REQUEST_URI'], trailingslashit( rest_get_url_prefix() ) ) ); // phpcs:disable WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		$rest_prefix         = trailingslashit( rest_get_url_prefix() );
+		$is_rest_api_request = ( false !== strpos( $_SERVER['REQUEST_URI'], $rest_prefix ) ); // phpcs:disable WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+
+		return $is_rest_api_request || wp_is_jsonp_request() || wp_is_json_request();
 	}
 
 	/**

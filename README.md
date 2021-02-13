@@ -1,7 +1,7 @@
 # DWS WordPress Framework - Helpers
 
 **Contributors:** Antonius Hegyes, Deep Web Solutions GmbH  
-**Requires at least:** 5.2  
+**Requires at least:** 5.5  
 **Tested up to:** 5.6  
 **Requires PHP:** 7.4  
 **Stable tag:** 1.0.0  

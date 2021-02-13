@@ -13,6 +13,8 @@
  * Plugin Name:         DWS WordPress Framework Helpers
  * Description:         A set of related helpers to kick start WordPress development.
  * Version:             1.0.0
+ * Requires at least:   5.5
+ * Requires PHP:        7.4
  * Author:              Deep Web Solutions GmbH
  * Author URI:          https://www.deep-web-solutions.com
  * License:             GPL-3.0+
@@ -61,7 +63,7 @@ function dws_wp_framework_get_helpers_version(): string {
 
 // Define minimum environment requirements.
 define( __NAMESPACE__ . '\DWS_WP_FRAMEWORK_HELPERS_MIN_PHP', '7.4' );
-define( __NAMESPACE__ . '\DWS_WP_FRAMEWORK_HELPERS_MIN_WP', '5.2' );
+define( __NAMESPACE__ . '\DWS_WP_FRAMEWORK_HELPERS_MIN_WP', '5.5' );
 
 /**
  * Returns the minimum PHP version required to run the Bootstrapper of the framework's helpers within the context of the current plugin.
