@@ -29,11 +29,10 @@ trait Filesystem {
 	 * @return  WP_Filesystem_Base|null
 	 */
 	public function get_wp_filesystem( ?string $form_url = null, $context = '', ?array $extra_fields = null ): ?WP_Filesystem_Base {
-		/** @var ?WP_Filesystem_Base $wp_filesystem */ // phpcs:ignore
 		global $wp_filesystem;
 
 		if ( ! function_exists( 'request_filesystem_credentials' ) ) {
-			/** @noinspection PhpIncludeInspection */ // phpcs:ignore
+			/* @noinspection PhpIncludeInspection */
 			include_once ABSPATH . 'wp-admin/includes/file.php';
 		}
 
