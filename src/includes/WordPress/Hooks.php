@@ -99,4 +99,36 @@ final class Hooks {
 
 		return null;
 	}
+
+	/**
+	 * Enqueues a callable to run on a given hook and priority, and deques the callable immediately after that.
+	 *
+	 * @since   1.0.0
+	 * @version 1.0.0
+	 *
+	 * @param   string      $hook               Hook to enqueue callable on.
+	 * @param   callable    $func               Callable to enqueue.
+	 * @param   int         $priority           The priority to enqueue on.
+	 * @param   int         $accepted_args      The number of accepted arguments of the callable.
+	 *
+	 * @return  bool
+	 */
+	public static function enqeue_temp( string $hook, callable $func, int $priority = 10, int $accepted_args = 1 ): bool {
+		$result = add_action( $hook, $func, $priority, $accepted_args );
+		if ( $result ) {
+			return add_action(
+				$hook,
+				function() use ( $hook, $func, $priority ) {
+					remove_action( $hook, $func, $priority );
+
+					if ( ! empty( func_get_args() ) && doing_filter() ) {
+						return func_get_arg( 0 );
+					}
+				},
+				$priority
+			);
+		}
+
+		return false;
+	}
 }
