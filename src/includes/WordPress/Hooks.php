@@ -59,12 +59,16 @@ final class Hooks {
 	 * @param   callable    $func           Function to enqueue.
 	 * @param   int         $accepted_args  The number of arguments the function accepts. Default 1.
 	 *
-	 * @return  int     The priority of the enqueued function.
+	 * @return  int|null     The priority of the enqueued function or null on failure.
 	 */
-	public static function enqueue_on_next_tick( callable $func, int $accepted_args = 1 ): int {
+	public static function enqueue_on_next_tick( callable $func, int $accepted_args = 1 ): ?int {
 		$current_priority = self::get_current_hook_priority();
-		add_action( current_action(), $func, $current_priority, $accepted_args );
-		return $current_priority;
+		if ( PHP_INT_MAX !== $current_priority ) {
+			add_action( current_action(), $func, $current_priority + 1, $accepted_args );
+			return $current_priority + 1;
+		}
+
+		return null;
 	}
 
 	/**
@@ -77,18 +81,22 @@ final class Hooks {
 	 * @param   callable    $func           Function to enqueue.
 	 * @param   int         $accepted_args  The number of arguments the function accepts. Default 1.
 	 *
-	 * @return  int     The priority of the enqueued function.
+	 * @return  int|null    The priority of the enqueued function or null on failure.
 	 */
-	public static function enqueue_temp_on_next_tick( callable $func, int $accepted_args = 1 ): int {
+	public static function enqueue_temp_on_next_tick( callable $func, int $accepted_args = 1 ): ?int {
 		$hooked_priority = self::enqueue_on_next_tick( $func, $accepted_args );
-		return self::enqueue_on_next_tick(
-			function() use ( $func, $hooked_priority ) {
-				remove_action( current_action(), $func, $hooked_priority );
+		if ( ! is_null( $hooked_priority ) ) {
+			return self::enqueue_on_next_tick(
+				function() use ( $func, $hooked_priority ) {
+					remove_action( current_action(), $func, $hooked_priority );
 
-				if ( ! empty( func_get_args() ) && doing_filter() ) {
-					return func_get_arg( 0 );
+					if ( ! empty( func_get_args() ) && doing_filter() ) {
+						return func_get_arg( 0 );
+					}
 				}
-			}
-		);
+			);
+		}
+
+		return null;
 	}
 }
