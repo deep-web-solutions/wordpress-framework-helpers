@@ -59,12 +59,36 @@ final class Hooks {
 	 * @param   callable    $func           Function to enqueue.
 	 * @param   int         $accepted_args  The number of arguments the function accepts. Default 1.
 	 *
-	 * @return  bool
+	 * @return  int     The priority of the enqueued function.
 	 */
-	public static function enqueue_on_next_tick( callable $func, int $accepted_args = 1 ): bool {
+	public static function enqueue_on_next_tick( callable $func, int $accepted_args = 1 ): int {
 		$current_priority = self::get_current_hook_priority();
-		return ( PHP_INT_MAX === $current_priority )
-			? false
-			: add_action( current_action(), $func, $current_priority + 1, $accepted_args );
+		add_action( current_action(), $func, $current_priority, $accepted_args );
+		return $current_priority;
+	}
+
+	/**
+	 * Enqueues a callable to run on the current hook's next priority, basically simulating a "tick", AND very importantly
+	 * dequeues the callable on the "tick" after that.
+	 *
+	 * @since   1.0.0
+	 * @version 1.0.0
+	 *
+	 * @param   callable    $func           Function to enqueue.
+	 * @param   int         $accepted_args  The number of arguments the function accepts. Default 1.
+	 *
+	 * @return  int     The priority of the enqueued function.
+	 */
+	public static function enqueue_temp_on_next_tick( callable $func, int $accepted_args = 1 ): int {
+		$hooked_priority = self::enqueue_on_next_tick( $func, $accepted_args );
+		return self::enqueue_on_next_tick(
+			function() use ( $func, $hooked_priority ) {
+				remove_action( current_action(), $func, $hooked_priority );
+
+				if ( ! empty( func_get_args() ) && doing_filter() ) {
+					return func_get_arg( 0 );
+				}
+			}
+		);
 	}
 }
