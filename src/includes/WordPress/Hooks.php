@@ -113,7 +113,7 @@ final class Hooks {
 	 *
 	 * @return  bool
 	 */
-	public static function enqeue_temp( string $hook, callable $func, int $priority = 10, int $accepted_args = 1 ): bool {
+	public static function enqueue_temp( string $hook, callable $func, int $priority = 10, int $accepted_args = 1 ): bool {
 		$result = add_action( $hook, $func, $priority, $accepted_args );
 		if ( $result ) {
 			return add_action(
