@@ -33,7 +33,7 @@ final class Misc {
 		$result = $defaults;
 
 		foreach ( $args as $k => &$v ) {
-			$result[ $k ] = ( is_array( $v ) && isset( $result[ $k ] ) && Arrays::has_string_keys( $v ) )
+			$result[ $k ] = ( is_array( $v ) && isset( $result[ $k ] ) && Arrays::has_string_keys( $result[ $k ] ) )
 				? self::wp_parse_args_recursive( $v, $result[ $k ] )
 				: $v;
 		}
