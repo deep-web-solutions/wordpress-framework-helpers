@@ -2,6 +2,8 @@
 
 namespace DeepWebSolutions\Framework\Helpers\WordPress;
 
+use DeepWebSolutions\Framework\Helpers\PHP\Arrays;
+
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -15,6 +17,7 @@ defined( 'ABSPATH' ) || exit;
 final class Misc {
 	/**
 	 * Recursive version of WP's own 'wp_parse_args' in order to handle multi-dimensional arrays.
+	 * In this implementation, non-associative arrays are also leaves.
 	 *
 	 * @since   1.0.0
 	 * @version 1.0.0
@@ -30,7 +33,7 @@ final class Misc {
 		$result = $defaults;
 
 		foreach ( $args as $k => &$v ) {
-			$result[ $k ] = ( is_array( $v ) && isset( $result[ $k ] ) )
+			$result[ $k ] = ( is_array( $v ) && isset( $result[ $k ] ) && Arrays::has_string_keys( $v ) )
 				? self::wp_parse_args_recursive( $v, $result[ $k ] )
 				: $v;
 		}
