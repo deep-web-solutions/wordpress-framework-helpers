@@ -44,4 +44,18 @@ final class Arrays {
 
 		return count( $keys );
 	}
+
+	/**
+	 * Checks whether an array has any string keys or if they are all numerical.
+	 *
+	 * @since   1.0.0
+	 * @version 1.0.0
+	 *
+	 * @param   array   $array  The array to check.
+	 *
+	 * @return  bool    True if it has string keys, false otherwise.
+	 */
+	public static function has_string_keys( array $array ): bool {
+		return count( array_filter( array_keys( $array ), 'is_string' ) ) > 0;
+	}
 }
