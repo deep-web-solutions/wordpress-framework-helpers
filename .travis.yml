@@ -8,6 +8,7 @@ notifications:
     on_failure: change
 
 matrix:
+  fast_finish: true
   include:
     - php: 8.0
       env: WP_VERSION=nightly
@@ -17,12 +18,6 @@ matrix:
       env: WP_VERSION=latest
     - php: 7.4 # minimum requirements
       env: WP_VERSION=5.5 # minimum requirements
-    - php: 7.4
-      env: WP_VERSION=5.4 # just below the min requirements
-    - php: 7.3 # just below the min requirements
-      env: WP_VERSION=5.5 # minimum requirements
-    - php: 7.3 # just below the min requirements
-      env: WP_VERSION=5.4 # just below the min requirements
   allow_failures:
     - env: WP_VERSION=latest
     - env: WP_VERSION=nightly
