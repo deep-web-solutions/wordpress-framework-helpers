@@ -29,9 +29,9 @@
     "object-calisthenics/phpcs-calisthenics-rules": "*",
     "phpcompatibility/php-compatibility": "*",
     "phpcompatibility/phpcompatibility-wp": "*",
-    "wp-coding-standards/wpcs": "*",
-    "sllh/composer-versions-check": "*"
+    "wp-coding-standards/wpcs": "*"
   },
+
   "autoload": {
     "psr-4": {
       "DeepWebSolutions\\Framework\\Helpers\\": "src/includes"
