@@ -14,7 +14,7 @@
 [![Build Status](https://travis-ci.com/deep-web-solutions/wordpress-framework-helpers.svg?branch=master)](https://travis-ci.com/deep-web-solutions/wordpress-framework-helpers)
 [![Maintainability](https://api.codeclimate.com/v1/badges/b777a17778d2969dfa84/maintainability)](https://codeclimate.com/github/deep-web-solutions/wordpress-framework-helpers/maintainability)
 
-A set of helpers to kick start WordPress development. This package is designed to contain small, helpful, static snippets 
+A set of helpers to kick-start WordPress development. This package is designed to contain small, helpful, static snippets 
 that can be reused throughout different projects.
 
 
