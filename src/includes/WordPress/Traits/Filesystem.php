@@ -32,7 +32,6 @@ trait Filesystem {
 		global $wp_filesystem;
 
 		if ( ! function_exists( 'request_filesystem_credentials' ) ) {
-			/* @noinspection PhpIncludeInspection */
 			include_once ABSPATH . 'wp-admin/includes/file.php';
 		}
 

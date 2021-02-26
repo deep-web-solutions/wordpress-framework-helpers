@@ -32,10 +32,10 @@ final class Misc {
 	public static function wp_parse_args_recursive( array &$args, array $defaults ): array {
 		$result = $defaults;
 
-		foreach ( $args as $k => &$v ) {
-			$result[ $k ] = ( is_array( $v ) && isset( $result[ $k ] ) && Arrays::has_string_keys( $result[ $k ] ) )
-				? self::wp_parse_args_recursive( $v, $result[ $k ] )
-				: $v;
+		foreach ( $args as $key => &$value ) {
+			$result[ $key ] = ( is_array( $value ) && isset( $result[ $key ] ) && Arrays::has_string_keys( $result[ $key ] ) )
+				? self::wp_parse_args_recursive( $value, $result[ $key ] )
+				: $value;
 		}
 
 		return $result;

@@ -23,7 +23,7 @@ final class Assets {
 	 *
 	 * @return  string
 	 */
-	public static function get_stylesheet_from_string( string $css ): string {
+	public static function wrap_string_in_style_tags( string $css ): string {
 		return "<style type='text/css'>{$css}</style>";
 	}
 
@@ -37,7 +37,7 @@ final class Assets {
 	 *
 	 * @return  string
 	 */
-	public static function get_javascript_from_string( string $js ): string {
+	public static function wrap_string_in_script_tags( string $js ): string {
 		return "<script type='text/javascript'>{$js}</script>";
 	}
 
