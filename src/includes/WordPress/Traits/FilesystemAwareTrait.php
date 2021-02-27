@@ -15,7 +15,7 @@ defined( 'ABSPATH' ) || exit;
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.com>
  * @package DeepWebSolutions\WP-Framework\Helpers\WordPress\Traits
  */
-trait Filesystem {
+trait FilesystemAwareTrait {
 	/**
 	 * Returns an instance of the WP_Filesystem API. Upon failure, return null.
 	 *

@@ -33,12 +33,12 @@ final class Assets {
 	 * @since   1.0.0
 	 * @version 1.0.0
 	 *
-	 * @param   string  $js     The JS content.
+	 * @param   string  $javascript     The JS content.
 	 *
 	 * @return  string
 	 */
-	public static function wrap_string_in_script_tags( string $js ): string {
-		return "<script type='text/javascript'>{$js}</script>";
+	public static function wrap_string_in_script_tags( string $javascript ): string {
+		return "<script type='text/javascript'>{$javascript}</script>";
 	}
 
 	/**

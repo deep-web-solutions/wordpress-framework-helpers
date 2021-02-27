@@ -2,6 +2,8 @@
 
 namespace DeepWebSolutions\Framework\Helpers\WordPress\Traits;
 
+use DeepWebSolutions\Framework\Helpers\PHP\Traits\ReferenceHelperTrait;
+
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -12,9 +14,11 @@ defined( 'ABSPATH' ) || exit;
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.com>
  * @package DeepWebSolutions\WP-Framework\Helpers\WordPress\Traits
  */
-trait Hooks {
+trait HooksHelperTrait {
+	use ReferenceHelperTrait;
+
 	/**
-	 * Returns a meaningful, hopefully unique, name for an internal hook.
+	 * Returns a meaningful, hopefully unique, tag for an internal hook.
 	 *
 	 * @since   1.0.0
 	 * @version 1.0.0
@@ -25,20 +29,15 @@ trait Hooks {
 	 *
 	 * @return  string
 	 */
-	public function get_hook_name( string $name, array $extra = array(), string $root = '' ): string {
-		return str_replace(
-			array( ' ', '/', '\\' ),
-			array( '-', '', '_' ),
-			strtolower(
-				join(
-					'_',
-					array_filter(
-						array_merge(
-							array( $root, $name ),
-							$extra
-						)
-					)
-				)
+	public function get_hook_tag( string $name, array $extra = array(), string $root = '' ): string {
+		return $this->get_reference_name(
+			$name,
+			$extra,
+			$root,
+			array(
+				' '  => '-',
+				'/'  => '',
+				'\\' => '_',
 			)
 		);
 	}

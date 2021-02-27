@@ -19,6 +19,9 @@ final class Misc {
 	 * @since   1.0.0
 	 * @version 1.0.0
 	 *
+	 * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
+	 * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+	 *
 	 * @see     https://www.php.net/manual/en/function.class-uses.php#122427
 	 *
 	 * @param   object|string   $class          An object (class instance) or a string (class name).
@@ -69,6 +72,8 @@ final class Misc {
 	 * @since   1.0.0
 	 * @version 1.0.0
 	 *
+	 * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
+	 *
 	 * @param   object|string   $class          An object (class instance) or a string (class name).
 	 * @param   bool            $autoload       Whether to allow this function to load the class automatically through the __autoload() magic method.
 	 *
@@ -108,22 +113,22 @@ final class Misc {
 	 * @return  int
 	 */
 	public static function let_to_num( string $size ): int {
-		$l   = substr( $size, -1 );
-		$ret = substr( $size, 0, -1 );
+		$letter = substr( $size, -1 );
+		$return = substr( $size, 0, -1 );
 
-		switch ( strtoupper( $l ) ) {
+		switch ( strtoupper( $letter ) ) {
 			case 'P': // phpcs:ignore
-				$ret *= 1024;
+				$return *= 1024;
 			case 'T': // phpcs:ignore
-				$ret *= 1024;
+				$return *= 1024;
 			case 'G': // phpcs:ignore
-				$ret *= 1024;
+				$return *= 1024;
 			case 'M': // phpcs:ignore
-				$ret *= 1024;
+				$return *= 1024;
 			case 'K': // phpcs:ignore
-				$ret *= 1024;
+				$return *= 1024;
 		}
 
-		return $ret;
+		return $return;
 	}
 }

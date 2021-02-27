@@ -14,7 +14,7 @@ defined( 'ABSPATH' ) || exit;
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.com>
  * @package DeepWebSolutions\WP-Framework\Helpers\PHP\Traits
  */
-trait Reflection {
+trait ReflectionTrait {
 	// region FIELDS AND CONSTANTS
 
 	/**

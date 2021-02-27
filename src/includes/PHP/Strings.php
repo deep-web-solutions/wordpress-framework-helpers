@@ -14,22 +14,6 @@ defined( 'ABSPATH' ) || exit;
  */
 final class Strings {
 	/**
-	 * Takes an associate array($placeholder -> $replacement) and replaces all instances of $placeholder with $replacement
-	 * inside the given string parameter.
-	 *
-	 * @since   1.0.0
-	 * @version 1.0.0
-	 *
-	 * @param   array   $placeholders   The values with which the placeholders must be replaced: {placeholder} => {value}.
-	 * @param   string  $string         The string containing the placeholders.
-	 *
-	 * @return  string  Processed string with all the placeholders replaced.
-	 */
-	public static function replace_placeholders( array $placeholders, string $string ): string {
-		return str_replace( array_keys( $placeholders ), array_values( $placeholders ), $string );
-	}
-
-	/**
 	 * Checks whether a string starts in a particular way or not.
 	 *
 	 * @since   1.0.0
@@ -81,5 +65,39 @@ final class Strings {
 	 */
 	public static function remove_non_alphanumeric_characters( string $string ): string {
 		return preg_replace( '/[^[:alnum:][:space:]]/u', '', $string );
+	}
+
+	/**
+	 * Takes an associate array($placeholder -> $replacement) and replaces all instances of $placeholder with $replacement
+	 * inside the given string parameter.
+	 *
+	 * @since   1.0.0
+	 * @version 1.0.0
+	 *
+	 * @param   array   $placeholders   The values with which the placeholders must be replaced: {placeholder} => {value}.
+	 * @param   string  $string         The string containing the placeholders.
+	 *
+	 * @return  string  Processed string with all the placeholders replaced.
+	 */
+	public static function replace_placeholders( array $placeholders, string $string ): string {
+		return str_replace( array_keys( $placeholders ), array_values( $placeholders ), $string );
+	}
+
+	/**
+	 * Transforms a string into a lowercase, safe version of itself.
+	 *
+	 * @since   1.0.0
+	 * @version 1.0.0
+	 *
+	 * @param   string  $string             String to transform.
+	 * @param   array   $unsafe_characters  Unsafe characters and what to replace them with.
+	 *
+	 * @return  string
+	 */
+	public static function generate_safe_string( string $string, array $unsafe_characters ): string {
+		return self::replace_placeholders(
+			$unsafe_characters,
+			strtolower( $string )
+		);
 	}
 }

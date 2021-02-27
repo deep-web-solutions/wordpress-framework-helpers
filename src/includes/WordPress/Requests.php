@@ -2,6 +2,8 @@
 
 namespace DeepWebSolutions\Framework\Helpers\WordPress;
 
+use DeepWebSolutions\Framework\Helpers\WordPress\Enums\RequestTypes;
+
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -13,65 +15,6 @@ defined( 'ABSPATH' ) || exit;
  * @package DeepWebSolutions\WP-Framework\Helpers\WordPress
  */
 final class Requests {
-	// region FIELDS AND CONSTANTS
-
-	/**
-	 * Enum-type constant for identifying an admin request.
-	 *
-	 * @since   1.0.0
-	 * @version 1.0.0
-	 *
-	 * @access  public
-	 * @var     string  ADMIN_REQUEST
-	 */
-	public const ADMIN_REQUEST = 'admin';
-
-	/**
-	 * Enum-type constant for identifying an ajax request.
-	 *
-	 * @since   1.0.0
-	 * @version 1.0.0
-	 *
-	 * @access  public
-	 * @var     string  AJAX_REQUEST
-	 */
-	public const AJAX_REQUEST = 'ajax';
-
-	/**
-	 * Enum-type constant for identifying a cron request.
-	 *
-	 * @since   1.0.0
-	 * @version 1.0.0
-	 *
-	 * @access  public
-	 * @var     string  CRON_REQUEST
-	 */
-	public const CRON_REQUEST = 'cron';
-
-	/**
-	 * Enum-type constant for identifying a REST request.
-	 *
-	 * @since   1.0.0
-	 * @version 1.0.0
-	 *
-	 * @access  public
-	 * @var     string  REST_REQUEST
-	 */
-	public const REST_REQUEST = 'rest';
-
-	/**
-	 * Enum-type constant for identifying a frontend request.
-	 *
-	 * @since   1.0.0
-	 * @version 1.0.0
-	 *
-	 * @access  public
-	 * @var     string  FRONTEND_REQUEST
-	 */
-	public const FRONTEND_REQUEST = 'frontend';
-
-	// endregion
-
 	// region METHODS
 
 	/**
@@ -88,39 +31,26 @@ final class Requests {
 	 */
 	public static function is_request( string $type ): bool {
 		switch ( $type ) {
-			case self::ADMIN_REQUEST:
-				return is_admin();
-			case self::AJAX_REQUEST:
-				return defined( 'DOING_AJAX' );
-			case self::CRON_REQUEST:
-				return defined( 'DOING_CRON' );
-			case self::REST_REQUEST:
-				return self::is_rest_api_request();
-			case self::FRONTEND_REQUEST:
-				return ( ! is_admin() || defined( 'DOING_AJAX' ) ) && ! defined( 'DOING_CRON' ) && ! self::is_rest_api_request();
+			case RequestTypes::ADMIN_REQUEST:
+				$result = is_admin();
+				break;
+			case RequestTypes::AJAX_REQUEST:
+				$result = defined( 'DOING_AJAX' );
+				break;
+			case RequestTypes::CRON_REQUEST:
+				$result = defined( 'DOING_CRON' );
+				break;
+			case RequestTypes::REST_REQUEST:
+				$result = self::is_rest_api_request();
+				break;
+			case RequestTypes::FRONTEND_REQUEST:
+				$result = ( ! is_admin() || defined( 'DOING_AJAX' ) ) && ! defined( 'DOING_CRON' ) && ! self::is_rest_api_request();
+				break;
+			default:
+				$result = false;
 		}
 
-		return false;
-	}
-
-	/**
-	 * Returns true if the request is a non-legacy REST API request.
-	 *
-	 * Legacy REST requests should still run some extra code for backwards compatibility.
-	 *
-	 * @todo: replace this function once core WP function is available: https://core.trac.wordpress.org/ticket/42061.
-	 *
-	 * @return  bool
-	 */
-	public static function is_rest_api_request(): bool {
-		if ( empty( $_SERVER['REQUEST_URI'] ) ) {
-			return wp_is_jsonp_request() || wp_is_json_request();
-		}
-
-		$rest_prefix         = trailingslashit( rest_get_url_prefix() );
-		$is_rest_api_request = ( false !== strpos( $_SERVER['REQUEST_URI'], $rest_prefix ) ); // phpcs:disable WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-
-		return $is_rest_api_request || wp_is_jsonp_request() || wp_is_json_request();
+		return $result;
 	}
 
 	/**
@@ -135,6 +65,30 @@ final class Requests {
 	 */
 	public static function has_debug( string $constant = 'WP_DEBUG' ): bool {
 		return defined( $constant ) && constant( $constant );
+	}
+
+	// endregion
+
+	// region HELPERS
+
+	/**
+	 * Returns true if the request is a non-legacy REST API request.
+	 *
+	 * Legacy REST requests should still run some extra code for backwards compatibility.
+	 *
+	 * @todo: replace this function once core WP function is available: https://core.trac.wordpress.org/ticket/42061.
+	 *
+	 * @return  bool
+	 */
+	protected static function is_rest_api_request(): bool {
+		if ( empty( $_SERVER['REQUEST_URI'] ) ) {
+			return wp_is_jsonp_request() || wp_is_json_request();
+		}
+
+		$rest_prefix         = trailingslashit( rest_get_url_prefix() );
+		$is_rest_api_request = ( false !== strpos( $_SERVER['REQUEST_URI'], $rest_prefix ) ); // phpcs:disable WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+
+		return $is_rest_api_request || wp_is_jsonp_request() || wp_is_json_request();
 	}
 
 	// endregion

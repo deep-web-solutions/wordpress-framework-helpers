@@ -30,7 +30,7 @@ final class Hooks {
 		}
 
 		foreach ( $filters as $priority => $filter ) {
-			foreach ( $filter as $identifier => $function ) {
+			foreach ( $filter as $function ) {
 				if ( is_array( $function ) && is_array( $function['function'] ) && is_a( $function['function'][0], $class ) && $method === $function['function'][1] ) {
 					remove_filter( $hook, array( $function['function'][0], $method ), $priority );
 				}

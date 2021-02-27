@@ -12,8 +12,8 @@ defined( 'ABSPATH' ) || exit;
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.com>
  * @package DeepWebSolutions\WP-Framework\Helpers\PHP\Traits
  */
-trait Paths {
-	use Reflection;
+trait PathsTrait {
+	use ReflectionTrait;
 
 	// region METHODS
 
@@ -22,6 +22,8 @@ trait Paths {
 	 *
 	 * @since   1.0.0
 	 * @version 1.0.0
+	 *
+	 * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
 	 *
 	 * @param   bool    $keep_file_name     If true, then returns the path including the end filename.
 	 *
@@ -43,6 +45,8 @@ trait Paths {
 	 *
 	 * @since   1.0.0
 	 * @version 1.0.0
+	 *
+	 * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
 	 *
 	 * @param   bool    $keep_file_name     If true, then returns the URL including the end filename.
 	 *
