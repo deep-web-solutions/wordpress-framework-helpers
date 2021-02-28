@@ -1,18 +1,18 @@
 <?php
 
-namespace DeepWebSolutions\Framework\Helpers\WordPress\Objects;
+namespace DeepWebSolutions\Framework\Helpers\WordPress\Assets;
 
 use DeepWebSolutions\Framework\Helpers\DataTypes\Strings;
 
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Defines useful methods for working with WP's assets system.
+ * Basic implementation of the assets-helpers-aware interface.
  *
  * @since   1.0.0
  * @version 1.0.0
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.com>
- * @package DeepWebSolutions\WP-Framework\Helpers\WordPress\Objects
+ * @package DeepWebSolutions\WP-Framework\Helpers\WordPress\Assets
  */
 trait AssetsHelpersTrait {
 	/**

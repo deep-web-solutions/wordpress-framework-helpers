@@ -1,6 +1,6 @@
 <?php
 
-namespace DeepWebSolutions\Framework\Helpers\WordPress;
+namespace DeepWebSolutions\Framework\Helpers\WordPress\Hooks;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -10,7 +10,7 @@ defined( 'ABSPATH' ) || exit;
  * @since   1.0.0
  * @version 1.0.0
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.com>
- * @package DeepWebSolutions\WP-Framework\Helpers\WordPress
+ * @package DeepWebSolutions\WP-Framework\Helpers\WordPress\Hooks
  */
 final class Hooks {
 	// region METHODS
