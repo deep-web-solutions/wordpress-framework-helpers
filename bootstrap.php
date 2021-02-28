@@ -9,6 +9,8 @@
  * @copyright           2021 Deep Web Solutions GmbH
  * @license             GPL-3.0-or-later
  *
+ * @noinspection PhpMissingReturnTypeInspection
+ *
  * @wordpress-plugin
  * Plugin Name:         DWS WordPress Framework Helpers
  * Description:         A set of related helpers to kick start WordPress development.
@@ -45,7 +47,7 @@ define( __NAMESPACE__ . '\DWS_WP_FRAMEWORK_HELPERS_VERSION', '1.0.0' );
  *
  * @return  string
  */
-function dws_wp_framework_get_helpers_name(): string {
+function dws_wp_framework_get_helpers_name() {
 	return constant( __NAMESPACE__ . '\DWS_WP_FRAMEWORK_HELPERS_NAME' );
 }
 
@@ -57,7 +59,7 @@ function dws_wp_framework_get_helpers_name(): string {
  *
  * @return  string
  */
-function dws_wp_framework_get_helpers_version(): string {
+function dws_wp_framework_get_helpers_version() {
 	return constant( __NAMESPACE__ . '\DWS_WP_FRAMEWORK_HELPERS_VERSION' );
 }
 
@@ -73,7 +75,7 @@ define( __NAMESPACE__ . '\DWS_WP_FRAMEWORK_HELPERS_MIN_WP', '5.5' );
  *
  * @return  string
  */
-function dws_wp_framework_get_helpers_min_php(): string {
+function dws_wp_framework_get_helpers_min_php() {
 	return constant( __NAMESPACE__ . '\DWS_WP_FRAMEWORK_HELPERS_MIN_PHP' );
 }
 
@@ -85,7 +87,7 @@ function dws_wp_framework_get_helpers_min_php(): string {
  *
  * @return  string
  */
-function dws_wp_framework_get_helpers_min_wp(): string {
+function dws_wp_framework_get_helpers_min_wp() {
 	return constant( __NAMESPACE__ . '\DWS_WP_FRAMEWORK_HELPERS_MIN_WP' );
 }
 
