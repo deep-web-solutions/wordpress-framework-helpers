@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/deep-web-solutions/wordpress-framework-bootstrapper.git",
-                "reference": "0f355075ab1d190de476e3a9b1ea99f8702cd360"
+                "reference": "48b7b5c31322418731f73a95cc5dc904029958dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/deep-web-solutions/wordpress-framework-bootstrapper/zipball/0f355075ab1d190de476e3a9b1ea99f8702cd360",
-                "reference": "0f355075ab1d190de476e3a9b1ea99f8702cd360",
+                "url": "https://api.github.com/repos/deep-web-solutions/wordpress-framework-bootstrapper/zipball/48b7b5c31322418731f73a95cc5dc904029958dc",
+                "reference": "48b7b5c31322418731f73a95cc5dc904029958dc",
                 "shasum": ""
             },
             "require-dev": {
@@ -63,7 +63,7 @@
                 "issues": "https://github.com/deep-web-solutions/wordpress-framework-bootstrapper/issues",
                 "source": "https://github.com/deep-web-solutions/wordpress-framework-bootstrapper/tree/v1.0.0"
             },
-            "time": "2021-02-26T18:01:40+00:00"
+            "time": "2021-02-28T22:40:55+00:00"
         }
     ],
     "packages-dev": [

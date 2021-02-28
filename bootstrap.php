@@ -13,7 +13,7 @@
  *
  * @wordpress-plugin
  * Plugin Name:         DWS WordPress Framework Helpers
- * Description:         A set of related helpers to kick start WordPress development.
+ * Description:         A set of related helpers to kick-start WordPress development.
  * Version:             1.0.0
  * Requires at least:   5.5
  * Requires PHP:        7.4
