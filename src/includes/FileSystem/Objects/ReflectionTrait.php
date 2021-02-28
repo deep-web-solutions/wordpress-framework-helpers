@@ -1,6 +1,6 @@
 <?php
 
-namespace DeepWebSolutions\Framework\Helpers\PHP\Traits;
+namespace DeepWebSolutions\Framework\Helpers\FileSystem\Objects;
 
 use ReflectionClass;
 
@@ -12,7 +12,7 @@ defined( 'ABSPATH' ) || exit;
  * @since   1.0.0
  * @version 1.0.0
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.com>
- * @package DeepWebSolutions\WP-Framework\Helpers\PHP\Traits
+ * @package DeepWebSolutions\WP-Framework\Helpers\FileSystem\Objects
  */
 trait ReflectionTrait {
 	// region FIELDS AND CONSTANTS

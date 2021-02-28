@@ -1,19 +1,19 @@
 <?php
 
-namespace DeepWebSolutions\Framework\Helpers\WordPress\Traits;
+namespace DeepWebSolutions\Framework\Helpers\FileSystem;
 
-use DeepWebSolutions\Framework\Helpers\WordPress\Requests;
+use DeepWebSolutions\Framework\Helpers\WordPress\Request;
 use WP_Filesystem_Base;
 
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Defines methods for retrieving instances of the WP Filesystem API objects.
+ * Defines methods for retrieving instances of the WP Files API objects.
  *
  * @since   1.0.0
  * @version 1.0.0
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.com>
- * @package DeepWebSolutions\WP-Framework\Helpers\WordPress\Traits
+ * @package DeepWebSolutions\WP-Framework\Helpers\FileSystem
  */
 trait FilesystemAwareTrait {
 	/**
@@ -39,16 +39,16 @@ trait FilesystemAwareTrait {
 		$credentials = request_filesystem_credentials( $form_url, '', false, $context, $extra_fields );
 
 		if ( false === $credentials ) {
-			if ( Requests::has_debug() ) {
+			if ( Request::has_debug() ) {
 				// phpcs:disable WordPress.PHP.DevelopmentFunctions
-				error_log( 'Failed to retrieve WP Filesystem credentials.' );
+				error_log( 'Failed to retrieve WP Files credentials.' );
 				// phpcs:enable
 			}
 			return null;
 		} elseif ( ! wp_filesystem( $credentials ) ) {
-			if ( Requests::has_debug() ) {
+			if ( Request::has_debug() ) {
 				// phpcs:disable WordPress.PHP.DevelopmentFunctions
-				error_log( 'Failed to connect to the WP Filesystem.' );
+				error_log( 'Failed to connect to the WP Files.' );
 				// phpcs:enable
 			}
 			request_filesystem_credentials( $form_url, '', true, $context, $extra_fields );

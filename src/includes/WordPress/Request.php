@@ -2,8 +2,6 @@
 
 namespace DeepWebSolutions\Framework\Helpers\WordPress;
 
-use DeepWebSolutions\Framework\Helpers\WordPress\Enums\RequestTypes;
-
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -14,7 +12,7 @@ defined( 'ABSPATH' ) || exit;
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.com>
  * @package DeepWebSolutions\WP-Framework\Helpers\WordPress
  */
-final class Requests {
+final class Request {
 	// region METHODS
 
 	/**
@@ -29,21 +27,21 @@ final class Requests {
 	 *
 	 * @return  bool    True if the current request is of the type passed on, false otherwise.
 	 */
-	public static function is_request( string $type ): bool {
+	public static function is_type( string $type ): bool {
 		switch ( $type ) {
-			case RequestTypes::ADMIN_REQUEST:
+			case RequestTypesEnum::ADMIN_REQUEST:
 				$result = is_admin();
 				break;
-			case RequestTypes::AJAX_REQUEST:
+			case RequestTypesEnum::AJAX_REQUEST:
 				$result = defined( 'DOING_AJAX' );
 				break;
-			case RequestTypes::CRON_REQUEST:
+			case RequestTypesEnum::CRON_REQUEST:
 				$result = defined( 'DOING_CRON' );
 				break;
-			case RequestTypes::REST_REQUEST:
+			case RequestTypesEnum::REST_REQUEST:
 				$result = self::is_rest_api_request();
 				break;
-			case RequestTypes::FRONTEND_REQUEST:
+			case RequestTypesEnum::FRONTEND_REQUEST:
 				$result = ( ! is_admin() || defined( 'DOING_AJAX' ) ) && ! defined( 'DOING_CRON' ) && ! self::is_rest_api_request();
 				break;
 			default:

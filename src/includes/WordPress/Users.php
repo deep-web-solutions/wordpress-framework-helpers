@@ -2,7 +2,7 @@
 
 namespace DeepWebSolutions\Framework\Helpers\WordPress;
 
-use DeepWebSolutions\Framework\Helpers\Miscellaneous\BooleanLogic;
+use DeepWebSolutions\Framework\Helpers\DataTypes\Booleans;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -74,7 +74,7 @@ final class Users {
 				},
 				$roles
 			),
-			array( BooleanLogic::class, "logical_{$logic}" ),
+			array( Booleans::class, "logical_{$logic}" ),
 			'and' === $logic
 		);
 	}
@@ -109,7 +109,7 @@ final class Users {
 				},
 				$capabilities
 			),
-			array( BooleanLogic::class, "logical_{$logic}" ),
+			array( Booleans::class, "logical_{$logic}" ),
 			'and' === $logic
 		);
 	}

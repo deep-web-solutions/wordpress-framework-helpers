@@ -1,18 +1,18 @@
 <?php
 
-namespace DeepWebSolutions\Framework\Helpers\WordPress\Enums;
+namespace DeepWebSolutions\Framework\Helpers\WordPress;
 
 /**
  * Valid values for request types.
  *
- * @see     Requests::is_request()
+ * @see     Request::is_request()
  *
  * @since   1.0.0
  * @version 1.0.0
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.com>
- * @package DeepWebSolutions\WP-Framework\Helpers\WordPress\Enums
+ * @package DeepWebSolutions\WP-Framework\Helpers\WordPress
  */
-final class RequestTypes {
+final class RequestTypesEnum {
 	/**
 	 * Enum-type constant for referring to an admin request.
 	 *

@@ -13,6 +13,8 @@ defined( 'ABSPATH' ) || exit;
  * @package DeepWebSolutions\WP-Framework\Helpers\WordPress
  */
 final class Hooks {
+	// region METHODS
+
 	/**
 	 * Removes an anonymous object action or filter.
 	 *
@@ -51,6 +53,25 @@ final class Hooks {
 	}
 
 	/**
+	 * Enqueues a callable to run on a given hook and priority, and deques the callable immediately after that.
+	 *
+	 * @since   1.0.0
+	 * @version 1.0.0
+	 *
+	 * @param   string      $hook               Hook to enqueue callable on.
+	 * @param   callable    $func               Callable to enqueue.
+	 * @param   int         $priority           The priority to enqueue on.
+	 * @param   int         $accepted_args      The number of accepted arguments of the callable.
+	 *
+	 * @return  bool
+	 */
+	public static function enqueue_temp( string $hook, callable $func, int $priority = 10, int $accepted_args = 1 ): bool {
+		return self::enqueue( $hook, $func, $priority, $accepted_args )
+			? self::enqueue( $hook, self::generate_dequeue_callable( $hook, $func, $priority ), $priority )
+			: false;
+	}
+
+	/**
 	 * Enqueues a callable to run on the current hook's next priority, basically simulating a "tick".
 	 *
 	 * @since   1.0.0
@@ -64,8 +85,9 @@ final class Hooks {
 	public static function enqueue_on_next_tick( callable $func, int $accepted_args = 1 ): ?int {
 		$current_priority = self::get_current_hook_priority();
 		if ( PHP_INT_MAX !== $current_priority ) {
-			add_action( current_action(), $func, $current_priority + 1, $accepted_args );
-			return $current_priority + 1;
+			return self::enqueue( current_action(), $func, $current_priority + 1, $accepted_args )
+				? $current_priority + 1
+				: null;
 		}
 
 		return null;
@@ -85,26 +107,18 @@ final class Hooks {
 	 */
 	public static function enqueue_temp_on_next_tick( callable $func, int $accepted_args = 1 ): ?int {
 		$hooked_priority = self::enqueue_on_next_tick( $func, $accepted_args );
-		if ( ! is_null( $hooked_priority ) ) {
-			return self::enqueue_on_next_tick(
-				function() use ( $func, $hooked_priority ) {
-					remove_action( current_action(), $func, $hooked_priority );
 
-					if ( ! empty( func_get_args() ) && doing_filter() ) {
-						return func_get_arg( 0 );
-					}
-				}
-			);
-		}
-
-		return null;
+		return ( ! is_null( $hooked_priority ) )
+			? self::enqueue_on_next_tick( self::generate_dequeue_callable( current_action(), $func, $hooked_priority ) )
+			: null;
 	}
 
+	// endregion
+
+	// region HELPERS
+
 	/**
-	 * Enqueues a callable to run on a given hook and priority, and deques the callable immediately after that.
-	 *
-	 * @since   1.0.0
-	 * @version 1.0.0
+	 * Wrapper around WordPress' own 'add_action' function just for the sake of refactoring the other methods in this class.
 	 *
 	 * @param   string      $hook               Hook to enqueue callable on.
 	 * @param   callable    $func               Callable to enqueue.
@@ -113,22 +127,28 @@ final class Hooks {
 	 *
 	 * @return  bool
 	 */
-	public static function enqueue_temp( string $hook, callable $func, int $priority = 10, int $accepted_args = 1 ): bool {
-		$result = add_action( $hook, $func, $priority, $accepted_args );
-		if ( $result ) {
-			return add_action(
-				$hook,
-				function() use ( $hook, $func, $priority ) {
-					remove_action( $hook, $func, $priority );
-
-					if ( ! empty( func_get_args() ) && doing_filter() ) {
-						return func_get_arg( 0 );
-					}
-				},
-				$priority
-			);
-		}
-
-		return false;
+	protected static function enqueue( string $hook, callable $func, int $priority = 10, int $accepted_args = 1 ): bool {
+		return add_action( $hook, $func, $priority, $accepted_args );
 	}
+
+	/**
+	 * Generates a callable that removes another callable from a WP hook.
+	 *
+	 * @param   string      $hook       Hook on which the callable is enqueued.
+	 * @param   callable    $func       Callable to dequeue.
+	 * @param   int         $priority   The priority on which the callable is hooked.
+	 *
+	 * @return  callable
+	 */
+	protected static function generate_dequeue_callable( string $hook, callable $func, int $priority ): callable {
+		return function() use ( $hook, $func, $priority ) {
+			remove_action( $hook, $func, $priority );
+
+			if ( ! empty( func_get_args() ) && doing_filter() ) {
+				return func_get_arg( 0 );
+			}
+		};
+	}
+
+	// endregion
 }

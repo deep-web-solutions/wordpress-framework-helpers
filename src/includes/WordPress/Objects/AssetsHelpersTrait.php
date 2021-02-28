@@ -1,8 +1,8 @@
 <?php
 
-namespace DeepWebSolutions\Framework\Helpers\WordPress\Traits;
+namespace DeepWebSolutions\Framework\Helpers\WordPress\Objects;
 
-use DeepWebSolutions\Framework\Helpers\PHP\Traits\ReferenceHelperTrait;
+use DeepWebSolutions\Framework\Helpers\DataTypes\Strings;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -12,11 +12,9 @@ defined( 'ABSPATH' ) || exit;
  * @since   1.0.0
  * @version 1.0.0
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.com>
- * @package DeepWebSolutions\WP-Framework\Helpers\WordPress\Traits
+ * @package DeepWebSolutions\WP-Framework\Helpers\WordPress\Objects
  */
-trait AssetsHelperTrait {
-	use ReferenceHelperTrait;
-
+trait AssetsHelpersTrait {
 	/**
 	 * Returns a meaningful, hopefully unique, handle for an asset.
 	 *
@@ -30,10 +28,16 @@ trait AssetsHelperTrait {
 	 * @return  string
 	 */
 	public function get_asset_handle( string $name = '', array $extra = array(), string $root = '' ): string {
-		return $this->get_reference_name(
-			$name,
-			$extra,
-			$root,
+		return Strings::to_safe_string(
+			join(
+				'_',
+				array_filter(
+					array_merge(
+						array( $root, $name ),
+						$extra
+					)
+				)
+			),
 			array(
 				' '  => '-',
 				'/'  => '',

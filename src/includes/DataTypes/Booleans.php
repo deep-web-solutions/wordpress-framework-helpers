@@ -1,18 +1,18 @@
 <?php
 
-namespace DeepWebSolutions\Framework\Helpers\Miscellaneous;
+namespace DeepWebSolutions\Framework\Helpers\DataTypes;
 
 defined( 'ABSPATH' ) || exit;
 
 /**
- * A collection of very useful boolean logic helpers to be used throughout the projects.
+ * A collection of very useful boolean helpers to be used throughout the projects.
  *
  * @since   1.0.0
  * @version 1.0.0
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.com>
- * @package DeepWebSolutions\WP-Framework\Helpers\Miscellaneous
+ * @package DeepWebSolutions\WP-Framework\Helpers\DataTypes
  */
-final class BooleanLogic {
+final class Booleans {
 	/**
 	 * Useful class for calls to functional programming constructs, such as 'array_reduce'. Returns the logical or result
 	 * of the two parameters.

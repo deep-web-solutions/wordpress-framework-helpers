@@ -1,6 +1,6 @@
 <?php
 
-namespace DeepWebSolutions\Framework\Helpers\PHP;
+namespace DeepWebSolutions\Framework\Helpers\DataTypes;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -10,7 +10,7 @@ defined( 'ABSPATH' ) || exit;
  * @since   1.0.0
  * @version 1.0.0
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.com>
- * @package DeepWebSolutions\WP-Framework\Helpers\PHP
+ * @package DeepWebSolutions\WP-Framework\Helpers\DataTypes
  */
 final class Strings {
 	/**
@@ -52,22 +52,6 @@ final class Strings {
 	}
 
 	/**
-	 * Removes non-alphanumeric characters from the given string and returns the new one.
-	 *
-	 * @since   1.0.0
-	 * @version 1.0.0
-	 *
-	 * @see     https://stackoverflow.com/a/17151182
-	 *
-	 * @param   string  $string     The string to remove non-alphanumeric characters from.
-	 *
-	 * @return string
-	 */
-	public static function remove_non_alphanumeric_characters( string $string ): string {
-		return preg_replace( '/[^[:alnum:][:space:]]/u', '', $string );
-	}
-
-	/**
 	 * Takes an associate array($placeholder -> $replacement) and replaces all instances of $placeholder with $replacement
 	 * inside the given string parameter.
 	 *
@@ -94,10 +78,60 @@ final class Strings {
 	 *
 	 * @return  string
 	 */
-	public static function generate_safe_string( string $string, array $unsafe_characters ): string {
+	public static function to_safe_string( string $string, array $unsafe_characters ): string {
 		return self::replace_placeholders(
 			$unsafe_characters,
 			strtolower( $string )
 		);
+	}
+
+	/**
+	 * Transforms a string into an alphanumeric version of itself by removing any non-alphanumeric characters.
+	 *
+	 * @since   1.0.0
+	 * @version 1.0.0
+	 *
+	 * @see     https://stackoverflow.com/a/17151182
+	 *
+	 * @param   string  $string     The string to remove non-alphanumeric characters from.
+	 *
+	 * @return  string
+	 */
+	public static function to_alphanumeric_string( string $string ): string {
+		return preg_replace( '/[^[:alnum:][:space:]]/u', '', $string );
+	}
+
+	/**
+	 * Transforms the php.ini notation for numbers (like 2M) to an integer.
+	 *
+	 * @since   1.0.0
+	 * @version 1.0.0
+	 *
+	 * @see     http://hookr.io/functions/wc_let_to_num/
+	 *
+	 * @noinspection PhpMissingBreakStatementInspection
+	 *
+	 * @param   string  $size   The php.ini size to transform into an integer.
+	 *
+	 * @return  int
+	 */
+	public static function letter_to_number( string $size ): int {
+		$letter = substr( $size, -1 );
+		$return = substr( $size, 0, -1 );
+
+		switch ( strtoupper( $letter ) ) {
+			case 'P': // phpcs:ignore
+				$return *= 1024;
+			case 'T': // phpcs:ignore
+				$return *= 1024;
+			case 'G': // phpcs:ignore
+				$return *= 1024;
+			case 'M': // phpcs:ignore
+				$return *= 1024;
+			case 'K': // phpcs:ignore
+				$return *= 1024;
+		}
+
+		return $return;
 	}
 }

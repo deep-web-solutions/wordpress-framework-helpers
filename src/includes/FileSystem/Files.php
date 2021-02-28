@@ -1,6 +1,8 @@
 <?php
 
-namespace DeepWebSolutions\Framework\Helpers\PHP;
+namespace DeepWebSolutions\Framework\Helpers\FileSystem;
+
+use DeepWebSolutions\Framework\Helpers\DataTypes\Strings;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -10,7 +12,7 @@ defined( 'ABSPATH' ) || exit;
  * @since   1.0.0
  * @version 1.0.0
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.com>
- * @package DeepWebSolutions\WP-Framework\Helpers\PHP
+ * @package DeepWebSolutions\WP-Framework\Helpers\FileSystem
  */
 final class Files {
 	/**

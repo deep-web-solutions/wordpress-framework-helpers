@@ -2,7 +2,7 @@
 
 namespace DeepWebSolutions\Framework\Helpers\WordPress;
 
-use DeepWebSolutions\Framework\Helpers\PHP\Arrays;
+use DeepWebSolutions\Framework\Helpers\DataTypes\Arrays;
 
 defined( 'ABSPATH' ) || exit;
 

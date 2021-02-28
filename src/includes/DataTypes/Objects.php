@@ -1,6 +1,6 @@
 <?php
 
-namespace DeepWebSolutions\Framework\Helpers\PHP;
+namespace DeepWebSolutions\Framework\Helpers\DataTypes;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -10,9 +10,9 @@ defined( 'ABSPATH' ) || exit;
  * @since   1.0.0
  * @version 1.0.0
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.com>
- * @package DeepWebSolutions\WP-Framework\Helpers\PHP
+ * @package DeepWebSolutions\WP-Framework\Helpers\DataTypes
  */
-final class Misc {
+final class Objects {
 	/**
 	 * Gets the recursive list of traits used by a given class or trait.
 	 *
@@ -96,39 +96,5 @@ final class Misc {
 		}
 
 		return $traits;
-	}
-
-	/**
-	 * Transforms the php.ini notation for numbers (like 2M) to an integer.
-	 *
-	 * @since   1.0.0
-	 * @version 1.0.0
-	 *
-	 * @see     http://hookr.io/functions/wc_let_to_num/
-	 *
-	 * @noinspection PhpMissingBreakStatementInspection
-	 *
-	 * @param   string  $size   The php.ini size to transform into an integer.
-	 *
-	 * @return  int
-	 */
-	public static function let_to_num( string $size ): int {
-		$letter = substr( $size, -1 );
-		$return = substr( $size, 0, -1 );
-
-		switch ( strtoupper( $letter ) ) {
-			case 'P': // phpcs:ignore
-				$return *= 1024;
-			case 'T': // phpcs:ignore
-				$return *= 1024;
-			case 'G': // phpcs:ignore
-				$return *= 1024;
-			case 'M': // phpcs:ignore
-				$return *= 1024;
-			case 'K': // phpcs:ignore
-				$return *= 1024;
-		}
-
-		return $return;
 	}
 }
