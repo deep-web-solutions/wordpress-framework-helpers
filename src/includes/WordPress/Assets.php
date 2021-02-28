@@ -1,6 +1,6 @@
 <?php
 
-namespace DeepWebSolutions\Framework\Helpers\WordPress\Assets;
+namespace DeepWebSolutions\Framework\Helpers\WordPress;
 
 use DeepWebSolutions\Framework\Helpers\WordPress\Request;
 
@@ -12,7 +12,7 @@ defined( 'ABSPATH' ) || exit;
  * @since   1.0.0
  * @version 1.0.0
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.com>
- * @package DeepWebSolutions\WP-Framework\Helpers\WordPress\Assets
+ * @package DeepWebSolutions\WP-Framework\Helpers\WordPress
  */
 final class Assets {
 	/**
