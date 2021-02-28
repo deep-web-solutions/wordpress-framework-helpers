@@ -27,7 +27,7 @@ trait HooksHelpersTrait {
 	 *
 	 * @return  string
 	 */
-	public function get_hook_tag( string $name, array $extra = array(), string $root = '' ): string {
+	public function get_hook_tag( string $name, array $extra = array(), string $root = 'dws-framework-helpers' ): string {
 		return Strings::to_safe_string(
 			join(
 				'_',
