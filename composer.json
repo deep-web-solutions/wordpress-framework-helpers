@@ -2,7 +2,7 @@
   "name": "deep-web-solutions/wp-framework-helpers",
   "type": "library",
 
-  "description": "A set of related helpers to kick start WordPress development.",
+  "description": "A set of related helpers to kick-start WordPress development.",
   "keywords": ["wordpress", "framework", "Deep Web Solutions", "helpers"],
   "homepage": "https://www.deep-web-solutions.com",
   "license": "GPL-3.0-or-later",
