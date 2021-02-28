@@ -20,7 +20,7 @@ final class RequestTypesEnum {
 	 * @version 1.0.0
 	 *
 	 * @access  public
-	 * @var     string  ADMIN_REQUEST
+	 * @var     string
 	 */
 	public const ADMIN_REQUEST = 'admin';
 
@@ -31,7 +31,7 @@ final class RequestTypesEnum {
 	 * @version 1.0.0
 	 *
 	 * @access  public
-	 * @var     string  AJAX_REQUEST
+	 * @var     string
 	 */
 	public const AJAX_REQUEST = 'ajax';
 
@@ -42,7 +42,7 @@ final class RequestTypesEnum {
 	 * @version 1.0.0
 	 *
 	 * @access  public
-	 * @var     string  CRON_REQUEST
+	 * @var     string
 	 */
 	public const CRON_REQUEST = 'cron';
 
@@ -53,7 +53,7 @@ final class RequestTypesEnum {
 	 * @version 1.0.0
 	 *
 	 * @access  public
-	 * @var     string  REST_REQUEST
+	 * @var     string
 	 */
 	public const REST_REQUEST = 'rest';
 
@@ -64,7 +64,7 @@ final class RequestTypesEnum {
 	 * @version 1.0.0
 	 *
 	 * @access  public
-	 * @var     string  FRONTEND_REQUEST
+	 * @var     string
 	 */
 	public const FRONTEND_REQUEST = 'frontend';
 }
