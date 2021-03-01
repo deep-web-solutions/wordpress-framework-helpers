@@ -30,7 +30,7 @@ trait HooksHelpersTrait {
 	public function get_hook_tag( string $name, array $extra = array(), string $root = 'dws-framework-helpers' ): string {
 		return Strings::to_safe_string(
 			join(
-				'_',
+				'-',
 				array_filter(
 					array_merge(
 						array( $root, $name ),
@@ -39,7 +39,7 @@ trait HooksHelpersTrait {
 				)
 			),
 			array(
-				' '  => '-',
+				' '  => '_',
 				'/'  => '',
 				'\\' => '_',
 			)
