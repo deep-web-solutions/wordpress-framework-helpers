@@ -26,7 +26,7 @@ final class Arrays {
 	 *
 	 * @return  int     The number of items removed from the array.
 	 */
-	public static function unset_array_element_by_value( array &$array, $value, callable $callback = null ): int {
+	public static function unset_element_by_value( array &$array, $value, callable $callback = null ): int {
 		if ( is_callable( $callback ) ) {
 			$keys = array();
 			foreach ( $array as $key => $value ) {
@@ -57,5 +57,32 @@ final class Arrays {
 	 */
 	public static function has_string_keys( array $array ): bool {
 		return count( array_filter( array_keys( $array ), 'is_string' ) ) > 0;
+	}
+
+	/**
+	 * Performs a recursive search in a potentially multi-dimensional array.
+	 *
+	 * @see     https://hotexamples.com/examples/-/-/array_search_recursive/php-array_search_recursive-function-examples.html
+	 *
+	 * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
+	 *
+	 * @param   array   $array      The array to search in.
+	 * @param   mixed   $needle     The element to search for.
+	 * @param   bool    $strict     Whether to perform type checks or not.
+	 *
+	 * @return  array|null  Array of path keys, or false if the needle couldn't be found in the array.
+	 */
+	public static function search_recursive( array $array, $needle, bool $strict = false ): ?array {
+		foreach ( $array as $key => $value ) {
+			if ( is_array( $value ) && ! is_null( $found = self::search_recursive( $value, $needle, $strict ) ) ) { // phpcs:ignore
+				return array_merge( $key, $found );
+			}
+
+			if ( ( $strict && $needle === $value ) || ( ! $strict && $needle == $value ) ) { // phpcs:ignore
+				return array( $key );
+			}
+		}
+
+		return null;
 	}
 }
