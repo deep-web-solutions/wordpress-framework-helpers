@@ -14,38 +14,6 @@ defined( 'ABSPATH' ) || exit;
  */
 final class Arrays {
 	/**
-	 * Removes an element from an array by its value. If the value exists more than once, removes all of them.
-	 *
-	 * @since   1.0.0
-	 * @version 1.0.0
-	 *
-	 * @param   array           $array      The original array passed by reference.
-	 * @param   mixed           $value      The value that should be unset.
-	 * @param   callable|null   $callback   The callback to use to determine whether the value is the one looked for or not.
-	 *                                      If not provided, the key search defaults to the function array_keys.
-	 *
-	 * @return  int     The number of items removed from the array.
-	 */
-	public static function unset_element_by_value( array &$array, $value, callable $callback = null ): int {
-		if ( is_callable( $callback ) ) {
-			$keys = array();
-			foreach ( $array as $key => $value ) {
-				if ( call_user_func( $callback, $value ) ) {
-					$keys[] = $key;
-				}
-			}
-		} else {
-			$keys = array_keys( $array, $value, true );
-		}
-
-		foreach ( $keys as $key ) {
-			unset( $array[ $key ] );
-		}
-
-		return count( $keys );
-	}
-
-	/**
 	 * Checks whether an array has any string keys or if they are all numerical.
 	 *
 	 * @since   1.0.0
@@ -60,29 +28,78 @@ final class Arrays {
 	}
 
 	/**
-	 * Performs a recursive search in a potentially multi-dimensional array.
+	 * Returns all the entries in a given array that match a given needle.
 	 *
-	 * @see     https://hotexamples.com/examples/-/-/array_search_recursive/php-array_search_recursive-function-examples.html
+	 * @since   1.0.0
+	 * @version 1.0.0
 	 *
 	 * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
 	 *
-	 * @param   array   $array      The array to search in.
-	 * @param   mixed   $needle     The element to search for.
-	 * @param   bool    $strict     Whether to perform type checks or not.
+	 * @param   array           $array      Array to search through.
+	 * @param   mixed           $needle     The value to search for.
+	 * @param   bool            $strict     Whether to perform type checks or not.
+	 * @param   callable|null   $callback   Optional callback to run the value through before needle comparison.
 	 *
-	 * @return  array|null  Array of path keys, or false if the needle couldn't be found in the array.
+	 * @return  array|null
 	 */
-	public static function search_recursive( array $array, $needle, bool $strict = false ): ?array {
-		foreach ( $array as $key => $value ) {
-			if ( is_array( $value ) && ! is_null( $found = self::search_recursive( $value, $needle, $strict ) ) ) { // phpcs:ignore
-				return array_merge( $key, $found );
+	public static function search_values( array $array, $needle, bool $strict = true, ?callable $callback = null ): ?array {
+		$comparison_array = is_callable( $callback ) ? array_map( $callback, $array ) : $array;
+
+		foreach ( $comparison_array as $key => $value ) {
+			if ( ( $strict && $needle === $value ) || ( ! $strict && $needle == $value ) ) { // phpcs:ignore
+				continue;
 			}
 
-			if ( ( $strict && $needle === $value ) || ( ! $strict && $needle == $value ) ) { // phpcs:ignore
-				return array( $key );
-			}
+			unset( $array[ $key ] );
 		}
 
-		return null;
+		return empty( $array ) ? null : $array;
+	}
+
+	/**
+	 * Returns all the keys in a given array that match a given needle.
+	 *
+	 * @since   1.0.0
+	 * @version 1.0.0
+	 *
+	 * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
+	 *
+	 * @param   array           $array      Array whose keys to search through.
+	 * @param   mixed           $needle     The value to search for.
+	 * @param   bool            $strict     Whether to perform type checks or not.
+	 * @param   callable|null   $callback   Optional callback to run the key through before needle comparison.
+	 *
+	 * @return  array|null
+	 */
+	public static function search_keys( array $array, $needle, bool $strict = false, callable $callback = null ): ?array {
+		return self::search_values( array_keys( $array ), $needle, $strict, $callback );
+	}
+
+	/**
+	 * Removes an element from an array by its value. If the value exists more than once, removes all of them.
+	 *
+	 * @since   1.0.0
+	 * @version 1.0.0
+	 *
+	 * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
+	 *
+	 * @param   array           $array      The original array passed by reference.
+	 * @param   mixed           $needle     The value that should be unset.
+	 * @param   bool            $strict     Whether to perform type checks or not.
+	 * @param   callable|null   $callback   Optional callback to run the value through before needle comparison.
+	 *
+	 * @return  array|null  The removed elements, or null if nothing removed.
+	 */
+	public static function unset_elements_by_value( array &$array, $needle, bool $strict = true, ?callable $callback = null ): ?array {
+		$to_unset = self::search_values( $array, $needle, $strict, $callback );
+		if ( is_null( $to_unset ) ) {
+			return null;
+		}
+
+		foreach ( array_keys( $to_unset ) as $key ) {
+			unset( $array[ $key ] );
+		}
+
+		return $to_unset;
 	}
 }
