@@ -40,4 +40,16 @@ final class Misc {
 
 		return $result;
 	}
+
+	/**
+	 * Returns the UNIX timestamp of today's midnight adjusted to the site's timezone.
+	 *
+	 * @since   1.0.0
+	 * @version 1.0.0
+	 *
+	 * @return  int
+	 */
+	public static function get_midnight_unix_timestamp(): int {
+		return strtotime( sprintf( 'today midnight %s', get_option( 'timezone_string' ) ) );
+	}
 }
