@@ -63,8 +63,8 @@ install:
   # Install and configure WordPress.
   - cd $WP_ROOT_FOLDER
   - wp core download --version=$WP_VERSION
-  - wp config create --dbname="$TEST_SITE_DB_NAME" --dbuser="$TEST_SITE_DB_USER" --dbpass="$TEST_SITE_DB_PASSWORD" --dbhost="$TEST_SITE_DB_HOST" --dbprefix="$TEST_SITE_TABLE_PREFIX"
-  - wp core install --url="$TEST_SITE_WP_URL" --title="Test" --admin_user="$TEST_SITE_ADMIN_USERNAME" --admin_password="$TEST_SITE_ADMIN_PASSWORD" --admin_email="$TEST_SITE_ADMIN_EMAIL" --skip-email
+  - wp config create --dbname="$TEST_DB_NAME" --dbuser="$TEST_DB_USER" --dbpass="$TEST_DB_PASSWORD" --dbhost="$TEST_DB_HOST" --dbprefix="$TEST_TABLE_PREFIX"
+  - wp core install --url="$TEST_SITE_WP_URL" --title="Test" --admin_user="admin" --admin_password="password" --admin_email="$TEST_SITE_ADMIN_EMAIL" --skip-email
   - wp rewrite structure '/%postname%/' --hard
   - wp core update-db
   # Copy the plugin to the plugins directory.
