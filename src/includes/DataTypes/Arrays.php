@@ -28,23 +28,30 @@ final class Arrays {
 	}
 
 	/**
-	 * Inserts new array entries after a given key within an associative array.
+	 * Inserts new array entries after a given key within an existing array. If the key is not found,
+	 * appends entries at the end of the array.
 	 *
 	 * @since   1.0.0
 	 * @version 1.0.0
 	 * @see     https://gist.github.com/wpscholar/0deadce1bbfa4adb4e4c
 	 *
-	 * @param   array   $array          Associative array to insert the new entries into.
-	 * @param   string  $key            Key to insert the entries after.
-	 * @param   array   $new_entries    The new entries to insert.
+	 * @param   array           $array          Associative array to insert the new entries into.
+	 * @param   string|int      $key            Key to insert the entries after.
+	 * @param   array           $new_entries    The new entries to insert.
 	 *
 	 * @return  array
 	 */
-	public static function insert_after( array $array, string $key, array $new_entries ): array {
+	public static function insert_after( array $array, $key, array $new_entries ): array {
 		$index    = array_search( $key, array_keys( $array ), true );
 		$position = ( false === $index ) ? count( $array ) : ( $index + 1 );
 
-		return array_merge( array_slice( $array, 0, $position ), $new_entries, array_slice( $array, $position ) );
+		if ( self::has_string_keys( $array ) ) {
+			$array = array_slice( $array, 0, $position, true ) + $new_entries + array_slice( $array, $position, null, true );
+		} else {
+			array_splice( $array, $position, 0, $new_entries );
+		}
+
+		return $array;
 	}
 
 	/**
