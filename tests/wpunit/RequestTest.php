@@ -2,15 +2,41 @@
 
 namespace DeepWebSolutions\Framework\Tests\Helpers\Integration;
 
+use Codeception\TestCase\WPTestCase;
 use WpunitTester;
 
-class RequestTest extends \Codeception\TestCase\WPTestCase {
+/**
+ * Tests for the WP request helpers.
+ *
+ * @since   1.0.0
+ * @version 1.0.0
+ * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.com>
+ * @package DeepWebSolutions\WP-Framework\Tests\Helpers\Integration
+ */
+class RequestTest extends WPTestCase {
+	// region FIELDS AND CONSTANTS
 
 	/**
-	 * @var WpunitTester
+	 * Instance of the WP actor.
+	 *
+	 * @since   1.0.0
+	 * @version 1.0.0
+	 *
+	 * @access  protected
+	 * @var     WpunitTester
 	 */
-	protected $tester;
+	protected WpunitTester $tester;
 
+	// endregion
+
+	// region LIFECYCLE
+
+	/**
+	 * Logic to execute before the tests are run.
+	 *
+	 * @since   1.0.0
+	 * @version 1.0.0
+	 */
 	public function setUp(): void {
 		// Before...
 		parent::setUp();
@@ -18,6 +44,12 @@ class RequestTest extends \Codeception\TestCase\WPTestCase {
 		// Your set up methods here.
 	}
 
+	/**
+	 * Logic to execute after the tests are run.
+	 *
+	 * @since   1.0.0
+	 * @version 1.0.0
+	 */
 	public function tearDown(): void {
 		// Your tear down methods here.
 
@@ -25,10 +57,9 @@ class RequestTest extends \Codeception\TestCase\WPTestCase {
 		parent::tearDown();
 	}
 
-	// Tests
-	public function test_it_works() {
-		$post = static::factory()->post->create_and_get();
+	// endregion
 
-		$this->assertInstanceOf( \WP_Post::class, $post );
-	}
+	// region TESTS
+
+	// endregion
 }

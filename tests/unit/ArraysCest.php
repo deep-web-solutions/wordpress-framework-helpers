@@ -27,7 +27,7 @@ class ArraysCest {
 	 *
 	 * @param   UnitTester  $I      Codeception actor instance.
 	 */
-	public function _before( UnitTester $I ) {
+	public function _before( UnitTester $I ): void {
 		defined( 'ABSPATH' ) || define( 'ABSPATH', __DIR__ );
 	}
 

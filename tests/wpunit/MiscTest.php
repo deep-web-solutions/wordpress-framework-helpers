@@ -2,33 +2,34 @@
 
 namespace DeepWebSolutions\Framework\Tests\Helpers\Integration;
 
+use Codeception\TestCase\WPTestCase;
 use WpunitTester;
 
-class MiscTest extends \Codeception\TestCase\WPTestCase {
+/**
+ * Tests for the WP misc helpers.
+ *
+ * @since   1.0.0
+ * @version 1.0.0
+ * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.com>
+ * @package DeepWebSolutions\WP-Framework\Tests\Helpers\Integration
+ */
+class MiscTest extends WPTestCase {
+	// region FIELDS AND CONSTANTS
 
 	/**
-	 * @var WpunitTester
+	 * Instance of the WP actor.
+	 *
+	 * @since   1.0.0
+	 * @version 1.0.0
+	 *
+	 * @access  protected
+	 * @var     WpunitTester
 	 */
-	protected $tester;
+	protected WpunitTester $tester;
 
-	public function setUp(): void {
-		// Before...
-		parent::setUp();
+	// endregion
 
-		// Your set up methods here.
-	}
+	// region TESTS
 
-	public function tearDown(): void {
-		// Your tear down methods here.
-
-		// Then...
-		parent::tearDown();
-	}
-
-	// Tests
-	public function test_it_works() {
-		$post = static::factory()->post->create_and_get();
-
-		$this->assertInstanceOf( \WP_Post::class, $post );
-	}
+	// endregion
 }
