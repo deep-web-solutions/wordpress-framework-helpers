@@ -1,5 +1,6 @@
 .env.testing
 codeception.yml
+tests/_data/dump.sql
 
 # Created by https://www.gitignore.io/api/composer,phpstorm+all
 # Edit at https://www.gitignore.io/?templates=composer,phpstorm+all

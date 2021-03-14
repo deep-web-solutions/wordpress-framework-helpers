@@ -33,63 +33,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 // Start by autoloading dependencies and defining a few functions for running the bootstrapper.
 // The conditional check makes the whole thing compatible with Composer-based WP management.
-file_exists( __DIR__ . '/vendor/autoload.php' ) && require_once __DIR__ . '/vendor/autoload.php';
+is_file( __DIR__ . '/vendor/autoload.php' ) && require_once __DIR__ . '/vendor/autoload.php';
+
+// Load module-specific bootstrapping functions.
+require_once __DIR__ . '/bootstrap-functions.php';
 
 // Define helpers constants.
 define( __NAMESPACE__ . '\DWS_WP_FRAMEWORK_HELPERS_NAME', dws_wp_framework_get_whitelabel_name() . ': Framework Helpers' );
 define( __NAMESPACE__ . '\DWS_WP_FRAMEWORK_HELPERS_VERSION', '1.0.0' );
 
-/**
- * Returns the whitelabel name of the framework's helpers within the context of the current plugin.
- *
- * @since   1.0.0
- * @version 1.0.0
- *
- * @return  string
- */
-function dws_wp_framework_get_helpers_name() {
-	return constant( __NAMESPACE__ . '\DWS_WP_FRAMEWORK_HELPERS_NAME' );
-}
-
-/**
- * Returns the version of the framework's helpers within the context of the current plugin.
- *
- * @since   1.0.0
- * @version 1.0.0
- *
- * @return  string
- */
-function dws_wp_framework_get_helpers_version() {
-	return constant( __NAMESPACE__ . '\DWS_WP_FRAMEWORK_HELPERS_VERSION' );
-}
-
 // Define minimum environment requirements.
 define( __NAMESPACE__ . '\DWS_WP_FRAMEWORK_HELPERS_MIN_PHP', '7.4' );
 define( __NAMESPACE__ . '\DWS_WP_FRAMEWORK_HELPERS_MIN_WP', '5.5' );
-
-/**
- * Returns the minimum PHP version required to run the Bootstrapper of the framework's helpers within the context of the current plugin.
- *
- * @since   1.0.0
- * @version 1.0.0
- *
- * @return  string
- */
-function dws_wp_framework_get_helpers_min_php() {
-	return constant( __NAMESPACE__ . '\DWS_WP_FRAMEWORK_HELPERS_MIN_PHP' );
-}
-
-/**
- * Returns the minimum WP version required to run the Bootstrapper of the framework's helpers within the context of the current plugin.
- *
- * @since   1.0.0
- * @version 1.0.0
- *
- * @return  string
- */
-function dws_wp_framework_get_helpers_min_wp() {
-	return constant( __NAMESPACE__ . '\DWS_WP_FRAMEWORK_HELPERS_MIN_WP' );
-}
 
 // Bootstrap the helpers (maybe)!
 if ( dws_wp_framework_check_php_wp_requirements_met( dws_wp_framework_get_helpers_min_php(), dws_wp_framework_get_helpers_min_wp() ) ) {
