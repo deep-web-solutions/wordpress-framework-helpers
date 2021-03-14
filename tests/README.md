@@ -5,7 +5,7 @@
 1) Create a WordPress test instance. You can use your preferred method of setting up development environments, e.g. VVV, Docker, Local by Flywheel etc.
 1) Create a separate database for acceptance+functional tests. For example, for `DB_USER` 'wp' and `DB_HOST` 'localhost':
 
-    * mysql -u root -p -e "CRATE DATABASE if not exists helpers_tests"
+    * mysql -u root -p -e "CREATE DATABASE if not exists helpers_tests"
     * mysql -u root -p -e "GRANT ALL PRIVILEGES ON helpers_tests.* TO 'wp'@'localhost';"
 
 1) Copy the `_support/dws-wp-helpers-test-plugin` folder to your instance's `wp-content/plugins` folder and install dependencies with `composer install --ignore-platform-reqs`.
