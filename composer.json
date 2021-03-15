@@ -47,6 +47,7 @@
   },
   "autoload-dev": {
     "psr-4": {
+      "DeepWebSolutions\\Framework\\Tests\\Helpers\\Support\\": "tests/_support",
       "DeepWebSolutions\\Framework\\Tests\\Helpers\\Integration\\": "tests/wpunit",
       "DeepWebSolutions\\Framework\\Tests\\Helpers\\Unit\\": "tests/unit"
     }

@@ -2,7 +2,7 @@
 
 namespace DeepWebSolutions\Framework\Helpers\WordPress\Assets;
 
-defined( 'ABSPATH' ) || exit;
+\defined( 'ABSPATH' ) || exit;
 
 /**
  * Describes an assets-helpers-aware instance.

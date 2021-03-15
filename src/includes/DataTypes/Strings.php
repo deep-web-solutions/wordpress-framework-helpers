@@ -2,7 +2,7 @@
 
 namespace DeepWebSolutions\Framework\Helpers\DataTypes;
 
-defined( 'ABSPATH' ) || exit;
+\defined( 'ABSPATH' ) || exit;
 
 /**
  * A collection of very useful string manipulation helpers to be used throughout the projects.
@@ -25,11 +25,11 @@ final class Strings {
 	 * @return  bool    True if the string starts as expected, false otherwise.
 	 */
 	public static function starts_with( string $haystack, string $needle ): bool {
-		if ( \PHP_VERSION_ID >= 80000 && function_exists( 'str_starts_with' ) ) {
-			str_starts_with( $haystack, $needle );
+		if ( \PHP_VERSION_ID >= 80000 && \function_exists( '\str_starts_with' ) ) {
+			\str_starts_with( $haystack, $needle );
 		}
 
-		return substr_compare( $haystack, $needle, 0, strlen( $needle ) ) === 0;
+		return \substr_compare( $haystack, $needle, 0, \strlen( $needle ) ) === 0;
 	}
 
 	/**
@@ -44,11 +44,11 @@ final class Strings {
 	 * @return  bool    True if the string ends as expected, false otherwise.
 	 */
 	public static function ends_with( string $haystack, string $needle ): bool {
-		if ( \PHP_VERSION_ID >= 80000 && function_exists( 'str_ends_with' ) ) {
-			return str_ends_with( $haystack, $needle );
+		if ( \PHP_VERSION_ID >= 80000 && \function_exists( '\str_ends_with' ) ) {
+			return \str_ends_with( $haystack, $needle );
 		}
 
-		return substr_compare( $haystack, $needle, -strlen( $needle ) ) === 0;
+		return '' === $needle || \substr_compare( $haystack, $needle, -\strlen( $needle ) ) === 0;
 	}
 
 	/**
@@ -64,7 +64,7 @@ final class Strings {
 	 * @return  string  Processed string with all the placeholders replaced.
 	 */
 	public static function replace_placeholders( array $placeholders, string $string ): string {
-		return str_replace( array_keys( $placeholders ), array_values( $placeholders ), $string );
+		return \str_replace( \array_keys( $placeholders ), \array_values( $placeholders ), $string );
 	}
 
 	/**
@@ -81,7 +81,7 @@ final class Strings {
 	public static function to_safe_string( string $string, array $unsafe_characters ): string {
 		return self::replace_placeholders(
 			$unsafe_characters,
-			strtolower( $string )
+			\strtolower( $string )
 		);
 	}
 
@@ -98,7 +98,7 @@ final class Strings {
 	 * @return  string
 	 */
 	public static function to_alphanumeric_string( string $string ): string {
-		return preg_replace( '/[^[:alnum:][:space:]]/u', '', $string );
+		return \preg_replace( '/[^[:alnum:][:space:]]/u', '', $string );
 	}
 
 	/**
@@ -116,10 +116,10 @@ final class Strings {
 	 * @return  int
 	 */
 	public static function letter_to_number( string $size ): int {
-		$letter = substr( $size, -1 );
-		$return = substr( $size, 0, -1 );
+		$letter = \substr( $size, -1 );
+		$return = \substr( $size, 0, -1 );
 
-		switch ( strtoupper( $letter ) ) {
+		switch ( \strtoupper( $letter ) ) {
 			case 'P': // phpcs:ignore
 				$return *= 1024;
 			case 'T': // phpcs:ignore

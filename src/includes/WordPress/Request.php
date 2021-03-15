@@ -2,7 +2,7 @@
 
 namespace DeepWebSolutions\Framework\Helpers\WordPress;
 
-defined( 'ABSPATH' ) || exit;
+\defined( 'ABSPATH' ) || exit;
 
 /**
  * A collection of very useful WP request helpers to be used throughout the projects.
@@ -30,19 +30,19 @@ final class Request {
 	public static function is_type( string $type ): bool {
 		switch ( $type ) {
 			case RequestTypesEnum::ADMIN_REQUEST:
-				$result = is_admin();
+				$result = \is_admin();
 				break;
 			case RequestTypesEnum::AJAX_REQUEST:
-				$result = defined( 'DOING_AJAX' );
+				$result = \defined( 'DOING_AJAX' );
 				break;
 			case RequestTypesEnum::CRON_REQUEST:
-				$result = defined( 'DOING_CRON' );
+				$result = \defined( 'DOING_CRON' );
 				break;
 			case RequestTypesEnum::REST_REQUEST:
 				$result = self::is_rest_api_request();
 				break;
 			case RequestTypesEnum::FRONTEND_REQUEST:
-				$result = ( ! is_admin() || defined( 'DOING_AJAX' ) ) && ! defined( 'DOING_CRON' ) && ! self::is_rest_api_request();
+				$result = ( ! \is_admin() || \defined( 'DOING_AJAX' ) ) && ! \defined( 'DOING_CRON' ) && ! self::is_rest_api_request();
 				break;
 			default:
 				$result = false;
@@ -62,7 +62,7 @@ final class Request {
 	 * @return  bool    True if the constant is defined and true.
 	 */
 	public static function has_debug( string $constant = 'WP_DEBUG' ): bool {
-		return defined( $constant ) && constant( $constant );
+		return \defined( $constant ) && \constant( $constant );
 	}
 
 	// endregion
@@ -80,13 +80,13 @@ final class Request {
 	 */
 	protected static function is_rest_api_request(): bool {
 		if ( empty( $_SERVER['REQUEST_URI'] ) ) {
-			return wp_is_jsonp_request() || wp_is_json_request();
+			return \wp_is_jsonp_request() || \wp_is_json_request();
 		}
 
-		$rest_prefix         = trailingslashit( rest_get_url_prefix() );
-		$is_rest_api_request = ( false !== strpos( $_SERVER['REQUEST_URI'], $rest_prefix ) ); // phpcs:disable WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		$rest_prefix         = \trailingslashit( \rest_get_url_prefix() );
+		$is_rest_api_request = ( false !== \strpos( $_SERVER['REQUEST_URI'], $rest_prefix ) ); // phpcs:disable WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 
-		return $is_rest_api_request || wp_is_jsonp_request() || wp_is_json_request();
+		return $is_rest_api_request || \wp_is_jsonp_request() || \wp_is_json_request();
 	}
 
 	// endregion

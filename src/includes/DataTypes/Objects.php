@@ -2,7 +2,7 @@
 
 namespace DeepWebSolutions\Framework\Helpers\DataTypes;
 
-defined( 'ABSPATH' ) || exit;
+\defined( 'ABSPATH' ) || exit;
 
 /**
  * A collection of very useful misc helpers to be used throughout the projects.
@@ -99,24 +99,6 @@ final class Objects {
 	}
 
 	/**
-	 * Returns whether a given trait is used in the inheritance tree of a given class or another trait.
-	 *
-	 * @since   1.0.0
-	 * @version 1.0.0
-	 *
-	 * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
-	 *
-	 * @param   string              $trait          Trait to search for.
-	 * @param   object|string       $class          An object (class instance) or a string (class name) to investigate.
-	 * @param   bool                $autoload       Whether to allow this function to load the class automatically through the __autoload() magic method.
-	 *
-	 * @return  bool
-	 */
-	public static function has_trait_deep( string $trait, $class, bool $autoload = true ): bool {
-		return in_array( $trait, self::class_uses_deep_list( $class, $autoload ), true );
-	}
-
-	/**
 	 * Returns whether a given trait is used in the given class.
 	 *
 	 * @since   1.0.0
@@ -131,6 +113,24 @@ final class Objects {
 	 * @return  bool
 	 */
 	public static function has_trait( string $trait, $class, bool $autoload = true ): bool {
-		return in_array( $trait, class_uses( $class, $autoload ), true );
+		return isset( class_uses( $class, $autoload )[ $trait ] );
+	}
+
+	/**
+	 * Returns whether a given trait is used in the inheritance tree of a given class or another trait.
+	 *
+	 * @since   1.0.0
+	 * @version 1.0.0
+	 *
+	 * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
+	 *
+	 * @param   string              $trait          Trait to search for.
+	 * @param   object|string       $class          An object (class instance) or a string (class name) to investigate.
+	 * @param   bool                $autoload       Whether to allow this function to load the class automatically through the __autoload() magic method.
+	 *
+	 * @return  bool
+	 */
+	public static function has_trait_deep( string $trait, $class, bool $autoload = true ): bool {
+		return isset( self::class_uses_deep_list( $class, $autoload )[ $trait ] );
 	}
 }

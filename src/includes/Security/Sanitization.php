@@ -2,7 +2,7 @@
 
 namespace DeepWebSolutions\Framework\Helpers\Security;
 
-defined( 'ABSPATH' ) || exit;
+\defined( 'ABSPATH' ) || exit;
 
 /**
  * A collection of very useful sanitization helpers to be used throughout the projects.
@@ -26,7 +26,7 @@ final class Sanitization {
 	 */
 	public static function sanitize_integer( $integer, int $default = 0 ): int {
 		return Validation::validate_integer(
-			filter_var( $integer, FILTER_SANITIZE_NUMBER_INT ),
+			\filter_var( $integer, FILTER_SANITIZE_NUMBER_INT ),
 			$default
 		);
 	}
@@ -45,7 +45,7 @@ final class Sanitization {
 	 */
 	public static function sanitize_integer_input( int $input_type, string $variable_name, int $default = 0 ): int {
 		return Validation::validate_integer(
-			filter_input( $input_type, $variable_name, FILTER_SANITIZE_NUMBER_INT ),
+			\filter_input( $input_type, $variable_name, FILTER_SANITIZE_NUMBER_INT ),
 			$default
 		);
 	}
@@ -63,7 +63,7 @@ final class Sanitization {
 	 */
 	public static function sanitize_float( $float, float $default = 0.0 ): float {
 		return Validation::validate_float(
-			filter_var( $float, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_THOUSAND | FILTER_FLAG_ALLOW_FRACTION | FILTER_FLAG_ALLOW_SCIENTIFIC ),
+			\filter_var( $float, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_THOUSAND | FILTER_FLAG_ALLOW_FRACTION | FILTER_FLAG_ALLOW_SCIENTIFIC ),
 			$default
 		);
 	}
@@ -82,7 +82,7 @@ final class Sanitization {
 	 */
 	public static function sanitize_float_input( int $input_type, string $variable_name, float $default = 0.0 ): float {
 		return Validation::validate_float(
-			filter_input( $input_type, $variable_name, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_THOUSAND | FILTER_FLAG_ALLOW_FRACTION | FILTER_FLAG_ALLOW_SCIENTIFIC ),
+			\filter_input( $input_type, $variable_name, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_THOUSAND | FILTER_FLAG_ALLOW_FRACTION | FILTER_FLAG_ALLOW_SCIENTIFIC ),
 			$default
 		);
 	}

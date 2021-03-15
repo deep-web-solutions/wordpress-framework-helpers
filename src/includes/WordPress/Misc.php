@@ -4,7 +4,7 @@ namespace DeepWebSolutions\Framework\Helpers\WordPress;
 
 use DeepWebSolutions\Framework\Helpers\DataTypes\Arrays;
 
-defined( 'ABSPATH' ) || exit;
+\defined( 'ABSPATH' ) || exit;
 
 /**
  * A collection of very useful WP misc helpers to be used throughout the projects.
@@ -33,7 +33,7 @@ final class Misc {
 		$result = $defaults;
 
 		foreach ( $args as $key => &$value ) {
-			$result[ $key ] = ( is_array( $value ) && isset( $result[ $key ] ) && Arrays::has_string_keys( $result[ $key ] ) )
+			$result[ $key ] = ( \is_array( $value ) && isset( $result[ $key ] ) && Arrays::has_string_keys( $result[ $key ] ) )
 				? self::wp_parse_args_recursive( $value, $result[ $key ] )
 				: $value;
 		}
@@ -50,6 +50,6 @@ final class Misc {
 	 * @return  int
 	 */
 	public static function get_midnight_unix_timestamp(): int {
-		return strtotime( sprintf( 'today midnight %s', get_option( 'timezone_string' ) ) );
+		return \strtotime( \sprintf( 'today midnight %s', \get_option( 'timezone_string' ) ) );
 	}
 }

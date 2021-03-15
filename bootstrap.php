@@ -27,44 +27,44 @@
 
 namespace DeepWebSolutions\Framework;
 
-if ( ! defined( 'ABSPATH' ) ) {
+if ( ! \defined( 'ABSPATH' ) ) {
 	return; // Since this file is autoloaded by Composer, 'exit' breaks all external dev tools.
 }
 
 // Start by autoloading dependencies and defining a few functions for running the bootstrapper.
 // The conditional check makes the whole thing compatible with Composer-based WP management.
-is_file( __DIR__ . '/vendor/autoload.php' ) && require_once __DIR__ . '/vendor/autoload.php';
+\is_file( __DIR__ . '/vendor/autoload.php' ) && require_once __DIR__ . '/vendor/autoload.php';
 
 // Load module-specific bootstrapping functions.
 require_once __DIR__ . '/bootstrap-functions.php';
 
 // Define helpers constants.
-define( __NAMESPACE__ . '\DWS_WP_FRAMEWORK_HELPERS_NAME', dws_wp_framework_get_whitelabel_name() . ': Framework Helpers' );
-define( __NAMESPACE__ . '\DWS_WP_FRAMEWORK_HELPERS_VERSION', '1.0.0' );
+\define( __NAMESPACE__ . '\DWS_WP_FRAMEWORK_HELPERS_NAME', dws_wp_framework_get_whitelabel_name() . ': Framework Helpers' );
+\define( __NAMESPACE__ . '\DWS_WP_FRAMEWORK_HELPERS_VERSION', '1.0.0' );
 
 // Define minimum environment requirements.
-define( __NAMESPACE__ . '\DWS_WP_FRAMEWORK_HELPERS_MIN_PHP', '7.4' );
-define( __NAMESPACE__ . '\DWS_WP_FRAMEWORK_HELPERS_MIN_WP', '5.5' );
+\define( __NAMESPACE__ . '\DWS_WP_FRAMEWORK_HELPERS_MIN_PHP', '7.4' );
+\define( __NAMESPACE__ . '\DWS_WP_FRAMEWORK_HELPERS_MIN_WP', '5.5' );
 
 // Bootstrap the helpers (maybe)!
 if ( dws_wp_framework_check_php_wp_requirements_met( dws_wp_framework_get_helpers_min_php(), dws_wp_framework_get_helpers_min_wp() ) ) {
 	$dws_helpers_init_function = function() {
-		define(
+		\define(
 			__NAMESPACE__ . '\DWS_WP_FRAMEWORK_HELPERS_INIT',
-			apply_filters(
+			\apply_filters(
 				'dws_wp_framework_helpers_init_status',
-				defined( __NAMESPACE__ . '\DWS_WP_FRAMEWORK_BOOTSTRAPPER_INIT' ) && DWS_WP_FRAMEWORK_BOOTSTRAPPER_INIT,
+				\defined( __NAMESPACE__ . '\DWS_WP_FRAMEWORK_BOOTSTRAPPER_INIT' ) && DWS_WP_FRAMEWORK_BOOTSTRAPPER_INIT,
 				__NAMESPACE__
 			)
 		);
 	};
 
-	if ( did_action( 'plugins_loaded' ) ) {
-		call_user_func( $dws_helpers_init_function );
+	if ( \did_action( 'plugins_loaded' ) ) {
+		\call_user_func( $dws_helpers_init_function );
 	} else {
-		add_action( 'plugins_loaded', $dws_helpers_init_function, PHP_INT_MIN + 100 );
+		\add_action( 'plugins_loaded', $dws_helpers_init_function, PHP_INT_MIN + 100 );
 	}
 } else {
-	define( __NAMESPACE__ . '\DWS_WP_FRAMEWORK_HELPERS_INIT', false );
+	\define( __NAMESPACE__ . '\DWS_WP_FRAMEWORK_HELPERS_INIT', false );
 	dws_wp_framework_output_requirements_error( dws_wp_framework_get_helpers_name(), dws_wp_framework_get_helpers_version(), dws_wp_framework_get_helpers_min_php(), dws_wp_framework_get_helpers_min_wp() );
 }

@@ -4,7 +4,7 @@ namespace DeepWebSolutions\Framework\Helpers\WordPress;
 
 use DeepWebSolutions\Framework\Helpers\DataTypes\Booleans;
 
-defined( 'ABSPATH' ) || exit;
+\defined( 'ABSPATH' ) || exit;
 
 /**
  * A collection of very useful WP users helpers to be used throughout the projects.
@@ -24,7 +24,7 @@ final class Users {
 	 * @param   int|null    $user_id    The ID of the user to log out. Defaults to the currently logged-in user.
 	 */
 	public static function logout_user( ?int $user_id = null ): void {
-		$user_sessions = \WP_Session_Tokens::get_instance( $user_id ?? get_current_user_id() );
+		$user_sessions = \WP_Session_Tokens::get_instance( $user_id ?? \get_current_user_id() );
 		$user_sessions->destroy_all();
 	}
 
@@ -39,7 +39,7 @@ final class Users {
 	 * @return  array|null  The list of roles or null if the user could not be retrieved.
 	 */
 	public static function get_roles( ?int $user_id = null ): ?array {
-		$user = is_null( $user_id ) ? wp_get_current_user() : get_user_by( 'id', $user_id );
+		$user = \is_null( $user_id ) ? \wp_get_current_user() : \get_user_by( 'id', $user_id );
 		return ( $user instanceof \WP_User && $user->exists() ) ? $user->roles : null;
 	}
 
@@ -57,7 +57,7 @@ final class Users {
 	 */
 	public static function has_roles( array $roles, ?int $user_id = null, string $logic = 'and' ): ?bool {
 		$user_roles = self::get_roles( $user_id );
-		if ( is_null( $user_roles ) ) {
+		if ( \is_null( $user_roles ) ) {
 			return null;
 		}
 
@@ -67,10 +67,10 @@ final class Users {
 			return false;
 		}
 
-		return array_reduce(
-			array_map(
+		return \array_reduce(
+			\array_map(
 				function( string $role ) use ( $user_roles ) {
-					return in_array( $role, $user_roles, true );
+					return \in_array( $role, $user_roles, true );
 				},
 				$roles
 			),
@@ -93,8 +93,8 @@ final class Users {
 	 * @return  bool|null   Null if the user could not be found, otherwise the result of the check.
 	 */
 	public static function has_capabilities( array $capabilities, ?int $user_id = null, string $logic = 'and', ...$args ): ?bool {
-		$user = is_null( $user_id ) ? wp_get_current_user() : get_user_by( 'id', $user_id );
-		if ( is_null( $user ) ) {
+		$user = \is_null( $user_id ) ? \wp_get_current_user() : \get_user_by( 'id', $user_id );
+		if ( \is_null( $user ) ) {
 			return null;
 		}
 
@@ -102,8 +102,8 @@ final class Users {
 			return true;
 		}
 
-		return array_reduce(
-			array_map(
+		return \array_reduce(
+			\array_map(
 				function( string $capability ) use ( $user, $args ) {
 					return $user->has_cap( $capability, ...$args );
 				},

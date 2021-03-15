@@ -2,7 +2,7 @@
 
 namespace DeepWebSolutions\Framework\Helpers\DataTypes;
 
-defined( 'ABSPATH' ) || exit;
+\defined( 'ABSPATH' ) || exit;
 
 /**
  * A collection of very useful array manipulation helpers to be used throughout the projects.
@@ -24,7 +24,7 @@ final class Arrays {
 	 * @return  bool    True if it has string keys, false otherwise.
 	 */
 	public static function has_string_keys( array $array ): bool {
-		return count( array_filter( array_keys( $array ), 'is_string' ) ) > 0;
+		return \count( \array_filter( \array_keys( $array ), '\is_string' ) ) > 0;
 	}
 
 	/**
@@ -42,13 +42,13 @@ final class Arrays {
 	 * @return  array
 	 */
 	public static function insert_after( array $array, $key, array $new_entries ): array {
-		$index    = array_search( $key, array_keys( $array ), true );
-		$position = ( false === $index ) ? count( $array ) : ( $index + 1 );
+		$index    = \array_search( $key, \array_keys( $array ), true );
+		$position = ( false === $index ) ? \count( $array ) : ( $index + 1 );
 
 		if ( self::has_string_keys( $array ) ) {
-			$array = array_slice( $array, 0, $position, true ) + $new_entries + array_slice( $array, $position, null, true );
+			$array = \array_slice( $array, 0, $position, true ) + $new_entries + \array_slice( $array, $position, null, true );
 		} else {
-			array_splice( $array, $position, 0, $new_entries );
+			\array_splice( $array, $position, 0, $new_entries );
 		}
 
 		return $array;
@@ -70,7 +70,7 @@ final class Arrays {
 	 * @return  array|null
 	 */
 	public static function search_values( array $array, $needle, bool $strict = true, ?callable $callback = null ): ?array {
-		$comparison_array = is_callable( $callback ) ? array_map( $callback, $array ) : $array;
+		$comparison_array = \is_callable( $callback ) ? \array_map( $callback, $array ) : $array;
 
 		foreach ( $comparison_array as $key => $value ) {
 			if ( ( $strict && $needle === $value ) || ( ! $strict && $needle == $value ) ) { // phpcs:ignore
@@ -99,6 +99,6 @@ final class Arrays {
 	 * @return  array|null
 	 */
 	public static function search_keys( array $array, $needle, bool $strict = false, callable $callback = null ): ?array {
-		return self::search_values( array_keys( $array ), $needle, $strict, $callback );
+		return self::search_values( \array_keys( $array ), $needle, $strict, $callback );
 	}
 }

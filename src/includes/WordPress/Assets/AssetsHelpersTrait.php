@@ -4,7 +4,7 @@ namespace DeepWebSolutions\Framework\Helpers\WordPress\Assets;
 
 use DeepWebSolutions\Framework\Helpers\DataTypes\Strings;
 
-defined( 'ABSPATH' ) || exit;
+\defined( 'ABSPATH' ) || exit;
 
 /**
  * Basic implementation of the assets-helpers-aware interface.
@@ -29,10 +29,10 @@ trait AssetsHelpersTrait {
 	 */
 	public function get_asset_handle( string $name = '', array $extra = array(), string $root = 'dws-framework-helpers' ): string {
 		return Strings::to_safe_string(
-			join(
+			\join(
 				'_',
-				array_filter(
-					array_merge(
+				\array_filter(
+					\array_merge(
 						array( $root, $name ),
 						$extra
 					)

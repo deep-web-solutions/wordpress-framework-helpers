@@ -12,7 +12,7 @@
 
 namespace DeepWebSolutions\Framework;
 
-defined( 'ABSPATH' ) || exit;
+\defined( 'ABSPATH' ) || exit;
 
 /**
  * Returns the whitelabel name of the framework's helpers within the context of the current plugin.
@@ -23,7 +23,7 @@ defined( 'ABSPATH' ) || exit;
  * @return  string
  */
 function dws_wp_framework_get_helpers_name() {
-	return constant( __NAMESPACE__ . '\DWS_WP_FRAMEWORK_HELPERS_NAME' );
+	return \constant( __NAMESPACE__ . '\DWS_WP_FRAMEWORK_HELPERS_NAME' );
 }
 
 /**
@@ -35,7 +35,7 @@ function dws_wp_framework_get_helpers_name() {
  * @return  string
  */
 function dws_wp_framework_get_helpers_version() {
-	return constant( __NAMESPACE__ . '\DWS_WP_FRAMEWORK_HELPERS_VERSION' );
+	return \constant( __NAMESPACE__ . '\DWS_WP_FRAMEWORK_HELPERS_VERSION' );
 }
 
 /**
@@ -47,7 +47,7 @@ function dws_wp_framework_get_helpers_version() {
  * @return  string
  */
 function dws_wp_framework_get_helpers_min_php() {
-	return constant( __NAMESPACE__ . '\DWS_WP_FRAMEWORK_HELPERS_MIN_PHP' );
+	return \constant( __NAMESPACE__ . '\DWS_WP_FRAMEWORK_HELPERS_MIN_PHP' );
 }
 
 /**
@@ -59,7 +59,7 @@ function dws_wp_framework_get_helpers_min_php() {
  * @return  string
  */
 function dws_wp_framework_get_helpers_min_wp() {
-	return constant( __NAMESPACE__ . '\DWS_WP_FRAMEWORK_HELPERS_MIN_WP' );
+	return \constant( __NAMESPACE__ . '\DWS_WP_FRAMEWORK_HELPERS_MIN_WP' );
 }
 
 /**
@@ -71,5 +71,5 @@ function dws_wp_framework_get_helpers_min_wp() {
  * @return  bool
  */
 function dws_wp_framework_get_helpers_init_status() {
-	return constant( __NAMESPACE__ . '\DWS_WP_FRAMEWORK_HELPERS_INIT' );
+	return \constant( __NAMESPACE__ . '\DWS_WP_FRAMEWORK_HELPERS_INIT' );
 }

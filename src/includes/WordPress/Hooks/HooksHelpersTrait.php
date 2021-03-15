@@ -4,7 +4,7 @@ namespace DeepWebSolutions\Framework\Helpers\WordPress\Hooks;
 
 use DeepWebSolutions\Framework\Helpers\DataTypes\Strings;
 
-defined( 'ABSPATH' ) || exit;
+\defined( 'ABSPATH' ) || exit;
 
 /**
  * Basic implementation of the hooks-helpers-aware interface.
@@ -29,10 +29,10 @@ trait HooksHelpersTrait {
 	 */
 	public function get_hook_tag( string $name, array $extra = array(), string $root = 'dws-framework-helpers' ): string {
 		return Strings::to_safe_string(
-			join(
+			\join(
 				'-',
-				array_filter(
-					array_merge(
+				\array_filter(
+					\array_merge(
 						array( $root, $name ),
 						$extra
 					)

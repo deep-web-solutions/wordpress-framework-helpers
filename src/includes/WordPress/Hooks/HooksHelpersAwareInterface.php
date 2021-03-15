@@ -2,7 +2,7 @@
 
 namespace DeepWebSolutions\Framework\Helpers\WordPress\Hooks;
 
-defined( 'ABSPATH' ) || exit;
+\defined( 'ABSPATH' ) || exit;
 
 /**
  * Describes a hooks-helpers-aware instance.

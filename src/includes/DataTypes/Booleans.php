@@ -2,7 +2,7 @@
 
 namespace DeepWebSolutions\Framework\Helpers\DataTypes;
 
-defined( 'ABSPATH' ) || exit;
+\defined( 'ABSPATH' ) || exit;
 
 /**
  * A collection of very useful boolean helpers to be used throughout the projects.

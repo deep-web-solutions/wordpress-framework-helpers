@@ -4,7 +4,7 @@ namespace DeepWebSolutions\Framework\Helpers\WordPress;
 
 use DeepWebSolutions\Framework\Helpers\WordPress\Request;
 
-defined( 'ABSPATH' ) || exit;
+\defined( 'ABSPATH' ) || exit;
 
 /**
  * A collection of very useful WP asset handling helpers to be used throughout the projects.

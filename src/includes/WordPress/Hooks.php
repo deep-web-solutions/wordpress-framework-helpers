@@ -2,7 +2,7 @@
 
 namespace DeepWebSolutions\Framework\Helpers\WordPress;
 
-defined( 'ABSPATH' ) || exit;
+\defined( 'ABSPATH' ) || exit;
 
 /**
  * A collection of very useful WP hooks helpers to be used throughout the projects.
@@ -33,8 +33,8 @@ final class Hooks {
 
 		foreach ( $filters as $priority => $filter ) {
 			foreach ( $filter as $function ) {
-				if ( is_array( $function ) && is_array( $function['function'] ) && is_a( $function['function'][0], $class ) && $method === $function['function'][1] ) {
-					remove_filter( $hook, array( $function['function'][0], $method ), $priority );
+				if ( \is_array( $function ) && \is_array( $function['function'] ) && \is_a( $function['function'][0], $class ) && $method === $function['function'][1] ) {
+					\remove_filter( $hook, array( $function['function'][0], $method ), $priority );
 				}
 			}
 		}
@@ -49,7 +49,7 @@ final class Hooks {
 	 * @return  int
 	 */
 	public static function get_current_hook_priority(): int {
-		return $GLOBALS['wp_filter'][ current_filter() ]->current_priority();
+		return $GLOBALS['wp_filter'][ \current_filter() ]->current_priority();
 	}
 
 	/**
@@ -85,7 +85,7 @@ final class Hooks {
 	public static function enqueue_on_next_tick( callable $func, int $accepted_args = 1 ): ?int {
 		$current_priority = self::get_current_hook_priority();
 		if ( PHP_INT_MAX !== $current_priority ) {
-			return self::enqueue( current_action(), $func, $current_priority + 1, $accepted_args )
+			return self::enqueue( \current_action(), $func, $current_priority + 1, $accepted_args )
 				? $current_priority + 1
 				: null;
 		}
@@ -108,8 +108,8 @@ final class Hooks {
 	public static function enqueue_temp_on_next_tick( callable $func, int $accepted_args = 1 ): ?int {
 		$hooked_priority = self::enqueue_on_next_tick( $func, $accepted_args );
 
-		return ( ! is_null( $hooked_priority ) )
-			? self::enqueue_on_next_tick( self::generate_dequeue_callable( current_action(), $func, $hooked_priority ) )
+		return ( ! \is_null( $hooked_priority ) )
+			? self::enqueue_on_next_tick( self::generate_dequeue_callable( \current_action(), $func, $hooked_priority ) )
 			: null;
 	}
 
@@ -128,7 +128,7 @@ final class Hooks {
 	 * @return  bool
 	 */
 	protected static function enqueue( string $hook, callable $func, int $priority = 10, int $accepted_args = 1 ): bool {
-		return add_action( $hook, $func, $priority, $accepted_args );
+		return \add_action( $hook, $func, $priority, $accepted_args );
 	}
 
 	/**
@@ -142,10 +142,10 @@ final class Hooks {
 	 */
 	protected static function generate_dequeue_callable( string $hook, callable $func, int $priority ): callable {
 		return function() use ( $hook, $func, $priority ) {
-			remove_action( $hook, $func, $priority );
+			\remove_action( $hook, $func, $priority );
 
-			if ( ! empty( func_get_args() ) && doing_filter() ) {
-				return func_get_arg( 0 );
+			if ( ! empty( \func_get_args() ) && \doing_filter() ) {
+				return \func_get_arg( 0 );
 			}
 		};
 	}

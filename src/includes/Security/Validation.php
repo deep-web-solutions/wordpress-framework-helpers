@@ -2,7 +2,7 @@
 
 namespace DeepWebSolutions\Framework\Helpers\Security;
 
-defined( 'ABSPATH' ) || exit;
+\defined( 'ABSPATH' ) || exit;
 
 /**
  * A collection of very useful validation helpers to be used throughout the projects.
@@ -25,7 +25,7 @@ final class Validation {
 	 * @return  bool
 	 */
 	public static function validate_boolean( $boolean, bool $default ): bool {
-		return filter_var( $boolean, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE ) ?? $default;
+		return \filter_var( $boolean, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE ) ?? $default;
 	}
 
 	/**
@@ -41,7 +41,7 @@ final class Validation {
 	 * @return  bool
 	 */
 	public static function validate_boolean_input( int $input_type, string $variable_name, bool $default ): bool {
-		return filter_input( $input_type, $variable_name, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE ) ?? $default;
+		return \filter_input( $input_type, $variable_name, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE ) ?? $default;
 	}
 
 	/**
@@ -56,7 +56,7 @@ final class Validation {
 	 * @return  int
 	 */
 	public static function validate_integer( $integer, int $default ): int {
-		return filter_var(
+		return \filter_var(
 			$integer,
 			FILTER_VALIDATE_INT,
 			array(
@@ -79,7 +79,7 @@ final class Validation {
 	 * @return  int
 	 */
 	public static function validate_integer_input( int $input_type, string $variable_name, int $default ): int {
-		return filter_input(
+		return \filter_input(
 			$input_type,
 			$variable_name,
 			FILTER_VALIDATE_INT,
@@ -102,9 +102,9 @@ final class Validation {
 	 * @return  float
 	 */
 	public static function validate_float( $float, float $default ): float {
-		$float = filter_var( $float, FILTER_VALIDATE_FLOAT, FILTER_FLAG_ALLOW_THOUSAND );
+		$float = \filter_var( $float, FILTER_VALIDATE_FLOAT, FILTER_FLAG_ALLOW_THOUSAND );
 		if ( false === $float ) {
-			$float = filter_var( $float, FILTER_VALIDATE_FLOAT, array( 'options' => array( 'decimal' => ',' ) ) );
+			$float = \filter_var( $float, FILTER_VALIDATE_FLOAT, array( 'options' => array( 'decimal' => ',' ) ) );
 		}
 
 		return $float ?: $default; // phpcs:ignore
@@ -122,10 +122,10 @@ final class Validation {
 	 * @return  callable
 	 */
 	public static function validate_callback( $callback, callable $default ): callable {
-		if ( is_string( $callback ) ) {
-			$callback = trim( $callback );
-			return is_callable( $callback ) ? $callback : $default;
-		} elseif ( is_callable( $callback ) ) {
+		if ( \is_string( $callback ) ) {
+			$callback = \trim( $callback );
+			return \is_callable( $callback ) ? $callback : $default;
+		} elseif ( \is_callable( $callback ) ) {
 			return $callback;
 		}
 
@@ -145,10 +145,10 @@ final class Validation {
 	 * @return  mixed
 	 */
 	public static function validate_allowed_value( $entry, array $allowed, $default ) {
-		$is_allowed = in_array( $entry, $allowed, true );
-		if ( false === $is_allowed && is_string( $entry ) ) {
-			$entry      = trim( $entry );
-			$is_allowed = in_array( $entry, $allowed, true );
+		$is_allowed = \in_array( $entry, $allowed, true );
+		if ( false === $is_allowed && \is_string( $entry ) ) {
+			$entry      = \trim( $entry );
+			$is_allowed = \in_array( $entry, $allowed, true );
 		}
 
 		return $is_allowed ? $entry : $default;

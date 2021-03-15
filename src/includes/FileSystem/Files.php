@@ -4,7 +4,7 @@ namespace DeepWebSolutions\Framework\Helpers\FileSystem;
 
 use DeepWebSolutions\Framework\Helpers\DataTypes\Strings;
 
-defined( 'ABSPATH' ) || exit;
+\defined( 'ABSPATH' ) || exit;
 
 /**
  * A collection of very useful file system helpers to be used throughout the projects.
@@ -27,7 +27,7 @@ final class Files {
 	 * @return  string  Full disk path.
 	 */
 	public static function generate_full_path( string $absolute, string $relative ): string {
-		return trailingslashit( $absolute ) . ltrim( $relative, '/' );
+		return \trailingslashit( $absolute ) . \ltrim( $relative, '/' );
 	}
 
 	/**

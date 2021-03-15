@@ -2,7 +2,9 @@
 
 namespace DeepWebSolutions\Framework\Helpers\FileSystem\Objects;
 
-defined( 'ABSPATH' ) || exit;
+use DeepWebSolutions\Framework\Helpers\DataTypes\Strings;
+
+\defined( 'ABSPATH' ) || exit;
 
 /**
  * Defines a few short-hand methods for retrieving file system and URL paths.
@@ -13,7 +15,11 @@ defined( 'ABSPATH' ) || exit;
  * @package DeepWebSolutions\WP-Framework\Helpers\FileSystem\Objects
  */
 trait PathsTrait {
+	// region TRAITS
+
 	use ReflectionTrait;
+
+	// endregion
 
 	// region METHODS
 
@@ -33,8 +39,8 @@ trait PathsTrait {
 		$file_name = self::get_file_name();
 
 		return $keep_file_name
-			? trailingslashit( $file_name )
-			: trailingslashit( plugin_dir_path( $file_name ) );
+			? \trailingslashit( $file_name )
+			: \trailingslashit( \plugin_dir_path( $file_name ) );
 	}
 
 	/**
@@ -53,11 +59,17 @@ trait PathsTrait {
 		$file_name = self::get_file_name();
 
 		$relative_url = $keep_file_name
-			? str_replace( ABSPATH, '', trailingslashit( $file_name ) )
-			: trailingslashit( plugin_dir_url( $file_name ) );
+			? \str_replace( ABSPATH, '', \trailingslashit( $file_name ) )
+			: \trailingslashit( \plugin_dir_url( $file_name ) );
 
 		// Fix for operating systems where the directory separator is not a forward slash.
-		return str_replace( array( site_url(), DIRECTORY_SEPARATOR ), array( '', '/' ), $relative_url );
+		return Strings::replace_placeholders(
+			array(
+				\site_url()         => '',
+				DIRECTORY_SEPARATOR => '/',
+			),
+			$relative_url
+		);
 	}
 
 	/**
@@ -71,7 +83,7 @@ trait PathsTrait {
 	 * @return  string
 	 */
 	final public static function get_custom_base_path( string $path ): string {
-		return trailingslashit( self::get_base_path() . $path );
+		return \trailingslashit( self::get_base_path() . $path );
 	}
 
 	/**
@@ -85,7 +97,7 @@ trait PathsTrait {
 	 * @return  string
 	 */
 	final public static function get_custom_base_relative_url( string $path ): string {
-		return trailingslashit( self::get_base_relative_url() . $path );
+		return \trailingslashit( self::get_base_relative_url() . $path );
 	}
 
 	// endregion

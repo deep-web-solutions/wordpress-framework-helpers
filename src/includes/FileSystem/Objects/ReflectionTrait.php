@@ -4,7 +4,7 @@ namespace DeepWebSolutions\Framework\Helpers\FileSystem\Objects;
 
 use ReflectionClass;
 
-defined( 'ABSPATH' ) || exit;
+\defined( 'ABSPATH' ) || exit;
 
 /**
  * Defines a few short-hand methods for retrieving reflection information about the using class.
