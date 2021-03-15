@@ -29,36 +29,6 @@ class AssetsTest extends WPTestCase {
 
 	// endregion
 
-	// region LIFECYCLE
-
-	/**
-	 * Logic to execute before the tests are run.
-	 *
-	 * @since   1.0.0
-	 * @version 1.0.0
-	 */
-	public function setUp(): void {
-		// Before...
-		parent::setUp();
-
-		// Your set up methods here.
-	}
-
-	/**
-	 * Logic to execute after the tests are run.
-	 *
-	 * @since   1.0.0
-	 * @version 1.0.0
-	 */
-	public function tearDown(): void {
-		// Your tear down methods here.
-
-		// Then...
-		parent::tearDown();
-	}
-
-	// endregion
-
 	// region TESTS
 
 	// endregion
