@@ -27,7 +27,10 @@ final class Files {
 	 * @return  string  Full disk path.
 	 */
 	public static function generate_full_path( string $absolute, string $relative ): string {
-		return \trailingslashit( $absolute ) . \ltrim( $relative, '/' );
+		$absolute = \trailingslashit( \trim( $absolute ) );
+		$relative = \trim( $relative, " \t\n\r\0\x0B/\\" ); // forward and backward slashes added
+
+		return \str_replace( '/', DIRECTORY_SEPARATOR, $absolute . $relative );
 	}
 
 	/**

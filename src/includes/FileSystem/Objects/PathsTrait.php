@@ -2,8 +2,6 @@
 
 namespace DeepWebSolutions\Framework\Helpers\FileSystem\Objects;
 
-use DeepWebSolutions\Framework\Helpers\DataTypes\Strings;
-
 \defined( 'ABSPATH' ) || exit;
 
 /**
@@ -37,10 +35,22 @@ trait PathsTrait {
 	 */
 	final public static function get_base_path( bool $keep_file_name = false ): string {
 		$file_name = self::get_file_name();
+		return $keep_file_name ? $file_name : dirname( $file_name ) . DIRECTORY_SEPARATOR;
+	}
 
-		return $keep_file_name
-			? \trailingslashit( $file_name )
-			: \trailingslashit( \plugin_dir_path( $file_name ) );
+	/**
+	 * Returns the path to a custom file or directory prepended by the path to the using class' path.
+	 *
+	 * @since   1.0.0
+	 * @version 1.0.0
+	 *
+	 * @param   string  $path       The path to append to the current file's base path.
+	 *
+	 * @return  string
+	 */
+	final public static function get_custom_base_path( string $path ): string {
+		$path = str_replace( '/', DIRECTORY_SEPARATOR, \trailingslashit( $path ) );
+		return self::get_base_path() . $path;
 	}
 
 	/**
@@ -56,34 +66,12 @@ trait PathsTrait {
 	 * @return  string
 	 */
 	final public static function get_base_relative_url( bool $keep_file_name = false ): string {
-		$file_name = self::get_file_name();
-
+		$base_path    = self::get_base_path( true );
 		$relative_url = $keep_file_name
-			? \str_replace( ABSPATH, '', \trailingslashit( $file_name ) )
-			: \trailingslashit( \plugin_dir_url( $file_name ) );
+			? '/' . \str_replace( ABSPATH, '', $base_path )
+			: \trailingslashit( \plugins_url( '', $base_path ) );
 
-		// Fix for operating systems where the directory separator is not a forward slash.
-		return Strings::replace_placeholders(
-			array(
-				\site_url()         => '',
-				DIRECTORY_SEPARATOR => '/',
-			),
-			$relative_url
-		);
-	}
-
-	/**
-	 * Returns the path to a custom file or directory prepended by the path to the using class' path.
-	 *
-	 * @since   1.0.0
-	 * @version 1.0.0
-	 *
-	 * @param   string  $path       The path to append to the current file's base path.
-	 *
-	 * @return  string
-	 */
-	final public static function get_custom_base_path( string $path ): string {
-		return \trailingslashit( self::get_base_path() . $path );
+		return \str_replace( array( \site_url(), DIRECTORY_SEPARATOR ), array( '', '/' ), $relative_url );
 	}
 
 	/**
@@ -97,7 +85,8 @@ trait PathsTrait {
 	 * @return  string
 	 */
 	final public static function get_custom_base_relative_url( string $path ): string {
-		return \trailingslashit( self::get_base_relative_url() . $path );
+		$path = str_replace( DIRECTORY_SEPARATOR, '/', \trailingslashit( $path ) );
+		return self::get_base_relative_url() . $path;
 	}
 
 	// endregion

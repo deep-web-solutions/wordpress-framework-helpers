@@ -314,7 +314,7 @@ class ValidationCest {
 				'expected' => 'is_numeric',
 			),
 			array(
-				'value'    => ( $func = function() {} ),
+				'value'    => ( $func = function() {} ), // phpcs:ignore
 				'default'  => 'is_numeric',
 				'expected' => $func,
 			),
