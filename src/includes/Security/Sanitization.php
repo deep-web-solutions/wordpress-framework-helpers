@@ -2,6 +2,8 @@
 
 namespace DeepWebSolutions\Framework\Helpers\Security;
 
+use DeepWebSolutions\Framework\Helpers\DataTypes\Strings;
+
 \defined( 'ABSPATH' ) || exit;
 
 /**
@@ -13,6 +15,8 @@ namespace DeepWebSolutions\Framework\Helpers\Security;
  * @package DeepWebSolutions\WP-Framework\Helpers\Security
  */
 final class Sanitization {
+	// region METHODS
+
 	/**
 	 * Sanitizes an int-like value.
 	 *
@@ -25,7 +29,12 @@ final class Sanitization {
 	 * @return  int
 	 */
 	public static function sanitize_integer( $integer, int $default = 0 ): int {
-		return Validation::validate_integer(
+		if ( \is_string( $integer ) ) {
+			$sign    = self::has_minus_before_number( $integer ) ? -1 : 1;
+			$integer = Strings::to_alphanumeric_string( $integer );
+		}
+
+		return ( $sign ?? 1 ) * Validation::validate_integer(
 			\filter_var( $integer, FILTER_SANITIZE_NUMBER_INT ),
 			$default
 		);
@@ -44,10 +53,8 @@ final class Sanitization {
 	 * @return  int
 	 */
 	public static function sanitize_integer_input( int $input_type, string $variable_name, int $default = 0 ): int {
-		return Validation::validate_integer(
-			\filter_input( $input_type, $variable_name, FILTER_SANITIZE_NUMBER_INT ),
-			$default
-		);
+		$value = \filter_input( $input_type, $variable_name, FILTER_UNSAFE_RAW );
+		return self::sanitize_integer( $value, $default );
 	}
 
 	/**
@@ -62,6 +69,17 @@ final class Sanitization {
 	 * @return  float
 	 */
 	public static function sanitize_float( $float, float $default = 0.0 ): float {
+		if ( \is_string( $float ) ) {
+			$float = Strings::to_safe_string( $float, array( '+' => '' ) );
+
+			$scientific = strpos( $float, 'E' ) !== false || strpos( $float, 'e' ) !== false;
+			if ( ! $scientific ) {
+				$sign  = self::has_minus_before_number( $float );
+				$float = Strings::to_safe_string( $float, array( '-' => '' ) );
+				$float = $sign ? "-{$float}" : $float;
+			}
+		}
+
 		return Validation::validate_float(
 			\filter_var( $float, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_THOUSAND | FILTER_FLAG_ALLOW_FRACTION | FILTER_FLAG_ALLOW_SCIENTIFIC ),
 			$default
@@ -81,9 +99,31 @@ final class Sanitization {
 	 * @return  float
 	 */
 	public static function sanitize_float_input( int $input_type, string $variable_name, float $default = 0.0 ): float {
-		return Validation::validate_float(
-			\filter_input( $input_type, $variable_name, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_THOUSAND | FILTER_FLAG_ALLOW_FRACTION | FILTER_FLAG_ALLOW_SCIENTIFIC ),
-			$default
-		);
+		$value = \filter_input( $input_type, $variable_name, FILTER_UNSAFE_RAW );
+		return self::sanitize_float( $value, $default );
 	}
+
+	// endregion
+
+	// region HELPERS
+
+	/**
+	 * Checks whether a string has the '-' character before any numeric characters.
+	 *
+	 * @since   1.0.0
+	 * @version 1.0.0
+	 *
+	 * @param   string  $string     String to perform the check for.
+	 *
+	 * @return  bool
+	 */
+	protected static function has_minus_before_number( string $string ): bool {
+		$matches = array();
+
+		return \preg_match( '/^([A-Z-]+)([0-9]+)(.)*$/i', $string, $matches )
+			? \strpos( $matches[1], '-' ) !== false
+			: false;
+	}
+
+	// endregion
 }

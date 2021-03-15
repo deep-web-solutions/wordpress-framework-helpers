@@ -41,7 +41,8 @@ final class Validation {
 	 * @return  bool
 	 */
 	public static function validate_boolean_input( int $input_type, string $variable_name, bool $default ): bool {
-		return \filter_input( $input_type, $variable_name, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE ) ?? $default;
+		$value = \filter_input( $input_type, $variable_name, FILTER_UNSAFE_RAW );
+		return self::validate_boolean( $value, $default );
 	}
 
 	/**
@@ -79,15 +80,8 @@ final class Validation {
 	 * @return  int
 	 */
 	public static function validate_integer_input( int $input_type, string $variable_name, int $default ): int {
-		return \filter_input(
-			$input_type,
-			$variable_name,
-			FILTER_VALIDATE_INT,
-			array(
-				'options' => array( 'default' => $default ),
-				'flags'   => FILTER_FLAG_ALLOW_OCTAL | FILTER_FLAG_ALLOW_HEX,
-			)
-		);
+		$value = \filter_input( $input_type, $variable_name, FILTER_UNSAFE_RAW );
+		return self::validate_integer( $value, $default );
 	}
 
 	/**
@@ -102,12 +96,36 @@ final class Validation {
 	 * @return  float
 	 */
 	public static function validate_float( $float, float $default ): float {
-		$float = \filter_var( $float, FILTER_VALIDATE_FLOAT, FILTER_FLAG_ALLOW_THOUSAND );
-		if ( false === $float ) {
-			$float = \filter_var( $float, FILTER_VALIDATE_FLOAT, array( 'options' => array( 'decimal' => ',' ) ) );
+		$result = \filter_var( $float, FILTER_VALIDATE_FLOAT, FILTER_FLAG_ALLOW_THOUSAND );
+		if ( false === $result ) {
+			$result = \filter_var(
+				$float,
+				FILTER_VALIDATE_FLOAT,
+				array(
+					'options' => array( 'decimal' => ',' ),
+					'flags'   => FILTER_FLAG_ALLOW_THOUSAND,
+				)
+			);
 		}
 
-		return $float ?: $default; // phpcs:ignore
+		return $result ?: $default; // phpcs:ignore
+	}
+
+	/**
+	 * Validates a float-like variable from an input stream.
+	 *
+	 * @since   1.0.0
+	 * @version 1.0.0
+	 *
+	 * @param   int     $input_type     One of INPUT_GET, INPUT_POST, INPUT_COOKIE, INPUT_SERVER, or INPUT_ENV.
+	 * @param   string  $variable_name  Name of a variable to get.
+	 * @param   float   $default        The default value to return if all fails.
+	 *
+	 * @return  float
+	 */
+	public static function validate_float_input( int $input_type, string $variable_name, float $default ): float {
+		$value = \filter_input( $input_type, $variable_name, FILTER_UNSAFE_RAW );
+		return self::validate_float( $value, $default );
 	}
 
 	/**
