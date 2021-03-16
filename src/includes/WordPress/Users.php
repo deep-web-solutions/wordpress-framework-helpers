@@ -24,8 +24,14 @@ final class Users {
 	 * @param   int|null    $user_id    The ID of the user to log out. Defaults to the currently logged-in user.
 	 */
 	public static function logout_user( ?int $user_id = null ): void {
-		$user_sessions = \WP_Session_Tokens::get_instance( $user_id ?? \get_current_user_id() );
-		$user_sessions->destroy_all();
+		$user_id = $user_id ?? \get_current_user_id();
+		if ( \get_current_user_id() === $user_id ) {
+			wp_destroy_all_sessions();
+			wp_logout();
+		} else {
+			$user_sessions = \WP_Session_Tokens::get_instance( $user_id );
+			$user_sessions->destroy_all();
+		}
 	}
 
 	/**

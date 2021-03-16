@@ -30,3 +30,11 @@ if ( ! defined( 'DeepWebSolutions\Framework\DWS_WP_FRAMEWORK_BOOTSTRAPPER_NAME' 
 	require __DIR__ . '/vendor/deep-web-solutions/wp-framework-bootstrapper/bootstrap.php';
 	require __DIR__ . '/vendor/deep-web-solutions/wp-framework-helpers/bootstrap.php';
 }
+
+// Trigger helpers externally.
+add_action( 'parse_query', function( &$wp_query ) {
+	if ( false !== strpos( $_SERVER[REQUEST_URI], 'dws-wp-framework-helpers/users-functions' ) ) {
+		include ABSPATH . 'wp-content/plugins/dws-wp-helpers-test-plugin/users-functions.php';
+		exit;
+	}
+} );
