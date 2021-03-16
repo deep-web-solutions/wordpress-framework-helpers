@@ -2,14 +2,14 @@
 
 **Contributors:** Antonius Hegyes, Deep Web Solutions GmbH  
 **Requires at least:** 5.5  
-**Tested up to:** 5.6  
+**Tested up to:** 5.7  
 **Requires PHP:** 7.4  
 **Stable tag:** 1.0.0  
 **License:** GPLv3 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-3.0.html  
 
 
-## Description 
+## Description
 
 [![Build Status](https://travis-ci.com/deep-web-solutions/wordpress-framework-helpers.svg?branch=master)](https://travis-ci.com/deep-web-solutions/wordpress-framework-helpers)
 [![Maintainability](https://api.codeclimate.com/v1/badges/b777a17778d2969dfa84/maintainability)](https://codeclimate.com/github/deep-web-solutions/wordpress-framework-helpers/maintainability)
@@ -24,12 +24,12 @@ The package is designed to be installed via Composer. It may work as a stand-alo
 The package's name is `deep-web-solutions/wp-framework-helpers`.
 
 
-## Contributing 
+## Contributing
 
 Contributions both in the form of bug-reports and pull requests are more than welcome!
 
 
-## Frequently Asked Questions 
+## Frequently Asked Questions
 
 - Will you support earlier versions of WordPress and PHP?
 
@@ -44,7 +44,7 @@ If you're using older versions of either one, you should really consider upgradi
 Hopefully yes, probably not. If you found any problems, please raise an issue on Github!
 
 
-## Changelog 
+## Changelog
 
-### 1.0.0 (TBD) 
+### 1.0.0 (March 16th, 2021)
 * First official release.

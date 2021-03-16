@@ -42,14 +42,17 @@ final class Misc {
 	}
 
 	/**
-	 * Returns the UNIX timestamp of today's midnight adjusted to the site's timezone.
+	 * Returns the UNIX timestamp of today's midnight adjusted to a specific timezone.
 	 *
 	 * @since   1.0.0
 	 * @version 1.0.0
 	 *
+	 * @param   string|null     $timezone_string    Optional timezone string. If not provided, will use the website's own timezone.
+	 *
 	 * @return  int
 	 */
-	public static function get_midnight_unix_timestamp(): int {
-		return \strtotime( \sprintf( 'today midnight %s', \get_option( 'timezone_string' ) ) );
+	public static function get_midnight_unix_timestamp( ?string $timezone_string = null ): int {
+		$timezone_string = $timezone_string ?: \get_option( 'timezone_string' ); // phpcs:ignore
+		return \strtotime( \sprintf( 'today midnight %s', $timezone_string ) );
 	}
 }
