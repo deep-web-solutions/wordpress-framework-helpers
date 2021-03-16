@@ -78,7 +78,7 @@ install:
   - wp config create --dbname="$TEST_SITE_DB_NAME" --dbuser="$TEST_SITE_DB_USER" --dbpass="$TEST_SITE_DB_PASSWORD" --dbhost="$TEST_SITE_DB_HOST" --dbprefix="$TEST_SITE_TABLE_PREFIX"
   - wp core install --url="$TEST_SITE_WP_URL" --title="Test" --admin_user="$TEST_SITE_ADMIN_USERNAME" --admin_password="$TEST_SITE_ADMIN_PASSWORD" --admin_email="$TEST_SITE_ADMIN_EMAIL" --skip-email
   - wp rewrite structure '/%postname%/' --hard
-  - awk '!/fastcgi_finish_request();/' wp-cron.php > temp && mv temp wp-cron.php # remove after finding a better way to test CRON detection
+  - grep -v 'fastcgi_finish_request();' wp-cron.php > temp && mv temp wp-cron.php # remove after finding a better way to test CRON detection
   # Copy the plugin to the plugins directory.
   - cp -r $TRAVIS_BUILD_DIR/tests/_support/dws-wp-helpers-test-plugin $WP_ROOT_FOLDER/wp-content/plugins/dws-wp-helpers-test-plugin
   - composer install --no-dev --no-interaction --ignore-platform-reqs --working-dir=$WP_ROOT_FOLDER/wp-content/plugins/dws-wp-helpers-test-plugin
@@ -88,6 +88,8 @@ install:
   # Activate the test plugin
   - wp plugin activate dws-wp-helpers-test-plugin
   - wp plugin list --status=active
+  # Generate the db export.
+  - wp db export $TRAVIS_BUILD_DIR/tests/_data/dump.sql
   # Make sure the WP directory is writeable.
   - chmod -R 777 $WP_ROOT_FOLDER
 
