@@ -15,15 +15,26 @@ env:
     # Must match the env variables in .dist.env
     - WP_ROOT_FOLDER=/tmp/wordpress
 
+    # For acceptance and functional tests
+    - TEST_SITE_DB_DSN="mysql:host=127.0.0.1;dbname=test_acceptance"
+    - TEST_SITE_DB_HOST=localhost
+    - TEST_SITE_DB_NAME=test_acceptance
+    - TEST_SITE_DB_USER=root
+    - TEST_SITE_DB_PASSWORD= #intentionally blank
+    - TEST_SITE_TABLE_PREFIX=wp_
+    - TEST_SITE_ADMIN_USERNAME=admin
+    - TEST_SITE_ADMIN_PASSWORD=password
+    - TEST_SITE_WP_ADMIN_PATH=/wp-admin
+    - TEST_SITE_WP_URL=http://localhost:8888
+    - TEST_SITE_WP_DOMAIN=localhost:8888
+    - TEST_SITE_ADMIN_EMAIL=admin@localhost.test
+
     # For integration tests
     - TEST_DB_NAME=test_integration
     - TEST_DB_HOST=127.0.0.1
     - TEST_DB_USER=root
     - TEST_DB_PASSWORD= #intentionally blank
     - TEST_TABLE_PREFIX=wp_
-    - TEST_SITE_WP_URL=http://localhost:8888
-    - TEST_SITE_WP_DOMAIN=localhost:8888
-    - TEST_SITE_ADMIN_EMAIL=admin@localhost.test
 
 matrix:
   fast_finish: true
@@ -44,6 +55,7 @@ cache:
 
 before_install:
   # Create the databases that will be used in the tests.
+  - mysql -u root -e "CREATE DATABASE IF NOT EXISTS $TEST_SITE_DB_NAME;"
   - mysql -u root -e "CREATE DATABASE IF NOT EXISTS $TEST_DB_NAME;"
   # Set up folders.
   - mkdir -p $WP_ROOT_FOLDER
@@ -63,10 +75,9 @@ install:
   # Install and configure WordPress.
   - cd $WP_ROOT_FOLDER
   - wp core download --version=$WP_VERSION
-  - wp config create --dbname="$TEST_DB_NAME" --dbuser="$TEST_DB_USER" --dbpass="$TEST_DB_PASSWORD" --dbhost="$TEST_DB_HOST" --dbprefix="$TEST_TABLE_PREFIX"
-  - wp core install --url="$TEST_SITE_WP_URL" --title="Test" --admin_user="admin" --admin_password="password" --admin_email="$TEST_SITE_ADMIN_EMAIL" --skip-email
+  - wp config create --dbname="$TEST_SITE_DB_NAME" --dbuser="$TEST_SITE_DB_USER" --dbpass="$TEST_SITE_DB_PASSWORD" --dbhost="$TEST_SITE_DB_HOST" --dbprefix="$TEST_SITE_TABLE_PREFIX"
+  - wp core install --url="$TEST_SITE_WP_URL" --title="Test" --admin_user="$TEST_SITE_ADMIN_USERNAME" --admin_password="$TEST_SITE_ADMIN_PASSWORD" --admin_email="$TEST_SITE_ADMIN_EMAIL" --skip-email
   - wp rewrite structure '/%postname%/' --hard
-  - wp core update-db
   # Copy the plugin to the plugins directory.
   - cp -r $TRAVIS_BUILD_DIR/tests/_support/dws-wp-helpers-test-plugin $WP_ROOT_FOLDER/wp-content/plugins/dws-wp-helpers-test-plugin
   - composer install --no-dev --no-interaction --ignore-platform-reqs --working-dir=$WP_ROOT_FOLDER/wp-content/plugins/dws-wp-helpers-test-plugin
@@ -92,3 +103,4 @@ script:
   # Run tests.
   - if [[ "$TEST" == "1" ]]; then codecept run unit --steps --debug ; fi
   - if [[ "$TEST" == "1" ]]; then codecept run wpunit --steps --debug ; fi
+  - if [[ "$TEST" == "1" ]]; then codecept run functional --steps --debug ; fi
