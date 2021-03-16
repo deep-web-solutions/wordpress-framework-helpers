@@ -22,6 +22,9 @@
 
 namespace DeepWebSolutions\Plugins;
 
+use DeepWebSolutions\Framework\Helpers\WordPress\Request;
+use DeepWebSolutions\Framework\Helpers\WordPress\RequestTypesEnum;
+
 defined( 'ABSPATH' ) || exit;
 
 // Register autoloader for testing dependencies.
@@ -33,8 +36,39 @@ if ( ! defined( 'DeepWebSolutions\Framework\DWS_WP_FRAMEWORK_BOOTSTRAPPER_NAME' 
 
 // Trigger helpers externally.
 add_action( 'parse_query', function( &$wp_query ) {
-	if ( false !== strpos( $_SERVER[REQUEST_URI], 'dws-wp-framework-helpers/users-functions' ) ) {
+	if ( false !== strpos( $_SERVER['REQUEST_URI'], 'dws-wp-framework-helpers/users-functions' ) ) {
 		include ABSPATH . 'wp-content/plugins/dws-wp-helpers-test-plugin/users-functions.php';
 		exit;
+	}
+} );
+
+// Append request type
+add_action( 'init', function() {
+	$headers = array(
+		'X-DWS-REQ-TYPE-ADMIN'    => 0,
+		'X-DWS-REQ-TYPE-AJAX'     => 0,
+		'X-DWS-REQ-TYPE-CRON'     => 0,
+		'X-DWS-REQ-TYPE-REST'     => 0,
+		'X-DWS-REQ-TYPE-FRONTEND' => 0,
+	);
+
+	if ( Request::is_type( RequestTypesEnum::ADMIN_REQUEST ) ) {
+		$headers['X-DWS-REQ-TYPE-ADMIN'] = 1;
+	}
+	if ( Request::is_type( RequestTypesEnum::AJAX_REQUEST ) ) {
+		$headers['X-DWS-REQ-TYPE-AJAX'] = 1;
+	}
+	if ( Request::is_type( RequestTypesEnum::CRON_REQUEST ) ) {
+		$headers['X-DWS-REQ-TYPE-CRON'] = 1;
+	}
+	if ( Request::is_type( RequestTypesEnum::REST_REQUEST ) ) {
+		$headers['X-DWS-REQ-TYPE-REST'] = 1;
+	}
+	if ( Request::is_type( RequestTypesEnum::FRONTEND_REQUEST ) ) {
+		$headers['X-DWS-REQ-TYPE-FRONTEND'] = 1;
+	}
+
+	foreach ( $headers as $header => $value ) {
+		header( "{$header}: {$value}" );
 	}
 } );
