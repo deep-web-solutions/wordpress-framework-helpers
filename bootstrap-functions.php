@@ -3,7 +3,7 @@
  * Defines module-specific getters and functions.
  *
  * @since   1.0.0
- * @version 1.0.0
+ * @version 1.0.1
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.com>
  * @package DeepWebSolutions\WP-Framework\Helpers
  *
@@ -66,10 +66,10 @@ function dws_wp_framework_get_helpers_min_wp() {
  * Returns whether the helpers package has managed to initialize successfully or not in the current environment.
  *
  * @since   1.0.0
- * @version 1.0.0
+ * @version 1.0.1
  *
  * @return  bool
  */
 function dws_wp_framework_get_helpers_init_status() {
-	return \constant( __NAMESPACE__ . '\DWS_WP_FRAMEWORK_HELPERS_INIT' );
+	return \defined( __NAMESPACE__ . '\DWS_WP_FRAMEWORK_HELPERS_INIT' ) && \constant( __NAMESPACE__ . '\DWS_WP_FRAMEWORK_HELPERS_INIT' );
 }
