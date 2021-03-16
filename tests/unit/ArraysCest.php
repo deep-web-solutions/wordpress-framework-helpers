@@ -47,7 +47,7 @@ class ArraysCest {
 	 * @dataProvider    has_string_keys_provider
 	 */
 	public function test_has_string_keys( UnitTester $I, Example $example ) {
-		$I->assertEquals( $example['result'], Arrays::has_string_keys( $example['array'] ) );
+		$I->assertEquals( $example['expected'], Arrays::has_string_keys( $example['array'] ) );
 	}
 
 	/**
@@ -65,7 +65,7 @@ class ArraysCest {
 		$new_array = Arrays::insert_after( $example['original'], $example['key'], $example['insert'] );
 
 		$I->assertEquals( count( $new_array ), count( $example['original'] ) + count( $example['insert'] ) );
-		$I->assertEquals( true, $new_array === $example['result'] );
+		$I->assertEquals( true, $new_array === $example['expected'] );
 	}
 
 	/**
@@ -82,10 +82,10 @@ class ArraysCest {
 	public function test_search_values( UnitTester $I, Example $example ) {
 		$result = Arrays::search_values( $example['array'], $example['needle'], $example['strict'], $example['callback'] );
 
-		if ( is_null( $example['result'] ) ) {
+		if ( is_null( $example['expected'] ) ) {
 			$I->assertNull( $result );
 		} else {
-			$I->assertEquals( true, $example['result'] === $result );
+			$I->assertEquals( true, $example['expected'] === $result );
 		}
 	}
 
@@ -103,10 +103,10 @@ class ArraysCest {
 	public function test_search_keys( UnitTester $I, Example $example ) {
 		$result = Arrays::search_keys( $example['array'], $example['needle'], $example['strict'], $example['callback'] );
 
-		if ( is_null( $example['result'] ) ) {
+		if ( is_null( $example['expected'] ) ) {
 			$I->assertNull( $result );
 		} else {
-			$I->assertEquals( true, $example['result'] === $result );
+			$I->assertEquals( true, $example['expected'] === $result );
 		}
 	}
 
@@ -125,28 +125,28 @@ class ArraysCest {
 	protected function has_string_keys_provider(): array {
 		return array(
 			array(
-				'array'  => array(
+				'array'    => array(
 					'string1' => 1,
 					'string2' => 2,
 					'string3' => 3,
 				),
-				'result' => true,
+				'expected' => true,
 			),
 			array(
-				'array'  => array(
+				'array'    => array(
 					1 => 1,
 					2 => 2,
 					3 => 3,
 				),
-				'result' => false,
+				'expected' => false,
 			),
 			array(
-				'array'  => array(
+				'array'    => array(
 					'1' => 1,
 					'2' => 2,
 					'3' => 3,
 				),
-				'result' => false, // PHP automatically converts numeric keys to integers since PHP4.
+				'expected' => false, // PHP automatically converts numeric keys to integers since PHP4.
 			),
 		);
 	}
@@ -173,7 +173,7 @@ class ArraysCest {
 					'elderberry'  => 'elderberry',
 					'dragonfruit' => 'dragonfruit',
 				),
-				'result'   => array(
+				'expected' => array(
 					'apple'       => 'apple',
 					'banana'      => 'banana',
 					'elderberry'  => 'elderberry',
@@ -186,7 +186,7 @@ class ArraysCest {
 				'original' => array( 'apple', 'banana', 'cantaloupe', 'dates' ),
 				'key'      => 1,
 				'insert'   => array( 'elderberry', 'dragonfruit' ),
-				'result'   => array( 'apple', 'banana', 'elderberry', 'dragonfruit', 'cantaloupe', 'dates' ),
+				'expected' => array( 'apple', 'banana', 'elderberry', 'dragonfruit', 'cantaloupe', 'dates' ),
 			),
 			array(
 				'original' => array(
@@ -200,7 +200,7 @@ class ArraysCest {
 					'elderberry' => 'elderberry',
 					633446       => 'dragonfruit',
 				),
-				'result'   => array(
+				'expected' => array(
 					'apple'      => 'apple',
 					21433        => 'banana',
 					'elderberry' => 'elderberry',
@@ -227,7 +227,7 @@ class ArraysCest {
 				'needle'   => 3,
 				'strict'   => true,
 				'callback' => null,
-				'result'   => array(
+				'expected' => array(
 					2 => 3,
 					6 => 3,
 				),
@@ -239,14 +239,14 @@ class ArraysCest {
 				'needle'   => '3',
 				'strict'   => true,
 				'callback' => null,
-				'result'   => null,
+				'expected' => null,
 			),
 			array(
 				'array'    => array( 1, 2, 3, 4, 5, 6, 3, 7, 8, 9, 10 ),
 				'needle'   => '3',
 				'strict'   => false,
 				'callback' => null,
-				'result'   => array(
+				'expected' => array(
 					2 => 3,
 					6 => 3,
 				),
@@ -260,7 +260,7 @@ class ArraysCest {
 				'callback' => function( int $entry ) {
 					return 3 === $entry;
 				},
-				'result'   => array(
+				'expected' => array(
 					2 => 3,
 					6 => 3,
 				),
@@ -272,7 +272,7 @@ class ArraysCest {
 				'callback' => function( int $entry ) {
 					return strval( $entry );
 				},
-				'result'   => array(
+				'expected' => array(
 					2 => 3,
 					6 => 3,
 				),
@@ -295,7 +295,7 @@ class ArraysCest {
 				'needle'   => 3,
 				'strict'   => true,
 				'callback' => null,
-				'result'   => array( 3 => 3 ),
+				'expected' => array( 3 => 3 ),
 			),
 			array(
 				'array'    => array(
@@ -306,7 +306,7 @@ class ArraysCest {
 				'needle'   => 46566,
 				'strict'   => true,
 				'callback' => null,
-				'result'   => array( 1 => 46566 ),
+				'expected' => array( 1 => 46566 ),
 			),
 
 			// Test the 'strict' argument.
@@ -319,7 +319,7 @@ class ArraysCest {
 				'needle'   => '46566',
 				'strict'   => false,
 				'callback' => null,
-				'result'   => array( 1 => 46566 ),
+				'expected' => array( 1 => 46566 ),
 			),
 			array(
 				'array'    => array(
@@ -330,7 +330,7 @@ class ArraysCest {
 				'needle'   => '46566',
 				'strict'   => true,
 				'callback' => null,
-				'result'   => null,
+				'expected' => null,
 			),
 
 			// Test the 'callback' argument.
@@ -345,7 +345,7 @@ class ArraysCest {
 				'callback' => function( int $key ) {
 					return strval( $key );
 				},
-				'result'   => array( 1 => 46566 ),
+				'expected' => array( 1 => 46566 ),
 			),
 			array(
 				'array'    => array(
@@ -358,7 +358,7 @@ class ArraysCest {
 				'callback' => function( string $key ) {
 					return strpos( $key, 'string' ) !== false;
 				},
-				'result'   => array(
+				'expected' => array(
 					0 => 'string1',
 					2 => 'string3',
 				),

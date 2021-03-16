@@ -138,6 +138,8 @@ final class Hooks {
 	 * @param   callable    $func       Callable to dequeue.
 	 * @param   int         $priority   The priority on which the callable is hooked.
 	 *
+	 * @noinspection PhpInconsistentReturnPointsInspection
+	 *
 	 * @return  callable
 	 */
 	protected static function generate_dequeue_callable( string $hook, callable $func, int $priority ): callable {
