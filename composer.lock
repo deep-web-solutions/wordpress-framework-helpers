@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "deep-web-solutions/wp-framework-bootstrapper",
-            "version": "v1.1.1",
+            "version": "v1.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/deep-web-solutions/wordpress-framework-bootstrapper.git",
-                "reference": "30fd1f8abc85cbc2e60962b5f1d8c5e44f71896d"
+                "reference": "97f99baa4c640dded1d0b04dc58303b47edc0294"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/deep-web-solutions/wordpress-framework-bootstrapper/zipball/30fd1f8abc85cbc2e60962b5f1d8c5e44f71896d",
-                "reference": "30fd1f8abc85cbc2e60962b5f1d8c5e44f71896d",
+                "url": "https://api.github.com/repos/deep-web-solutions/wordpress-framework-bootstrapper/zipball/97f99baa4c640dded1d0b04dc58303b47edc0294",
+                "reference": "97f99baa4c640dded1d0b04dc58303b47edc0294",
                 "shasum": ""
             },
             "require": {
@@ -68,9 +68,9 @@
             ],
             "support": {
                 "issues": "https://github.com/deep-web-solutions/wordpress-framework-bootstrapper/issues",
-                "source": "https://github.com/deep-web-solutions/wordpress-framework-bootstrapper/tree/v1.1.1"
+                "source": "https://github.com/deep-web-solutions/wordpress-framework-bootstrapper/tree/v1.1.2"
             },
-            "time": "2021-03-15T15:46:03+00:00"
+            "time": "2021-03-16T19:47:37+00:00"
         }
     ],
     "packages-dev": [
@@ -1321,7 +1321,7 @@
         },
         {
             "name": "illuminate/collections",
-            "version": "v8.33.0",
+            "version": "v8.33.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/collections.git",
@@ -1375,7 +1375,7 @@
         },
         {
             "name": "illuminate/contracts",
-            "version": "v8.33.0",
+            "version": "v8.33.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
@@ -1423,7 +1423,7 @@
         },
         {
             "name": "illuminate/macroable",
-            "version": "v8.33.0",
+            "version": "v8.33.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/macroable.git",
@@ -1469,16 +1469,16 @@
         },
         {
             "name": "illuminate/support",
-            "version": "v8.33.0",
+            "version": "v8.33.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/support.git",
-                "reference": "520dcf5aa7631723fe6343afbeba777c102c98ae"
+                "reference": "cd8f6b6622b97cb63bfbe4d78a268b6956c82a22"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/support/zipball/520dcf5aa7631723fe6343afbeba777c102c98ae",
-                "reference": "520dcf5aa7631723fe6343afbeba777c102c98ae",
+                "url": "https://api.github.com/repos/illuminate/support/zipball/cd8f6b6622b97cb63bfbe4d78a268b6956c82a22",
+                "reference": "cd8f6b6622b97cb63bfbe4d78a268b6956c82a22",
                 "shasum": ""
             },
             "require": {
@@ -1533,7 +1533,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2021-03-15T13:43:13+00:00"
+            "time": "2021-03-16T14:21:03+00:00"
         },
         {
             "name": "lucatume/wp-browser",
