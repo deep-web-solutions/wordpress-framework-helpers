@@ -123,7 +123,7 @@ class RequestCest {
 	 */
 	public function test_rest_request( WPBrowser $wp_browser, FunctionalTester $I ) {
 		$I->loginAsAdmin();
-		$I->amOnPage( '/wp-json/oembed/1.0' );
+		$I->amOnPage( '/wp-json/wp/v2/users' );
 
 		$headers = $wp_browser->client->getInternalResponse()->getHeaders();
 		$I->assertIsArray( $headers );
