@@ -2,6 +2,8 @@
 
 namespace DeepWebSolutions\Framework\Helpers\WordPress;
 
+\defined( 'ABSPATH' ) || exit;
+
 /**
  * Valid values for request types.
  *

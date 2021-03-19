@@ -10,7 +10,7 @@ use UnitTester;
  * Tests for the array helpers.
  *
  * @since   1.0.0
- * @version 1.0.0
+ * @version 1.0.2
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.com>
  * @package DeepWebSolutions\WP-Framework\Tests\Helpers\Unit
  */
@@ -155,7 +155,7 @@ class ArraysCest {
 	 * Provides examples for the 'insert_after' tester.
 	 *
 	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @version 1.0.2
 	 *
 	 * @return  array[]
 	 */
@@ -207,6 +207,18 @@ class ArraysCest {
 					633446       => 'dragonfruit',
 					'cantaloupe' => 'cantaloupe',
 					5755         => 'dates',
+				),
+			),
+			array(
+				'original' => array(),
+				'key'      => 21433, // Key doesn't exist on purpose.
+				'insert'   => array(
+					'elderberry' => 'elderberry',
+					633446       => 'dragonfruit',
+				),
+				'expected' => array(
+					'elderberry' => 'elderberry',
+					633446       => 'dragonfruit',
 				),
 			),
 		);

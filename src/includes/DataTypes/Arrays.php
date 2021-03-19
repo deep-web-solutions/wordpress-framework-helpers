@@ -8,7 +8,7 @@ namespace DeepWebSolutions\Framework\Helpers\DataTypes;
  * A collection of very useful array manipulation helpers to be used throughout the projects.
  *
  * @since   1.0.0
- * @version 1.0.0
+ * @version 1.0.2
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.com>
  * @package DeepWebSolutions\WP-Framework\Helpers\DataTypes
  */
@@ -32,7 +32,7 @@ final class Arrays {
 	 * appends entries at the end of the array.
 	 *
 	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @version 1.0.2
 	 * @see     https://gist.github.com/wpscholar/0deadce1bbfa4adb4e4c
 	 *
 	 * @param   array           $array          Associative array to insert the new entries into.
@@ -45,7 +45,7 @@ final class Arrays {
 		$index    = \array_search( $key, \array_keys( $array ), true );
 		$position = ( false === $index ) ? \count( $array ) : ( $index + 1 );
 
-		if ( self::has_string_keys( $array ) ) {
+		if ( empty( $array ) || self::has_string_keys( $array ) ) {
 			$array = \array_slice( $array, 0, $position, true ) + $new_entries + \array_slice( $array, $position, null, true );
 		} else {
 			\array_splice( $array, $position, 0, $new_entries );

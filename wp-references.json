@@ -1,0 +1,32 @@
+{
+    "classes": [
+        "WP_Filesystem_Base",
+        "WP_Session_Tokens",
+        "WP_User"
+    ],
+    "functions": [
+        "apply_filters",
+        "did_action",
+        "add_action",
+        "trailingslashit",
+        "site_url",
+        "request_filesystem_credentials",
+        "wp_filesystem",
+        "plugins_url",
+        "remove_filter",
+        "current_filter",
+        "current_action",
+        "remove_action",
+        "doing_filter",
+        "get_option",
+        "is_admin",
+        "wp_is_jsonp_request",
+        "wp_is_json_request",
+        "rest_get_url_prefix",
+        "get_current_user_id",
+        "wp_destroy_all_sessions",
+        "wp_logout",
+        "wp_get_current_user",
+        "get_user_by"
+    ]
+}
