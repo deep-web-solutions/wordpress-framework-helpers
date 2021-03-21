@@ -74,8 +74,8 @@ before_install:
 install:
   - phpenv config-rm xdebug.ini
   - composer self-update
-  - if [[ "$LEGACY" == "1" ]]; then composer install --prefer-source --no-interaction --ignore-platform-reqs ; fi # Ignore platform requirements to install on lower PHP version and check that execution indeed fails.
-  - if [[ "$LEGACY" != "1" ]]; then composer install --no-dev --prefer-source --no-interaction --ignore-platform-reqs ; fi # Ignore platform requirements to install on lower PHP version and check that execution indeed fails.
+  - if [[ "$LEGACY" == "1" ]]; then composer install --no-dev --prefer-source --no-interaction --ignore-platform-reqs ; fi # Ignore platform requirements to install on lower PHP version and check that execution indeed fails.
+  - if [[ "$LEGACY" != "1" ]]; then composer install --prefer-source --no-interaction --ignore-platform-reqs ; fi # Ignore platform requirements to install on lower PHP version and check that execution indeed fails.
   # Install and configure WordPress.
   - cd $WP_ROOT_FOLDER
   - wp core download --version=$WP_VERSION
