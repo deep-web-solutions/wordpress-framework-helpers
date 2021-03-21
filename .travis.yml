@@ -103,8 +103,8 @@ before_script:
 
 script:
   # Search for PHP syntax errors.
-  - if [[ "$LEGACY" != "1" ]]; find -L $TRAVIS_BUILD_DIR -path $TRAVIS_BUILD_DIR/vendor -prune -o -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l ; fi
-  - if [[ "$LEGACY" == "1" ]]; find $TRAVIS_BUILD_DIR -maxdepth 1 -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l ; fi
+  - if [[ "$LEGACY" != "1" ]]; then find -L $TRAVIS_BUILD_DIR -path $TRAVIS_BUILD_DIR/vendor -prune -o -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l ; fi
+  - if [[ "$LEGACY" == "1" ]]; then find $TRAVIS_BUILD_DIR -maxdepth 1 -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l ; fi
   # Run PHPCS.
   - if [[ "$SNIFF" == "1" ]]; then vendor/bin/phpcs $TRAVIS_BUILD_DIR ; fi
   # Run tests.
