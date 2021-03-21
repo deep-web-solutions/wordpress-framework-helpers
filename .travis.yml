@@ -90,8 +90,8 @@ install:
   - cp -r $TRAVIS_BUILD_DIR/* $WP_ROOT_FOLDER/wp-content/plugins/dws-wp-helpers-test-plugin/vendor/deep-web-solutions/wp-framework-helpers/
   - rm -fv $WP_ROOT_FOLDER/wp-content/plugins/dws-wp-helpers-test-plugin/vendor/deep-web-solutions/wp-framework-helpers/vendor/autoload.php
   # Activate the test plugin
-  - wp plugin activate dws-wp-helpers-test-plugin
-  - wp plugin list --status=active
+  - if [[ "$LEGACY" != "1" ]]; then wp plugin activate dws-wp-helpers-test-plugin ; fi
+  - if [[ "$LEGACY" != "1" ]]; then wp plugin list --status=active ; fi
   # Generate the db export.
   - wp db export $TRAVIS_BUILD_DIR/tests/_data/dump.sql
   # Make sure the WP directory is writeable.
