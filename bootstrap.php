@@ -3,7 +3,7 @@
  * The DWS WordPress Framework Helpers bootstrap file.
  *
  * @since               1.0.0
- * @version             1.0.1
+ * @version             1.1.1
  * @package             DeepWebSolutions\WP-Framework\Helpers
  * @author              Deep Web Solutions GmbH
  * @copyright           2021 Deep Web Solutions GmbH
@@ -14,7 +14,7 @@
  * @wordpress-plugin
  * Plugin Name:         DWS WordPress Framework Helpers
  * Description:         A set of related helpers to kick-start WordPress development.
- * Version:             1.1.0
+ * Version:             1.1.1
  * Requires at least:   5.5
  * Requires PHP:        7.4
  * Author:              Deep Web Solutions GmbH
@@ -40,7 +40,7 @@ require_once __DIR__ . '/bootstrap-functions.php';
 
 // Define helpers constants.
 \define( __NAMESPACE__ . '\DWS_WP_FRAMEWORK_HELPERS_NAME', dws_wp_framework_get_whitelabel_name() . ': Framework Helpers' );
-\define( __NAMESPACE__ . '\DWS_WP_FRAMEWORK_HELPERS_VERSION', '1.0.2' );
+\define( __NAMESPACE__ . '\DWS_WP_FRAMEWORK_HELPERS_VERSION', '1.1.1' );
 
 // Define minimum environment requirements.
 \define( __NAMESPACE__ . '\DWS_WP_FRAMEWORK_HELPERS_MIN_PHP', '7.4' );
