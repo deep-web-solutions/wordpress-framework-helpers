@@ -10,7 +10,7 @@ use UnitTester;
  * Tests for the string helpers.
  *
  * @since   1.0.0
- * @version 1.0.0
+ * @version 1.1.0
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.com>
  * @package DeepWebSolutions\WP-Framework\Tests\Helpers\Unit
  */
@@ -81,7 +81,7 @@ class StringsCest {
 	}
 
 	/**
-	 * Test the 'replace_placeholders' helper.
+	 * Test the 'to_safe_string' helper.
 	 *
 	 * @since   1.0.0
 	 * @version 1.0.0
@@ -96,22 +96,52 @@ class StringsCest {
 	}
 
 	/**
-	 * Test the 'replace_placeholders' helper.
+	 * Test the 'to_alphanumeric_unicode_string' helper.
 	 *
 	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @version 1.1.0
 	 *
 	 * @param   UnitTester  $I          Codeception actor instance.
 	 * @param   Example     $example    Example to run the test on.
 	 *
-	 * @dataProvider    to_alphanumeric_string_provider
+	 * @dataProvider    to_alphanumeric_unicode_string_provider
 	 */
-	public function test_to_alphanumeric_string( UnitTester $I, Example $example ) {
-		$I->assertEquals( $example['expected'], Strings::to_alphanumeric_string( $example['string'] ) );
+	public function test_to_alphanumeric_unicode_string( UnitTester $I, Example $example ) {
+		$I->assertEquals( $example['expected'], Strings::to_alphanumeric_unicode_string( $example['string'] ) );
 	}
 
 	/**
-	 * Test the 'replace_placeholders' helper.
+	 * Test the 'to_alphanumeric_ascii_string' helper.
+	 *
+	 * @since   1.1.0
+	 * @version 1.1.0
+	 *
+	 * @param   UnitTester  $I          Codeception actor instance.
+	 * @param   Example     $example    Example to run the test on.
+	 *
+	 * @dataProvider    to_alphanumeric_ascii_string_provider
+	 */
+	public function test_to_alphanumeric_ascii_string( UnitTester $I, Example $example ) {
+		$I->assertEquals( $example['expected'], Strings::to_alphanumeric_ascii_string( $example['string'] ) );
+	}
+
+	/**
+	 * Test the 'to_ascii_input_string' helper.
+	 *
+	 * @since   1.1.0
+	 * @version 1.1.0
+	 *
+	 * @param   UnitTester  $I          Codeception actor instance.
+	 * @param   Example     $example    Example to run the test on.
+	 *
+	 * @dataProvider    to_ascii_input_string_provider
+	 */
+	public function test_to_ascii_input_string( UnitTester $I, Example $example ) {
+		$I->assertEquals( $example['expected'], Strings::to_ascii_input_string( $example['string'] ) );
+	}
+
+	/**
+	 * Test the 'letter_to_number' helper.
 	 *
 	 * @since   1.0.0
 	 * @version 1.0.0
@@ -264,18 +294,72 @@ class StringsCest {
 	}
 
 	/**
-	 * Provides examples for the 'to_alphanumeric_string' tester.
+	 * Provides examples for the 'to_alphanumeric_unicode_string' tester.
 	 *
 	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @version 1.1.0
 	 *
 	 * @return  array[]
 	 */
-	protected function to_alphanumeric_string_provider(): array {
+	protected function to_alphanumeric_unicode_string_provider(): array {
 		return array(
 			array(
 				'string'   => 'señorita / bibliotecă / ändern',
 				'expected' => 'señorita  bibliotecă  ändern',
+			),
+			array(
+				'string'   => 'senorita +/ biblioteca /- andern',
+				'expected' => 'senorita  biblioteca  andern',
+			),
+			array(
+				'string'   => 'señorita /57 bibMNliotecă */-/ ändern',
+				'expected' => 'señorita 57 bibMNliotecă  ändern',
+			),
+		);
+	}
+
+	/**
+	 * Provides examples for the 'to_alphanumeric_ascii_string' tester.
+	 *
+	 * @since   1.1.0
+	 * @version 1.1.0
+	 *
+	 * @return  array[]
+	 */
+	protected function to_alphanumeric_ascii_string_provider(): array {
+		return array(
+			array(
+				'string'   => 'señorita / bibliotecă / ändern',
+				'expected' => 'seorita  bibliotec  ndern',
+			),
+			array(
+				'string'   => 'senorita +/ biblioteca /- andern',
+				'expected' => 'senorita  biblioteca  andern',
+			),
+			array(
+				'string'   => 'señorita /57 bibMNliotecă */-/ ändern',
+				'expected' => 'seorita 57 bibMNliotec  ndern',
+			),
+		);
+	}
+
+	/**
+	 * Provides examples for the 'to_ascii_input_string' tester.
+	 *
+	 * @since   1.1.0
+	 * @version 1.1.0
+	 *
+	 * @return  array[]
+	 */
+	protected function to_ascii_input_string_provider(): array {
+		return array(
+			array(
+				'string'   => 'senorita +/ biblioteca /- andern',
+				'expected' => 'senorita +/ biblioteca /- andern',
+			),
+			array(
+				'string'   => 'señorita /57 bibMNliotecă */-/ ändern',
+				'expected' => 'seorita /57 bibMNliotec */-/ ndern',
 			),
 		);
 	}

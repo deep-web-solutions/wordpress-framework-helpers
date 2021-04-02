@@ -8,7 +8,7 @@ namespace DeepWebSolutions\Framework\Helpers\DataTypes;
  * A collection of very useful string manipulation helpers to be used throughout the projects.
  *
  * @since   1.0.0
- * @version 1.0.0
+ * @version 1.1.0
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.com>
  * @package DeepWebSolutions\WP-Framework\Helpers\DataTypes
  */
@@ -71,7 +71,7 @@ final class Strings {
 	 * Transforms a string into a lowercase, safe version of itself.
 	 *
 	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @version 1.1.0
 	 *
 	 * @param   string  $string             String to transform.
 	 * @param   array   $unsafe_characters  Unsafe characters and what to replace them with.
@@ -79,17 +79,15 @@ final class Strings {
 	 * @return  string
 	 */
 	public static function to_safe_string( string $string, array $unsafe_characters ): string {
-		return self::replace_placeholders(
-			$unsafe_characters,
-			\strtolower( $string )
-		);
+		return \strtolower( self::to_ascii_input_string( self::replace_placeholders( $unsafe_characters, $string ) ) );
 	}
 
 	/**
-	 * Transforms a string into an alphanumeric version of itself by removing any non-alphanumeric characters.
+	 * Transforms a string into an alphanumeric version of itself by removing any non-alphanumeric characters. Supports
+	 * all unicode characters.
 	 *
 	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @version 1.1.0
 	 *
 	 * @see     https://stackoverflow.com/a/17151182
 	 *
@@ -97,8 +95,39 @@ final class Strings {
 	 *
 	 * @return  string
 	 */
-	public static function to_alphanumeric_string( string $string ): string {
+	public static function to_alphanumeric_unicode_string( string $string ): string {
 		return \preg_replace( '/[^[:alnum:][:space:]]/u', '', $string );
+	}
+
+	/**
+	 * Removes all non-ASCII characters and all non-alphanumeric ASCII characters from a string and returns the result.
+	 *
+	 * @since   1.1.0
+	 * @version 1.1.0
+	 *
+	 * @see     https://stackoverflow.com/a/17151182
+	 *
+	 * @param   string  $string     The string to remove non-alphanumeric characters from.
+	 *
+	 * @return  string
+	 */
+	public static function to_alphanumeric_ascii_string( string $string ): string {
+		return \preg_replace( '/[^A-Za-z0-9 ]/', '', $string );
+	}
+
+	/**
+	 * Removes all non-ASCII characters and all non-user-input ASCII characters (like null bytes and control characters)
+	 * and returns the result.
+	 *
+	 * @since   1.1.0
+	 * @version 1.1.0
+	 *
+	 * @param   string  $string     The string to remove the characters from.
+	 *
+	 * @return  string
+	 */
+	public static function to_ascii_input_string( string $string ): string {
+		return \filter_var( $string, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH );
 	}
 
 	/**

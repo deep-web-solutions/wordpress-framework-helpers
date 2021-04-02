@@ -10,7 +10,7 @@ use DeepWebSolutions\Framework\Helpers\DataTypes\Strings;
  * A collection of very useful sanitization helpers to be used throughout the projects.
  *
  * @since   1.0.0
- * @version 1.0.0
+ * @version 1.1.0
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.com>
  * @package DeepWebSolutions\WP-Framework\Helpers\Security
  */
@@ -21,7 +21,7 @@ final class Sanitization {
 	 * Sanitizes an int-like value.
 	 *
 	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @version 1.1.0
 	 *
 	 * @param   mixed   $integer    Value to sanitize.
 	 * @param   int     $default    The default value to return if all fails. By default 0.
@@ -31,7 +31,7 @@ final class Sanitization {
 	public static function sanitize_integer( $integer, int $default = 0 ): int {
 		if ( \is_string( $integer ) ) {
 			$sign    = self::has_minus_before_number( $integer ) ? -1 : 1;
-			$integer = Strings::to_alphanumeric_string( $integer );
+			$integer = Strings::to_alphanumeric_ascii_string( $integer );
 		}
 
 		return ( $sign ?? 1 ) * Validation::validate_integer(
