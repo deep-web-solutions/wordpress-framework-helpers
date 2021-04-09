@@ -49,6 +49,9 @@ Hopefully yes, probably not. If you found any problems, please raise an issue on
 
 ## Changelog
 
+### 1.1.2 (April 9th, 2021)
+* Updated development tools.
+
 ### 1.1.1 (April 2nd, 2021)
 * Updated version constant.
 

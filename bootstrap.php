@@ -3,7 +3,7 @@
  * The DWS WordPress Framework Helpers bootstrap file.
  *
  * @since               1.0.0
- * @version             1.1.1
+ * @version             1.0.1
  * @package             DeepWebSolutions\WP-Framework\Helpers
  * @author              Deep Web Solutions GmbH
  * @copyright           2021 Deep Web Solutions GmbH
