@@ -74,7 +74,8 @@ final class Objects {
 			foreach ( $used_traits as $used_trait => $children_traits ) {
 				$traits[ $used_trait ] = $used_trait;
 				foreach ( \array_keys( $children_traits ) as $child_trait ) {
-					$traits += self::trait_uses_deep_list( $child_trait );
+					$traits[ $child_trait ] = $child_trait;
+					$traits                += self::trait_uses_deep_list( $child_trait );
 				}
 			}
 
