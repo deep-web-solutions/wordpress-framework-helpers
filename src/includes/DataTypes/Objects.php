@@ -73,7 +73,7 @@ final class Objects {
 
 			foreach ( $used_traits as $used_trait => $children_traits ) {
 				$traits[ $used_trait ] = $used_trait;
-				foreach ( $children_traits as $child_trait ) {
+				foreach ( \array_keys( $children_traits ) as $child_trait ) {
 					$traits += self::trait_uses_deep_list( $child_trait );
 				}
 			}
@@ -148,6 +148,8 @@ final class Objects {
 	 */
 	public static function class_uses_deep_list( $class, bool $autoload = true ): array {
 		static $results = array();
+
+		$class = \is_object( $class ) ? \get_class( $class ) : $class;
 
 		if ( isset( $results[ $class ] ) ) {
 			$traits = $results[ $class ];
