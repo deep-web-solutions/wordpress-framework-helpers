@@ -3,6 +3,7 @@
 namespace DeepWebSolutions\Framework\Tests\Helpers\Unit;
 
 use _generated\UnitTesterActions;
+use Codeception\Actor;
 use Codeception\Lib\Actor\Shared\Comment;
 use DeepWebSolutions\Framework\Helpers\DataTypes\Objects;
 use DeepWebSolutions\Framework\Helpers\FileSystem\FilesystemAwareTrait;
@@ -18,7 +19,7 @@ use UnitTester;
  * Tests for the object helpers.
  *
  * @since   1.0.0
- * @version 1.0.0
+ * @version 1.2.0
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.com>
  * @package DeepWebSolutions\WP-Framework\Tests\Helpers\Unit
  */
@@ -44,6 +45,42 @@ class ObjectsCest {
 	// region TESTS
 
 	/**
+	 * Test the 'trait_uses_deep' helper.
+	 *
+	 * @since   1.2.0
+	 * @version 1.2.0
+	 *
+	 * @param   UnitTester  $I      Codeception actor instance.
+	 */
+	public function test_trait_uses_deep( UnitTester $I ) {
+		$result = Objects::trait_uses_deep( FilesystemAwareTrait::class );
+		$I->assertEmpty( $result );
+
+		$expected = array(
+			ReflectionTrait::class => array(),
+		);
+		$result   = Objects::trait_uses_deep( PathsTrait::class );
+		$I->assertEquals( true, $expected === $result );
+	}
+
+	/**
+	 * Test the 'trait_uses_deep_list' helper.
+	 *
+	 * @since   1.2.0
+	 * @version 1.2.0
+	 *
+	 * @param   UnitTester  $I      Codeception actor instance.
+	 */
+	public function test_trait_uses_deep_list( UnitTester $I ) {
+		$result = Objects::trait_uses_deep_list( FilesystemAwareTrait::class );
+		$I->assertEmpty( $result );
+
+		$expected = array( ReflectionTrait::class => ReflectionTrait::class );
+		$result   = Objects::trait_uses_deep_list( PathsTrait::class );
+		$I->assertEquals( true, $expected === $result );
+	}
+
+	/**
 	 * Test the 'class_uses_deep' helper.
 	 *
 	 * @since   1.0.0
@@ -53,23 +90,16 @@ class ObjectsCest {
 	 */
 	public function test_class_uses_deep( UnitTester $I ) {
 		$expected = array(
-			AbstractObject::class       => array( FilesystemAwareTrait::class => FilesystemAwareTrait::class ),
-			FilesystemAwareTrait::class => array(),
+			AbstractObject::class => array( FilesystemAwareTrait::class => array() ),
 		);
 		$result   = Objects::class_uses_deep( AbstractObject::class );
 		$I->assertEquals( true, $expected === $result );
 
 		$expected = array(
-			// Traits of all individual classes in the inheritance hierarchy
-			ChildObject::class          => array( PathsTrait::class => PathsTrait::class ),
-			AbstractObject::class       => array( FilesystemAwareTrait::class => FilesystemAwareTrait::class ),
-
-			// Traits of all used traits
-			FilesystemAwareTrait::class => array(),
-			PathsTrait::class           => array( ReflectionTrait::class => ReflectionTrait::class ),
-			ReflectionTrait::class      => array(),
+			AbstractObject::class => array( FilesystemAwareTrait::class => array() ),
+			ChildObject::class    => array( PathsTrait::class => array( ReflectionTrait::class => array() ) ),
 		);
-		$result = Objects::class_uses_deep( ChildObject::class );
+		$result   = Objects::class_uses_deep( ChildObject::class );
 		$I->assertEquals( true, $expected === $result );
 	}
 
@@ -77,7 +107,7 @@ class ObjectsCest {
 	 * Test the 'class_uses_deep_list' helper.
 	 *
 	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @version 1.2.0
 	 *
 	 * @param   UnitTester  $I      Codeception actor instance.
 	 */
@@ -87,8 +117,8 @@ class ObjectsCest {
 		$I->assertEquals( true, $expected === $result );
 
 		$expected = array(
-			PathsTrait::class           => PathsTrait::class,
 			FilesystemAwareTrait::class => FilesystemAwareTrait::class,
+			PathsTrait::class           => PathsTrait::class,
 			ReflectionTrait::class      => ReflectionTrait::class,
 		);
 		$result   = Objects::class_uses_deep_list( ChildObject::class );
@@ -99,43 +129,43 @@ class ObjectsCest {
 	 * Test the 'has_trait' helper.
 	 *
 	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @version 1.2.0
 	 *
 	 * @param   UnitTester  $I      Codeception actor instance.
 	 */
 	public function test_has_trait( UnitTester $I ) {
-		$I->assertEquals( false, Objects::has_trait( UnitTesterActions::class, $this ) );
-		$I->assertEquals( false, Objects::has_trait( UnitTesterActions::class, self::class ) );
+		$I->assertFalse( Objects::has_trait( UnitTesterActions::class, $this ) );
+		$I->assertFalse( Objects::has_trait( UnitTesterActions::class, self::class ) );
 
-		$I->assertEquals( true, Objects::has_trait( UnitTesterActions::class, $I ) );
-		$I->assertEquals( true, Objects::has_trait( UnitTesterActions::class, UnitTester::class ) );
+		$I->assertTrue( Objects::has_trait( UnitTesterActions::class, $I ) );
+		$I->assertTrue( Objects::has_trait( UnitTesterActions::class, UnitTester::class ) );
 	}
 
 	/**
 	 * Test the 'has_trait_deep' helper.
 	 *
 	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @version 1.2.0
 	 *
 	 * @param   UnitTester  $I      Codeception actor instance.
 	 */
 	public function test_has_trait_deep( UnitTester $I ) {
-		$I->assertEquals( false, Objects::has_trait( Comment::class, UnitTester::class ) );
-		$I->assertEquals( true, Objects::has_trait_deep( Comment::class, UnitTester::class ) );
+		$I->assertFalse( Objects::has_trait( Comment::class, UnitTester::class ) );
+		$I->assertTrue( Objects::has_trait_deep( Comment::class, UnitTester::class ) );
 	}
 
 	/**
 	 * Test the 'ReflectionTrait' trait.
 	 *
 	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @version 1.2.0
 	 *
 	 * @param   UnitTester  $I      Codeception actor instance.
 	 */
 	public function test_reflection_trait( UnitTester $I ) {
 		$reflection_class = ChildObject::get_reflection_class();
 
-		$I->assertEquals( true, $reflection_class instanceof ReflectionClass );
+		$I->assertTrue( $reflection_class instanceof ReflectionClass );
 		$I->assertEquals( ChildObject::class, $reflection_class->getName() );
 
 		$I->assertEquals( 'ChildObject', ChildObject::get_class_name() );
