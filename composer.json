@@ -85,17 +85,17 @@
     "test:clean": [
       "@php ./vendor/bin/codecept clean"
     ],
-    "test:functional": [
+    "test:unit": [
       "Composer\\Config::disableProcessTimeout",
-      "@php ./vendor/bin/codecept run functional --debug"
+      "@php ./vendor/bin/codecept run unit --debug"
     ],
     "test:integration": [
       "Composer\\Config::disableProcessTimeout",
       "@php ./vendor/bin/codecept run wpunit --debug"
     ],
-    "test:unit": [
+    "test:functional": [
       "Composer\\Config::disableProcessTimeout",
-      "@php ./vendor/bin/codecept run unit --debug"
+      "@php ./vendor/bin/codecept run functional --debug"
     ]
   }
 }
