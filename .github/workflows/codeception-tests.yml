@@ -127,7 +127,7 @@ jobs:
           phantomjs --webdriver=4444 >/dev/null 2>&1 &
 
       - name: Run Codeception unit tests
-      run: composer run-script test:unit
+        run: composer run-script test:unit
 
       - name: Run Codeception integration tests
         run: composer run-script test:integration
