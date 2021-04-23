@@ -21,7 +21,7 @@
 
   "require": {
     "php": ">=7.4",
-    "deep-web-solutions/wp-framework-bootstrapper": "^1.1.5"
+    "deep-web-solutions/wp-framework-bootstrapper": "^1.1.6"
   },
   "require-dev": {
     "deep-web-solutions/wordpress-configs": "master@dev",
@@ -37,7 +37,7 @@
     "lucatume/wp-browser": ">=3.0",
     "codeception/module-asserts": "^1.3",
     "codeception/module-phpbrowser": "^1.0",
-    "codeception/module-db": "^1.0",
+    "codeception/module-db": "^1.1",
     "codeception/module-filesystem": "^1.0"
   },
   "minimum-stability": "dev",
@@ -76,7 +76,7 @@
       "@php ./vendor/bin/phpmd . json phpmd.xml.dist"
     ],
     "coding-standards:check": [
-      "@php ./vendor/bin/phpcs --standard=phpcs.xml.dist"
+      "@php ./vendor/bin/phpcs --standard=phpcs.xml.dist -v"
     ],
     "coding-standards:fix": [
       "@php ./vendor/bin/phpcbf --standard=phpcs.xml.dist"
@@ -87,19 +87,15 @@
     ],
     "test:functional": [
       "Composer\\Config::disableProcessTimeout",
-      "@php ./vendor/bin/codecept run functional"
+      "@php ./vendor/bin/codecept run functional --debug"
     ],
     "test:integration": [
       "Composer\\Config::disableProcessTimeout",
-      "@php ./vendor/bin/codecept run wpunit"
+      "@php ./vendor/bin/codecept run wpunit --debug"
     ],
     "test:unit": [
       "Composer\\Config::disableProcessTimeout",
-      "@php ./vendor/bin/codecept run unit"
-    ],
-    "test:coverage": [
-      "Composer\\Config::disableProcessTimeout",
-      "@php ./vendor/bin/codecept run wpunit --coverage --coverage-xml --coverage-html"
+      "@php ./vendor/bin/codecept run unit --debug"
     ]
   }
 }

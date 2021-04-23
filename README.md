@@ -4,18 +4,23 @@
 **Requires at least:** 5.5  
 **Tested up to:** 5.7  
 **Requires PHP:** 7.4  
-**Stable tag:** 1.2.0  
+**Stable tag:** 1.2.1  
 **License:** GPLv3 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-3.0.html  
 
 
 ## Description
 
-[![Build Status](https://travis-ci.com/deep-web-solutions/wordpress-framework-helpers.svg?branch=master)](https://travis-ci.com/deep-web-solutions/wordpress-framework-helpers)
+[![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)](https://opensource.org/licenses/)
 [![Maintainability](https://api.codeclimate.com/v1/badges/b777a17778d2969dfa84/maintainability)](https://codeclimate.com/github/deep-web-solutions/wordpress-framework-helpers/maintainability)
 
 A set of helpers to kick-start WordPress development. This package is designed to contain small, helpful, static snippets 
-that can be reused throughout different projects. Documentation can be found at https://framework.deep-web-solutions.com/
+that can be reused throughout different projects.
+
+
+## Documentation
+
+Documentation for this module and the rest of the DWS WP Framework can be found [here](https://framework.deep-web-solutions.com/helpers-module/motivation).
 
 
 ## Installation
@@ -26,6 +31,7 @@ The package's name is `deep-web-solutions/wp-framework-helpers`.
 If the package will be used outside a composer-based installation, e.g. inside a regular WP plugin, you should install
 using the `--ignore-platform-reqs` option. If you don't do that, the bundled `DWS WordPress Framework - Bootstrapper` package 
 will only be able to perform checks for the WordPress version because composer will throw an error in case of an incompatible PHP version.
+
 
 ## Contributing
 
@@ -48,6 +54,10 @@ Hopefully yes, probably not. If you found any problems, please raise an issue on
 
 
 ## Changelog
+
+### 1.2.1 (April 23rd, 2021)
+* Migrated from Travis CI to Github Actions.
+* Documentation updates.
 
 ### 1.2.0 (April 11th, 2021)
 * Added new object helpers for working with trait inheritance.
