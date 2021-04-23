@@ -28,4 +28,4 @@ jobs:
 
       - name: Check all non-test files for syntax errors
         if: ${{ matrix.php < 7.4 }}
-        run: find -L $GITHUB_WORKSPACE -maxdepth 1 -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l ; fi
+        run: find -L $GITHUB_WORKSPACE -maxdepth 1 -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l
