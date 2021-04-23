@@ -14,7 +14,7 @@
 [![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)](https://opensource.org/licenses/)
 [![PHP Syntax Errors](https://github.com/deep-web-solutions/wordpress-framework-helpers/actions/workflows/php-syntax-errors.yml/badge.svg)](https://github.com/deep-web-solutions/wordpress-framework-helpers/actions/workflows/php-syntax-errors.yml)
 [![WordPress Coding Standards](https://github.com/deep-web-solutions/wordpress-framework-helpers/actions/workflows/wordpress-coding-standards.yml/badge.svg)](https://github.com/deep-web-solutions/wordpress-framework-helpers/actions/workflows/wordpress-coding-standards.yml)
-[![.github/workflows/codeception-tests.yml](https://github.com/deep-web-solutions/wordpress-framework-helpers/actions/workflows/codeception-tests.yml/badge.svg)](https://github.com/deep-web-solutions/wordpress-framework-helpers/actions/workflows/codeception-tests.yml)
+[![Codeception Tests](https://github.com/deep-web-solutions/wordpress-framework-helpers/actions/workflows/codeception-tests.yml/badge.svg)](https://github.com/deep-web-solutions/wordpress-framework-helpers/actions/workflows/codeception-tests.yml)
 [![Maintainability](https://api.codeclimate.com/v1/badges/b777a17778d2969dfa84/maintainability)](https://codeclimate.com/github/deep-web-solutions/wordpress-framework-helpers/maintainability)
 
 A set of helpers to kick-start WordPress development. This package is designed to contain small, helpful, static snippets 
