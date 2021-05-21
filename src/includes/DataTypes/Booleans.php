@@ -8,7 +8,7 @@ namespace DeepWebSolutions\Framework\Helpers\DataTypes;
  * A collection of very useful boolean helpers to be used throughout the projects.
  *
  * @since   1.0.0
- * @version 1.0.0
+ * @version 1.3.0
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.com>
  * @package DeepWebSolutions\WP-Framework\Helpers\DataTypes
  */
@@ -43,5 +43,21 @@ final class Booleans {
 	 */
 	public static function logical_and( bool $boolean1, bool $boolean2 ): bool {
 		return $boolean1 && $boolean2;
+	}
+
+	/**
+	 * Attempts to resolve a potential callable value to a boolean.
+	 *
+	 * @since   1.3.0
+	 * @version 1.3.0
+	 *
+	 * @param   bool|callable   $bool       Callable to resolve.
+	 * @param   bool            $default    Default value to return on failure.
+	 *
+	 * @return  bool
+	 */
+	public static function resolve( $bool, bool $default ): ?bool {
+		$bool = \is_callable( $bool ) ? \call_user_func( $bool ) : $bool;
+		return \is_bool( $bool ) ? $bool : $default;
 	}
 }
