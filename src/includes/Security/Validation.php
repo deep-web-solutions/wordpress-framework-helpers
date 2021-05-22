@@ -8,18 +8,50 @@ namespace DeepWebSolutions\Framework\Helpers\Security;
  * A collection of very useful validation helpers to be used throughout the projects.
  *
  * @since   1.0.0
- * @version 1.0.0
+ * @version 1.3.1
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.com>
  * @package DeepWebSolutions\WP-Framework\Helpers\Security
  */
 final class Validation {
+	/**
+	 * Validates a string-like value.
+	 *
+	 * @since   1.3.1
+	 * @version 1.3.1
+	 *
+	 * @param   mixed   $string     Value to validate.
+	 * @param   string  $default    The default value to return if all fails.
+	 *
+	 * @return  string
+	 */
+	public static function validate_string( $string, string $default = '' ): string {
+		return \is_array( $string ) || ( \is_object( $string ) && ! \method_exists( $string, '__toString' ) ) ? $default : \strval( $string );
+	}
+
+	/**
+	 * Validates a string-like variable from an input stream.
+	 *
+	 * @since   1.3.1
+	 * @version 1.3.1
+	 *
+	 * @param   int     $input_type     One of INPUT_GET, INPUT_POST, INPUT_COOKIE, INPUT_SERVER, or INPUT_ENV.
+	 * @param   string  $variable_name  Name of a variable to get.
+	 * @param   string  $default        The default value to return if all fails.
+	 *
+	 * @return  string
+	 */
+	public static function validate_string_input( int $input_type, string $variable_name, string $default = '' ): string {
+		$value = \filter_input( $input_type, $variable_name, FILTER_UNSAFE_RAW );
+		return self::validate_string( $value, $default );
+	}
+
 	/**
 	 * Validates a bool-like value.
 	 *
 	 * @since   1.0.0
 	 * @version 1.0.0
 	 *
-	 * @param   mixed   $boolean    Value to sanitize.
+	 * @param   mixed   $boolean    Value to validate.
 	 * @param   bool    $default    The default value to return if all fails.
 	 *
 	 * @return  bool

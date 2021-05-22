@@ -2,13 +2,15 @@
 
 namespace DeepWebSolutions\Framework\Helpers\DataTypes;
 
+use DeepWebSolutions\Framework\Helpers\Security\Validation;
+
 \defined( 'ABSPATH' ) || exit;
 
 /**
  * A collection of very useful string manipulation helpers to be used throughout the projects.
  *
  * @since   1.0.0
- * @version 1.3.0
+ * @version 1.3.1
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.com>
  * @package DeepWebSolutions\WP-Framework\Helpers\DataTypes
  */
@@ -168,15 +170,15 @@ final class Strings {
 	 * Attempts to resolve a potential callable value to a string.
 	 *
 	 * @since   1.3.0
-	 * @version 1.3.0
+	 * @version 1.3.1
 	 *
-	 * @param   string|callable     $string     Callable to resolve.
-	 * @param   string              $default    Default value to return on failure.
+	 * @param   mixed|callable  $string     Callable to resolve.
+	 * @param   string          $default    Default value to return on failure.
 	 *
 	 * @return  string
 	 */
 	public static function resolve( $string, string $default = '' ): string {
 		$string = \is_callable( $string ) ? \call_user_func( $string ) : $string;
-		return \is_string( $string ) ? $string : $default;
+		return Validation::validate_string( $string, $default );
 	}
 }

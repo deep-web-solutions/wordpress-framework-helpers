@@ -2,13 +2,15 @@
 
 namespace DeepWebSolutions\Framework\Helpers\DataTypes;
 
+use DeepWebSolutions\Framework\Helpers\Security\Validation;
+
 \defined( 'ABSPATH' ) || exit;
 
 /**
  * A collection of very useful boolean helpers to be used throughout the projects.
  *
  * @since   1.0.0
- * @version 1.3.0
+ * @version 1.3.1
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.com>
  * @package DeepWebSolutions\WP-Framework\Helpers\DataTypes
  */
@@ -49,15 +51,15 @@ final class Booleans {
 	 * Attempts to resolve a potential callable value to a boolean.
 	 *
 	 * @since   1.3.0
-	 * @version 1.3.0
+	 * @version 1.3.1
 	 *
-	 * @param   bool|callable   $bool       Callable to resolve.
+	 * @param   mixed|callable  $bool       Callable to resolve.
 	 * @param   bool            $default    Default value to return on failure.
 	 *
 	 * @return  bool
 	 */
-	public static function resolve( $bool, bool $default ): ?bool {
+	public static function resolve( $bool, bool $default ): bool {
 		$bool = \is_callable( $bool ) ? \call_user_func( $bool ) : $bool;
-		return \is_bool( $bool ) ? $bool : $default;
+		return Validation::validate_boolean( $bool, $default );
 	}
 }

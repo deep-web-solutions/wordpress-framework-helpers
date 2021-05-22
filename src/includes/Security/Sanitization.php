@@ -111,7 +111,7 @@ final class Sanitization {
 	 * Checks whether a string has the '-' character before any numeric characters.
 	 *
 	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @version 1.3.1
 	 *
 	 * @param   string  $string     String to perform the check for.
 	 *
@@ -120,9 +120,7 @@ final class Sanitization {
 	protected static function has_minus_before_number( string $string ): bool {
 		$matches = array();
 
-		return \preg_match( '/^([A-Z-]+)([0-9]+)(.)*$/i', $string, $matches )
-			? \strpos( $matches[1], '-' ) !== false
-			: false;
+		return \preg_match( '/^([A-Z-]+)([0-9]+)(.)*$/i', $string, $matches ) && \strpos( $matches[1], '-' ) !== false;
 	}
 
 	// endregion
