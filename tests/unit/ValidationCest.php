@@ -10,7 +10,7 @@ use UnitTester;
  * Tests for the validation helpers.
  *
  * @since   1.0.0
- * @version 1.0.0
+ * @version 1.3.2
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.com>
  * @package DeepWebSolutions\WP-Framework\Tests\Helpers\Unit
  */
@@ -81,18 +81,18 @@ class ValidationCest {
 	}
 
 	/**
-	 * Test the 'validate_callback' helper.
+	 * Test the 'validate_callable' helper.
 	 *
 	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @version 1.3.2
 	 *
 	 * @param   UnitTester  $I          Codeception actor instance.
 	 * @param   Example     $example    Example to run the test on.
 	 *
-	 * @dataProvider    validate_callback_provider
+	 * @dataProvider    validate_callable_provider
 	 */
-	public function test_validate_callback( UnitTester $I, Example $example ) {
-		$I->assertEquals( $example['expected'], Validation::validate_callback( $example['value'], $example['default'] ) );
+	public function test_validate_callable( UnitTester $I, Example $example ) {
+		$I->assertEquals( $example['expected'], Validation::validate_callable( $example['value'], $example['default'] ) );
 	}
 
 	/**
@@ -301,7 +301,7 @@ class ValidationCest {
 	 *
 	 * @return  array[]
 	 */
-	protected function validate_callback_provider(): array {
+	protected function validate_callable_provider(): array {
 		return array(
 			array(
 				'value'    => 'is_string',
