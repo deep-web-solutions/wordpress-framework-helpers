@@ -7,8 +7,10 @@ namespace DeepWebSolutions\Framework\Helpers\Security;
 /**
  * A collection of very useful validation helpers to be used throughout the projects.
  *
+ * @SuppressWarnings(PHPMD.TooManyMethods)
+ *
  * @since   1.0.0
- * @version 1.3.3
+ * @version 1.3.4
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.com>
  * @package DeepWebSolutions\WP-Framework\Helpers\Security
  */
@@ -32,7 +34,7 @@ final class Validation {
 	 * Validates a string-like variable from an input stream.
 	 *
 	 * @since   1.3.1
-	 * @version 1.3.2
+	 * @version 1.3.4
 	 *
 	 * @param   int     $input_type     One of INPUT_GET, INPUT_POST, INPUT_COOKIE, INPUT_SERVER, or INPUT_ENV.
 	 * @param   string  $variable_name  Name of a variable to get.
@@ -42,7 +44,7 @@ final class Validation {
 	 */
 	public static function validate_string_input( int $input_type, string $variable_name, string $default = '' ): string {
 		return \filter_has_var( $input_type, $variable_name )
-			? self::validate_string( \filter_input( $input_type, $variable_name, FILTER_UNSAFE_RAW ), $default )
+			? self::validate_string( \filter_input( $input_type, $variable_name, FILTER_UNSAFE_RAW, FILTER_REQUIRE_SCALAR ), $default )
 			: $default;
 	}
 
@@ -50,7 +52,7 @@ final class Validation {
 	 * Validates a bool-like value.
 	 *
 	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @version 1.3.4
 	 *
 	 * @param   mixed   $boolean    Value to validate.
 	 * @param   bool    $default    The default value to return if all fails.
@@ -58,14 +60,14 @@ final class Validation {
 	 * @return  bool
 	 */
 	public static function validate_boolean( $boolean, bool $default ): bool {
-		return \filter_var( $boolean, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE ) ?? $default;
+		return \filter_var( $boolean, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE | FILTER_REQUIRE_SCALAR ) ?? $default;
 	}
 
 	/**
 	 * Validates a bool-like variable from an input stream.
 	 *
 	 * @since   1.0.0
-	 * @version 1.3.2
+	 * @version 1.3.4
 	 *
 	 * @param   int     $input_type     One of INPUT_GET, INPUT_POST, INPUT_COOKIE, INPUT_SERVER, or INPUT_ENV.
 	 * @param   string  $variable_name  Name of a variable to get.
@@ -75,7 +77,7 @@ final class Validation {
 	 */
 	public static function validate_boolean_input( int $input_type, string $variable_name, bool $default ): bool {
 		return \filter_has_var( $input_type, $variable_name )
-			? self::validate_boolean( \filter_input( $input_type, $variable_name, FILTER_UNSAFE_RAW ), $default )
+			? self::validate_boolean( \filter_input( $input_type, $variable_name, FILTER_UNSAFE_RAW, FILTER_REQUIRE_SCALAR ), $default )
 			: $default;
 	}
 
@@ -83,7 +85,7 @@ final class Validation {
 	 * Validates an int-like value.
 	 *
 	 * @since   1.0.0
-	 * @version 1.3.3
+	 * @version 1.3.4
 	 *
 	 * @param   mixed   $integer    Value to sanitize.
 	 * @param   int     $default    The default value to return if all fails.
@@ -96,7 +98,7 @@ final class Validation {
 			FILTER_VALIDATE_INT,
 			array(
 				'options' => array( 'default' => $default ),
-				'flags'   => FILTER_FLAG_ALLOW_OCTAL | FILTER_FLAG_ALLOW_HEX,
+				'flags'   => FILTER_FLAG_ALLOW_OCTAL | FILTER_FLAG_ALLOW_HEX | FILTER_REQUIRE_SCALAR,
 			)
 		);
 	}
@@ -105,7 +107,7 @@ final class Validation {
 	 * Validates an int-like variable from an input stream.
 	 *
 	 * @since   1.0.0
-	 * @version 1.3.3
+	 * @version 1.3.4
 	 *
 	 * @param   int     $input_type     One of INPUT_GET, INPUT_POST, INPUT_COOKIE, INPUT_SERVER, or INPUT_ENV.
 	 * @param   string  $variable_name  Name of a variable to get.
@@ -115,7 +117,7 @@ final class Validation {
 	 */
 	public static function validate_integer_input( int $input_type, string $variable_name, int $default = 0 ): int {
 		return \filter_has_var( $input_type, $variable_name )
-			? self::validate_integer( \filter_input( $input_type, $variable_name, FILTER_UNSAFE_RAW ), $default )
+			? self::validate_integer( \filter_input( $input_type, $variable_name, FILTER_UNSAFE_RAW, FILTER_REQUIRE_SCALAR ), $default )
 			: $default;
 	}
 
@@ -123,7 +125,7 @@ final class Validation {
 	 * Validates a float-like value.
 	 *
 	 * @since   1.0.0
-	 * @version 1.3.3
+	 * @version 1.3.4
 	 *
 	 * @param   mixed   $float      Value to sanitize.
 	 * @param   float   $default    The default value to return if all fails.
@@ -138,7 +140,7 @@ final class Validation {
 				FILTER_VALIDATE_FLOAT,
 				array(
 					'options' => array( 'decimal' => ',' ),
-					'flags'   => FILTER_FLAG_ALLOW_THOUSAND,
+					'flags'   => FILTER_FLAG_ALLOW_THOUSAND | FILTER_REQUIRE_SCALAR,
 				)
 			);
 		}
@@ -150,7 +152,7 @@ final class Validation {
 	 * Validates a float-like variable from an input stream.
 	 *
 	 * @since   1.0.0
-	 * @version 1.3.3
+	 * @version 1.3.4
 	 *
 	 * @param   int     $input_type     One of INPUT_GET, INPUT_POST, INPUT_COOKIE, INPUT_SERVER, or INPUT_ENV.
 	 * @param   string  $variable_name  Name of a variable to get.
@@ -160,7 +162,25 @@ final class Validation {
 	 */
 	public static function validate_float_input( int $input_type, string $variable_name, float $default = 0.0 ): float {
 		return \filter_has_var( $input_type, $variable_name )
-			? self::validate_float( \filter_input( $input_type, $variable_name, FILTER_UNSAFE_RAW ), $default )
+			? self::validate_float( \filter_input( $input_type, $variable_name, FILTER_UNSAFE_RAW, FILTER_REQUIRE_SCALAR ), $default )
+			: $default;
+	}
+
+	/**
+	 * Validates an array from an input stream.
+	 *
+	 * @since   1.3.4
+	 * @version 1.3.4
+	 *
+	 * @param   int     $input_type     One of INPUT_GET, INPUT_POST, INPUT_COOKIE, INPUT_SERVER, or INPUT_ENV.
+	 * @param   string  $variable_name  Name of a variable to get.
+	 * @param   array   $default        The default value to return if all fails.
+	 *
+	 * @return  array
+	 */
+	public static function validate_array_input( int $input_type, string $variable_name, array $default = array() ): array {
+		return \filter_has_var( $input_type, $variable_name )
+			? \filter_input( $input_type, $variable_name, FILTER_UNSAFE_RAW, FILTER_FORCE_ARRAY )
 			: $default;
 	}
 

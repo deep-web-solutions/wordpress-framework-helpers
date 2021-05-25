@@ -10,7 +10,7 @@ use DeepWebSolutions\Framework\Helpers\DataTypes\Strings;
  * A collection of very useful sanitization helpers to be used throughout the projects.
  *
  * @since   1.0.0
- * @version 1.3.2
+ * @version 1.3.4
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.com>
  * @package DeepWebSolutions\WP-Framework\Helpers\Security
  */
@@ -58,7 +58,7 @@ final class Sanitization {
 	 * Sanitizes an int-like value.
 	 *
 	 * @since   1.0.0
-	 * @version 1.1.0
+	 * @version 1.3.4
 	 *
 	 * @param   mixed   $integer    Value to sanitize.
 	 * @param   int     $default    The default value to return if all fails. By default 0.
@@ -72,7 +72,7 @@ final class Sanitization {
 		}
 
 		return ( $sign ?? 1 ) * Validation::validate_integer(
-			\filter_var( $integer, FILTER_SANITIZE_NUMBER_INT ),
+			\filter_var( $integer, FILTER_SANITIZE_NUMBER_INT, FILTER_REQUIRE_SCALAR ),
 			$default
 		);
 	}
@@ -99,7 +99,7 @@ final class Sanitization {
 	 * Sanitizes a float-like value.
 	 *
 	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @version 1.3.4
 	 *
 	 * @param   mixed   $float      Value to sanitize.
 	 * @param   float   $default    The default value to return if all fails. By default 0.
@@ -119,7 +119,7 @@ final class Sanitization {
 		}
 
 		return Validation::validate_float(
-			\filter_var( $float, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_THOUSAND | FILTER_FLAG_ALLOW_FRACTION | FILTER_FLAG_ALLOW_SCIENTIFIC ),
+			\filter_var( $float, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_THOUSAND | FILTER_FLAG_ALLOW_FRACTION | FILTER_FLAG_ALLOW_SCIENTIFIC | FILTER_REQUIRE_SCALAR ),
 			$default
 		);
 	}
