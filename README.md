@@ -4,7 +4,7 @@
 **Requires at least:** 5.5  
 **Tested up to:** 5.7  
 **Requires PHP:** 7.4  
-**Stable tag:** 1.3.2  
+**Stable tag:** 1.3.3  
 **License:** GPLv3 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-3.0.html  
 
@@ -58,9 +58,10 @@ Hopefully yes, probably not. If you found any problems, please raise an issue on
 
 ## Changelog
 
-### 1.3.2 (May 25th, 2021)
+### 1.3.2, 1.3.3 (May 25th, 2021)
 * Added more security helpers.
 * Tweaked validation helpers.
+* Added defaults for the $default argument for validation helpers.
 
 ### 1.3.1 (May 22rd, 2021)
 * Tweaked data type resolvers to handle more cases.
