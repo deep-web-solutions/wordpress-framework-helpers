@@ -2,6 +2,7 @@
 
 namespace DeepWebSolutions\Framework\Helpers\DataTypes;
 
+use DeepWebSolutions\Framework\Helpers\Security\Sanitization;
 use DeepWebSolutions\Framework\Helpers\Security\Validation;
 
 \defined( 'ABSPATH' ) || exit;
@@ -10,7 +11,7 @@ use DeepWebSolutions\Framework\Helpers\Security\Validation;
  * A collection of very useful string manipulation helpers to be used throughout the projects.
  *
  * @since   1.0.0
- * @version 1.3.1
+ * @version 1.3.2
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.com>
  * @package DeepWebSolutions\WP-Framework\Helpers\DataTypes
  */
@@ -122,14 +123,14 @@ final class Strings {
 	 * and returns the result.
 	 *
 	 * @since   1.1.0
-	 * @version 1.1.0
+	 * @version 1.3.2
 	 *
 	 * @param   string  $string     The string to remove the characters from.
 	 *
 	 * @return  string
 	 */
 	public static function to_ascii_input_string( string $string ): string {
-		return \filter_var( $string, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH );
+		return Sanitization::sanitize_string( $string, '', FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH );
 	}
 
 	/**

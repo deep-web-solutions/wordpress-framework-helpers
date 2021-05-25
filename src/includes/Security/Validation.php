@@ -8,7 +8,7 @@ namespace DeepWebSolutions\Framework\Helpers\Security;
  * A collection of very useful validation helpers to be used throughout the projects.
  *
  * @since   1.0.0
- * @version 1.3.1
+ * @version 1.3.2
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.com>
  * @package DeepWebSolutions\WP-Framework\Helpers\Security
  */
@@ -32,7 +32,7 @@ final class Validation {
 	 * Validates a string-like variable from an input stream.
 	 *
 	 * @since   1.3.1
-	 * @version 1.3.1
+	 * @version 1.3.2
 	 *
 	 * @param   int     $input_type     One of INPUT_GET, INPUT_POST, INPUT_COOKIE, INPUT_SERVER, or INPUT_ENV.
 	 * @param   string  $variable_name  Name of a variable to get.
@@ -41,8 +41,9 @@ final class Validation {
 	 * @return  string
 	 */
 	public static function validate_string_input( int $input_type, string $variable_name, string $default = '' ): string {
-		$value = \filter_input( $input_type, $variable_name, FILTER_UNSAFE_RAW );
-		return self::validate_string( $value, $default );
+		return \filter_has_var( $input_type, $variable_name )
+			? self::validate_string( \filter_input( $input_type, $variable_name, FILTER_UNSAFE_RAW ), $default )
+			: $default;
 	}
 
 	/**
@@ -64,7 +65,7 @@ final class Validation {
 	 * Validates a bool-like variable from an input stream.
 	 *
 	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @version 1.3.2
 	 *
 	 * @param   int     $input_type     One of INPUT_GET, INPUT_POST, INPUT_COOKIE, INPUT_SERVER, or INPUT_ENV.
 	 * @param   string  $variable_name  Name of a variable to get.
@@ -73,8 +74,9 @@ final class Validation {
 	 * @return  bool
 	 */
 	public static function validate_boolean_input( int $input_type, string $variable_name, bool $default ): bool {
-		$value = \filter_input( $input_type, $variable_name, FILTER_UNSAFE_RAW );
-		return self::validate_boolean( $value, $default );
+		return \filter_has_var( $input_type, $variable_name )
+			? self::validate_boolean( \filter_input( $input_type, $variable_name, FILTER_UNSAFE_RAW ), $default )
+			: $default;
 	}
 
 	/**
@@ -103,7 +105,7 @@ final class Validation {
 	 * Validates an int-like variable from an input stream.
 	 *
 	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @version 1.3.2
 	 *
 	 * @param   int     $input_type     One of INPUT_GET, INPUT_POST, INPUT_COOKIE, INPUT_SERVER, or INPUT_ENV.
 	 * @param   string  $variable_name  Name of a variable to get.
@@ -112,8 +114,9 @@ final class Validation {
 	 * @return  int
 	 */
 	public static function validate_integer_input( int $input_type, string $variable_name, int $default ): int {
-		$value = \filter_input( $input_type, $variable_name, FILTER_UNSAFE_RAW );
-		return self::validate_integer( $value, $default );
+		return \filter_has_var( $input_type, $variable_name )
+			? self::validate_integer( \filter_input( $input_type, $variable_name, FILTER_UNSAFE_RAW ), $default )
+			: $default;
 	}
 
 	/**
@@ -147,7 +150,7 @@ final class Validation {
 	 * Validates a float-like variable from an input stream.
 	 *
 	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @version 1.3.2
 	 *
 	 * @param   int     $input_type     One of INPUT_GET, INPUT_POST, INPUT_COOKIE, INPUT_SERVER, or INPUT_ENV.
 	 * @param   string  $variable_name  Name of a variable to get.
@@ -156,27 +159,28 @@ final class Validation {
 	 * @return  float
 	 */
 	public static function validate_float_input( int $input_type, string $variable_name, float $default ): float {
-		$value = \filter_input( $input_type, $variable_name, FILTER_UNSAFE_RAW );
-		return self::validate_float( $value, $default );
+		return \filter_has_var( $input_type, $variable_name )
+			? self::validate_float( \filter_input( $input_type, $variable_name, FILTER_UNSAFE_RAW ), $default )
+			: $default;
 	}
 
 	/**
-	 * Validates a callback.
+	 * Validates a callable.
 	 *
 	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @version 1.3.2
 	 *
-	 * @param   mixed       $callback   Value to sanitize.
+	 * @param   mixed       $callable   Value to sanitize.
 	 * @param   callable    $default    The default value to return if all fails.
 	 *
 	 * @return  callable
 	 */
-	public static function validate_callback( $callback, callable $default ): callable {
-		if ( \is_string( $callback ) ) {
-			$callback = \trim( $callback );
-			return \is_callable( $callback ) ? $callback : $default;
-		} elseif ( \is_callable( $callback ) ) {
-			return $callback;
+	public static function validate_callable( $callable, callable $default ): callable {
+		if ( \is_string( $callable ) ) {
+			$callable = \trim( $callable );
+			return \is_callable( $callable ) ? $callable : $default;
+		} elseif ( \is_callable( $callable ) ) {
+			return $callable;
 		}
 
 		return $default;

@@ -10,12 +10,49 @@ use DeepWebSolutions\Framework\Helpers\DataTypes\Strings;
  * A collection of very useful sanitization helpers to be used throughout the projects.
  *
  * @since   1.0.0
- * @version 1.1.0
+ * @version 1.3.2
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.com>
  * @package DeepWebSolutions\WP-Framework\Helpers\Security
  */
 final class Sanitization {
 	// region METHODS
+
+	/**
+	 * Sanitizes a string.
+	 *
+	 * @since   1.3.2
+	 * @version 1.3.2
+	 *
+	 * @param   mixed   $string     Value to sanitize.
+	 * @param   string  $default    The default value to return if all fails. By default the empty string.
+	 * @param   int     $flags      Flags supported by the used filter.
+	 * @param   int     $filter     One of the sanitization filters supported by PHP.
+	 *
+	 * @return  string
+	 */
+	public static function sanitize_string( $string, string $default = '', int $flags = FILTER_FLAG_STRIP_LOW, int $filter = FILTER_SANITIZE_STRING ): string {
+		return \filter_var( Validation::validate_string( $string, $default ), $filter, $flags );
+	}
+
+	/**
+	 * Sanitizes a string from an input stream.
+	 *
+	 * @since   1.3.2
+	 * @version 1.3.2
+	 *
+	 * @param   int     $input_type     One of INPUT_GET, INPUT_POST, INPUT_COOKIE, INPUT_SERVER, or INPUT_ENV.
+	 * @param   string  $variable_name  Name of a variable to get.
+	 * @param   string  $default        The default value to return if all fails. By default the empty string.
+	 * @param   int     $flags          Flags supported by the used filter.
+	 * @param   int     $filter         One of the sanitization filters supported by PHP.
+	 *
+	 * @return  string
+	 */
+	public static function sanitize_string_input( int $input_type, string $variable_name, string $default = '', int $flags = FILTER_FLAG_STRIP_LOW, int $filter = FILTER_SANITIZE_STRING ): string {
+		return \filter_has_var( $input_type, $variable_name )
+			? self::sanitize_string( \filter_input( $input_type, $variable_name, FILTER_UNSAFE_RAW ), $default, $flags, $filter )
+			: $default;
+	}
 
 	/**
 	 * Sanitizes an int-like value.
@@ -44,7 +81,7 @@ final class Sanitization {
 	 * Sanitizes an int-like value from an input stream.
 	 *
 	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @version 1.3.2
 	 *
 	 * @param   int     $input_type     One of INPUT_GET, INPUT_POST, INPUT_COOKIE, INPUT_SERVER, or INPUT_ENV.
 	 * @param   string  $variable_name  Name of a variable to get.
@@ -53,8 +90,9 @@ final class Sanitization {
 	 * @return  int
 	 */
 	public static function sanitize_integer_input( int $input_type, string $variable_name, int $default = 0 ): int {
-		$value = \filter_input( $input_type, $variable_name, FILTER_UNSAFE_RAW );
-		return self::sanitize_integer( $value, $default );
+		return \filter_has_var( $input_type, $variable_name )
+			? self::sanitize_integer( \filter_input( $input_type, $variable_name, FILTER_UNSAFE_RAW ), $default )
+			: $default;
 	}
 
 	/**
@@ -76,7 +114,7 @@ final class Sanitization {
 			if ( ! $scientific ) {
 				$sign  = self::has_minus_before_number( $float );
 				$float = Strings::to_safe_string( $float, array( '-' => '' ) );
-				$float = $sign ? "-{$float}" : $float;
+				$float = $sign ? "-$float" : $float;
 			}
 		}
 
@@ -90,7 +128,7 @@ final class Sanitization {
 	 * Sanitizes a float-like value from an input stream.
 	 *
 	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @version 1.3.2
 	 *
 	 * @param   int     $input_type     One of INPUT_GET, INPUT_POST, INPUT_COOKIE, INPUT_SERVER, or INPUT_ENV.
 	 * @param   string  $variable_name  Name of a variable to get.
@@ -99,8 +137,9 @@ final class Sanitization {
 	 * @return  float
 	 */
 	public static function sanitize_float_input( int $input_type, string $variable_name, float $default = 0.0 ): float {
-		$value = \filter_input( $input_type, $variable_name, FILTER_UNSAFE_RAW );
-		return self::sanitize_float( $value, $default );
+		return \filter_has_var( $input_type, $variable_name )
+			? self::sanitize_float( \filter_input( $input_type, $variable_name, FILTER_UNSAFE_RAW ), $default )
+			: $default;
 	}
 
 	// endregion
