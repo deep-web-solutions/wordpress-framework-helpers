@@ -10,7 +10,7 @@ use UnitTester;
  * Tests for the array helpers.
  *
  * @since   1.0.0
- * @version 1.0.2
+ * @version 1.4.0
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.com>
  * @package DeepWebSolutions\WP-Framework\Tests\Helpers\Unit
  */
@@ -72,7 +72,7 @@ class ArraysCest {
 	 * Test the 'search_values' helper.
 	 *
 	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @version 1.4.0
 	 *
 	 * @param   UnitTester  $I          Codeception actor instance.
 	 * @param   Example     $example    Example to run the test on.
@@ -80,7 +80,7 @@ class ArraysCest {
 	 * @dataProvider    search_values_provider
 	 */
 	public function test_search_values( UnitTester $I, Example $example ) {
-		$result = Arrays::search_values( $example['array'], $example['needle'], $example['strict'], $example['callback'] );
+		$result = Arrays::search_values( $example['array'], $example['needle'], $example['callback'], $example['strict'] );
 
 		if ( is_null( $example['expected'] ) ) {
 			$I->assertNull( $result );
@@ -93,7 +93,7 @@ class ArraysCest {
 	 * Test the 'search_keys' helper.
 	 *
 	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @version 1.4.0
 	 *
 	 * @param   UnitTester  $I          Codeception actor instance.
 	 * @param   Example     $example    Example to run the test on.
@@ -101,7 +101,7 @@ class ArraysCest {
 	 * @dataProvider    search_keys_provider
 	 */
 	public function test_search_keys( UnitTester $I, Example $example ) {
-		$result = Arrays::search_keys( $example['array'], $example['needle'], $example['strict'], $example['callback'] );
+		$result = Arrays::search_keys( $example['array'], $example['needle'], $example['callback'], $example['strict'] );
 
 		if ( is_null( $example['expected'] ) ) {
 			$I->assertNull( $result );
