@@ -8,6 +8,7 @@ use DeepWebSolutions\Framework\Helpers\DataTypes\Booleans;
 use DeepWebSolutions\Framework\Helpers\DataTypes\Callables;
 use DeepWebSolutions\Framework\Helpers\DataTypes\Floats;
 use DeepWebSolutions\Framework\Helpers\DataTypes\Integers;
+use DeepWebSolutions\Framework\Helpers\DataTypes\Strings;
 use UnitTester;
 
 /**
@@ -111,7 +112,7 @@ class ValidationCest {
 	 * @dataProvider    validate_allowed_value_provider
 	 */
 	public function test_validate_allowed_value( UnitTester $I, Example $example ) {
-		$I->assertEquals( $example['expected'], Arrays::validate_allowed_value( $example['value'], $example['allowed'], $example['default'] ) );
+		$I->assertEquals( $example['expected'], Strings::validate_allowed( $example['value'], $example['allowed'], $example['default'] ) );
 	}
 
 	// endregion
