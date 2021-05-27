@@ -39,7 +39,7 @@ final class Arrays {
 	 *
 	 * @return  array|null
 	 */
-	public static function cast( $array, ?array $default = null ): ?array {
+	public static function maybe_cast( $array, ?array $default = null ): ?array {
 		if ( ! \is_null( self::check( $array ) ) ) {
 			return $array;
 		} elseif ( ! \is_null( $array ) ) {
@@ -61,10 +61,10 @@ final class Arrays {
 	 *
 	 * @return  array|null
 	 */
-	public static function cast_input( int $input_type, string $variable_name, ?array $default = null ): ?array {
+	public static function maybe_cast_input( int $input_type, string $variable_name, ?array $default = null ): ?array {
 		if ( \filter_has_var( $input_type, $variable_name ) ) {
 			$array = \filter_input( $input_type, $variable_name, FILTER_UNSAFE_RAW, FILTER_FORCE_ARRAY );
-			return self::cast( $array, $default );
+			return self::maybe_cast( $array, $default );
 		}
 
 		return $default;

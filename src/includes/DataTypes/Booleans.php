@@ -40,7 +40,7 @@ final class Booleans {
 	 *
 	 * @return  bool|null
 	 */
-	public static function cast( $boolean, ?bool $default = null ): ?bool {
+	public static function maybe_cast( $boolean, ?bool $default = null ): ?bool {
 		$boolean = \filter_var( $boolean, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE );
 		return self::check( $boolean, $default );
 	}
@@ -58,10 +58,10 @@ final class Booleans {
 	 *
 	 * @return  bool|null
 	 */
-	public static function cast_input( int $input_type, string $variable_name, ?bool $default = null ): ?bool {
+	public static function maybe_cast_input( int $input_type, string $variable_name, ?bool $default = null ): ?bool {
 		if ( \filter_has_var( $input_type, $variable_name ) ) {
 			$boolean = \filter_input( $input_type, $variable_name, FILTER_UNSAFE_RAW, FILTER_REQUIRE_SCALAR | FILTER_NULL_ON_FAILURE );
-			return self::cast( $boolean, $default );
+			return self::maybe_cast( $boolean, $default );
 		}
 
 		return $default;
@@ -81,7 +81,7 @@ final class Booleans {
 	 * @return  bool|null
 	 */
 	public static function resolve( $bool, ?bool $default = null, array $args = array() ): ?bool {
-		return self::cast( Callables::maybe_resolve( $bool, $args ), $default );
+		return self::maybe_cast( Callables::maybe_resolve( $bool, $args ), $default );
 	}
 
 	/**

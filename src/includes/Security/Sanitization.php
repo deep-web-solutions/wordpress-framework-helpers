@@ -73,7 +73,7 @@ final class Sanitization {
 			$integer = Strings::to_alphanumeric_ascii_string( $integer );
 		}
 
-		return ( $sign ?? 1 ) * Integers::cast(
+		return ( $sign ?? 1 ) * Integers::maybe_cast(
 			\filter_var( $integer, FILTER_SANITIZE_NUMBER_INT ),
 			$default
 		);
@@ -120,7 +120,7 @@ final class Sanitization {
 			}
 		}
 
-		return Floats::cast(
+		return Floats::maybe_cast(
 			\filter_var( $float, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_THOUSAND | FILTER_FLAG_ALLOW_FRACTION | FILTER_FLAG_ALLOW_SCIENTIFIC ),
 			$default
 		);

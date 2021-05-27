@@ -44,7 +44,7 @@ final class Strings {
 	 *
 	 * @return  string|null
 	 */
-	public static function cast( $string, ?string $default = '' ): ?string {
+	public static function maybe_cast( $string, ?string $default = '' ): ?string {
 		if ( ! \is_null( self::check( $string ) ) ) {
 			return $string;
 		} elseif ( \is_null( Arrays::check( $string ) ) && ( \is_null( Objects::check( $string ) || \method_exists( $string, '__toString' ) ) ) ) {
@@ -67,10 +67,10 @@ final class Strings {
 	 *
 	 * @return  string|null
 	 */
-	public static function cast_input( int $input_type, string $variable_name, ?string $default = null ): ?string {
+	public static function maybe_cast_input( int $input_type, string $variable_name, ?string $default = null ): ?string {
 		if ( \filter_has_var( $input_type, $variable_name ) ) {
 			$integer = \filter_input( $input_type, $variable_name, FILTER_UNSAFE_RAW, FILTER_REQUIRE_SCALAR );
-			return self::cast( $integer, $default );
+			return self::maybe_cast( $integer, $default );
 		}
 
 		return $default;
@@ -90,7 +90,7 @@ final class Strings {
 	 * @return  string|null
 	 */
 	public static function resolve( $string, ?string $default = null, array $args = array() ): ?string {
-		return self::cast( Callables::maybe_resolve( $string, $args ), $default );
+		return self::maybe_cast( Callables::maybe_resolve( $string, $args ), $default );
 	}
 
 	/**

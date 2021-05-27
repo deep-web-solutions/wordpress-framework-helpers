@@ -40,7 +40,7 @@ final class Floats {
 	 *
 	 * @return  float|null
 	 */
-	public static function cast( $float, ?float $default = null ): ?float {
+	public static function maybe_cast( $float, ?float $default = null ): ?float {
 		$result = \filter_var( $float, FILTER_VALIDATE_FLOAT, FILTER_REQUIRE_SCALAR | FILTER_FLAG_ALLOW_THOUSAND );
 		if ( false === $result ) {
 			$result = \filter_var(
@@ -69,10 +69,10 @@ final class Floats {
 	 *
 	 * @return  float|null
 	 */
-	public static function cast_input( int $input_type, string $variable_name, ?float $default = null ): ?float {
+	public static function maybe_cast_input( int $input_type, string $variable_name, ?float $default = null ): ?float {
 		if ( \filter_has_var( $input_type, $variable_name ) ) {
 			$integer = \filter_input( $input_type, $variable_name, FILTER_UNSAFE_RAW, FILTER_REQUIRE_SCALAR );
-			return self::cast( $integer, $default );
+			return self::maybe_cast( $integer, $default );
 		}
 
 		return $default;

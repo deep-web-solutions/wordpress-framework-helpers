@@ -40,7 +40,7 @@ final class Integers {
 	 *
 	 * @return  int|null
 	 */
-	public static function cast( $integer, ?int $default = null ): ?int {
+	public static function maybe_cast( $integer, ?int $default = null ): ?int {
 		$integer = \filter_var( $integer, FILTER_VALIDATE_INT, FILTER_FLAG_ALLOW_OCTAL | FILTER_FLAG_ALLOW_HEX );
 		return self::check( $integer, $default );
 	}
@@ -58,10 +58,10 @@ final class Integers {
 	 *
 	 * @return  int|null
 	 */
-	public static function cast_input( int $input_type, string $variable_name, ?int $default = null ): ?int {
+	public static function maybe_cast_input( int $input_type, string $variable_name, ?int $default = null ): ?int {
 		if ( \filter_has_var( $input_type, $variable_name ) ) {
 			$integer = \filter_input( $input_type, $variable_name, FILTER_UNSAFE_RAW, FILTER_REQUIRE_SCALAR );
-			return self::cast( $integer, $default );
+			return self::maybe_cast( $integer, $default );
 		}
 
 		return $default;
@@ -80,6 +80,6 @@ final class Integers {
 	 * @return  int|null
 	 */
 	public static function resolve( $integer, ?int $default = null, array $args = array() ): ?int {
-		return self::cast( Callables::maybe_resolve( $integer, $args ), $default );
+		return self::maybe_cast( Callables::maybe_resolve( $integer, $args ), $default );
 	}
 }

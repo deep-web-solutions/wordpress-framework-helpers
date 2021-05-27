@@ -51,7 +51,7 @@ class ValidationCest {
 	 * @dataProvider    validate_boolean_provider
 	 */
 	public function test_validate_boolean( UnitTester $I, Example $example ) {
-		$I->assertEquals( $example['expected'], Booleans::cast( $example['value'], $example['default'] ) );
+		$I->assertEquals( $example['expected'], Booleans::maybe_cast( $example['value'], $example['default'] ) );
 	}
 
 	/**
@@ -66,7 +66,7 @@ class ValidationCest {
 	 * @dataProvider    validate_integer_provider
 	 */
 	public function test_validate_integer( UnitTester $I, Example $example ) {
-		$I->assertEquals( $example['expected'], Integers::cast( $example['value'], $example['default'] ) );
+		$I->assertEquals( $example['expected'], Integers::maybe_cast( $example['value'], $example['default'] ) );
 	}
 
 	/**
@@ -81,7 +81,7 @@ class ValidationCest {
 	 * @dataProvider    validate_float_provider
 	 */
 	public function test_validate_float( UnitTester $I, Example $example ) {
-		$I->assertEquals( $example['expected'], Floats::cast( $example['value'], $example['default'] ) );
+		$I->assertEquals( $example['expected'], Floats::maybe_cast( $example['value'], $example['default'] ) );
 	}
 
 	/**
