@@ -1,8 +1,8 @@
 {
     "classes": [
         "WP_Filesystem_Base",
-        "WP_Session_Tokens",
-        "WP_User"
+        "WP_User",
+        "WP_Session_Tokens"
     ],
     "functions": [
         "apply_filters",
@@ -24,10 +24,10 @@
         "wp_is_jsonp_request",
         "wp_is_json_request",
         "rest_get_url_prefix",
+        "wp_get_current_user",
+        "get_user_by",
         "get_current_user_id",
         "wp_destroy_all_sessions",
-        "wp_logout",
-        "wp_get_current_user",
-        "get_user_by"
+        "wp_logout"
     ]
 }
