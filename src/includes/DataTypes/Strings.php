@@ -222,14 +222,14 @@ final class Strings {
 	 * and returns the result.
 	 *
 	 * @since   1.1.0
-	 * @version 1.3.2
+	 * @version 1.1.0
 	 *
 	 * @param   string  $string     The string to remove the characters from.
 	 *
 	 * @return  string
 	 */
 	public static function to_ascii_input_string( string $string ): string {
-		return Sanitization::sanitize_string( $string, '', FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH );
+		return \filter_var( $string, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH );
 	}
 
 	/**
