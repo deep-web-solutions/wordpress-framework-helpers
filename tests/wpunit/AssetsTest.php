@@ -39,7 +39,7 @@ class AssetsTest extends WPTestCase {
 	 * @version 1.0.0
 	 */
 	public function test_wrap_string_in_style_tags() {
-		$this->assertEquals( "<style type='text/css'>.test{}</style>", Assets::wrap_string_in_style_tags( '.test{}' ) );
+		$this->assertEquals( "<style>.test{}</style>", Assets::wrap_string_in_style_tags( '.test{}' ) );
 	}
 
 	/**
