@@ -8,7 +8,7 @@ namespace DeepWebSolutions\Framework\Helpers\WordPress;
  * A collection of very useful WP hooks helpers to be used throughout the projects.
  *
  * @since   1.0.0
- * @version 1.0.0
+ * @version 1.4.0
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.com>
  * @package DeepWebSolutions\WP-Framework\Helpers\WordPress
  */
@@ -56,7 +56,7 @@ final class Hooks {
 	 * Enqueues a callable to run on a given hook and priority, and deques the callable immediately after that.
 	 *
 	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @version 1.4.0
 	 *
 	 * @param   string      $hook               Hook to enqueue callable on.
 	 * @param   callable    $func               Callable to enqueue.
@@ -66,9 +66,7 @@ final class Hooks {
 	 * @return  bool
 	 */
 	public static function enqueue_temp( string $hook, callable $func, int $priority = 10, int $accepted_args = 1 ): bool {
-		return self::enqueue( $hook, $func, $priority, $accepted_args )
-			? self::enqueue( $hook, self::generate_dequeue_callable( $hook, $func, $priority ), $priority )
-			: false;
+		return self::enqueue( $hook, $func, $priority, $accepted_args ) && self::enqueue( $hook, self::generate_dequeue_callable( $hook, $func, $priority ), $priority );
 	}
 
 	/**

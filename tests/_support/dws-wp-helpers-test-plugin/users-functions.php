@@ -15,6 +15,6 @@ switch ( $_GET['action'] ) {
 		echo wp_json_encode( Users::has_roles( $_GET['roles'] ?? array(), $_GET['user_id'] ? intval( $_GET['user_id'] ) : null, $_GET['logic'] ?? 'and' ) );
 		break;
 	case 'has_capabilities':
-		echo wp_json_encode( Users::has_capabilities( $_GET['capabilities'] ?? array(), $_GET['user_id'] ? intval( $_GET['user_id'] ) : null, $_GET['logic'] ?? 'and', ...( $_GET['args'] ?? array() ) ) );
+		echo wp_json_encode( Users::has_capabilities( $_GET['capabilities'] ?? array(), $_GET['args'] ?? array(), isset( $_GET['user_id'] ) ? intval( $_GET['user_id'] ) : null, $_GET['logic'] ?? 'and' ) );
 		break;
 }

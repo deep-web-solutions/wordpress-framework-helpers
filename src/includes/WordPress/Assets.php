@@ -8,7 +8,7 @@ namespace DeepWebSolutions\Framework\Helpers\WordPress;
  * A collection of very useful WP asset handling helpers to be used throughout the projects.
  *
  * @since   1.0.0
- * @version 1.0.0
+ * @version 1.4.0
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.com>
  * @package DeepWebSolutions\WP-Framework\Helpers\WordPress
  */
@@ -17,14 +17,14 @@ final class Assets {
 	 * Returns a string wrapped in CSS tags.
 	 *
 	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @version 1.4.0
 	 *
 	 * @param   string  $css    The CSS content.
 	 *
 	 * @return  string
 	 */
 	public static function wrap_string_in_style_tags( string $css ): string {
-		return "<style type='text/css'>{$css}</style>";
+		return "<style>$css</style>";
 	}
 
 	/**
@@ -38,7 +38,7 @@ final class Assets {
 	 * @return  string
 	 */
 	public static function wrap_string_in_script_tags( string $javascript ): string {
-		return "<script type='text/javascript'>{$javascript}</script>";
+		return "<script type='text/javascript'>$javascript</script>";
 	}
 
 	/**

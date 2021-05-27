@@ -63,6 +63,8 @@ Hopefully yes, probably not. If you found any problems, please raise an issue on
 * Most old validation API has been renamed to casting.
 * Added array validation.
 * Replaced all references to `sprintf` with `wp_sprintf`.
+* Fixed some bugs in the `Users` class.
+* Overall performance tweaks.
 
 ### 1.3.2, 1.3.3 (May 25th, 2021)
 * Added more security helpers.
