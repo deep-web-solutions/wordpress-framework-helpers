@@ -23,7 +23,7 @@ final class Sanitization {
 	 * Sanitizes a string.
 	 *
 	 * @since   1.3.2
-	 * @version 1.3.2
+	 * @version 1.4.0
 	 *
 	 * @param   mixed   $string     Value to sanitize.
 	 * @param   string  $default    The default value to return if all fails. By default the empty string.
@@ -33,7 +33,7 @@ final class Sanitization {
 	 * @return  string
 	 */
 	public static function sanitize_string( $string, string $default = '', int $flags = FILTER_FLAG_STRIP_LOW, int $filter = FILTER_SANITIZE_STRING ): string {
-		return \filter_var( Validation::validate_string( $string, $default ), $filter, $flags );
+		return \filter_var( Strings::maybe_cast( $string, $default ), $filter, $flags );
 	}
 
 	/**
