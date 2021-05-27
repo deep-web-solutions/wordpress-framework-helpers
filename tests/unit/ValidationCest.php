@@ -3,11 +3,11 @@
 namespace DeepWebSolutions\Framework\Tests\Helpers\Unit;
 
 use Codeception\Example;
+use DeepWebSolutions\Framework\Helpers\DataTypes\Arrays;
 use DeepWebSolutions\Framework\Helpers\DataTypes\Booleans;
 use DeepWebSolutions\Framework\Helpers\DataTypes\Callables;
 use DeepWebSolutions\Framework\Helpers\DataTypes\Floats;
 use DeepWebSolutions\Framework\Helpers\DataTypes\Integers;
-use DeepWebSolutions\Framework\Helpers\Security\Validation;
 use UnitTester;
 
 /**
@@ -103,7 +103,7 @@ class ValidationCest {
 	 * Test the 'validate_allowed_value' helper.
 	 *
 	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @version 1.4.0
 	 *
 	 * @param   UnitTester  $I          Codeception actor instance.
 	 * @param   Example     $example    Example to run the test on.
@@ -111,7 +111,7 @@ class ValidationCest {
 	 * @dataProvider    validate_allowed_value_provider
 	 */
 	public function test_validate_allowed_value( UnitTester $I, Example $example ) {
-		$I->assertEquals( $example['expected'], Validation::validate_allowed_value( $example['value'], $example['allowed'], $example['default'] ) );
+		$I->assertEquals( $example['expected'], Arrays::validate_allowed_value( $example['value'], $example['allowed'], $example['default'] ) );
 	}
 
 	// endregion

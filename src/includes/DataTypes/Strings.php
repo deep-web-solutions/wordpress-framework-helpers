@@ -94,6 +94,28 @@ final class Strings {
 	}
 
 	/**
+	 * Validates a string against a safelist.
+	 *
+	 * @since   1.4.0
+	 * @version 1.4.0
+	 *
+	 * @param   string          $string     The string to validate.
+	 * @param   string[]        $allowed    Array of allowed entries.
+	 * @param   string|null     $default    The value to return if string is not in safelist.
+	 *
+	 * @return  string|null
+	 */
+	public static function validate_allowed( string $string, array $allowed, ?string $default = null ): ?string {
+		$is_allowed = \in_array( $string, $allowed, true );
+		if ( false === $is_allowed ) {
+			$string     = \trim( $string );
+			$is_allowed = \in_array( $string, $allowed, true );
+		}
+
+		return $is_allowed ? $string : $default;
+	}
+
+	/**
 	 * Checks whether a string starts in a particular way or not.
 	 *
 	 * @since   1.0.0

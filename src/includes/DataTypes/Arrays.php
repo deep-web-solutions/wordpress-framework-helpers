@@ -71,6 +71,27 @@ final class Arrays {
 	}
 
 	/**
+	 * Validates an array of values against a safelist. Returns a new array containing only valid entries.
+	 *
+	 * @since   1.4.0
+	 * @version 1.4.0
+	 *
+	 * @param   array       $entries    Array of entries to validate.
+	 * @param   array       $allowed    Array of allowed entries.
+	 * @param   mixed|null  $default    The value to replace invalid entries with.
+	 *
+	 * @return  array
+	 */
+	public static function validate_allowed( array $entries, array $allowed, $default = null ): array {
+		return \array_map(
+			function( $entry ) use ( $allowed, $default ) {
+				return \in_array( $entry, $allowed, true ) ? $entry : $default;
+			},
+			$entries
+		);
+	}
+
+	/**
 	 * Checks whether an array has any string keys or if they are all numerical.
 	 *
 	 * @since   1.0.0
@@ -115,18 +136,18 @@ final class Arrays {
 	 * Returns all the entries in a given array that match a given needle.
 	 *
 	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @version 1.4.0
 	 *
 	 * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
 	 *
 	 * @param   array           $array      Array to search through.
 	 * @param   mixed           $needle     The value to search for.
-	 * @param   bool            $strict     Whether to perform type checks or not.
 	 * @param   callable|null   $callback   Optional callback to run the value through before needle comparison.
+	 * @param   bool            $strict     Whether to perform type checks or not.
 	 *
 	 * @return  array|null
 	 */
-	public static function search_values( array $array, $needle, bool $strict = true, ?callable $callback = null ): ?array {
+	public static function search_values( array $array, $needle, ?callable $callback = null, bool $strict = true ): ?array {
 		$comparison_array = \is_callable( $callback ) ? \array_map( $callback, $array ) : $array;
 
 		foreach ( $comparison_array as $key => $value ) {
@@ -150,12 +171,12 @@ final class Arrays {
 	 *
 	 * @param   array           $array      Array whose keys to search through.
 	 * @param   mixed           $needle     The value to search for.
-	 * @param   bool            $strict     Whether to perform type checks or not.
 	 * @param   callable|null   $callback   Optional callback to run the key through before needle comparison.
+	 * @param   bool            $strict     Whether to perform type checks or not.
 	 *
 	 * @return  array|null
 	 */
-	public static function search_keys( array $array, $needle, bool $strict = false, callable $callback = null ): ?array {
-		return self::search_values( \array_keys( $array ), $needle, $strict, $callback );
+	public static function search_keys( array $array, $needle, ?callable $callback = null, bool $strict = false ): ?array {
+		return self::search_values( \array_keys( $array ), $needle, $callback, $strict );
 	}
 }
