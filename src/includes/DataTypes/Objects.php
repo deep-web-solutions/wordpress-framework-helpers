@@ -8,11 +8,26 @@ namespace DeepWebSolutions\Framework\Helpers\DataTypes;
  * A collection of very useful misc helpers to be used throughout the projects.
  *
  * @since   1.0.0
- * @version 1.2.0
+ * @version 1.4.0
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.com>
  * @package DeepWebSolutions\WP-Framework\Helpers\DataTypes
  */
 final class Objects {
+	/**
+	 * Returns a given variable if it is an object or a default value if not.
+	 *
+	 * @since   1.4.0
+	 * @version 1.4.0
+	 *
+	 * @param   mixed           $object     Variable to check.
+	 * @param   object|null     $default    The default value to return if check fails. By default null.
+	 *
+	 * @return  object|null
+	 */
+	public static function check( $object, ?object $default = null ): ?object {
+		return \is_object( $object ) ? $object : $default;
+	}
+
 	/**
 	 * Gets the description of the trait inheritance scheme of a given trait.
 	 *

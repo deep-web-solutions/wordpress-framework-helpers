@@ -3,19 +3,96 @@
 namespace DeepWebSolutions\Framework\Helpers\DataTypes;
 
 use DeepWebSolutions\Framework\Helpers\Security\Sanitization;
-use DeepWebSolutions\Framework\Helpers\Security\Validation;
 
 \defined( 'ABSPATH' ) || exit;
 
 /**
- * A collection of very useful string manipulation helpers to be used throughout the projects.
+ * A collection of useful string manipulation helpers to be used throughout the projects.
+ *
+ * @SuppressWarnings(PHPMD.TooManyPublicMethods)
  *
  * @since   1.0.0
- * @version 1.3.2
+ * @version 1.4.0
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.com>
  * @package DeepWebSolutions\WP-Framework\Helpers\DataTypes
  */
 final class Strings {
+	/**
+	 * Returns a given variable if it is a string or a default value if not.
+	 *
+	 * @since   1.4.0
+	 * @version 1.4.0
+	 *
+	 * @param   mixed           $string     Variable to check.
+	 * @param   string|null     $default    The default value to return if check fails. By default null.
+	 *
+	 * @return  string|null
+	 */
+	public static function check( $string, ?string $default = null ): ?string {
+		return \is_string( $string ) ? $string : $default;
+	}
+
+	/**
+	 * Attempts to turn a variable of unknown type into a string.
+	 *
+	 * @since   1.3.1
+	 * @since   1.4.0   Moved to the Strings class.
+	 * @version 1.4.0
+	 *
+	 * @param   mixed           $string     Variable to cast.
+	 * @param   string|null     $default    The default value to return if all fails.
+	 *
+	 * @return  string|null
+	 */
+	public static function cast( $string, ?string $default = '' ): ?string {
+		if ( ! \is_null( self::check( $string ) ) ) {
+			return $string;
+		} elseif ( \is_null( Arrays::check( $string ) ) && ( \is_null( Objects::check( $string ) || \method_exists( $string, '__toString' ) ) ) ) {
+			return \strval( $string );
+		}
+
+		return $default;
+	}
+
+	/**
+	 * Attempts to cast a variable from an input stream into an integer.
+	 *
+	 * @since   1.3.1
+	 * @since   1.4.0   Moved to the Strings class.
+	 * @version 1.4.0
+	 *
+	 * @param   int         $input_type     One of INPUT_GET, INPUT_POST, INPUT_COOKIE, INPUT_SERVER, or INPUT_ENV.
+	 * @param   string      $variable_name  Name of a variable to get from the input stream.
+	 * @param   string|null $default        The default value to return if all fails. By default null.
+	 *
+	 * @return  string|null
+	 */
+	public static function cast_input( int $input_type, string $variable_name, ?string $default = null ): ?string {
+		if ( \filter_has_var( $input_type, $variable_name ) ) {
+			$integer = \filter_input( $input_type, $variable_name, FILTER_UNSAFE_RAW, FILTER_REQUIRE_SCALAR );
+			return self::cast( $integer, $default );
+		}
+
+		return $default;
+	}
+
+	/**
+	 * Attempts to resolve a potential callable to a string.
+	 *
+	 * @since   1.3.0
+	 * @since   1.4.0   Moved to the Strings class.
+	 * @version 1.4.0
+	 *
+	 * @param   mixed|callable  $string     Potential callable to resolve.
+	 * @param   string|null     $default    Default value to return on failure. By default null.
+	 * @param   array           $args       Arguments to pass on to the callable. By default none.
+	 *
+	 * @return  string|null
+	 */
+	public static function resolve( $string, ?string $default = null, array $args = array() ): ?string {
+		return self::cast( Callables::maybe_resolve( $string, $args ), $default );
+	}
+
 	/**
 	 * Checks whether a string starts in a particular way or not.
 	 *
@@ -81,7 +158,7 @@ final class Strings {
 	 *
 	 * @return  string
 	 */
-	public static function to_safe_string( string $string, array $unsafe_characters ): string {
+	public static function to_safe_string( string $string, array $unsafe_characters = array() ): string {
 		return \strtolower( self::to_ascii_input_string( self::replace_placeholders( $unsafe_characters, $string ) ) );
 	}
 
@@ -165,21 +242,5 @@ final class Strings {
 		}
 
 		return $return;
-	}
-
-	/**
-	 * Attempts to resolve a potential callable value to a string.
-	 *
-	 * @since   1.3.0
-	 * @version 1.3.1
-	 *
-	 * @param   mixed|callable  $string     Callable to resolve.
-	 * @param   string          $default    Default value to return on failure.
-	 *
-	 * @return  string
-	 */
-	public static function resolve( $string, string $default = '' ): string {
-		$string = \is_callable( $string ) ? \call_user_func( $string ) : $string;
-		return Validation::validate_string( $string, $default );
 	}
 }

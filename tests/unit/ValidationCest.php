@@ -3,6 +3,10 @@
 namespace DeepWebSolutions\Framework\Tests\Helpers\Unit;
 
 use Codeception\Example;
+use DeepWebSolutions\Framework\Helpers\DataTypes\Booleans;
+use DeepWebSolutions\Framework\Helpers\DataTypes\Callables;
+use DeepWebSolutions\Framework\Helpers\DataTypes\Floats;
+use DeepWebSolutions\Framework\Helpers\DataTypes\Integers;
 use DeepWebSolutions\Framework\Helpers\Security\Validation;
 use UnitTester;
 
@@ -10,7 +14,7 @@ use UnitTester;
  * Tests for the validation helpers.
  *
  * @since   1.0.0
- * @version 1.3.2
+ * @version 1.4.0
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.com>
  * @package DeepWebSolutions\WP-Framework\Tests\Helpers\Unit
  */
@@ -39,7 +43,7 @@ class ValidationCest {
 	 * Test the 'validate_boolean' helper.
 	 *
 	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @version 1.4.0
 	 *
 	 * @param   UnitTester  $I          Codeception actor instance.
 	 * @param   Example     $example    Example to run the test on.
@@ -47,14 +51,14 @@ class ValidationCest {
 	 * @dataProvider    validate_boolean_provider
 	 */
 	public function test_validate_boolean( UnitTester $I, Example $example ) {
-		$I->assertEquals( $example['expected'], Validation::validate_boolean( $example['value'], $example['default'] ) );
+		$I->assertEquals( $example['expected'], Booleans::cast( $example['value'], $example['default'] ) );
 	}
 
 	/**
 	 * Test the 'validate_integer' helper.
 	 *
 	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @version 1.4.0
 	 *
 	 * @param   UnitTester  $I          Codeception actor instance.
 	 * @param   Example     $example    Example to run the test on.
@@ -62,14 +66,14 @@ class ValidationCest {
 	 * @dataProvider    validate_integer_provider
 	 */
 	public function test_validate_integer( UnitTester $I, Example $example ) {
-		$I->assertEquals( $example['expected'], Validation::validate_integer( $example['value'], $example['default'] ) );
+		$I->assertEquals( $example['expected'], Integers::cast( $example['value'], $example['default'] ) );
 	}
 
 	/**
 	 * Test the 'validate_float' helper.
 	 *
 	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @version 1.4.0
 	 *
 	 * @param   UnitTester  $I          Codeception actor instance.
 	 * @param   Example     $example    Example to run the test on.
@@ -77,14 +81,14 @@ class ValidationCest {
 	 * @dataProvider    validate_float_provider
 	 */
 	public function test_validate_float( UnitTester $I, Example $example ) {
-		$I->assertEquals( $example['expected'], Validation::validate_float( $example['value'], $example['default'] ) );
+		$I->assertEquals( $example['expected'], Floats::cast( $example['value'], $example['default'] ) );
 	}
 
 	/**
 	 * Test the 'validate_callable' helper.
 	 *
 	 * @since   1.0.0
-	 * @version 1.3.2
+	 * @version 1.4.0
 	 *
 	 * @param   UnitTester  $I          Codeception actor instance.
 	 * @param   Example     $example    Example to run the test on.
@@ -92,7 +96,7 @@ class ValidationCest {
 	 * @dataProvider    validate_callable_provider
 	 */
 	public function test_validate_callable( UnitTester $I, Example $example ) {
-		$I->assertEquals( $example['expected'], Validation::validate_callable( $example['value'], $example['default'] ) );
+		$I->assertEquals( $example['expected'], Callables::validate( $example['value'], $example['default'] ) );
 	}
 
 	/**

@@ -8,11 +8,68 @@ namespace DeepWebSolutions\Framework\Helpers\DataTypes;
  * A collection of very useful array manipulation helpers to be used throughout the projects.
  *
  * @since   1.0.0
- * @version 1.0.2
+ * @version 1.4.0
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.com>
  * @package DeepWebSolutions\WP-Framework\Helpers\DataTypes
  */
 final class Arrays {
+	/**
+	 * Returns a given variable if it is an array or a default value if not.
+	 *
+	 * @since   1.4.0
+	 * @version 1.4.0
+	 *
+	 * @param   mixed       $array      Variable to check.
+	 * @param   array|null  $default    The default value to return if check fails. By default null.
+	 *
+	 * @return  array|null
+	 */
+	public static function check( $array, ?array $default = null ): ?array {
+		return \is_array( $array ) ? $array : $default;
+	}
+
+	/**
+	 * Attempts to turn a variable of unknown type into an array.
+	 *
+	 * @since   1.4.0
+	 * @version 1.4.0
+	 *
+	 * @param   mixed       $array      Variable to cast.
+	 * @param   array|null  $default    The default value to return if all fails. By default null.
+	 *
+	 * @return  array|null
+	 */
+	public static function cast( $array, ?array $default = null ): ?array {
+		if ( ! \is_null( self::check( $array ) ) ) {
+			return $array;
+		} elseif ( ! \is_null( $array ) ) {
+			return array( $array );
+		}
+
+		return $default;
+	}
+
+	/**
+	 * Attempts to cast a variable from an input stream into an array.
+	 *
+	 * @since   1.4.0
+	 * @version 1.4.0
+	 *
+	 * @param   int         $input_type     One of INPUT_GET, INPUT_POST, INPUT_COOKIE, INPUT_SERVER, or INPUT_ENV.
+	 * @param   string      $variable_name  Name of a variable to get.
+	 * @param   array|null  $default        The default value to return if all fails.
+	 *
+	 * @return  array|null
+	 */
+	public static function cast_input( int $input_type, string $variable_name, ?array $default = null ): ?array {
+		if ( \filter_has_var( $input_type, $variable_name ) ) {
+			$array = \filter_input( $input_type, $variable_name, FILTER_UNSAFE_RAW, FILTER_FORCE_ARRAY );
+			return self::cast( $array, $default );
+		}
+
+		return $default;
+	}
+
 	/**
 	 * Checks whether an array has any string keys or if they are all numerical.
 	 *
