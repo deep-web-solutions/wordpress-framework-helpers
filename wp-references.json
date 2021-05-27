@@ -19,6 +19,7 @@
         "remove_action",
         "doing_filter",
         "get_option",
+        "wp_sprintf",
         "is_admin",
         "wp_is_jsonp_request",
         "wp_is_json_request",

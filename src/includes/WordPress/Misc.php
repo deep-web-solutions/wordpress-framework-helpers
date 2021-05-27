@@ -10,7 +10,7 @@ use DeepWebSolutions\Framework\Helpers\DataTypes\Arrays;
  * A collection of very useful WP misc helpers to be used throughout the projects.
  *
  * @since   1.0.0
- * @version 1.0.0
+ * @version 1.4.0
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.com>
  * @package DeepWebSolutions\WP-Framework\Helpers\WordPress
  */
@@ -45,7 +45,7 @@ final class Misc {
 	 * Returns the UNIX timestamp of today's midnight adjusted to a specific timezone.
 	 *
 	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @version 1.4.0
 	 *
 	 * @param   string|null     $timezone_string    Optional timezone string. If not provided, will use the website's own timezone.
 	 *
@@ -53,6 +53,6 @@ final class Misc {
 	 */
 	public static function get_midnight_unix_timestamp( ?string $timezone_string = null ): int {
 		$timezone_string = $timezone_string ?: \get_option( 'timezone_string' ); // phpcs:ignore
-		return \strtotime( \sprintf( 'today midnight %s', $timezone_string ) );
+		return \strtotime( \wp_sprintf( 'today midnight %s', $timezone_string ) );
 	}
 }
