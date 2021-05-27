@@ -2,6 +2,8 @@
 
 namespace DeepWebSolutions\Framework\Helpers\Security;
 
+use DeepWebSolutions\Framework\Helpers\DataTypes\Floats;
+use DeepWebSolutions\Framework\Helpers\DataTypes\Integers;
 use DeepWebSolutions\Framework\Helpers\DataTypes\Strings;
 
 \defined( 'ABSPATH' ) || exit;
@@ -58,7 +60,7 @@ final class Sanitization {
 	 * Sanitizes an int-like value.
 	 *
 	 * @since   1.0.0
-	 * @version 1.1.0
+	 * @version 1.4.0
 	 *
 	 * @param   mixed   $integer    Value to sanitize.
 	 * @param   int     $default    The default value to return if all fails. By default 0.
@@ -71,7 +73,7 @@ final class Sanitization {
 			$integer = Strings::to_alphanumeric_ascii_string( $integer );
 		}
 
-		return ( $sign ?? 1 ) * Validation::validate_integer(
+		return ( $sign ?? 1 ) * Integers::cast(
 			\filter_var( $integer, FILTER_SANITIZE_NUMBER_INT ),
 			$default
 		);
@@ -99,7 +101,7 @@ final class Sanitization {
 	 * Sanitizes a float-like value.
 	 *
 	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @version 1.4.0
 	 *
 	 * @param   mixed   $float      Value to sanitize.
 	 * @param   float   $default    The default value to return if all fails. By default 0.
@@ -118,7 +120,7 @@ final class Sanitization {
 			}
 		}
 
-		return Validation::validate_float(
+		return Floats::cast(
 			\filter_var( $float, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_THOUSAND | FILTER_FLAG_ALLOW_FRACTION | FILTER_FLAG_ALLOW_SCIENTIFIC ),
 			$default
 		);
