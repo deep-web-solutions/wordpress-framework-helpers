@@ -24,7 +24,7 @@ final class Booleans {
 	 *
 	 * @return  bool|null
 	 */
-	public static function check( $boolean, ?bool $default = null ): ?bool {
+	public static function validate( $boolean, ?bool $default = null ): ?bool {
 		return \is_bool( $boolean ) ? $boolean : $default;
 	}
 
@@ -42,7 +42,7 @@ final class Booleans {
 	 */
 	public static function maybe_cast( $boolean, ?bool $default = null ): ?bool {
 		$boolean = \filter_var( $boolean, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE );
-		return self::check( $boolean, $default );
+		return self::validate( $boolean, $default );
 	}
 
 	/**

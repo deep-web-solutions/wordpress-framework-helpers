@@ -24,7 +24,7 @@ final class Objects {
 	 *
 	 * @return  object|null
 	 */
-	public static function check( $object, ?object $default = null ): ?object {
+	public static function validate( $object, ?object $default = null ): ?object {
 		return \is_object( $object ) ? $object : $default;
 	}
 

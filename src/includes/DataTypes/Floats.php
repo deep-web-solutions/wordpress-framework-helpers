@@ -24,7 +24,7 @@ final class Floats {
 	 *
 	 * @return  float|null
 	 */
-	public static function check( $float, ?float $default = null ): ?float {
+	public static function validate( $float, ?float $default = null ): ?float {
 		return \is_float( $float ) ? $float : $default;
 	}
 
@@ -53,7 +53,7 @@ final class Floats {
 			);
 		}
 
-		return self::check( $result, $default );
+		return self::validate( $result, $default );
 	}
 
 	/**

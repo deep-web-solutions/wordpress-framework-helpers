@@ -24,7 +24,7 @@ final class Integers {
 	 *
 	 * @return  int|null
 	 */
-	public static function check( $integer, ?int $default = null ): ?int {
+	public static function validate( $integer, ?int $default = null ): ?int {
 		return \is_int( $integer ) ? $integer : $default;
 	}
 
@@ -42,7 +42,7 @@ final class Integers {
 	 */
 	public static function maybe_cast( $integer, ?int $default = null ): ?int {
 		$integer = \filter_var( $integer, FILTER_VALIDATE_INT, FILTER_FLAG_ALLOW_OCTAL | FILTER_FLAG_ALLOW_HEX );
-		return self::check( $integer, $default );
+		return self::validate( $integer, $default );
 	}
 
 	/**

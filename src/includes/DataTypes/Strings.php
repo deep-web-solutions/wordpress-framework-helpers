@@ -28,7 +28,7 @@ final class Strings {
 	 *
 	 * @return  string|null
 	 */
-	public static function check( $string, ?string $default = null ): ?string {
+	public static function validate( $string, ?string $default = null ): ?string {
 		return \is_string( $string ) ? $string : $default;
 	}
 
@@ -45,9 +45,9 @@ final class Strings {
 	 * @return  string|null
 	 */
 	public static function maybe_cast( $string, ?string $default = '' ): ?string {
-		if ( ! \is_null( self::check( $string ) ) ) {
+		if ( ! \is_null( self::validate( $string ) ) ) {
 			return $string;
-		} elseif ( \is_null( Arrays::check( $string ) ) && ( \is_null( Objects::check( $string ) || \method_exists( $string, '__toString' ) ) ) ) {
+		} elseif ( \is_null( Arrays::validate( $string ) ) && ( \is_null( Objects::validate( $string ) || \method_exists( $string, '__toString' ) ) ) ) {
 			return \strval( $string );
 		}
 

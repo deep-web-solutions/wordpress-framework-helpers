@@ -24,7 +24,7 @@ final class Arrays {
 	 *
 	 * @return  array|null
 	 */
-	public static function check( $array, ?array $default = null ): ?array {
+	public static function validate( $array, ?array $default = null ): ?array {
 		return \is_array( $array ) ? $array : $default;
 	}
 
@@ -40,7 +40,7 @@ final class Arrays {
 	 * @return  array|null
 	 */
 	public static function maybe_cast( $array, ?array $default = null ): ?array {
-		if ( ! \is_null( self::check( $array ) ) ) {
+		if ( ! \is_null( self::validate( $array ) ) ) {
 			return $array;
 		} elseif ( ! \is_null( $array ) ) {
 			return array( $array );
