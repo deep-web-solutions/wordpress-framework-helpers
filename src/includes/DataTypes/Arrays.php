@@ -85,7 +85,13 @@ final class Arrays {
 	public static function validate_allowed( array $entries, array $allowed, $default = null ): array {
 		return \array_map(
 			function( $entry ) use ( $allowed, $default ) {
-				return \in_array( $entry, $allowed, true ) ? $entry : $default;
+				$is_allowed = \in_array( $entry, $allowed, true );
+				if ( false === $is_allowed && Strings::validate( $entry ) ) {
+					$entry      = \trim( $entry );
+					$is_allowed = \in_array( $entry, $allowed, true );
+				}
+
+				return $is_allowed ? $entry : $default;
 			},
 			$entries
 		);

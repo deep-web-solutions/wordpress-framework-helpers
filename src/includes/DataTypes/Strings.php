@@ -2,8 +2,6 @@
 
 namespace DeepWebSolutions\Framework\Helpers\DataTypes;
 
-use DeepWebSolutions\Framework\Helpers\Security\Sanitization;
-
 \defined( 'ABSPATH' ) || exit;
 
 /**
