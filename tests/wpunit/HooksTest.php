@@ -343,7 +343,7 @@ class HooksTest extends WPTestCase {
 				array(
 					'extra'    => array( 'extra/test1', 'extra\\test2' ),
 					'root'     => 'codeception_unit_test',
-					'expected' => 'codeception_unit_test/extra_test1/extra_test2',
+					'expected' => 'codeception_unit_test/extra/test1/extra_test2',
 				),
 			),
 			array(
