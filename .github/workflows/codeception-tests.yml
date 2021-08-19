@@ -56,6 +56,8 @@ jobs:
         with:
           php-version: ${{ matrix.php }}
           extensions: mbstring, intl, pdo_mysql
+        env:
+          COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set database connection env globals
         env:
