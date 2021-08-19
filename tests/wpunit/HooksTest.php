@@ -322,14 +322,14 @@ class HooksTest extends WPTestCase {
 					'name'     => 'test',
 					'extra'    => array( 'extra_test1', 'extra_test2' ),
 					'root'     => 'codeception_unit_test',
-					'expected' => 'codeception_unit_test/test/extra_test1-extra_test2',
+					'expected' => 'codeception_unit_test/test/extra_test1/extra_test2',
 				),
 			),
 			array(
 				array(
 					'name'     => 'test',
 					'extra'    => array( 'extra test1', 'extra test2' ),
-					'expected' => 'dws_framework_helpers/test/extra_test1-extra_test2',
+					'expected' => 'dws_framework_helpers/test/extra_test1/extra_test2',
 				),
 			),
 			array(
@@ -343,13 +343,13 @@ class HooksTest extends WPTestCase {
 				array(
 					'extra'    => array( 'extra/test1', 'extra\\test2' ),
 					'root'     => 'codeception_unit_test',
-					'expected' => 'codeception_unit_test/extra_test1/extra_test2',
+					'expected' => 'codeception_unit_test/extra_test1_extra_test2',
 				),
 			),
 			array(
 				array(
 					'name'     => 'test',
-					'expected' => 'dws_framework_helpers-test',
+					'expected' => 'dws_framework_helpers/test',
 				),
 			),
 			array(
