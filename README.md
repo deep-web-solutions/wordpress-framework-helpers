@@ -4,7 +4,7 @@
 **Requires at least:** 5.5  
 **Tested up to:** 5.7  
 **Requires PHP:** 7.4  
-**Stable tag:** 1.4.0  
+**Stable tag:** 1.4.1  
 **License:** GPLv3 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-3.0.html  
 
@@ -57,6 +57,9 @@ Hopefully yes, probably not. If you found any problems, please raise an issue on
 
 
 ## Changelog
+
+### 1.4.1 (August 19th, 2021)
+* Changed the joining separator for hooks tags.
 
 ### 1.4.0 (May 28th, 2021)
 * New validation & sanitization API.

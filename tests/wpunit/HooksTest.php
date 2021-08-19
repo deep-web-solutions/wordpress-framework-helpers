@@ -10,7 +10,7 @@ use WpunitTester;
  * Tests for the WP hooks helpers.
  *
  * @since   1.0.0
- * @version 1.0.0
+ * @version 1.4.1
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.com>
  * @package DeepWebSolutions\WP-Framework\Tests\Helpers\Integration
  */
@@ -311,7 +311,7 @@ class HooksTest extends WPTestCase {
 	 * Provides examples for the 'get_hook_tag' function tester.
 	 *
 	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @version 1.4.1
 	 *
 	 * @return  array[]
 	 */
@@ -322,28 +322,28 @@ class HooksTest extends WPTestCase {
 					'name'     => 'test',
 					'extra'    => array( 'extra_test1', 'extra_test2' ),
 					'root'     => 'codeception_unit_test',
-					'expected' => 'codeception_unit_test-test-extra_test1-extra_test2',
+					'expected' => 'codeception_unit_test/test/extra_test1-extra_test2',
 				),
 			),
 			array(
 				array(
 					'name'     => 'test',
 					'extra'    => array( 'extra test1', 'extra test2' ),
-					'expected' => 'dws_framework_helpers-test-extra_test1-extra_test2',
+					'expected' => 'dws_framework_helpers/test/extra_test1-extra_test2',
 				),
 			),
 			array(
 				array(
 					'name'     => 'test',
 					'root'     => 'codeception_unit_test',
-					'expected' => 'codeception_unit_test-test',
+					'expected' => 'codeception_unit_test/test',
 				),
 			),
 			array(
 				array(
 					'extra'    => array( 'extra/test1', 'extra\\test2' ),
 					'root'     => 'codeception_unit_test',
-					'expected' => 'codeception_unit_test-extra_test1-extra_test2',
+					'expected' => 'codeception_unit_test/extra_test1/extra_test2',
 				),
 			),
 			array(
@@ -355,7 +355,7 @@ class HooksTest extends WPTestCase {
 			array(
 				array(
 					'extra'    => array( 'extra_test1', 'extra_test2' ),
-					'expected' => 'dws_framework_helpers-extra_test1-extra_test2',
+					'expected' => 'dws_framework_helpers/extra_test1/extra_test2',
 				),
 			),
 			array(
