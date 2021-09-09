@@ -59,7 +59,7 @@ Hopefully yes, probably not. If you found any problems, please raise an issue on
 ## Changelog
 
 ### 1.4.2 (September 9th, 2021)
-* Special handling for trying to cast a null to boolean. Now it will return null instead of false.
+* Special handling for trying to cast a null to boolean. Now it will return the default instead of false.
 * Made coding rules exceptions more specific.
 
 ### 1.4.1 (August 19th, 2021)

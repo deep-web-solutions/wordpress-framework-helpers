@@ -42,7 +42,7 @@ final class Booleans {
 	 */
 	public static function maybe_cast( $boolean, ?bool $default = null ): ?bool {
 		if ( \is_null( $boolean ) ) {
-			return null;
+			return $default;
 		} else {
 			$boolean = \filter_var( $boolean, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE );
 			return self::validate( $boolean, $default );
