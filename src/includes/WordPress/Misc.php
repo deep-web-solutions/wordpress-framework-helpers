@@ -52,7 +52,7 @@ final class Misc {
 	 * @return  int
 	 */
 	public static function get_midnight_unix_timestamp( ?string $timezone_string = null ): int {
-		$timezone_string = $timezone_string ?: \get_option( 'timezone_string' ); // phpcs:ignore
+		$timezone_string = $timezone_string ?: \get_option( 'timezone_string' );
 		return \strtotime( \wp_sprintf( 'today midnight %s', $timezone_string ) );
 	}
 }

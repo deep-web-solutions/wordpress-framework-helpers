@@ -8,7 +8,7 @@ namespace DeepWebSolutions\Framework\Helpers\DataTypes;
  * A collection of very useful boolean helpers to be used throughout the projects.
  *
  * @since   1.0.0
- * @version 1.4.0
+ * @version 1.4.2
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.com>
  * @package DeepWebSolutions\WP-Framework\Helpers\DataTypes
  */
@@ -33,7 +33,7 @@ final class Booleans {
 	 *
 	 * @since   1.0.0
 	 * @since   1.4.0   Moved to the Booleans class.
-	 * @version 1.4.0
+	 * @version 1.4.2
 	 *
 	 * @param   mixed       $boolean    Variable to cast.
 	 * @param   bool|null   $default    The default value to return if all fails. By default null.
@@ -41,8 +41,12 @@ final class Booleans {
 	 * @return  bool|null
 	 */
 	public static function maybe_cast( $boolean, ?bool $default = null ): ?bool {
-		$boolean = \filter_var( $boolean, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE );
-		return self::validate( $boolean, $default );
+		if ( \is_null( $boolean ) ) {
+			return null;
+		} else {
+			$boolean = \filter_var( $boolean, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE );
+			return self::validate( $boolean, $default );
+		}
 	}
 
 	/**

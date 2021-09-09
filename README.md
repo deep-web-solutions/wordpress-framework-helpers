@@ -4,7 +4,7 @@
 **Requires at least:** 5.5  
 **Tested up to:** 5.7  
 **Requires PHP:** 7.4  
-**Stable tag:** 1.4.1  
+**Stable tag:** 1.4.2  
 **License:** GPLv3 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-3.0.html  
 
@@ -57,6 +57,10 @@ Hopefully yes, probably not. If you found any problems, please raise an issue on
 
 
 ## Changelog
+
+### 1.4.2 (September 9th, 2021)
+* Special handling for trying to cast a null to boolean. Now it will return null instead of false.
+* Made coding rules exceptions more specific.
 
 ### 1.4.1 (August 19th, 2021)
 * Changed the joining separator for hooks tags.

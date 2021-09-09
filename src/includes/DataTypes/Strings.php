@@ -248,18 +248,20 @@ final class Strings {
 		$letter = \substr( $size, -1 );
 		$return = \substr( $size, 0, -1 );
 
+		// phpcs:disable PSR2.ControlStructures.SwitchDeclaration.TerminatingComment
 		switch ( \strtoupper( $letter ) ) {
-			case 'P': // phpcs:ignore
+			case 'P':
 				$return *= 1024;
-			case 'T': // phpcs:ignore
+			case 'T':
 				$return *= 1024;
-			case 'G': // phpcs:ignore
+			case 'G':
 				$return *= 1024;
-			case 'M': // phpcs:ignore
+			case 'M':
 				$return *= 1024;
-			case 'K': // phpcs:ignore
+			case 'K':
 				$return *= 1024;
 		}
+		// phpcs:enable
 
 		return $return;
 	}

@@ -157,7 +157,7 @@ final class Arrays {
 		$comparison_array = \is_callable( $callback ) ? \array_map( $callback, $array ) : $array;
 
 		foreach ( $comparison_array as $key => $value ) {
-			if ( ( $strict && $needle === $value ) || ( ! $strict && $needle == $value ) ) { // phpcs:ignore
+			if ( ( $strict && $needle === $value ) || ( ! $strict && $needle == $value ) ) { // phpcs:ignore WordPress.PHP.StrictComparisons.LooseComparison
 				continue;
 			}
 

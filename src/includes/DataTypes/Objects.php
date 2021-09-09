@@ -49,7 +49,7 @@ final class Objects {
 			$traits = $results[ $trait ];
 		} else {
 			$traits      = array();
-			$used_traits = \class_uses( $trait, $autoload ) ?: array(); // phpcs:ignore
+			$used_traits = \class_uses( $trait, $autoload ) ?: array();
 
 			foreach ( $used_traits as $used_trait ) {
 				$traits[ $used_trait ] = self::trait_uses_deep( $used_trait );
@@ -204,7 +204,7 @@ final class Objects {
 	 * @return  bool
 	 */
 	public static function has_trait( string $trait, $class, bool $autoload = true ): bool {
-		$traits = \class_uses( $class, $autoload ) ?: array(); // phpcs:ignore
+		$traits = \class_uses( $class, $autoload ) ?: array();
 		return isset( $traits[ $trait ] );
 	}
 
