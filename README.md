@@ -58,12 +58,11 @@ Hopefully yes, probably not. If you found any problems, please raise an issue on
 
 ## Changelog
 
-### 1.4.3 (September 15th, 2021)
-* Improved REST API detection to remove false positives on AJAX requests.
-
-### 1.4.2 (September 9th, 2021)
+### 1.4.2, 1.4.3, 1.4.4 (September 9th, 2021, September 15th, 2021, September 18th, 2021)
 * Special handling for trying to cast a null to boolean. Now it will return the default instead of false.
 * Made coding rules exceptions more specific.
+* Improved REST API detection to remove false positives on AJAX requests.
+* Added new helpful string helpers.
 
 ### 1.4.1 (August 19th, 2021)
 * Changed the joining separator for hooks tags.

@@ -71,8 +71,8 @@ final class Floats {
 	 */
 	public static function maybe_cast_input( int $input_type, string $variable_name, ?float $default = null ): ?float {
 		if ( \filter_has_var( $input_type, $variable_name ) ) {
-			$integer = \filter_input( $input_type, $variable_name, FILTER_UNSAFE_RAW, FILTER_REQUIRE_SCALAR );
-			return self::maybe_cast( $integer, $default );
+			$float = \filter_input( $input_type, $variable_name, FILTER_UNSAFE_RAW, FILTER_REQUIRE_SCALAR );
+			return self::maybe_cast( $float, $default );
 		}
 
 		return $default;

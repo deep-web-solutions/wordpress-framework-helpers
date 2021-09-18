@@ -10,7 +10,7 @@ namespace DeepWebSolutions\Framework\Helpers\DataTypes;
  * @SuppressWarnings(PHPMD.TooManyPublicMethods)
  *
  * @since   1.0.0
- * @version 1.4.0
+ * @version 1.4.4
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.com>
  * @package DeepWebSolutions\WP-Framework\Helpers\DataTypes
  */
@@ -67,8 +67,8 @@ final class Strings {
 	 */
 	public static function maybe_cast_input( int $input_type, string $variable_name, ?string $default = null ): ?string {
 		if ( \filter_has_var( $input_type, $variable_name ) ) {
-			$integer = \filter_input( $input_type, $variable_name, FILTER_UNSAFE_RAW, FILTER_REQUIRE_SCALAR );
-			return self::maybe_cast( $integer, $default );
+			$string = \filter_input( $input_type, $variable_name, FILTER_UNSAFE_RAW, FILTER_REQUIRE_SCALAR );
+			return self::maybe_cast( $string, $default );
 		}
 
 		return $default;
@@ -149,6 +149,66 @@ final class Strings {
 		}
 
 		return '' === $needle || \substr_compare( $haystack, $needle, -\strlen( $needle ) ) === 0;
+	}
+
+	/**
+	 * Adds a given prefix to a given string if not already prefixed.
+	 *
+	 * @since   1.4.4
+	 * @version 1.4.4
+	 *
+	 * @param   string  $string     String to prefix.
+	 * @param   string  $prefix     Prefix to add if not existent.
+	 *
+	 * @return  string
+	 */
+	public static function maybe_prefix( string $string, string $prefix = '_' ): string {
+		return self::starts_with( $string, $prefix ) ? $string : ( $prefix . $string );
+	}
+
+	/**
+	 * Removes a given prefix from a given string if present.
+	 *
+	 * @since   1.4.4
+	 * @version 1.4.4
+	 *
+	 * @param   string  $string     String to un-prefix.
+	 * @param   string  $prefix     Prefix to remove if it exists.
+	 *
+	 * @return  string
+	 */
+	public static function maybe_unprefix( string $string, string $prefix = '_' ): string {
+		return self::starts_with( $string, $prefix ) ? \substr( $string, \strlen( $prefix ) ) : $string;
+	}
+
+	/**
+	 * Adds a given suffix to a given string if not already suffixed.
+	 *
+	 * @since   1.4.4
+	 * @version 1.4.4
+	 *
+	 * @param   string  $string     String to prefix.
+	 * @param   string  $suffix     Suffix to add if not existent.
+	 *
+	 * @return  string
+	 */
+	public static function maybe_suffix( string $string, string $suffix ): string {
+		return self::ends_with( $string, $suffix ) ? $string : ( $string . $suffix );
+	}
+
+	/**
+	 * Removes a given suffix from a given string if present.
+	 *
+	 * @since   1.4.4
+	 * @version 1.4.4
+	 *
+	 * @param   string  $string     String to un-prefix.
+	 * @param   string  $suffix     Suffix to remove if it exists.
+	 *
+	 * @return  string
+	 */
+	public static function maybe_unsuffix( string $string, string $suffix ): string {
+		return self::ends_with( $string, $suffix ) ? \substr( $string, 0, -1 * \strlen( $suffix ) ) : $string;
 	}
 
 	/**
