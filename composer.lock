@@ -1868,16 +1868,16 @@
         },
         {
             "name": "lucatume/wp-browser",
-            "version": "3.0.10",
+            "version": "3.0.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lucatume/wp-browser.git",
-                "reference": "0754da8955c97762976379a9b2ab7175594ff815"
+                "reference": "c215ae0aff4a4ea58e2172e7014a2a7b0c160e25"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lucatume/wp-browser/zipball/0754da8955c97762976379a9b2ab7175594ff815",
-                "reference": "0754da8955c97762976379a9b2ab7175594ff815",
+                "url": "https://api.github.com/repos/lucatume/wp-browser/zipball/c215ae0aff4a4ea58e2172e7014a2a7b0c160e25",
+                "reference": "c215ae0aff4a4ea58e2172e7014a2a7b0c160e25",
                 "shasum": ""
             },
             "require": {
@@ -1950,7 +1950,7 @@
             ],
             "support": {
                 "issues": "https://github.com/lucatume/wp-browser/issues",
-                "source": "https://github.com/lucatume/wp-browser/tree/3.0.10"
+                "source": "https://github.com/lucatume/wp-browser/tree/3.0.11"
             },
             "funding": [
                 {
@@ -1958,7 +1958,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-09-13T18:16:58+00:00"
+            "time": "2021-09-20T17:00:45+00:00"
         },
         {
             "name": "mikehaertl/php-shellcommand",
