@@ -10,7 +10,7 @@ use DeepWebSolutions\Framework\Helpers\DataTypes\Booleans;
  * A collection of very useful WP users helpers to be used throughout the projects.
  *
  * @since   1.0.0
- * @version 1.4.0
+ * @version 1.4.6
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.com>
  * @package DeepWebSolutions\WP-Framework\Helpers\WordPress
  */
@@ -49,15 +49,16 @@ final class Users {
 	 * Checks whether a given user has certain roles.
 	 *
 	 * @since   1.0.0
-	 * @version 1.4.0
+	 * @version 1.4.6
 	 *
-	 * @param   array       $roles      The roles to check for.
-	 * @param   int|null    $user_id    The ID of the user to check for. Defaults to the currently logged-in user.
-	 * @param   string      $logic      Whether the user needs to have all the roles mentioned or either of them. Valid values: 'and', 'or'. Default: 'and'.
+	 * @param   string[]|string     $roles      The roles to check for.
+	 * @param   int|null            $user_id    The ID of the user to check for. Defaults to the currently logged-in user.
+	 * @param   string              $logic      Whether the user needs to have all the roles mentioned or either of them. Valid values: 'and', 'or'. Default: 'or'.
 	 *
 	 * @return  bool|null
 	 */
-	public static function has_roles( array $roles, ?int $user_id = null, string $logic = 'and' ): ?bool {
+	public static function has_roles( $roles, ?int $user_id = null, string $logic = 'or' ): ?bool {
+		$roles = \is_array( $roles ) ? $roles : array( $roles );
 		if ( empty( $roles ) ) {
 			return true;
 		}
@@ -71,9 +72,7 @@ final class Users {
 
 		return \array_reduce(
 			\array_map(
-				function( string $role ) use ( $user_roles ) {
-					return \in_array( $role, $user_roles, true );
-				},
+				fn( string $role ) => \in_array( $role, $user_roles, true ),
 				$roles
 			),
 			array( Booleans::class, "logical_$logic" ),
@@ -85,16 +84,17 @@ final class Users {
 	 * Checks whether a given user has certain capabilities.
 	 *
 	 * @since   1.0.0
-	 * @version 1.4.0
+	 * @version 1.4.6
 	 *
-	 * @param   array       $capabilities   The capabilities to check for.
-	 * @param   array       $args           Optional further parameters, typically starting with an object ID. See @user_can.
-	 * @param   int|null    $user_id        The ID of the user to check for. Defaults to the currently logged-in user.
-	 * @param   string      $logic          Whether the user needs to have all the roles mentioned or either of them. Valid values: 'and', 'or'. Default: 'and'.
+	 * @param   string[]|string     $capabilities   The capabilities to check for.
+	 * @param   array               $args           Optional further parameters, typically starting with an object ID. See @user_can.
+	 * @param   int|null            $user_id        The ID of the user to check for. Defaults to the currently logged-in user.
+	 * @param   string              $logic          Whether the user needs to have all the roles mentioned or either of them. Valid values: 'and', 'or'. Default: 'and'.
 	 *
 	 * @return  bool|null
 	 */
-	public static function has_capabilities( array $capabilities, array $args = array(), ?int $user_id = null, string $logic = 'and' ): ?bool {
+	public static function has_capabilities( $capabilities, array $args = array(), ?int $user_id = null, string $logic = 'and' ): ?bool {
+		$capabilities = \is_array( $capabilities ) ? $capabilities : array( $capabilities );
 		if ( empty( $capabilities ) ) {
 			return true;
 		}
@@ -106,9 +106,7 @@ final class Users {
 
 		return \array_reduce(
 			\array_map(
-				function( string $capability ) use ( $user, $args ) {
-					return $user->has_cap( $capability, ...$args );
-				},
+				fn( string $capability ) => $user->has_cap( $capability, ...$args ),
 				$capabilities
 			),
 			array( Booleans::class, "logical_$logic" ),
@@ -127,8 +125,8 @@ final class Users {
 	public static function logout_user( ?int $user_id = null ): void {
 		$user_id = $user_id ?? \get_current_user_id();
 		if ( \get_current_user_id() === $user_id ) {
-			wp_destroy_all_sessions();
-			wp_logout();
+			\wp_destroy_all_sessions();
+			\wp_logout();
 		} else {
 			$user_sessions = \WP_Session_Tokens::get_instance( $user_id );
 			$user_sessions->destroy_all();

@@ -10,7 +10,7 @@ use DeepWebSolutions\Framework\Helpers\DataTypes\Strings;
  * A collection of very useful file system helpers to be used throughout the projects.
  *
  * @since   1.0.0
- * @version 1.0.0
+ * @version 1.4.6
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.com>
  * @package DeepWebSolutions\WP-Framework\Helpers\FileSystem
  */
@@ -38,7 +38,7 @@ final class Files {
 	 * truthful about its nature.
 	 *
 	 * @version 1.0.0
-	 * @since   1.0.0
+	 * @since   1.4.6
 	 *
 	 * @param   string  $filename   The path to the file, or just the filename.
 	 * @param   string  $extension  The extension to check against.
@@ -46,7 +46,6 @@ final class Files {
 	 * @return  bool    Whether the file has the expected extension or not.
 	 */
 	public static function has_extension( string $filename, string $extension ): bool {
-		$extension = Strings::starts_with( $extension, '.' ) ? $extension : ".{$extension}";
-		return Strings::ends_with( $filename, $extension );
+		return Strings::ends_with( $filename, Strings::maybe_prefix( $extension, '.' ) );
 	}
 }

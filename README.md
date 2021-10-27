@@ -58,6 +58,12 @@ Hopefully yes, probably not. If you found any problems, please raise an issue on
 
 ## Changelog
 
+### 1.4.6 (October 27th, 2021)
+* Users::has_roles default logical operator is now 'or'.
+* Users::has_roles and Users::has_capabilities now also accept a string as a first parameter.
+* Tweaked Strings::maybe_cast for better compatibility with humbug/php-scoper.
+* Files::has_extension now uses the newly-introduced Strings::maybe_prefix helper.
+
 ### 1.4.2, 1.4.3, 1.4.4, 1.4.5 (September 9th, September 15th, September 18th, September 23rd, 2021)
 * Special handling for trying to cast a null to boolean. Now it will return the default instead of false.
 * Made coding rules exceptions more specific.

@@ -27,7 +27,7 @@ trait FilesystemAwareTrait {
 	 *
 	 * @return  \WP_Filesystem_Base|null
 	 */
-	public function get_wp_filesystem( ?string $form_url = null, $context = '', ?array $extra_fields = null ): ?\WP_Filesystem_Base {
+	public function get_wp_filesystem( ?string $form_url = null, string $context = '', ?array $extra_fields = null ): ?\WP_Filesystem_Base {
 		global $wp_filesystem;
 
 		if ( ! \function_exists( '\request_filesystem_credentials' ) ) {
@@ -39,16 +39,12 @@ trait FilesystemAwareTrait {
 
 		if ( false === $credentials ) {
 			if ( Request::has_debug() ) {
-				// phpcs:disable WordPress.PHP.DevelopmentFunctions
-				\error_log( 'Failed to retrieve WP Files credentials.' );
-				// phpcs:enable
+				\error_log( 'Failed to retrieve WP Files credentials.' ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions
 			}
 			return null;
 		} elseif ( ! \wp_filesystem( $credentials ) ) {
 			if ( Request::has_debug() ) {
-				// phpcs:disable WordPress.PHP.DevelopmentFunctions
-				\error_log( 'Failed to connect to the WP Files.' );
-				// phpcs:enable
+				\error_log( 'Failed to connect to the WP Files.' ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions
 			}
 			\request_filesystem_credentials( $form_url, '', true, $context, $extra_fields );
 			return null;

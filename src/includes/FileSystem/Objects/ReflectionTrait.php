@@ -73,7 +73,7 @@ trait ReflectionTrait {
 	 * @return  string
 	 */
 	final public static function get_full_class_name(): string {
-		return '\\' . ltrim( self::get_reflection_class()->getName(), '\\' );
+		return '\\' . \ltrim( self::get_reflection_class()->getName(), '\\' );
 	}
 
 	/**
