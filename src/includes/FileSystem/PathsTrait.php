@@ -35,8 +35,8 @@ trait PathsTrait {
 	 * @return  string
 	 */
 	final public static function get_path( bool $absolute = true, bool $keep_file_name = false ): string {
-		$absolute_path = \wp_normalize_path( self::get_reflection_class()->getFileName() );
-		$path          = $absolute ? $absolute_path : '/' . \str_replace( ABSPATH, '', $absolute_path );
+		$absolute_path = self::get_reflection_class()->getFileName();
+		$path          = \wp_normalize_path( $absolute ? $absolute_path : '/' . \str_replace( ABSPATH, '', $absolute_path ) );
 
 		return $keep_file_name ? $path : \trailingslashit( \dirname( $path ) );
 	}
