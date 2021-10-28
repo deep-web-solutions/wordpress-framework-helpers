@@ -3,7 +3,7 @@
 namespace DeepWebSolutions\Framework\Tests\Helpers;
 
 use DeepWebSolutions\Framework\Helpers\FileSystem\FilesystemAwareTrait;
-use DeepWebSolutions\Framework\Helpers\FileSystem\Objects\PathsTrait;
+use DeepWebSolutions\Framework\Helpers\FileSystem\PathsTrait;
 
 /**
  * Class Paths

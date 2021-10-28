@@ -2,7 +2,7 @@
 
 namespace DeepWebSolutions\Framework\Tests\Helpers\Support\Objects;
 
-use DeepWebSolutions\Framework\Helpers\FileSystem\Objects\PathsTrait;
+use DeepWebSolutions\Framework\Helpers\FileSystem\PathsTrait;
 
 /**
  * Class ChildObject

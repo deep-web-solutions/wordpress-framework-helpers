@@ -2,8 +2,8 @@
 
 namespace DeepWebSolutions\Framework\Tests\Helpers;
 
-use DeepWebSolutions\Framework\Helpers\WordPress\Hooks\HooksHelpersAwareInterface;
-use DeepWebSolutions\Framework\Helpers\WordPress\Hooks\HooksHelpersTrait;
+use DeepWebSolutions\Framework\Helpers\HooksHelpersAwareInterface;
+use DeepWebSolutions\Framework\Helpers\HooksHelpersTrait;
 
 /**
  * Class Hooks

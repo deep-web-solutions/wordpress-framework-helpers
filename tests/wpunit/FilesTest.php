@@ -11,7 +11,7 @@ use WpunitTester;
  * Tests for the file helpers.
  *
  * @since   1.0.0
- * @version 1.0.0
+ * @version 1.5.0
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.com>
  * @package DeepWebSolutions\WP-Framework\Tests\Helpers\Integration
  */
@@ -37,24 +37,24 @@ class FilesTest extends WPTestCase {
 	 * Test for the 'generate_full_path' helper.
 	 *
 	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @version 1.5.0
 	 */
 	public function test_generate_full_path() {
 		$rel_path = 'wp-content/plugins/dws-wp-helpers-test-plugin/src/includes/Paths.php';
 		$this->assertEquals(
-			Paths::get_file_name(),
+			Paths::get_path( true, true ),
 			Files::generate_full_path( ABSPATH, $rel_path )
 		);
 		$this->assertEquals(
-			Paths::get_file_name(),
+			Paths::get_path( true, true ),
 			Files::generate_full_path( ABSPATH, '/' . $rel_path )
 		);
 		$this->assertEquals(
-			Paths::get_file_name(),
+			Paths::get_path( true, true ),
 			Files::generate_full_path( ABSPATH, $rel_path . '/' )
 		);
 		$this->assertEquals(
-			Paths::get_file_name(),
+			Paths::get_path( true, true ),
 			Files::generate_full_path( ABSPATH, '/' . $rel_path . '/' )
 		);
 	}
@@ -63,46 +63,38 @@ class FilesTest extends WPTestCase {
 	 * Test for the 'has_extension' helper.
 	 *
 	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @version 1.5.0
 	 */
 	public function test_has_extension() {
-		$this->assertEquals( true, Files::has_extension( Paths::get_file_name(), 'php' ) );
-		$this->assertEquals( true, Files::has_extension( Paths::get_file_name(), '.php' ) );
-		$this->assertEquals( false, Files::has_extension( Paths::get_file_name(), 'anything else' ) );
+		$this->assertEquals( true, Files::has_extension( Paths::get_path( true, true ), 'php' ) );
+		$this->assertEquals( true, Files::has_extension( Paths::get_path( true, true ), '.php' ) );
+		$this->assertEquals( false, Files::has_extension( Paths::get_path( true, true ), 'anything else' ) );
 	}
 
 	/**
 	 * Test the 'PathsTrait' trait.
 	 *
 	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @version 1.5.0
 	 */
 	public function test_paths_trait() {
 		$rel_path = 'wp-content/plugins/dws-wp-helpers-test-plugin/src/includes/';
 		$this->assertEquals(
 			Files::generate_full_path( ABSPATH, $rel_path . 'Paths.php' ),
-			Paths::get_base_path( true )
+			Paths::get_path( true, true ),
 		);
 		$this->assertEquals(
-			Files::generate_full_path( ABSPATH, $rel_path ) . DIRECTORY_SEPARATOR,
-			Paths::get_base_path( false )
-		);
-		$this->assertEquals(
-			Files::generate_full_path( ABSPATH, $rel_path . 'assets' ) . DIRECTORY_SEPARATOR,
-			Paths::get_custom_base_path( 'assets' ),
+			Files::generate_full_path( ABSPATH, $rel_path ) . '/',
+			Paths::get_path(),
 		);
 
 		$this->assertEquals(
 			'/wp-content/plugins/dws-wp-helpers-test-plugin/src/includes/Paths.php',
-			Paths::get_base_relative_url( true ),
+			Paths::get_url( true, true ),
 		);
 		$this->assertEquals(
 			'/wp-content/plugins/dws-wp-helpers-test-plugin/src/includes/',
-			Paths::get_base_relative_url( false )
-		);
-		$this->assertEquals(
-			'/wp-content/plugins/dws-wp-helpers-test-plugin/src/includes/assets/',
-			Paths::get_custom_base_relative_url( 'assets' ),
+			Paths::get_url()
 		);
 	}
 

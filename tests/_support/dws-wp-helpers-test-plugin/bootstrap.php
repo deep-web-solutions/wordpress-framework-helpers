@@ -22,8 +22,7 @@
 
 namespace DeepWebSolutions\Plugins;
 
-use DeepWebSolutions\Framework\Helpers\WordPress\Request;
-use DeepWebSolutions\Framework\Helpers\WordPress\RequestTypesEnum;
+use DeepWebSolutions\Framework\Helpers\Request;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -52,23 +51,23 @@ add_action( 'init', function() {
 		'X-DWS-REQ-TYPE-FRONTEND' => 0,
 	);
 
-	if ( Request::is_type( RequestTypesEnum::ADMIN_REQUEST ) ) {
+	if ( Request::is_type( 'admin' ) ) {
 		$headers['X-DWS-REQ-TYPE-ADMIN'] = 1;
 	}
-	if ( Request::is_type( RequestTypesEnum::AJAX_REQUEST ) ) {
+	if ( Request::is_type( 'ajax' ) ) {
 		$headers['X-DWS-REQ-TYPE-AJAX'] = 1;
 	}
-	if ( Request::is_type( RequestTypesEnum::CRON_REQUEST ) ) {
+	if ( Request::is_type( 'cron' ) ) {
 		$headers['X-DWS-REQ-TYPE-CRON'] = 1;
 	}
-	if ( Request::is_type( RequestTypesEnum::REST_REQUEST ) ) {
+	if ( Request::is_type( 'rest' ) ) {
 		$headers['X-DWS-REQ-TYPE-REST'] = 1;
 	}
-	if ( Request::is_type( RequestTypesEnum::FRONTEND_REQUEST ) ) {
+	if ( Request::is_type( 'front' ) ) {
 		$headers['X-DWS-REQ-TYPE-FRONTEND'] = 1;
 	}
 
 	foreach ( $headers as $header => $value ) {
-		header( "{$header}: {$value}" );
+		header( "$header: $value" );
 	}
 } );

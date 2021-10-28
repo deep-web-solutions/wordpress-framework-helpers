@@ -3,15 +3,13 @@
 namespace DeepWebSolutions\Framework\Tests\Helpers\Unit;
 
 use _generated\UnitTesterActions;
-use Codeception\Actor;
 use Codeception\Lib\Actor\Shared\Comment;
 use DeepWebSolutions\Framework\Helpers\DataTypes\Objects;
 use DeepWebSolutions\Framework\Helpers\FileSystem\FilesystemAwareTrait;
-use DeepWebSolutions\Framework\Helpers\FileSystem\Objects\PathsTrait;
-use DeepWebSolutions\Framework\Helpers\FileSystem\Objects\ReflectionTrait;
+use DeepWebSolutions\Framework\Helpers\FileSystem\PathsTrait;
+use DeepWebSolutions\Framework\Helpers\ReflectionTrait;
 use DeepWebSolutions\Framework\Tests\Helpers\Support\Objects\AbstractObject;
 use DeepWebSolutions\Framework\Tests\Helpers\Support\Objects\ChildObject;
-use Prophecy\Prophet;
 use ReflectionClass;
 use UnitTester;
 
@@ -19,7 +17,7 @@ use UnitTester;
  * Tests for the object helpers.
  *
  * @since   1.0.0
- * @version 1.2.0
+ * @version 1.5.0
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.com>
  * @package DeepWebSolutions\WP-Framework\Tests\Helpers\Unit
  */
@@ -158,7 +156,7 @@ class ObjectsCest {
 	 * Test the 'ReflectionTrait' trait.
 	 *
 	 * @since   1.0.0
-	 * @version 1.2.0
+	 * @version 1.5.0
 	 *
 	 * @param   UnitTester  $I      Codeception actor instance.
 	 */
@@ -169,12 +167,8 @@ class ObjectsCest {
 		$I->assertEquals( ChildObject::class, $reflection_class->getName() );
 
 		$I->assertEquals( 'ChildObject', ChildObject::get_class_name() );
-		$I->assertEquals( '\\' . ChildObject::class, ChildObject::get_full_class_name() );
-
-		$I->assertEquals(
-			dirname( ABSPATH ) . str_replace( '/', DIRECTORY_SEPARATOR, '/_support/Objects/ChildObject.php' ),
-			ChildObject::get_file_name()
-		);
+		$I->assertEquals( '\\' . ChildObject::class, ChildObject::get_qualified_class_name() );
+		$I->assertEquals( ChildObject::class, ChildObject::get_qualified_class_name( false ) );
 	}
 
 	// endregion

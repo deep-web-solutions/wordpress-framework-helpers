@@ -1,6 +1,6 @@
 <?php
 
-use DeepWebSolutions\Framework\Helpers\WordPress\Users;
+use DeepWebSolutions\Framework\Helpers\Users;
 
 defined( 'ABSPATH' ) || exit;
 

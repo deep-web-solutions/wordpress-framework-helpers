@@ -3,7 +3,7 @@
 namespace DeepWebSolutions\Framework\Tests\Helpers\Integration;
 
 use Codeception\TestCase\WPTestCase;
-use DeepWebSolutions\Framework\Helpers\WordPress\Assets;
+use DeepWebSolutions\Framework\Helpers\Assets;
 use WpunitTester;
 
 /**

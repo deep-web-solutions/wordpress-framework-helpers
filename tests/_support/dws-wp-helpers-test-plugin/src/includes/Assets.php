@@ -2,8 +2,8 @@
 
 namespace DeepWebSolutions\Framework\Tests\Helpers;
 
-use DeepWebSolutions\Framework\Helpers\WordPress\Assets\AssetsHelpersAwareInterface;
-use DeepWebSolutions\Framework\Helpers\WordPress\Assets\AssetsHelpersTrait;
+use DeepWebSolutions\Framework\Helpers\AssetsHelpersAwareInterface;
+use DeepWebSolutions\Framework\Helpers\AssetsHelpersTrait;
 
 /**
  * Class Assets
