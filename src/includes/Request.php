@@ -1,6 +1,6 @@
 <?php
 
-namespace DeepWebSolutions\Framework\Helpers\WordPress;
+namespace DeepWebSolutions\Framework\Helpers;
 
 \defined( 'ABSPATH' ) || exit;
 
@@ -8,9 +8,9 @@ namespace DeepWebSolutions\Framework\Helpers\WordPress;
  * A collection of very useful WP request helpers to be used throughout the projects.
  *
  * @since   1.0.0
- * @version 1.4.3
+ * @version 1.5.0
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.com>
- * @package DeepWebSolutions\WP-Framework\Helpers\WordPress
+ * @package DeepWebSolutions\WP-Framework\Helpers
  */
 final class Request {
 	// region METHODS
@@ -19,7 +19,7 @@ final class Request {
 	 * A copy of WooCommerce's private built-in function for determining what type of request we're dealing with.
 	 *
 	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @version 1.5.0
 	 *
 	 * @see     WooCommerce::is_request()
 	 *
@@ -29,19 +29,19 @@ final class Request {
 	 */
 	public static function is_type( string $type ): bool {
 		switch ( $type ) {
-			case RequestTypesEnum::ADMIN_REQUEST:
+			case 'admin':
 				$result = \is_admin();
 				break;
-			case RequestTypesEnum::AJAX_REQUEST:
+			case 'ajax':
 				$result = \defined( 'DOING_AJAX' );
 				break;
-			case RequestTypesEnum::CRON_REQUEST:
+			case 'cron':
 				$result = \defined( 'DOING_CRON' );
 				break;
-			case RequestTypesEnum::REST_REQUEST:
+			case 'rest':
 				$result = self::is_rest_api_request();
 				break;
-			case RequestTypesEnum::FRONTEND_REQUEST:
+			case 'front':
 				$result = ( ! \is_admin() || \defined( 'DOING_AJAX' ) ) && ! \defined( 'DOING_CRON' ) && ! self::is_rest_api_request();
 				break;
 			default:

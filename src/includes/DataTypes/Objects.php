@@ -34,7 +34,6 @@ final class Objects {
 	 * @since   1.2.0
 	 * @version 1.2.0
 	 *
-	 * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
 	 * @SuppressWarnings(PHPMD.UndefinedVariable)
 	 *
 	 * @param   string  $trait          The trait to act upon.
@@ -69,7 +68,6 @@ final class Objects {
 	 * @since   1.2.0
 	 * @version 1.2.0
 	 *
-	 * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
 	 * @SuppressWarnings(PHPMD.UndefinedVariable)
 	 *
 	 * @param   string  $trait          The trait to act upon.
@@ -108,7 +106,6 @@ final class Objects {
 	 * @since   1.0.0
 	 * @version 1.2.0
 	 *
-	 * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
 	 * @SuppressWarnings(PHPMD.CyclomaticComplexity)
 	 * @SuppressWarnings(PHPMD.UndefinedVariable)
 	 *
@@ -154,7 +151,6 @@ final class Objects {
 	 * @since   1.0.0
 	 * @version 1.2.0
 	 *
-	 * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
 	 * @SuppressWarnings(PHPMD.UndefinedVariable)
 	 *
 	 * @param   object|string   $class          An object (class instance) or a string (class name).
@@ -195,8 +191,6 @@ final class Objects {
 	 * @since   1.0.0
 	 * @version 1.2.0
 	 *
-	 * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
-	 *
 	 * @param   string              $trait          Trait to search for.
 	 * @param   object|string       $class          An object (class instance) or a string (class name) to investigate.
 	 * @param   bool                $autoload       Whether to allow this function to load the class automatically through the __autoload() magic method.
@@ -213,8 +207,6 @@ final class Objects {
 	 *
 	 * @since   1.0.0
 	 * @version 1.0.0
-	 *
-	 * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
 	 *
 	 * @param   string              $trait          Trait to search for.
 	 * @param   object|string       $class          An object (class instance) or a string (class name) to investigate.

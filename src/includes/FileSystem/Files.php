@@ -10,7 +10,7 @@ use DeepWebSolutions\Framework\Helpers\DataTypes\Strings;
  * A collection of very useful file system helpers to be used throughout the projects.
  *
  * @since   1.0.0
- * @version 1.4.6
+ * @version 1.5.0
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.com>
  * @package DeepWebSolutions\WP-Framework\Helpers\FileSystem
  */
@@ -19,7 +19,7 @@ final class Files {
 	 * Append two halves of a full-path in a way that doesn't cause double slashes.
 	 *
 	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @version 1.5.0
 	 *
 	 * @param   string  $absolute   The absolute path to prepend.
 	 * @param   string  $relative   The relative path to append to the absolute one.
@@ -30,7 +30,7 @@ final class Files {
 		$absolute = \trailingslashit( \trim( $absolute ) );
 		$relative = \trim( $relative, " \t\n\r\0\x0B/\\" ); // forward and backward slashes added
 
-		return \str_replace( '/', DIRECTORY_SEPARATOR, $absolute . $relative );
+		return \wp_normalize_path( $absolute . $relative );
 	}
 
 	/**

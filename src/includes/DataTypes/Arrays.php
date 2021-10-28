@@ -144,8 +144,6 @@ final class Arrays {
 	 * @since   1.0.0
 	 * @version 1.4.0
 	 *
-	 * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
-	 *
 	 * @param   array           $array      Array to search through.
 	 * @param   mixed           $needle     The value to search for.
 	 * @param   callable|null   $callback   Optional callback to run the value through before needle comparison.
@@ -172,8 +170,6 @@ final class Arrays {
 	 *
 	 * @since   1.0.0
 	 * @version 1.0.0
-	 *
-	 * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
 	 *
 	 * @param   array           $array      Array whose keys to search through.
 	 * @param   mixed           $needle     The value to search for.

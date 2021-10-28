@@ -2,7 +2,7 @@
 
 namespace DeepWebSolutions\Framework\Helpers\FileSystem;
 
-use DeepWebSolutions\Framework\Helpers\WordPress\Request;
+use DeepWebSolutions\Framework\Helpers\Request;
 
 \defined( 'ABSPATH' ) || exit;
 
