@@ -17,16 +17,10 @@ use DeepWebSolutions\Framework\Helpers\DataTypes\Strings;
  */
 trait HooksHelpersTrait {
 	/**
-	 * Returns a meaningful, hopefully unique, tag for an internal hook.
+	 * {@inheritDoc}
 	 *
 	 * @since   1.0.0
-	 * @version 1.4.1
-	 *
-	 * @param   string              $name   The actual descriptor of the hook's purpose.
-	 * @param   string|string[]     $extra  Further descriptor of the hook's purpose.
-	 * @param   string              $root   Prepended to all hooks inside the same class.
-	 *
-	 * @return  string
+	 * @version 1.5.0
 	 */
 	public function get_hook_tag( string $name, $extra = array(), string $root = 'dws_framework_helpers' ): string {
 		return Strings::to_safe_string(

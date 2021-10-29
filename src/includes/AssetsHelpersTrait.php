@@ -17,16 +17,10 @@ use DeepWebSolutions\Framework\Helpers\DataTypes\Strings;
  */
 trait AssetsHelpersTrait {
 	/**
-	 * Returns a meaningful, hopefully unique, handle for an asset.
+	 * {@inheritDoc}
 	 *
 	 * @since   1.0.0
-	 * @version 1.0.0
-	 *
-	 * @param   string              $name   The actual descriptor of the asset's purpose. Leave blank for default.
-	 * @param   string|string[]     $extra  Further descriptor of the asset's purpose.
-	 * @param   string              $root   Prepended to all asset handles inside the same class.
-	 *
-	 * @return  string
+	 * @version 1.5.0
 	 */
 	public function get_asset_handle( string $name = '', $extra = array(), string $root = 'dws-framework-helpers' ): string {
 		return Strings::to_safe_string(
