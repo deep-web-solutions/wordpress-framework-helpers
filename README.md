@@ -4,7 +4,7 @@
 **Requires at least:** 5.5  
 **Tested up to:** 5.7  
 **Requires PHP:** 7.4  
-**Stable tag:** 1.5.0  
+**Stable tag:** 1.5.1  
 **License:** GPLv3 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-3.0.html  
 
@@ -58,7 +58,7 @@ Hopefully yes, probably not. If you found any problems, please raise an issue on
 
 ## Changelog
 
-### 1.4.6, 1.5.0 (October 27th, October 28th, 2021)
+### 1.4.6, 1.5.0, 1.5.1 (October 27th, October 28th, October 29th, 2021)
 * Users::has_roles default logical operator is now 'or'.
 * Users::has_roles and Users::has_capabilities now also accept a string as a first parameter.
 * Tweaked Strings::maybe_cast for better compatibility with humbug/php-scoper.
@@ -67,6 +67,7 @@ Hopefully yes, probably not. If you found any problems, please raise an issue on
 * RequestTypesEnum was removed. Use strings.
 * Moved the WordPress subnamespace one level up.
 * Asset handle and hook tag extras can now be a single string as well.
+* Enhanced the asset helpers trait.
 
 ### 1.4.2, 1.4.3, 1.4.4, 1.4.5 (September 9th, September 15th, September 18th, September 23rd, 2021)
 * Special handling for trying to cast a null to boolean. Now it will return the default instead of false.
