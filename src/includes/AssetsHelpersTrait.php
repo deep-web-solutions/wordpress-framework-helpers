@@ -13,7 +13,7 @@ use DeepWebSolutions\Framework\Helpers\FileSystem\FilesystemAwareTrait;
  * Basic implementation of the assets-helpers-aware interface.
  *
  * @since   1.0.0
- * @version 1.5.1
+ * @version 1.5.2
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.com>
  * @package DeepWebSolutions\WP-Framework\Helpers
  */
@@ -55,7 +55,7 @@ trait AssetsHelpersTrait {
 	 * Returns the path to a minified version of a given asset, if it exists.
 	 *
 	 * @since   1.5.1
-	 * @version 1.5.1
+	 * @version 1.5.2
 	 *
 	 * @param   string  $relative_path  Path of the asset relative to the WordPress root directory.
 	 * @param   string  $constant_name  Constant which if set and true, the unminified path will always be returned.
@@ -68,9 +68,9 @@ trait AssetsHelpersTrait {
 			$wp_filesystem = $this->get_wp_filesystem();
 			if ( ! \is_null( $wp_filesystem ) ) {
 				$abs_path  = Files::generate_full_path( $wp_filesystem->abspath(), $relative_path );
-				$extension = \pathinfo( $abs_path, PATHINFO_EXTENSION );
+				$extension = Strings::maybe_prefix( \pathinfo( $abs_path, PATHINFO_EXTENSION ), '.' ); // pathinfo returns the extension without the dot
 
-				$minified_rel_path = Strings::maybe_suffix( Strings::maybe_unsuffix( $relative_path, $extension ), "$minified_suffix.$extension" );
+				$minified_rel_path = Strings::maybe_suffix( Strings::maybe_unsuffix( $relative_path, $extension ), $minified_suffix . $extension );
 				$minified_abs_path = Files::generate_full_path( $wp_filesystem->abspath(), $minified_rel_path );
 
 				if ( $wp_filesystem->is_file( $minified_abs_path ) ) {
