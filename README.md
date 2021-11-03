@@ -2,9 +2,9 @@
 
 **Contributors:** Antonius Hegyes, Deep Web Solutions GmbH  
 **Requires at least:** 5.5  
-**Tested up to:** 5.7  
+**Tested up to:** 5.8  
 **Requires PHP:** 7.4  
-**Stable tag:** 1.5.2  
+**Stable tag:** 1.5.3  
 **License:** GPLv3 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-3.0.html  
 
@@ -58,10 +58,10 @@ Hopefully yes, probably not. If you found any problems, please raise an issue on
 
 ## Changelog
 
-### 1.4.6, 1.5.0, 1.5.1, 1.5.2 (October 27th, October 28th, October 29th, November 1st, 2021)
+### 1.4.6, 1.5.0, 1.5.1, 1.5.2 , 1.5.3(October 27th, October 28th, October 29th, November 1st, November 3rd, 2021)
 * Users::has_roles default logical operator is now 'or'.
 * Users::has_roles and Users::has_capabilities now also accept a string as a first parameter.
-* Tweaked Strings::maybe_cast for better compatibility with humbug/php-scoper.
+* Fixed Strings::maybe_cast wrong placement of parenthesis.
 * Files::has_extension now uses the newly-introduced Strings::maybe_prefix helper.
 * Make use of \wp_normalize_path for better support of cross-OS website migrations.
 * RequestTypesEnum was removed. Use strings.
