@@ -10,7 +10,7 @@ namespace DeepWebSolutions\Framework\Helpers\DataTypes;
  * @SuppressWarnings(PHPMD.TooManyPublicMethods)
  *
  * @since   1.0.0
- * @version 1.5.3
+ * @version 1.5.4
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.com>
  * @package DeepWebSolutions\WP-Framework\Helpers\DataTypes
  */
@@ -35,7 +35,7 @@ final class Strings {
 	 *
 	 * @since   1.3.1
 	 * @since   1.4.0   Moved to the Strings class.
-	 * @version 1.5.3
+	 * @version 1.5.4
 	 *
 	 * @param   mixed           $string     Variable to cast.
 	 * @param   string|null     $default    The default value to return if all fails.
@@ -43,7 +43,9 @@ final class Strings {
 	 * @return  string|null
 	 */
 	public static function maybe_cast( $string, ?string $default = null ): ?string {
-		if ( ! \is_null( self::validate( $string ) ) ) {
+		if ( \is_null( $string ) ) {
+			return $default;
+		} elseif ( ! \is_null( self::validate( $string ) ) ) {
 			return $string;
 		} elseif ( \is_null( Arrays::validate( $string ) ) && ( \is_null( Objects::validate( $string ) ) || \method_exists( $string, '__toString' ) ) ) {
 			return \strval( $string );
