@@ -1,6 +1,6 @@
 {
   "name": "dws-wp-framework-helpers",
-  "version": "1.5.4",
+  "version": "1.5.5",
   "title": "DWS WordPress Framework - Helpers",
   "author": "Deep Web Solutions GmbH",
   "homepage": "https://github.com/deep-web-solutions/wordpress-framework-helpers#readme",
@@ -13,9 +13,9 @@
     "url": "https://github.com/deep-web-solutions/wordpress-framework-helpers/issues"
   },
   "devDependencies": {
+    "@lodder/time-grunt": "^4.0.0",
     "grunt": "^1.3.0",
     "grunt-text-replace": "^0.4.0",
-    "load-grunt-tasks": "^5.1.0",
-    "@lodder/time-grunt": "^4.0.0"
+    "load-grunt-tasks": "^5.1.0"
   }
 }

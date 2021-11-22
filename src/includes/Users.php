@@ -10,7 +10,7 @@ use DeepWebSolutions\Framework\Helpers\DataTypes\Booleans;
  * A collection of very useful WP users helpers to be used throughout the projects.
  *
  * @since   1.0.0
- * @version 1.4.6
+ * @version 1.5.5
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.com>
  * @package DeepWebSolutions\WP-Framework\Helpers
  */
@@ -19,15 +19,22 @@ final class Users {
 	 * Attempts to retrieve a WP_User instance by a user's ID.
 	 *
 	 * @since   1.4.0
-	 * @version 1.4.0
+	 * @version 1.5.5
 	 *
-	 * @param   int|null    $user_id    The ID of the user to retrieve. Defaults to the currently logged-in user.
+	 * @param   int|null    $user_id    The ID of the user to retrieve. Defaults to the currently logged-in user or the guest user.
 	 *
 	 * @return  \WP_User|null
 	 */
 	public static function get( ?int $user_id = null ): ?\WP_User {
-		$user = \is_null( $user_id ) ? \wp_get_current_user() : \get_user_by( 'id', $user_id );
-		return ( $user instanceof \WP_User && $user->exists() ) ? $user : null;
+		if ( \is_null( $user_id ) ) {
+			$user = \wp_get_current_user();
+		} elseif ( 0 === $user_id ) {
+			$user = new \WP_User( $user_id );
+		} else {
+			$user = \get_user_by( 'id', $user_id );
+		}
+
+		return $user instanceof \WP_User ? $user : null;
 	}
 
 	/**
