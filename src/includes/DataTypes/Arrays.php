@@ -8,7 +8,7 @@ namespace DeepWebSolutions\Framework\Helpers\DataTypes;
  * A collection of very useful array manipulation helpers to be used throughout the projects.
  *
  * @since   1.0.0
- * @version 1.4.0
+ * @version 1.5.6
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.com>
  * @package DeepWebSolutions\WP-Framework\Helpers\DataTypes
  */
@@ -109,6 +109,26 @@ final class Arrays {
 	 */
 	public static function has_string_keys( array $array ): bool {
 		return \count( \array_filter( \array_keys( $array ), '\is_string' ) ) > 0;
+	}
+
+	/**
+	 * Checks whether a given array is a list or not. An array is considered a list if its keys consist of consecutive numbers from 0 to count($array)-1.
+	 *
+	 * @since   1.5.6
+	 * @version 1.5.6
+	 *
+	 * @see     https://www.php.net/manual/en/function.array-is-list.php#126574
+	 *
+	 * @param   array   $array  The array to check.
+	 *
+	 * @return  bool    True if the array is a list, false otherwise.
+	 */
+	public static function is_list( array $array ): bool {
+		if ( \PHP_VERSION_ID >= 80100 && \function_exists( '\array_is_list' ) ) {
+			return \array_is_list( $array );
+		}
+
+		return array() === $array || ( \array_keys( $array ) === \range( 0, \count( $array ) - 1 ) );
 	}
 
 	/**

@@ -4,7 +4,7 @@
 **Requires at least:** 5.5  
 **Tested up to:** 5.8  
 **Requires PHP:** 7.4  
-**Stable tag:** 1.5.5  
+**Stable tag:** 1.5.6  
 **License:** GPLv3 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-3.0.html  
 
@@ -58,9 +58,10 @@ Hopefully yes, probably not. If you found any problems, please raise an issue on
 
 ## Changelog
 
-### 1.5.4, 1.5.5 (November 16th, November 22nd, 2021)
+### 1.5.4, 1.5.5, 1.5.6 (November 16th, November 22nd, November 24th 2021)
 * Strings::maybe_cast returns default if string is null.
 * Users::get supports guests.
+* Added new polyfill Arrays::is_list.
 
 ### 1.4.6, 1.5.0, 1.5.1, 1.5.2 , 1.5.3(October 27th, October 28th, October 29th, November 1st, November 3rd, 2021)
 * Users::has_roles default logical operator is now 'or'.
