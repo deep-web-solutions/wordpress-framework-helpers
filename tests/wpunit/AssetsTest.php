@@ -10,7 +10,7 @@ use WpunitTester;
  * Tests for the WP asset helpers.
  *
  * @since   1.0.0
- * @version 1.0.0
+ * @version 1.6.0
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.com>
  * @package DeepWebSolutions\WP-Framework\Tests\Helpers\Integration
  */
@@ -31,26 +31,6 @@ class AssetsTest extends WPTestCase {
 	// endregion
 
 	// region TESTS
-
-	/**
-	 * Test for the 'wrap_string_in_style_tags' helper.
-	 *
-	 * @since   1.0.0
-	 * @version 1.0.0
-	 */
-	public function test_wrap_string_in_style_tags() {
-		$this->assertEquals( "<style>.test{}</style>", Assets::wrap_string_in_style_tags( '.test{}' ) ); // phpcs:ignore
-	}
-
-	/**
-	 * Test for the 'wrap_string_in_script_tags' helper.
-	 *
-	 * @since   1.0.0
-	 * @version 1.0.0
-	 */
-	public function test_wrap_string_in_script_tags() {
-		$this->assertEquals( "<script type='text/javascript'>var test= '';</script>", Assets::wrap_string_in_script_tags( "var test= '';" ) );
-	}
 
 	/**
 	 * Test for the 'maybe_get_minified_suffix' helper.

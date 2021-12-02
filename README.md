@@ -58,6 +58,10 @@ Hopefully yes, probably not. If you found any problems, please raise an issue on
 
 ## Changelog
 
+### 1.6.0 (December 2nd, 2021)
+* Removed Assets::wrap_string_in_style_tags and Assets::wrap_string_in_script_tags helpers.
+* Added methods Assets::maybe_get_minified_path and Assets::maybe_get_mtime_version.
+
 ### 1.5.4, 1.5.5, 1.5.6 (November 16th, November 22nd, November 24th 2021)
 * Strings::maybe_cast returns default if string is null.
 * Users::get supports guests.
