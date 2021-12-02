@@ -44,7 +44,7 @@
     "codeception/module-cli": "^1.1",
     "codeception/util-universalframework": "^1.0",
     "hoa/console": "^3.17",
-    "vlucas/phpdotenv": "^5.3"
+    "vlucas/phpdotenv": "^5.4"
   },
 
   "autoload": {

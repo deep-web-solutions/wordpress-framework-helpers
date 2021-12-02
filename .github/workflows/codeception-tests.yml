@@ -33,8 +33,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php: [ 7.4, 8.0 ]
-        WP_VERSION: [ 5.5, latest, nightly ]
+        php: [ 7.4, 8.0, 8.1 ]
+        WP_VERSION: [ latest, nightly ]
+        include:
+          - php: 7.4
+            WP_VERSION: 5.5
 
     runs-on: ubuntu-latest
 
