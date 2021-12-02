@@ -1,6 +1,7 @@
 {
     "classes": [
         "WP_Filesystem_Base",
+        "WP_Filesystem_Direct",
         "WP_User",
         "WP_Session_Tokens"
     ],
@@ -12,7 +13,7 @@
         "wp_normalize_path",
         "site_url",
         "request_filesystem_credentials",
-        "wp_filesystem",
+        "WP_Filesystem",
         "remove_filter",
         "current_filter",
         "current_action",
