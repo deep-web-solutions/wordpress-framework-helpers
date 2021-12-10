@@ -4,7 +4,7 @@
 **Requires at least:** 5.5  
 **Tested up to:** 5.8  
 **Requires PHP:** 7.4  
-**Stable tag:** 1.6.0  
+**Stable tag:** 1.6.1  
 **License:** GPLv3 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-3.0.html  
 
@@ -58,9 +58,10 @@ Hopefully yes, probably not. If you found any problems, please raise an issue on
 
 ## Changelog
 
-### 1.6.0 (December 2nd, 2021)
+### 1.6.0, 1.6.1 (December 2nd, December 10th, 2021)
 * Removed Assets::wrap_string_in_style_tags and Assets::wrap_string_in_script_tags helpers.
 * Added methods Assets::maybe_get_minified_path and Assets::maybe_get_mtime_version.
+* Better filesystem detection for assets helpers.
 
 ### 1.5.4, 1.5.5, 1.5.6 (November 16th, November 22nd, November 24th 2021)
 * Strings::maybe_cast returns default if string is null.
