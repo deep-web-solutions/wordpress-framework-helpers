@@ -58,7 +58,7 @@ Hopefully yes, probably not. If you found any problems, please raise an issue on
 
 ## Changelog
 
-### 1.7.0 (January 14th, 2022)
+### 1.7.0 (January 13th, 2022)
 * Updated hooks to conform to new format in the rest of the framework.
 * Renamed `WP_Users::logout_user` to `WP_Users::logout` for consistency.
 * Improved upon the `Request::is_type` method inline with WC deprecations in 6.0.
