@@ -65,6 +65,9 @@ Hopefully yes, probably not. If you found any problems, please raise an issue on
 * Introduced a new helper class for working with constants.
 * Enhanced the `Misc::wp_parse_args_recursive` helper.
 * Enhanced the `Misc::get_midnight_unix_timestamp` helper.
+* `AssetsHelpersTrait` no longer automatically includes the `FilesystemAwareTrait`.
+* Inverted the parameter order of `Strings::replace_placeholders` for consistency.
+* Better handling of error for the `Objects` helpers.
 
 ### 1.6.0, 1.6.1 (December 2nd, December 10th, 2021)
 * Removed `Assets::wrap_string_in_style_tags` and `Assets::wrap_string_in_script_tags helpers`.

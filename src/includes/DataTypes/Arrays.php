@@ -13,6 +13,30 @@ namespace DeepWebSolutions\Framework\Helpers\DataTypes;
  * @package DeepWebSolutions\WP-Framework\Helpers\DataTypes
  */
 final class Arrays {
+	// region POLYFILLS
+
+	/**
+	 * Checks whether a given array is a list or not. An array is considered a list if its keys consist of consecutive numbers from 0 to count($array)-1.
+	 *
+	 * @since   1.5.6
+	 * @version 1.5.6
+	 *
+	 * @see     https://www.php.net/manual/en/function.array-is-list.php#126574
+	 *
+	 * @param   array   $array  The array to check.
+	 *
+	 * @return  bool    True if the array is a list, false otherwise.
+	 */
+	public static function is_list( array $array ): bool {
+		if ( \PHP_VERSION_ID >= 80100 && \function_exists( '\array_is_list' ) ) {
+			return \array_is_list( $array );
+		}
+
+		return array() === $array || ( \array_keys( $array ) === \range( 0, \count( $array ) - 1 ) );
+	}
+
+	// endregion
+
 	/**
 	 * Returns a given variable if it is an array or a default value if not.
 	 *
@@ -20,7 +44,7 @@ final class Arrays {
 	 * @version 1.4.0
 	 *
 	 * @param   mixed       $array      Variable to check.
-	 * @param   array|null  $default    The default value to return if check fails. By default null.
+	 * @param   array|null  $default    The default value to return if check fails. By default, null.
 	 *
 	 * @return  array|null
 	 */
@@ -35,7 +59,7 @@ final class Arrays {
 	 * @version 1.4.0
 	 *
 	 * @param   mixed       $array      Variable to cast.
-	 * @param   array|null  $default    The default value to return if all fails. By default null.
+	 * @param   array|null  $default    The default value to return if all fails. By default, null.
 	 *
 	 * @return  array|null
 	 */
@@ -109,26 +133,6 @@ final class Arrays {
 	 */
 	public static function has_string_keys( array $array ): bool {
 		return \count( \array_filter( \array_keys( $array ), '\is_string' ) ) > 0;
-	}
-
-	/**
-	 * Checks whether a given array is a list or not. An array is considered a list if its keys consist of consecutive numbers from 0 to count($array)-1.
-	 *
-	 * @since   1.5.6
-	 * @version 1.5.6
-	 *
-	 * @see     https://www.php.net/manual/en/function.array-is-list.php#126574
-	 *
-	 * @param   array   $array  The array to check.
-	 *
-	 * @return  bool    True if the array is a list, false otherwise.
-	 */
-	public static function is_list( array $array ): bool {
-		if ( \PHP_VERSION_ID >= 80100 && \function_exists( '\array_is_list' ) ) {
-			return \array_is_list( $array );
-		}
-
-		return array() === $array || ( \array_keys( $array ) === \range( 0, \count( $array ) - 1 ) );
 	}
 
 	/**

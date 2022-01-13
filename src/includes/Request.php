@@ -2,6 +2,8 @@
 
 namespace DeepWebSolutions\Framework\Helpers;
 
+use DeepWebSolutions\Framework\Helpers\DataTypes\Strings;
+
 \defined( 'ABSPATH' ) || exit;
 
 /**
@@ -92,7 +94,7 @@ final class Request {
 			}
 
 			$rest_prefix         = \trailingslashit( \rest_get_url_prefix() );
-			$is_rest_api_request = ( false !== \strpos( $_SERVER['REQUEST_URI'], $rest_prefix ) ); // phpcs:disable WordPress.Security.ValidatedSanitizedInput
+			$is_rest_api_request = Strings::contains( $_SERVER['REQUEST_URI'], $rest_prefix ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
 
 			return $is_rest_api_request || ( ( \wp_is_jsonp_request() || \wp_is_json_request() ) && ! \wp_doing_ajax() );
 		}

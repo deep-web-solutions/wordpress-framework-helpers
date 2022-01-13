@@ -4,7 +4,6 @@ namespace DeepWebSolutions\Framework\Helpers;
 
 use DeepWebSolutions\Framework\Helpers\DataTypes\Arrays;
 use DeepWebSolutions\Framework\Helpers\DataTypes\Strings;
-use DeepWebSolutions\Framework\Helpers\FileSystem\FilesystemAwareTrait;
 
 \defined( 'ABSPATH' ) || exit;
 
@@ -12,19 +11,11 @@ use DeepWebSolutions\Framework\Helpers\FileSystem\FilesystemAwareTrait;
  * Basic implementation of the assets-helpers-aware interface.
  *
  * @since   1.0.0
- * @version 1.5.2
+ * @version 1.7.0
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.com>
  * @package DeepWebSolutions\WP-Framework\Helpers
  */
 trait AssetsHelpersTrait {
-	// region TRAITS
-
-	use FilesystemAwareTrait;
-
-	// endregion
-
-	// region METHODS
-
 	/**
 	 * {@inheritDoc}
 	 *
@@ -49,6 +40,4 @@ trait AssetsHelpersTrait {
 			)
 		);
 	}
-
-	// endregion
 }

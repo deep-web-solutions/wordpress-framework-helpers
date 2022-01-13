@@ -55,9 +55,8 @@ final class Misc {
 		$timezone_string = $timezone_string ?: \wp_timezone_string();
 
 		try {
-			$current_datetime  = new \DateTimeImmutable( 'now', new \DateTimeZone( $timezone_string ) );
-			$midnight_datetime = $current_datetime->setTime( 0, 0 );
-			return $midnight_datetime->getTimestamp() + $midnight_datetime->getOffset();
+			$midnight_datetime = new \DateTimeImmutable( 'today midnight', new \DateTimeZone( $timezone_string ) );
+			return $midnight_datetime->getTimestamp();
 		} catch ( \Exception $e ) {
 			return \strtotime( \wp_sprintf( 'today midnight %s', $timezone_string ) )
 				?: \strtotime( 'today midnight' );

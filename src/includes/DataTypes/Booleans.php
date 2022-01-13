@@ -50,7 +50,7 @@ final class Booleans {
 	}
 
 	/**
-	 * Attempts to cast a variable from an input stream into a boolean.
+	 * Attempts to cast a variable from an input stream into a boolean value.
 	 *
 	 * @since   1.0.0
 	 * @since   1.4.0   Moved to the Booleans class.
@@ -72,7 +72,7 @@ final class Booleans {
 	}
 
 	/**
-	 * Attempts to resolve a potential callable to a boolean.
+	 * Attempts to resolve a potential callable to a boolean value.
 	 *
 	 * @since   1.3.0
 	 * @since   1.4.0   Moved to the Booleans class.

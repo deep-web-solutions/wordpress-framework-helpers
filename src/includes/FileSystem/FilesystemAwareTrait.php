@@ -38,13 +38,13 @@ trait FilesystemAwareTrait {
 		$credentials = \request_filesystem_credentials( $form_url, '', false, $context, $extra_fields );
 
 		if ( false === $credentials ) {
-			if ( Request::has_debug() ) {
-				\error_log( 'Failed to retrieve WP Files credentials.' ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions
+			if ( true === Request::has_debug() ) {
+				\error_log( 'Failed to retrieve WP file system credentials.' ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions
 			}
 			return null;
-		} elseif ( ! \WP_Filesystem( $credentials ) ) {
-			if ( Request::has_debug() ) {
-				\error_log( 'Failed to connect to the WP Files.' ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions
+		} elseif ( true !== \WP_Filesystem( $credentials ) ) {
+			if ( true === Request::has_debug() ) {
+				\error_log( 'Failed to connect to the WP file system.' ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions
 			}
 			\request_filesystem_credentials( $form_url, '', true, $context, $extra_fields );
 			return null;

@@ -11,16 +11,18 @@ use DeepWebSolutions\Framework\Helpers\FileSystem\Files;
  * A collection of very useful WP asset handling helpers to be used throughout the projects.
  *
  * @since   1.0.0
- * @version 1.6.1
+ * @version 1.7.0
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.com>
  * @package DeepWebSolutions\WP-Framework\Helpers
  */
 final class Assets {
+	// region METHODS
+
 	/**
 	 * Returns the path to a minified version of a given asset, if it exists.
 	 *
 	 * @since   1.6.0
-	 * @version 1.6.1
+	 * @version 1.7.0
 	 *
 	 * @param   string                  $relative_path  Path of the asset relative to the WordPress root directory.
 	 * @param   string                  $constant_name  Constant which, if set and true, the unminified path will always be returned.
@@ -32,7 +34,7 @@ final class Assets {
 		$maybe_minified_path = $relative_path;
 		$minified_suffix     = self::maybe_get_minified_suffix( $constant_name );
 
-		if ( ! empty( $minified_suffix ) && false === \strpos( $relative_path, $minified_suffix ) ) {
+		if ( ! empty( $minified_suffix ) && true !== Strings::contains( $relative_path, $minified_suffix ) ) {
 			$wp_filesystem = $wp_filesystem ?? self::resolve_filesystem();
 
 			if ( $wp_filesystem instanceof \WP_Filesystem_Base ) {
@@ -42,7 +44,7 @@ final class Assets {
 				$minified_rel_path = Strings::maybe_suffix( Strings::maybe_unsuffix( $relative_path, $extension ), $minified_suffix . $extension );
 				$minified_abs_path = Files::generate_full_path( $wp_filesystem->abspath(), $minified_rel_path );
 
-				if ( $wp_filesystem->is_file( $minified_abs_path ) ) {
+				if ( true === $wp_filesystem->is_file( $minified_abs_path ) ) {
 					$maybe_minified_path = $minified_rel_path;
 				}
 			}
@@ -79,15 +81,19 @@ final class Assets {
 	 * Returns the assets suffix which determines whether assets should be enqueued minified or not.
 	 *
 	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @version 1.7.0
 	 *
 	 * @param   string  $constant_name  The name of the constant to check for truthful values in case the assets should be loaded in a minified state.
 	 *
 	 * @return  string
 	 */
 	public static function maybe_get_minified_suffix( string $constant_name = 'SCRIPT_DEBUG' ): string {
-		return Request::has_debug( $constant_name ) ? '' : '.min';
+		return Constants::is_true( $constant_name ) ? '' : '.min';
 	}
+
+	// endregion
+
+	// region HELPERS
 
 	/**
 	 * Attempts to return a WP Filesystem object given a potentially null one.
@@ -106,4 +112,6 @@ final class Assets {
 
 		return $wp_filesystem instanceof \WP_Filesystem_Base ? $wp_filesystem : null;
 	}
+
+	// endregion
 }

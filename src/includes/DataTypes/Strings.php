@@ -10,11 +10,72 @@ namespace DeepWebSolutions\Framework\Helpers\DataTypes;
  * @SuppressWarnings(PHPMD.TooManyPublicMethods)
  *
  * @since   1.0.0
- * @version 1.5.4
+ * @version 1.7.0
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.com>
  * @package DeepWebSolutions\WP-Framework\Helpers\DataTypes
  */
 final class Strings {
+	// region POLYFILLS
+
+	/**
+	 * Checks whether a string starts in a particular way or not.
+	 *
+	 * @since   1.0.0
+	 * @version 1.7.0
+	 *
+	 * @param   string  $haystack   String to check.
+	 * @param   string  $needle     Beginning to check against.
+	 *
+	 * @return  bool    True if the string starts as expected, false otherwise.
+	 */
+	public static function starts_with( string $haystack, string $needle ): bool {
+		if ( \PHP_VERSION_ID >= 80000 && \function_exists( '\str_starts_with' ) ) {
+			\str_starts_with( $haystack, $needle );
+		}
+
+		return 0 === \strncmp( $haystack, $needle, \strlen( $needle ) );
+	}
+
+	/**
+	 * Checks whether a string end in a particular way or not.
+	 *
+	 * @since   1.0.0
+	 * @version 1.7.0
+	 *
+	 * @param   string  $haystack   String to check.
+	 * @param   string  $needle     Ending to check against.
+	 *
+	 * @return  bool    True if the string ends as expected, false otherwise.
+	 */
+	public static function ends_with( string $haystack, string $needle ): bool {
+		if ( \PHP_VERSION_ID >= 80000 && \function_exists( '\str_ends_with' ) ) {
+			return \str_ends_with( $haystack, $needle );
+		}
+
+		return '' === $needle || ( '' !== $haystack && 0 === \substr_compare( $haystack, $needle, -\strlen( $needle ) ) );
+	}
+
+	/**
+	 * Checks whether a given string contains another smaller string or not.
+	 *
+	 * @since   1.7.0
+	 * @version 1.7.0
+	 *
+	 * @param   string  $haystack   String to check.
+	 * @param   string  $needle     Substring to search for.
+	 *
+	 * @return  bool
+	 */
+	public static function contains( string $haystack, string $needle ): bool {
+		if ( \PHP_VERSION_ID >= 80000 && \function_exists( '\str_contains' ) ) {
+			return \str_contains( $haystack, $needle );
+		}
+
+		return '' === $needle || false !== \strpos( $haystack, $needle );
+	}
+
+	// endregion
+
 	/**
 	 * Returns a given variable if it is a string or a default value if not.
 	 *
@@ -94,7 +155,7 @@ final class Strings {
 	}
 
 	/**
-	 * Validates a string against a safelist.
+	 * Validates a string against a safe-list.
 	 *
 	 * @since   1.4.0
 	 * @version 1.4.0
@@ -113,44 +174,6 @@ final class Strings {
 		}
 
 		return $is_allowed ? $string : $default;
-	}
-
-	/**
-	 * Checks whether a string starts in a particular way or not.
-	 *
-	 * @since   1.0.0
-	 * @version 1.0.0
-	 *
-	 * @param   string  $haystack   String to check.
-	 * @param   string  $needle     Beginning to check against.
-	 *
-	 * @return  bool    True if the string starts as expected, false otherwise.
-	 */
-	public static function starts_with( string $haystack, string $needle ): bool {
-		if ( \PHP_VERSION_ID >= 80000 && \function_exists( '\str_starts_with' ) ) {
-			\str_starts_with( $haystack, $needle );
-		}
-
-		return \substr_compare( $haystack, $needle, 0, \strlen( $needle ) ) === 0;
-	}
-
-	/**
-	 * Checks whether a string end in a particular way or not.
-	 *
-	 * @since   1.0.0
-	 * @version 1.0.0
-	 *
-	 * @param   string  $haystack   String to check.
-	 * @param   string  $needle     Ending to check against.
-	 *
-	 * @return  bool    True if the string ends as expected, false otherwise.
-	 */
-	public static function ends_with( string $haystack, string $needle ): bool {
-		if ( \PHP_VERSION_ID >= 80000 && \function_exists( '\str_ends_with' ) ) {
-			return \str_ends_with( $haystack, $needle );
-		}
-
-		return '' === $needle || \substr_compare( $haystack, $needle, -\strlen( $needle ) ) === 0;
 	}
 
 	/**
@@ -218,14 +241,14 @@ final class Strings {
 	 * inside the given string parameter.
 	 *
 	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @version 1.7.0
 	 *
-	 * @param   array   $placeholders   The values with which the placeholders must be replaced: {placeholder} => {value}.
 	 * @param   string  $string         The string containing the placeholders.
+	 * @param   array   $placeholders   The values with which the placeholders must be replaced: {placeholder} => {value}.
 	 *
 	 * @return  string  Processed string with all the placeholders replaced.
 	 */
-	public static function replace_placeholders( array $placeholders, string $string ): string {
+	public static function replace_placeholders( string $string, array $placeholders ): string {
 		return \str_replace( \array_keys( $placeholders ), \array_values( $placeholders ), $string );
 	}
 
@@ -241,7 +264,7 @@ final class Strings {
 	 * @return  string
 	 */
 	public static function to_safe_string( string $string, array $unsafe_characters = array() ): string {
-		return \strtolower( self::to_ascii_input_string( self::replace_placeholders( $unsafe_characters, $string ) ) );
+		return \strtolower( self::to_ascii_input_string( self::replace_placeholders( $string, $unsafe_characters ) ) );
 	}
 
 	/**
