@@ -5,7 +5,7 @@ namespace DeepWebSolutions\Framework\Helpers;
 \defined( 'ABSPATH' ) || exit;
 
 /**
- * Defines a few short-hand methods for retrieving reflection information about the using class.
+ * Defines a few shorthand methods for retrieving reflection information about the using class.
  *
  * @since   1.0.0
  * @version 1.5.0

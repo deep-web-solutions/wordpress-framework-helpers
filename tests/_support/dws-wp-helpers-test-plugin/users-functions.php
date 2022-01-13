@@ -6,7 +6,7 @@ defined( 'ABSPATH' ) || exit;
 
 switch ( $_GET['action'] ) {
 	case 'logout_user':
-		Users::logout_user( $_GET['user_id'] ? intval( $_GET['user_id'] ) : null );
+		Users::logout( $_GET['user_id'] ? intval( $_GET['user_id'] ) : null );
 		break;
 	case 'get_roles':
 		echo wp_json_encode( Users::get_roles( $_GET['user_id'] ? intval( $_GET['user_id'] ) : null ) );

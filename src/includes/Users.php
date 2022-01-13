@@ -10,7 +10,7 @@ use DeepWebSolutions\Framework\Helpers\DataTypes\Booleans;
  * A collection of very useful WP users helpers to be used throughout the projects.
  *
  * @since   1.0.0
- * @version 1.5.5
+ * @version 1.7.0
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.com>
  * @package DeepWebSolutions\WP-Framework\Helpers
  */
@@ -125,11 +125,11 @@ final class Users {
 	 * Logs out a given user from WordPress.
 	 *
 	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @version 1.7.0
 	 *
 	 * @param   int|null    $user_id    The ID of the user to log out. Defaults to the currently logged-in user.
 	 */
-	public static function logout_user( ?int $user_id = null ): void {
+	public static function logout( ?int $user_id = null ): void {
 		$user_id = $user_id ?? \get_current_user_id();
 		if ( \get_current_user_id() === $user_id ) {
 			\wp_destroy_all_sessions();
