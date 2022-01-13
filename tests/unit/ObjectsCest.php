@@ -17,7 +17,7 @@ use UnitTester;
  * Tests for the object helpers.
  *
  * @since   1.0.0
- * @version 1.5.0
+ * @version 1.7.0
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.com>
  * @package DeepWebSolutions\WP-Framework\Tests\Helpers\Unit
  */
@@ -29,12 +29,8 @@ class ObjectsCest {
 	 *
 	 * @since   1.0.0
 	 * @version 1.0.0
-	 *
-	 * @SuppressWarnings(PHPMD.UnusedFormalParameter)
-	 *
-	 * @param   UnitTester  $I      Codeception actor instance.
 	 */
-	public function _before( UnitTester $I ): void {
+	public function _before(): void {
 		defined( 'ABSPATH' ) || define( 'ABSPATH', __DIR__ );
 	}
 

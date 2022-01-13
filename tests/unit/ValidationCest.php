@@ -27,12 +27,8 @@ class ValidationCest {
 	 *
 	 * @since   1.0.0
 	 * @version 1.0.0
-	 *
-	 * @SuppressWarnings(PHPMD.UnusedFormalParameter)
-	 *
-	 * @param   UnitTester  $I      Codeception actor instance.
 	 */
-	public function _before( UnitTester $I ): void {
+	public function _before(): void {
 		defined( 'ABSPATH' ) || define( 'ABSPATH', __DIR__ );
 	}
 

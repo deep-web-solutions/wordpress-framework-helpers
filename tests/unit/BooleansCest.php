@@ -70,6 +70,9 @@ class BooleansCest {
 		$I->assertEquals( Booleans::maybe_cast( 'yes' ), true );
 		$I->assertEquals( Booleans::maybe_cast( 'no' ), false );
 
+		$I->assertEquals( Booleans::maybe_cast( 'on' ), true );
+		$I->assertEquals( Booleans::maybe_cast( 'off' ), false );
+
 		$I->assertEquals( Booleans::maybe_cast( '1' ), true );
 		$I->assertEquals( Booleans::maybe_cast( '0' ), false );
 	}
