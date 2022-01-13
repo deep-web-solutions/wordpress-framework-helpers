@@ -10,17 +10,17 @@ use DeepWebSolutions\Framework\Helpers\DataTypes\Arrays;
  * A collection of very useful WP misc helpers to be used throughout the projects.
  *
  * @since   1.0.0
- * @version 1.4.0
+ * @version 1.7.0
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.com>
  * @package DeepWebSolutions\WP-Framework\Helpers
  */
 final class Misc {
 	/**
-	 * Recursive version of WP's own 'wp_parse_args' in order to handle multi-dimensional arrays.
+	 * Recursive version of WordPress' own 'wp_parse_args' in order to handle multidimensional arrays.
 	 * In this implementation, non-associative arrays are also leaves.
 	 *
 	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @version 1.7.0
 	 *
 	 * @param   array   $args       The arguments to parse.
 	 * @param   array   $defaults   The default arguments.
@@ -33,7 +33,7 @@ final class Misc {
 		$result = $defaults;
 
 		foreach ( $args as $key => &$value ) {
-			$result[ $key ] = ( \is_array( $value ) && isset( $result[ $key ] ) && Arrays::has_string_keys( $result[ $key ] ) )
+			$result[ $key ] = ( \is_array( $value ) && isset( $result[ $key ] ) && true !== Arrays::is_list( $result[ $key ] ) )
 				? self::wp_parse_args_recursive( $value, $result[ $key ] )
 				: $value;
 		}
@@ -45,14 +45,22 @@ final class Misc {
 	 * Returns the UNIX timestamp of today's midnight adjusted to a specific timezone.
 	 *
 	 * @since   1.0.0
-	 * @version 1.4.0
+	 * @version 1.7.0
 	 *
 	 * @param   string|null     $timezone_string    Optional timezone string. If not provided, will use the website's own timezone.
 	 *
 	 * @return  int
 	 */
 	public static function get_midnight_unix_timestamp( ?string $timezone_string = null ): int {
-		$timezone_string = $timezone_string ?: \get_option( 'timezone_string' );
-		return \strtotime( \wp_sprintf( 'today midnight %s', $timezone_string ) );
+		$timezone_string = $timezone_string ?: \wp_timezone_string();
+
+		try {
+			$current_datetime  = new \DateTimeImmutable( 'now', new \DateTimeZone( $timezone_string ) );
+			$midnight_datetime = $current_datetime->setTime( 0, 0 );
+			return $midnight_datetime->getTimestamp() + $midnight_datetime->getOffset();
+		} catch ( \Exception $e ) {
+			return \strtotime( \wp_sprintf( 'today midnight %s', $timezone_string ) )
+				?: \strtotime( 'today midnight' );
+		}
 	}
 }
