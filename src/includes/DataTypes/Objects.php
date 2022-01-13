@@ -223,10 +223,10 @@ final class Objects {
 	 * @return  bool|null
 	 */
 	public static function has_trait_deep( string $trait, $class_or_trait, bool $autoload = true ): ?bool {
-		if ( true === \trait_exists( $class_or_trait, $autoload ) ) {
-			return isset( self::trait_uses_deep_list( $class_or_trait, $autoload )[ $trait ] );
-		} elseif ( true === \class_exists( $class_or_trait, $autoload ) ) {
+		if ( true === \is_object( $class_or_trait ) || true === \class_exists( $class_or_trait, $autoload ) ) {
 			return isset( self::class_uses_deep_list( $class_or_trait, $autoload )[ $trait ] );
+		} elseif ( true === \trait_exists( $class_or_trait, $autoload ) ) {
+			return isset( self::trait_uses_deep_list( $class_or_trait, $autoload )[ $trait ] );
 		}
 
 		return null;
