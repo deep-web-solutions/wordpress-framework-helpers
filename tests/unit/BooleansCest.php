@@ -89,7 +89,7 @@ class BooleansCest {
 		$I->assertEquals( Booleans::resolve( false ), false );
 
 		$I->assertEquals( Booleans::resolve( fn() => true ), true );
-		$I->assertEquals( Booleans::resolve( fn() => false ), true );
+		$I->assertEquals( Booleans::resolve( fn() => false ), false );
 
 		$I->assertNull( Booleans::resolve( array( $this, 'get_bool' ) ) );
 		$I->assertEquals( Booleans::resolve( array( $this, 'get_bool' ), null, array( true ) ), true );
