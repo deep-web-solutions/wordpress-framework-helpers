@@ -60,23 +60,28 @@ Hopefully yes, probably not. If you found any problems, please raise an issue on
 
 ### 1.7.0 (January 13th, 2022)
 * Updated hooks to conform to new format in the rest of the framework.
+* Renamed `WP_Users::logout_user` to `WP_Users::logout` for consistency.
+* Improved upon the `Request::is_type` method inline with WC deprecations in 6.0.
+* Introduced a new helper class for working with constants.
+* Enhanced the `Misc::wp_parse_args_recursive` helper.
+* Enhanced the `Misc::get_midnight_unix_timestamp` helper.
 
 ### 1.6.0, 1.6.1 (December 2nd, December 10th, 2021)
-* Removed Assets::wrap_string_in_style_tags and Assets::wrap_string_in_script_tags helpers.
-* Added methods Assets::maybe_get_minified_path and Assets::maybe_get_mtime_version.
+* Removed `Assets::wrap_string_in_style_tags` and `Assets::wrap_string_in_script_tags helpers`.
+* Added methods `Assets::maybe_get_minified_path` and `Assets::maybe_get_mtime_version`.
 * Better filesystem detection for assets helpers.
 
 ### 1.5.4, 1.5.5, 1.5.6 (November 16th, November 22nd, November 24th 2021)
-* Strings::maybe_cast returns default if string is null.
-* Users::get supports guests.
-* Added new polyfill Arrays::is_list.
+* `Strings::maybe_cast` returns default if string is null.
+* `Users::get` supports guests.
+* Added new polyfill `Arrays::is_list`.
 
 ### 1.4.6, 1.5.0, 1.5.1, 1.5.2 , 1.5.3(October 27th, October 28th, October 29th, November 1st, November 3rd, 2021)
-* Users::has_roles default logical operator is now 'or'.
-* Users::has_roles and Users::has_capabilities now also accept a string as a first parameter.
-* Fixed Strings::maybe_cast wrong placement of parenthesis.
-* Files::has_extension now uses the newly-introduced Strings::maybe_prefix helper.
-* Make use of \wp_normalize_path for better support of cross-OS website migrations.
+* `Users::has_roles` default logical operator is now 'or'.
+* `Users::has_roles` and `Users::has_capabilities` now also accept a string as a first parameter.
+* Fixed `Strings::maybe_cast` wrong placement of parenthesis.
+* `Files::has_extension` now uses the newly-introduced `Strings::maybe_prefix` helper.
+* Make use of `wp_normalize_path` for better support of cross-OS website migrations.
 * RequestTypesEnum was removed. Use strings.
 * Moved the WordPress subnamespace one level up.
 * Asset handle and hook tag extras can now be a single string as well.
@@ -87,7 +92,7 @@ Hopefully yes, probably not. If you found any problems, please raise an issue on
 * Made coding rules exceptions more specific.
 * Improved REST API detection to remove false positives on AJAX requests.
 * Added new helpful string helpers.
-* Fixed the default of Strings::maybe_cast
+* Fixed the default of `Strings::maybe_cast`.
 
 ### 1.4.1 (August 19th, 2021)
 * Changed the joining separator for hooks tags.
