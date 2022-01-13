@@ -4,7 +4,7 @@
 **Requires at least:** 5.5  
 **Tested up to:** 5.8  
 **Requires PHP:** 7.4  
-**Stable tag:** 1.6.1  
+**Stable tag:** 1.7.0  
 **License:** GPLv3 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-3.0.html  
 
@@ -57,6 +57,9 @@ Hopefully yes, probably not. If you found any problems, please raise an issue on
 
 
 ## Changelog
+
+### 1.7.0 (January 13th, 2022)
+* Updated hooks to conform to new format in the rest of the framework.
 
 ### 1.6.0, 1.6.1 (December 2nd, December 10th, 2021)
 * Removed Assets::wrap_string_in_style_tags and Assets::wrap_string_in_script_tags helpers.
