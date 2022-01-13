@@ -17,7 +17,7 @@ final class Callables {
 	 * Returns a given variable if it is a callable or a default value if not.
 	 *
 	 * @since   1.4.0
-	 * @version 1.4.0
+	 * @version 1.7.0
 	 *
 	 * @param   mixed           $callable   Variable to check.
 	 * @param   callable|null   $default    The default value to return if check fails.
@@ -32,7 +32,7 @@ final class Callables {
 		if ( false === \is_null( Strings::validate( $callable ) ) ) {
 			$callable = \trim( $callable );
 		} elseif ( false === \is_null( Arrays::validate( $callable ) ) && true === \is_callable( $callable, true ) ) {
-			$callable[1] = \trim( $callable );
+			$callable[1] = \trim( $callable[1] );
 		}
 
 		return \is_callable( $callable ) ? $callable : $default;
