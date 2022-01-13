@@ -8,7 +8,7 @@ namespace DeepWebSolutions\Framework\Helpers\DataTypes;
  * A collection of useful callable helpers to be used throughout the projects.
  *
  * @since   1.4.0
- * @version 1.4.0
+ * @version 1.7.0
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.com>
  * @package DeepWebSolutions\WP-Framework\Helpers\DataTypes
  */
@@ -29,9 +29,9 @@ final class Callables {
 			return $callable;
 		}
 
-		if ( ! \is_null( Strings::validate( $callable ) ) ) {
+		if ( false === \is_null( Strings::validate( $callable ) ) ) {
 			$callable = \trim( $callable );
-		} elseif ( ! \is_null( Arrays::validate( $callable ) ) && \is_callable( $callable, true ) ) {
+		} elseif ( false === \is_null( Arrays::validate( $callable ) ) && true === \is_callable( $callable, true ) ) {
 			$callable[1] = \trim( $callable );
 		}
 
@@ -42,7 +42,7 @@ final class Callables {
 	 * If given a callable, returns the return value of said callable otherwise the passed value itself.
 	 *
 	 * @since   1.4.0
-	 * @version 1.4.0
+	 * @version 1.7.0
 	 *
 	 * @param   callable|mixed  $maybe_callable     Variable to maybe evaluate.
 	 * @param   array           $args               Arguments to pass on to the callable. No arguments by default.
@@ -50,6 +50,7 @@ final class Callables {
 	 * @return  mixed
 	 */
 	public static function maybe_resolve( $maybe_callable, array $args = array() ) {
-		return self::validate( $maybe_callable ) ? \call_user_func_array( $maybe_callable, $args ) : $maybe_callable;
+		$callable = self::validate( $maybe_callable );
+		return \is_null( $callable ) ? $maybe_callable : \call_user_func_array( $maybe_callable, $args );
 	}
 }

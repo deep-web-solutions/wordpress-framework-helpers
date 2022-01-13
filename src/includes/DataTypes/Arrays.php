@@ -95,7 +95,23 @@ final class Arrays {
 	}
 
 	/**
-	 * Validates an array of values against a safelist. Returns a new array containing only valid entries.
+	 * Attempts to resolve a potential callable to an array value.
+	 *
+	 * @since   1.7.0
+	 * @version 1.7.0
+	 *
+	 * @param   mixed|callable  $array      Potential callable to resolve.
+	 * @param   array|null      $default    Default value to return on failure. By default, null.
+	 * @param   array           $args       Arguments to pass on to the callable. By default, none.
+	 *
+	 * @return  array|null
+	 */
+	public static function resolve( $array, ?array $default = null, array $args = array() ): ?array {
+		return self::maybe_cast( Callables::maybe_resolve( $array, $args ), $default );
+	}
+
+	/**
+	 * Validates an array of values against a safe-list. Returns a new array containing only valid entries.
 	 *
 	 * @since   1.4.0
 	 * @version 1.4.0

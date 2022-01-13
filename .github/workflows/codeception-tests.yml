@@ -7,7 +7,7 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
+  test:
     env:
       # Must match the env variables in .dist.env
       WP_ROOT_FOLDER: /tmp/wordpress

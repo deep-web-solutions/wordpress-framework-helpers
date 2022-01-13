@@ -58,7 +58,7 @@ Hopefully yes, probably not. If you found any problems, please raise an issue on
 
 ## Changelog
 
-### 1.7.0 (January 13th, 2022)
+### 1.7.0 (January 14th, 2022)
 * Updated hooks to conform to new format in the rest of the framework.
 * Renamed `WP_Users::logout_user` to `WP_Users::logout` for consistency.
 * Improved upon the `Request::is_type` method inline with WC deprecations in 6.0.
@@ -68,6 +68,7 @@ Hopefully yes, probably not. If you found any problems, please raise an issue on
 * `AssetsHelpersTrait` no longer automatically includes the `FilesystemAwareTrait`.
 * Inverted the parameter order of `Strings::replace_placeholders` for consistency.
 * Better handling of error for the `Objects` helpers.
+* Added more automated testing.
 
 ### 1.6.0, 1.6.1 (December 2nd, December 10th, 2021)
 * Removed `Assets::wrap_string_in_style_tags` and `Assets::wrap_string_in_script_tags helpers`.

@@ -9,8 +9,10 @@ use UnitTester;
 /**
  * Tests for the string helpers.
  *
+ * @SuppressWarnings(PHPMD.TooManyPublicMethods)
+ *
  * @since   1.0.0
- * @version 1.1.0
+ * @version 1.7.0
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.com>
  * @package DeepWebSolutions\WP-Framework\Tests\Helpers\Unit
  */
@@ -22,18 +24,138 @@ class StringsCest {
 	 *
 	 * @since   1.0.0
 	 * @version 1.0.0
-	 *
-	 * @SuppressWarnings(PHPMD.UnusedFormalParameter)
-	 *
-	 * @param   UnitTester  $I      Codeception actor instance.
 	 */
-	public function _before( UnitTester $I ): void {
+	public function _before(): void {
 		defined( 'ABSPATH' ) || define( 'ABSPATH', __DIR__ );
 	}
 
 	// endregion
 
 	// region TESTS
+
+	/**
+	 * Test the 'validate' helper.
+	 *
+	 * @since   1.7.0
+	 * @version 1.7.0
+	 *
+	 * @param   UnitTester  $I  Codeception actor instance.
+	 *
+	 * @return  void
+	 */
+	public function test_validate( UnitTester $I ) {
+		$I->assertEquals( Strings::validate( 'string' ), 'string' );
+
+		$I->assertNull( Strings::validate( 5 ) );
+		$I->assertNull( Strings::validate( 5.0 ) );
+		$I->assertNull( Strings::validate( array( 'string' ) ) );
+		$I->assertEquals( Strings::validate( '5' ), '5' );
+		$I->assertEquals( Strings::validate( 4, '5' ), '5' );
+	}
+
+	/**
+	 * Test the 'maybe_cast' helper.
+	 *
+	 * @since   1.7.0
+	 * @version 1.7.0
+	 *
+	 * @param   UnitTester  $I  Codeception actor instance.
+	 *
+	 * @return  void
+	 */
+	public function test_maybe_cast( UnitTester $I ) {
+		$I->assertEquals( 'string', Strings::maybe_cast( 'string' ) );
+
+		$I->assertNull( Strings::maybe_cast( null ) );
+		$I->assertEquals( 'string', Strings::maybe_cast( null, 'string' ) );
+
+		$I->assertEquals( 'default', Strings::maybe_cast( array(), 'default' ) );
+		$I->assertEquals( 'default', Strings::maybe_cast( new \stdClass(), 'default' ) );
+		$I->assertEquals( 'stringify', Strings::maybe_cast( $this, 'default' ) );
+	}
+
+	/**
+	 * Test the 'validate_allowed' helper.
+	 *
+	 * @since   1.7.0
+	 * @version 1.7.0
+	 *
+	 * @param   UnitTester  $I  Codeception actor instance.
+	 *
+	 * @return  void
+	 */
+	public function test_validate_allowed( UnitTester $I ) {
+		$allowed = array( 'allowed1', 'allowed2', 'allowed3' );
+
+		$I->assertEquals( Strings::validate_allowed( 'not_allowed', $allowed ), null );
+		$I->assertEquals( Strings::validate_allowed( 'not_allowed', $allowed, 'allowed4' ), 'allowed4' );
+
+		foreach ( $allowed as $item ) {
+			$I->assertEquals( $item, Strings::validate_allowed( $item, $allowed ) );
+		}
+	}
+
+	/**
+	 * Test the 'resolve' helper.
+	 *
+	 * @since   1.7.0
+	 * @version 1.7.0
+	 *
+	 * @param   UnitTester  $I  Codeception actor instance.
+	 *
+	 * @return  void
+	 */
+	public function test_resolve( UnitTester $I ) {
+		$I->assertEquals( Strings::resolve( 'test' ), 'test' );
+
+		$I->assertEquals( Strings::resolve( fn() => 'return' ), 'return' );
+
+		$I->assertNull( Strings::resolve( array( $this, 'get_string' ) ) );
+		$I->assertEquals( Strings::resolve( array( $this, 'get_string' ), null, array( 'return' ) ), 'return' );
+		$I->assertEquals( Strings::resolve( array( $this, 'get_string' ), 'return' ), 'return' );
+	}
+
+	/**
+	 * Test the 'contains' helper.
+	 *
+	 * @since   1.7.0
+	 * @version 1.7.0
+	 *
+	 * @param   UnitTester  $I          Codeception actor instance.
+	 * @param   Example     $example    Example to run the test on.
+	 *
+	 * @dataProvider    contains_provider
+	 */
+	public function test_contains( UnitTester $I, Example $example ) {
+		$I->assertEquals( $example['expected'], Strings::contains( $example['haystack'], $example['needle'] ) );
+	}
+
+	/**
+	 * Test the 'maybe_prefix', 'maybe_unprefix', 'maybe_suffix', and 'maybe_unsuffix' helpers.
+	 *
+	 * @since   1.7.0
+	 * @version 1.7.0
+	 *
+	 * @param   UnitTester  $I  Codeception actor instance.
+	 *
+	 * @return  void
+	 */
+	public function test_prefixes_and_suffixes( UnitTester $I ) {
+		$I->assertEquals( Strings::maybe_prefix( 'unprefixed' ), '_unprefixed' );
+		$I->assertEquals( Strings::maybe_prefix( 'unprefixed', 'prefix_' ), 'prefix_unprefixed' );
+		$I->assertEquals( Strings::maybe_prefix( 'prefix_unprefixed', 'prefix_' ), 'prefix_unprefixed' );
+		$I->assertEquals( Strings::maybe_prefix( 'prefix_unprefixed' ), '_prefix_unprefixed' );
+
+		$I->assertEquals( Strings::maybe_unprefix( 'prefix_unprefixed', 'prefix_' ), 'unprefixed' );
+		$I->assertEquals( Strings::maybe_unprefix( 'prefix_unprefixed', 'prefix2_' ), 'prefix_unprefixed' );
+		$I->assertEquals( Strings::maybe_unprefix( '_unprefixed' ), 'unprefixed' );
+
+		$I->assertEquals( Strings::maybe_suffix( 'unsuffixed', '_suffix' ), 'unsuffixed_suffix' );
+		$I->assertEquals( Strings::maybe_suffix( 'unsuffixed_suffix', '_suffix' ), 'unsuffixed_suffix' );
+
+		$I->assertEquals( Strings::maybe_unsuffix( 'unsuffixed_suffix', '_suffix' ), 'unsuffixed' );
+		$I->assertEquals( Strings::maybe_unsuffix( 'unsuffixed_suffix', '_suffix2' ), 'unsuffixed_suffix' );
+	}
 
 	/**
 	 * Test the 'starts_with' helper.
@@ -69,7 +191,7 @@ class StringsCest {
 	 * Test the 'replace_placeholders' helper.
 	 *
 	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @version 1.7.0
 	 *
 	 * @param   UnitTester  $I          Codeception actor instance.
 	 * @param   Example     $example    Example to run the test on.
@@ -77,7 +199,7 @@ class StringsCest {
 	 * @dataProvider    replace_placeholders_provider
 	 */
 	public function test_replace_placeholders( UnitTester $I, Example $example ) {
-		$I->assertEquals( $example['expected'], Strings::replace_placeholders( $example['placeholders'], $example['string'] ) );
+		$I->assertEquals( $example['expected'], Strings::replace_placeholders( $example['string'], $example['placeholders'] ) );
 	}
 
 	/**
@@ -158,6 +280,65 @@ class StringsCest {
 	// endregion
 
 	// region HELPERS
+
+	/**
+	 * Returns a given string.
+	 *
+	 * @since   1.7.0
+	 * @version 1.7.0
+	 *
+	 * @param   null|string     $string     String to return.
+	 *
+	 * @return  string|null
+	 */
+	public function get_string( ?string $string = null ): ?string {
+		return $string;
+	}
+
+	/**
+	 * Returns a static string.
+	 *
+	 * @since   1.7.0
+	 * @version 1.7.0
+	 *
+	 * @return  string
+	 */
+	public function __toString() {
+		return 'stringify';
+	}
+
+	/**
+	 * Provides examples for the 'contains' tester.
+	 *
+	 * @since   1.7.0
+	 * @version 1.7.0
+	 *
+	 * @return  array[]
+	 */
+	protected function contains_provider(): array {
+		return array(
+			array(
+				'haystack' => '',
+				'needle'   => '',
+				'expected' => true,
+			),
+			array(
+				'haystack' => 'whatever_string',
+				'needle'   => '',
+				'expected' => true,
+			),
+			array(
+				'haystack' => 'whatever_string',
+				'needle'   => 'ever_str',
+				'expected' => true,
+			),
+			array(
+				'haystack' => 'whatever_string',
+				'needle'   => 'ever__str',
+				'expected' => false,
+			),
+		);
+	}
 
 	/**
 	 * Provides examples for the 'starts_with' tester.
