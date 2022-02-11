@@ -4,7 +4,7 @@
 **Requires at least:** 5.5  
 **Tested up to:** 5.8  
 **Requires PHP:** 7.4  
-**Stable tag:** 1.7.0  
+**Stable tag:** 1.7.1  
 **License:** GPLv3 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-3.0.html  
 
@@ -57,6 +57,9 @@ Hopefully yes, probably not. If you found any problems, please raise an issue on
 
 
 ## Changelog
+
+### 1.7.1 (February 11th, 2022)
+* Removed the usage of deprecated FILTER_SANITIZE_STRING filter.
 
 ### 1.7.0 (January 13th, 2022)
 * Updated hooks to conform to new format in the rest of the framework.

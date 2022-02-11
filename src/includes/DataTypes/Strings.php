@@ -10,7 +10,7 @@ namespace DeepWebSolutions\Framework\Helpers\DataTypes;
  * @SuppressWarnings(PHPMD.TooManyPublicMethods)
  *
  * @since   1.0.0
- * @version 1.7.0
+ * @version 1.7.1
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.com>
  * @package DeepWebSolutions\WP-Framework\Helpers\DataTypes
  */
@@ -305,14 +305,14 @@ final class Strings {
 	 * and returns the result.
 	 *
 	 * @since   1.1.0
-	 * @version 1.1.0
+	 * @version 1.7.1
 	 *
 	 * @param   string  $string     The string to remove the characters from.
 	 *
 	 * @return  string
 	 */
 	public static function to_ascii_input_string( string $string ): string {
-		return \filter_var( $string, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH );
+		return \filter_var( $string, FILTER_UNSAFE_RAW, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH );
 	}
 
 	/**
