@@ -2,9 +2,9 @@
 
 **Contributors:** Antonius Hegyes, Deep Web Solutions GmbH  
 **Requires at least:** 5.5  
-**Tested up to:** 5.8  
+**Tested up to:** 5.9  
 **Requires PHP:** 7.4  
-**Stable tag:** 1.7.1  
+**Stable tag:** 1.7.2  
 **License:** GPLv3 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-3.0.html  
 
@@ -58,8 +58,10 @@ Hopefully yes, probably not. If you found any problems, please raise an issue on
 
 ## Changelog
 
-### 1.7.1 (February 11th, 2022)
+### 1.7.1, 1.7.2 (February 11th, April 14th 2022)
 * Removed the usage of deprecated FILTER_SANITIZE_STRING filter.
+* Added new helper for converting between a filesystem path and a website URL.
+* Fixed: bug in Misc::wp_parse_args_recursive when the default is an array but the passed on argument isn't.
 
 ### 1.7.0 (January 13th, 2022)
 * Updated hooks to conform to new format in the rest of the framework.

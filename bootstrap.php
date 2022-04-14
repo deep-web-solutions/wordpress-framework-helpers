@@ -3,7 +3,7 @@
  * The DWS WordPress Framework Helpers bootstrap file.
  *
  * @since               1.0.0
- * @version             1.7.0
+ * @version             1.7.2
  * @package             DeepWebSolutions\WP-Framework\Helpers
  * @author              Deep Web Solutions GmbH
  * @copyright           2021 Deep Web Solutions GmbH
@@ -14,7 +14,7 @@
  * @wordpress-plugin
  * Plugin Name:         DWS WordPress Framework Helpers
  * Description:         A set of related helpers to kick-start WordPress development.
- * Version:             1.7.1
+ * Version:             1.7.2
  * Requires at least:   5.5
  * Requires PHP:        7.4
  * Author:              Deep Web Solutions GmbH
@@ -40,7 +40,7 @@ require_once __DIR__ . '/bootstrap-functions.php';
 
 // Define helpers constants.
 \define( __NAMESPACE__ . '\DWS_WP_FRAMEWORK_HELPERS_NAME', dws_wp_framework_get_whitelabel_name() . ': Framework Helpers' );
-\define( __NAMESPACE__ . '\DWS_WP_FRAMEWORK_HELPERS_VERSION', '1.7.1' );
+\define( __NAMESPACE__ . '\DWS_WP_FRAMEWORK_HELPERS_VERSION', '1.7.2' );
 
 // Define minimum environment requirements.
 \define( __NAMESPACE__ . '\DWS_WP_FRAMEWORK_HELPERS_MIN_PHP', '7.4' );
@@ -48,7 +48,7 @@ require_once __DIR__ . '/bootstrap-functions.php';
 
 // Bootstrap the helpers (maybe)!
 if ( dws_wp_framework_check_php_wp_requirements_met( dws_wp_framework_get_helpers_min_php(), dws_wp_framework_get_helpers_min_wp() ) ) {
-	$dws_helpers_init_function = function() {
+	$dws_helpers_init_function = static function() {
 		\define(
 			__NAMESPACE__ . '\DWS_WP_FRAMEWORK_HELPERS_INIT',
 			\apply_filters(
@@ -60,7 +60,7 @@ if ( dws_wp_framework_check_php_wp_requirements_met( dws_wp_framework_get_helper
 	};
 
 	if ( \did_action( 'plugins_loaded' ) ) {
-		\call_user_func( $dws_helpers_init_function );
+		$dws_helpers_init_function();
 	} else {
 		\add_action( 'plugins_loaded', $dws_helpers_init_function, PHP_INT_MIN + 100 );
 	}

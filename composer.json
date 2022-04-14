@@ -34,6 +34,7 @@
     "phpcompatibility/php-compatibility": "*",
     "phpcompatibility/phpcompatibility-wp": "*",
     "wp-coding-standards/wpcs": "*",
+    "roave/security-advisories": "dev-latest",
 
     "lucatume/wp-browser": "3.*",
     "codeception/module-asserts": "^1.3",
