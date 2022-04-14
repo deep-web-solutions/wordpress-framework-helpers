@@ -106,10 +106,14 @@ final class Strings {
 	public static function maybe_cast( $string, ?string $default = null ): ?string {
 		if ( \is_null( $string ) ) {
 			return $default;
-		} elseif ( ! \is_null( self::validate( $string ) ) ) {
+		}
+
+		if ( ! \is_null( self::validate( $string ) ) ) {
 			return $string;
-		} elseif ( \is_null( Arrays::validate( $string ) ) && ( \is_null( Objects::validate( $string ) ) || \method_exists( $string, '__toString' ) ) ) {
-			return \strval( $string );
+		}
+
+		if ( \is_null( Arrays::validate( $string ) ) && ( \is_null( Objects::validate( $string ) ) || \method_exists( $string, '__toString' ) ) ) {
+			return (string) $string;
 		}
 
 		return $default;

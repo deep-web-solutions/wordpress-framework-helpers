@@ -66,7 +66,9 @@ final class Arrays {
 	public static function maybe_cast( $array, ?array $default = null ): ?array {
 		if ( ! \is_null( self::validate( $array ) ) ) {
 			return $array;
-		} elseif ( ! \is_null( $array ) ) {
+		}
+
+		if ( ! \is_null( $array ) ) {
 			return array( $array );
 		}
 
@@ -124,7 +126,7 @@ final class Arrays {
 	 */
 	public static function validate_allowed( array $entries, array $allowed, $default = null ): array {
 		return \array_map(
-			function( $entry ) use ( $allowed, $default ) {
+			static function( $entry ) use ( $allowed, $default ) {
 				$is_allowed = \in_array( $entry, $allowed, true );
 				if ( false === $is_allowed && Strings::validate( $entry ) ) {
 					$entry      = \trim( $entry );

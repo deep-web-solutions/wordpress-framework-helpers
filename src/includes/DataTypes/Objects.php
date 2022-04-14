@@ -126,7 +126,7 @@ final class Objects {
 	public static function class_uses_deep( $class, bool $autoload = true ): ?array {
 		static $results = array();
 
-		$class = \is_object( $class ) ? \get_class( $class ) : \strval( $class );
+		$class = \is_object( $class ) ? \get_class( $class ) : (string) $class;
 
 		if ( isset( $results[ $class ] ) ) {
 			$traits = $results[ $class ];
@@ -166,7 +166,7 @@ final class Objects {
 	public static function class_uses_deep_list( $class, bool $autoload = true ): ?array {
 		static $results = array();
 
-		$class = \is_object( $class ) ? \get_class( $class ) : \strval( $class );
+		$class = \is_object( $class ) ? \get_class( $class ) : (string) $class;
 
 		if ( isset( $results[ $class ] ) ) {
 			$traits = $results[ $class ];
@@ -225,7 +225,9 @@ final class Objects {
 	public static function has_trait_deep( string $trait, $class_or_trait, bool $autoload = true ): ?bool {
 		if ( true === \is_object( $class_or_trait ) || true === \class_exists( $class_or_trait, $autoload ) ) {
 			return isset( self::class_uses_deep_list( $class_or_trait, $autoload )[ $trait ] );
-		} elseif ( true === \trait_exists( $class_or_trait, $autoload ) ) {
+		}
+
+		if ( true === \trait_exists( $class_or_trait, $autoload ) ) {
 			return isset( self::trait_uses_deep_list( $class_or_trait, $autoload )[ $trait ] );
 		}
 

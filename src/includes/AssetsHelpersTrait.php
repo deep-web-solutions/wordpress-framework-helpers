@@ -24,7 +24,7 @@ trait AssetsHelpersTrait {
 	 */
 	public function get_asset_handle( string $name = '', $extra = array(), string $root = 'dws-framework-helpers' ): string {
 		return Strings::to_safe_string(
-			\join(
+			\implode(
 				'_',
 				\array_filter(
 					\array_merge(

@@ -73,13 +73,14 @@ final class Users {
 		$user_roles = self::get_roles( $user_id );
 		if ( \is_null( $user_roles ) ) {
 			return null;
-		} elseif ( empty( $user_roles ) ) {
+		}
+		if ( empty( $user_roles ) ) {
 			return false;
 		}
 
 		return \array_reduce(
 			\array_map(
-				fn( string $role ) => \in_array( $role, $user_roles, true ),
+				static fn( string $role ) => \in_array( $role, $user_roles, true ),
 				$roles
 			),
 			array( Booleans::class, "logical_$logic" ),
@@ -113,7 +114,7 @@ final class Users {
 
 		return \array_reduce(
 			\array_map(
-				fn( string $capability ) => $user->has_cap( $capability, ...$args ),
+				static fn( string $capability ) => $user->has_cap( $capability, ...$args ),
 				$capabilities
 			),
 			array( Booleans::class, "logical_$logic" ),

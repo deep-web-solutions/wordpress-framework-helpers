@@ -42,7 +42,7 @@ final class Constants {
 	 * @param   string                              $name   The name of the constant.
 	 * @param   null|array|bool|int|float|string    $value  The value of the constant.
 	 */
-	public static function set( string $name, $value ) {
+	public static function set( string $name, $value ): void {
 		self::$set_constants[ $name ] = $value;
 	}
 
@@ -60,7 +60,9 @@ final class Constants {
 	public static function get( string $name ) {
 		if ( \array_key_exists( $name, self::$set_constants ) ) {
 			return self::$set_constants[ $name ];
-		} elseif ( \defined( $name ) ) {
+		}
+
+		if ( \defined( $name ) ) {
 			return \constant( $name );
 		}
 
@@ -95,7 +97,7 @@ final class Constants {
 	 *
 	 * @return  void
 	 */
-	public static function clear_all() {
+	public static function clear_all(): void {
 		self::$set_constants = array();
 	}
 

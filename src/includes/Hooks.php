@@ -141,7 +141,7 @@ final class Hooks {
 	 * @return  callable
 	 */
 	protected static function generate_dequeue_callable( string $hook, callable $func, int $priority ): callable {
-		return function() use ( $hook, $func, $priority ) {
+		return static function() use ( $hook, $func, $priority ) {
 			\remove_action( $hook, $func, $priority );
 
 			if ( ! empty( \func_get_args() ) && \doing_filter() ) {

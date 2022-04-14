@@ -86,18 +86,20 @@ final class Request {
 	protected static function is_rest_api_request(): bool {
 		if ( \function_exists( 'wp_doing_rest' ) ) {
 			return \wp_doing_rest();
-		} elseif ( \defined( 'REST_REQUEST' ) && REST_REQUEST ) {
-			return true;
-		} else {
-			if ( empty( $_SERVER['REQUEST_URI'] ) ) {
-				return ( \wp_is_jsonp_request() || \wp_is_json_request() ) && ! \wp_doing_ajax();
-			}
-
-			$rest_prefix         = \trailingslashit( \rest_get_url_prefix() );
-			$is_rest_api_request = Strings::contains( $_SERVER['REQUEST_URI'], $rest_prefix ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
-
-			return $is_rest_api_request || ( ( \wp_is_jsonp_request() || \wp_is_json_request() ) && ! \wp_doing_ajax() );
 		}
+
+		if ( \defined( 'REST_REQUEST' ) && REST_REQUEST ) {
+			return true;
+		}
+
+		if ( empty( $_SERVER['REQUEST_URI'] ) ) {
+			return ( \wp_is_jsonp_request() || \wp_is_json_request() ) && ! \wp_doing_ajax();
+		}
+
+		$rest_prefix         = \trailingslashit( \rest_get_url_prefix() );
+		$is_rest_api_request = Strings::contains( $_SERVER['REQUEST_URI'], $rest_prefix ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
+
+		return $is_rest_api_request || ( ( \wp_is_jsonp_request() || \wp_is_json_request() ) && ! \wp_doing_ajax() );
 	}
 
 	// endregion

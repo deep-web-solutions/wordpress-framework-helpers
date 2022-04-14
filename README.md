@@ -62,6 +62,7 @@ Hopefully yes, probably not. If you found any problems, please raise an issue on
 * Removed the usage of deprecated FILTER_SANITIZE_STRING filter.
 * Added new helper for converting between a filesystem path and a website URL.
 * Fixed: bug in Misc::wp_parse_args_recursive when the default is an array but the passed on argument isn't.
+* Small overall performance tweaks.
 
 ### 1.7.0 (January 13th, 2022)
 * Updated hooks to conform to new format in the rest of the framework.

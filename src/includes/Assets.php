@@ -71,7 +71,7 @@ final class Assets {
 
 		if ( $wp_filesystem instanceof \WP_Filesystem_Base ) {
 			$mtime               = $wp_filesystem->mtime( Files::generate_full_path( $wp_filesystem->abspath(), $relative_path ) );
-			$maybe_mtime_version = ! empty( $mtime ) ? \strval( $mtime ) : $maybe_mtime_version;
+			$maybe_mtime_version = ! empty( $mtime ) ? (string) $mtime : $maybe_mtime_version;
 		}
 
 		return $maybe_mtime_version;

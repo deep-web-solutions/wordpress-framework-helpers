@@ -42,7 +42,9 @@ trait FilesystemAwareTrait {
 				\error_log( 'Failed to retrieve WP file system credentials.' ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions
 			}
 			return null;
-		} elseif ( true !== \WP_Filesystem( $credentials ) ) {
+		}
+
+		if ( true !== \WP_Filesystem( $credentials ) ) {
 			if ( true === Request::has_debug() ) {
 				\error_log( 'Failed to connect to the WP file system.' ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions
 			}

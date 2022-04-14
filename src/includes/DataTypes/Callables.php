@@ -31,7 +31,7 @@ final class Callables {
 
 		if ( false === \is_null( Strings::validate( $callable ) ) ) {
 			$callable = \trim( $callable );
-		} elseif ( false === \is_null( Arrays::validate( $callable ) ) && true === \is_callable( $callable, true ) ) {
+		} elseif ( true === \is_callable( $callable, true ) && false === \is_null( Arrays::validate( $callable ) ) ) {
 			$callable[1] = \trim( $callable[1] );
 		}
 
