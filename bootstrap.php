@@ -10,6 +10,7 @@
  * @license             GPL-3.0-or-later
  *
  * @noinspection PhpMissingReturnTypeInspection
+ * @noinspection StaticClosureCanBeUsedInspection
  *
  * @wordpress-plugin
  * Plugin Name:         DWS WordPress Framework Helpers
@@ -48,7 +49,7 @@ require_once __DIR__ . '/bootstrap-functions.php';
 
 // Bootstrap the helpers (maybe)!
 if ( dws_wp_framework_check_php_wp_requirements_met( dws_wp_framework_get_helpers_min_php(), dws_wp_framework_get_helpers_min_wp() ) ) {
-	$dws_helpers_init_function = static function() {
+	$dws_helpers_init_function = function() {
 		\define(
 			__NAMESPACE__ . '\DWS_WP_FRAMEWORK_HELPERS_INIT',
 			\apply_filters(
