@@ -10,7 +10,7 @@ use DeepWebSolutions\Framework\Helpers\DataTypes\Arrays;
  * A collection of very useful WP misc helpers to be used throughout the projects.
  *
  * @since   1.0.0
- * @version 1.7.0
+ * @version 1.7.2
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.com>
  * @package DeepWebSolutions\WP-Framework\Helpers
  */
@@ -20,7 +20,7 @@ final class Misc {
 	 * In this implementation, non-associative arrays are also leaves.
 	 *
 	 * @since   1.0.0
-	 * @version 1.7.0
+	 * @version 1.7.2
 	 *
 	 * @param   array   $args       The arguments to parse.
 	 * @param   array   $defaults   The default arguments.
@@ -33,7 +33,7 @@ final class Misc {
 		$result = $defaults;
 
 		foreach ( $args as $key => &$value ) {
-			$result[ $key ] = ( \is_array( $value ) && isset( $result[ $key ] ) && true !== Arrays::is_list( $result[ $key ] ) )
+			$result[ $key ] = ( \is_array( $value ) && isset( $result[ $key ] ) && \is_array( $result[ $key ] ) && true !== Arrays::is_list( $result[ $key ] ) )
 				? self::wp_parse_args_recursive( $value, $result[ $key ] )
 				: $value;
 		}

@@ -10,7 +10,7 @@ use DeepWebSolutions\Framework\Helpers\DataTypes\Strings;
  * A collection of very useful file system helpers to be used throughout the projects.
  *
  * @since   1.0.0
- * @version 1.5.0
+ * @version 1.7.2
  * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.com>
  * @package DeepWebSolutions\WP-Framework\Helpers\FileSystem
  */
@@ -47,5 +47,25 @@ final class Files {
 	 */
 	public static function has_extension( string $filename, string $extension ): bool {
 		return Strings::ends_with( $filename, Strings::maybe_prefix( $extension, '.' ) );
+	}
+
+	/**
+	 * Converts a given path into a URL.
+	 *
+	 * @since   1.7.2
+	 * @version 1.7.2
+	 * @see    https://github.com/wpmetabox/meta-box/blob/023e3ccc08aced428c34b542169b9ac36d3893bd/inc/fields/file.php#L523
+	 *
+	 * @param   string  $absolute_or_relative   Absolute or relative filesystem path within the WordPress directory.
+	 *
+	 * @return  string
+	 */
+	public static function convert_path_to_url( string $absolute_or_relative ): string {
+		$absolute_or_relative = \wp_normalize_path( \untrailingslashit( $absolute_or_relative ) );
+
+		$wp_root  = \wp_normalize_path( \untrailingslashit( ABSPATH ) );
+		$relative = \str_replace( $wp_root, '', $absolute_or_relative );
+
+		return \home_url( $relative );
 	}
 }
