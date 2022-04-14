@@ -11,6 +11,8 @@
         "WP_Filesystem",
         "trailingslashit",
         "wp_normalize_path",
+        "untrailingslashit",
+        "home_url",
         "site_url",
         "request_filesystem_credentials",
         "remove_filter",
