@@ -1,6 +1,7 @@
 {
     "classes": [],
     "functions": [
-        "array_is_list"
+        "array_is_list",
+        "wp_doing_rest"
     ]
 }
