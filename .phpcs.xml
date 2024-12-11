@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="vendor/squizlabs/php_codesniffer/phpcs.xsd">
+	<!-- Extend the shared ruleset. -->
+	<rule ref="./vendor/deep-web-solutions/wordpress-configs/quality-assurance/phpcs.dist.xml"/>
+
+	<!-- Check that the proper text domain(s) is used everywhere. -->
+	<rule ref="WordPress.WP.I18n">
+		<properties>
+			<property name="text_domain" type="array">
+				<element value="dws-wp-framework-helpers"/>
+			</property>
+		</properties>
+	</rule>
+
+	<!-- Check that the proper prefix is used everywhere. -->
+	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
+		<properties>
+			<property name="prefixes" type="array">
+				<element value="dws_"/>
+				<element value="dws_wp_framework_"/>
+				<element value="dws_wp_framework_helpers_"/>
+				<element value="DeepWebSolutions"/>
+			</property>
+		</properties>
+	</rule>
+</ruleset>

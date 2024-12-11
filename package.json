@@ -1,21 +1,25 @@
 {
   "name": "dws-wp-framework-helpers",
-  "version": "1.7.2",
-  "title": "DWS WordPress Framework - Helpers",
-  "author": "Deep Web Solutions GmbH",
-  "homepage": "https://github.com/deep-web-solutions/wordpress-framework-helpers#readme",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/deep-web-solutions/wordpress-framework-helpers.git"
-  },
-  "license": "GPL-3.0",
-  "bugs": {
-    "url": "https://github.com/deep-web-solutions/wordpress-framework-helpers/issues"
-  },
+  "license": "GPL-3.0-or-later",
+  "repository": "https://github.com/deep-web-solutions/wordpress-framework-helpers",
+  "bugs": "https://github.com/deep-web-solutions/wordpress-framework-helpers/issues",
   "devDependencies": {
-    "@lodder/time-grunt": "^4.0.0",
-    "grunt": "^1.3.0",
-    "grunt-text-replace": "^0.4.0",
-    "load-grunt-tasks": "^5.1.0"
+    "@wordpress/env": "^10.13.0"
+  },
+  "scripts": {
+    "selenium:start": "docker container start selenium-chromium",
+    "selenium:stop": "docker container stop selenium-chromium",
+
+    "tests:start": "wp-env start && wp-env run tests-cli --env-cwd=wp-content/plugins/dws-framework-helpers-test-plugin composer run-script packages-update && npm run selenium:start",
+    "tests:run": "npm run tests:start && npm run tests:run:integration && npm run tests:run:end-to-end",
+    "tests:run:integration": "wp-env run tests-wordpress --env-cwd=project composer run-script tests:run:integration",
+
+    "tests:output-wp-path": "npm run wp-env install-path",
+    "tests:export-db": "npm run wp-env run tests-cli wp db export project/tests/Support/Data/dump.sql",
+
+    "wp-env:start": "wp-env start",
+    "wp-env:update": "wp-env start --update",
+    "wp-env:stop": "wp-env stop",
+    "wp-env": "wp-env"
   }
 }

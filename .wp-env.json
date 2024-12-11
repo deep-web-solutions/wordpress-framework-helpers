@@ -1,0 +1,17 @@
+{
+  "phpVersion": "8.3",
+  "env": {
+    "development": {
+      "plugins": [ "." ]
+    },
+    "tests": {
+      "mappings": {
+        "wp-content/plugins/dws-framework-bootstrapper-test-plugin": "./tests/Support/dws-framework-bootstrapper-test-plugin",
+        "project": "."
+      }
+    }
+  },
+  "lifecycleScripts": {
+    "afterStart": "vendor/deep-web-solutions/wordpress-configs/docker/wp-env-install-pdo_mysql.sh"
+  }
+}

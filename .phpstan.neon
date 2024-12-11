@@ -1,0 +1,2 @@
+includes:
+    - vendor/deep-web-solutions/wordpress-configs/quality-assurance/phpstan.dist.neon
