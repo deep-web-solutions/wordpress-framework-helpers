@@ -23,8 +23,8 @@ final class Strings {
 	 * @since   1.0.0
 	 * @version 1.7.0
 	 *
-	 * @param   string  $haystack   String to check.
-	 * @param   string  $needle     Beginning to check against.
+	 * @param   string $haystack   String to check.
+	 * @param   string $needle     Beginning to check against.
 	 *
 	 * @return  bool    True if the string starts as expected, false otherwise.
 	 */
@@ -42,8 +42,8 @@ final class Strings {
 	 * @since   1.0.0
 	 * @version 1.7.0
 	 *
-	 * @param   string  $haystack   String to check.
-	 * @param   string  $needle     Ending to check against.
+	 * @param   string $haystack   String to check.
+	 * @param   string $needle     Ending to check against.
 	 *
 	 * @return  bool    True if the string ends as expected, false otherwise.
 	 */
@@ -61,8 +61,8 @@ final class Strings {
 	 * @since   1.7.0
 	 * @version 1.7.0
 	 *
-	 * @param   string  $haystack   String to check.
-	 * @param   string  $needle     Substring to search for.
+	 * @param   string $haystack   String to check.
+	 * @param   string $needle     Substring to search for.
 	 *
 	 * @return  bool
 	 */
@@ -82,8 +82,8 @@ final class Strings {
 	 * @since   1.4.0
 	 * @version 1.4.0
 	 *
-	 * @param   mixed           $string     Variable to check.
-	 * @param   string|null     $default    The default value to return if check fails. By default null.
+	 * @param   mixed       $string     Variable to check.
+	 * @param   string|null $default    The default value to return if check fails. By default null.
 	 *
 	 * @return  string|null
 	 */
@@ -98,8 +98,8 @@ final class Strings {
 	 * @since   1.4.0   Moved to the Strings class.
 	 * @version 1.5.4
 	 *
-	 * @param   mixed           $string     Variable to cast.
-	 * @param   string|null     $default    The default value to return if all fails.
+	 * @param   mixed       $string     Variable to cast.
+	 * @param   string|null $default    The default value to return if all fails.
 	 *
 	 * @return  string|null
 	 */
@@ -148,9 +148,9 @@ final class Strings {
 	 * @since   1.4.0   Moved to the Strings class.
 	 * @version 1.4.0
 	 *
-	 * @param   mixed|callable  $string     Potential callable to resolve.
-	 * @param   string|null     $default    Default value to return on failure. By default null.
-	 * @param   array           $args       Arguments to pass on to the callable. By default none.
+	 * @param   mixed|callable $string     Potential callable to resolve.
+	 * @param   string|null    $default    Default value to return on failure. By default null.
+	 * @param   array          $args       Arguments to pass on to the callable. By default none.
 	 *
 	 * @return  string|null
 	 */
@@ -164,9 +164,9 @@ final class Strings {
 	 * @since   1.4.0
 	 * @version 1.4.0
 	 *
-	 * @param   string          $string     The string to validate.
-	 * @param   string[]        $allowed    Array of allowed entries.
-	 * @param   string|null     $default    The value to return if string is not in safelist.
+	 * @param   string      $string     The string to validate.
+	 * @param   string[]    $allowed    Array of allowed entries.
+	 * @param   string|null $default    The value to return if string is not in safelist.
 	 *
 	 * @return  string|null
 	 */
@@ -186,8 +186,8 @@ final class Strings {
 	 * @since   1.4.4
 	 * @version 1.4.4
 	 *
-	 * @param   string  $string     String to prefix.
-	 * @param   string  $prefix     Prefix to add if not existent.
+	 * @param   string $string     String to prefix.
+	 * @param   string $prefix     Prefix to add if not existent.
 	 *
 	 * @return  string
 	 */
@@ -201,8 +201,8 @@ final class Strings {
 	 * @since   1.4.4
 	 * @version 1.4.4
 	 *
-	 * @param   string  $string     String to un-prefix.
-	 * @param   string  $prefix     Prefix to remove if it exists.
+	 * @param   string $string     String to un-prefix.
+	 * @param   string $prefix     Prefix to remove if it exists.
 	 *
 	 * @return  string
 	 */
@@ -216,8 +216,8 @@ final class Strings {
 	 * @since   1.4.4
 	 * @version 1.4.4
 	 *
-	 * @param   string  $string     String to prefix.
-	 * @param   string  $suffix     Suffix to add if not existent.
+	 * @param   string $string     String to prefix.
+	 * @param   string $suffix     Suffix to add if not existent.
 	 *
 	 * @return  string
 	 */
@@ -231,8 +231,8 @@ final class Strings {
 	 * @since   1.4.4
 	 * @version 1.4.4
 	 *
-	 * @param   string  $string     String to un-prefix.
-	 * @param   string  $suffix     Suffix to remove if it exists.
+	 * @param   string $string     String to un-prefix.
+	 * @param   string $suffix     Suffix to remove if it exists.
 	 *
 	 * @return  string
 	 */
@@ -247,8 +247,8 @@ final class Strings {
 	 * @since   1.0.0
 	 * @version 1.7.0
 	 *
-	 * @param   string  $string         The string containing the placeholders.
-	 * @param   array   $placeholders   The values with which the placeholders must be replaced: {placeholder} => {value}.
+	 * @param   string $string         The string containing the placeholders.
+	 * @param   array  $placeholders   The values with which the placeholders must be replaced: {placeholder} => {value}.
 	 *
 	 * @return  string  Processed string with all the placeholders replaced.
 	 */
@@ -262,8 +262,8 @@ final class Strings {
 	 * @since   1.0.0
 	 * @version 1.1.0
 	 *
-	 * @param   string  $string             String to transform.
-	 * @param   array   $unsafe_characters  Unsafe characters and what to replace them with.
+	 * @param   string $string             String to transform.
+	 * @param   array  $unsafe_characters  Unsafe characters and what to replace them with.
 	 *
 	 * @return  string
 	 */
@@ -280,7 +280,7 @@ final class Strings {
 	 *
 	 * @see     https://stackoverflow.com/a/17151182
 	 *
-	 * @param   string  $string     The string to remove non-alphanumeric characters from.
+	 * @param   string $string     The string to remove non-alphanumeric characters from.
 	 *
 	 * @return  string
 	 */
@@ -296,7 +296,7 @@ final class Strings {
 	 *
 	 * @see     https://stackoverflow.com/a/17151182
 	 *
-	 * @param   string  $string     The string to remove non-alphanumeric characters from.
+	 * @param   string $string     The string to remove non-alphanumeric characters from.
 	 *
 	 * @return  string
 	 */
@@ -311,7 +311,7 @@ final class Strings {
 	 * @since   1.1.0
 	 * @version 1.7.1
 	 *
-	 * @param   string  $string     The string to remove the characters from.
+	 * @param   string $string     The string to remove the characters from.
 	 *
 	 * @return  string
 	 */
@@ -329,7 +329,7 @@ final class Strings {
 	 *
 	 * @noinspection PhpMissingBreakStatementInspection
 	 *
-	 * @param   string  $size   The php.ini size to transform into an integer.
+	 * @param   string $size   The php.ini size to transform into an integer.
 	 *
 	 * @return  int
 	 */

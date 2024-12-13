@@ -19,8 +19,8 @@ final class Booleans {
 	 * @since   1.4.0
 	 * @version 1.4.0
 	 *
-	 * @param   mixed       $boolean    Variable to check.
-	 * @param   bool|null   $default    The default value to return if check fails. By default null.
+	 * @param   mixed     $boolean    Variable to check.
+	 * @param   bool|null $default    The default value to return if check fails. By default null.
 	 *
 	 * @return  bool|null
 	 */
@@ -35,8 +35,8 @@ final class Booleans {
 	 * @since   1.4.0   Moved to the Booleans class.
 	 * @version 1.4.2
 	 *
-	 * @param   mixed       $boolean    Variable to cast.
-	 * @param   bool|null   $default    The default value to return if all fails. By default null.
+	 * @param   mixed     $boolean    Variable to cast.
+	 * @param   bool|null $default    The default value to return if all fails. By default null.
 	 *
 	 * @return  bool|null
 	 */
@@ -57,9 +57,9 @@ final class Booleans {
 	 * @since   1.4.0   Moved to the Booleans class.
 	 * @version 1.4.0
 	 *
-	 * @param   int         $input_type     One of INPUT_GET, INPUT_POST, INPUT_COOKIE, INPUT_SERVER, or INPUT_ENV.
-	 * @param   string      $variable_name  Name of a variable to get from the input stream.
-	 * @param   bool|null   $default        The default value to return if all fails. By default null.
+	 * @param   int       $input_type     One of INPUT_GET, INPUT_POST, INPUT_COOKIE, INPUT_SERVER, or INPUT_ENV.
+	 * @param   string    $variable_name  Name of a variable to get from the input stream.
+	 * @param   bool|null $default        The default value to return if all fails. By default null.
 	 *
 	 * @return  bool|null
 	 */
@@ -79,9 +79,9 @@ final class Booleans {
 	 * @since   1.4.0   Moved to the Booleans class.
 	 * @version 1.4.0
 	 *
-	 * @param   mixed|callable  $bool       Potential callable to resolve.
-	 * @param   bool|null       $default    Default value to return on failure. By default null.
-	 * @param   array           $args       Arguments to pass on to the callable. By default none.
+	 * @param   mixed|callable $bool       Potential callable to resolve.
+	 * @param   bool|null      $default    Default value to return on failure. By default null.
+	 * @param   array          $args       Arguments to pass on to the callable. By default none.
 	 *
 	 * @return  bool|null
 	 */
@@ -96,8 +96,8 @@ final class Booleans {
 	 * @since   1.0.0
 	 * @version 1.0.0
 	 *
-	 * @param   bool    $boolean1   The first boolean value.
-	 * @param   bool    $boolean2   The second boolean value.
+	 * @param   bool $boolean1   The first boolean value.
+	 * @param   bool $boolean2   The second boolean value.
 	 *
 	 * @return  bool    The result of "or-ing" the two boolean parameters.
 	 */
@@ -112,8 +112,8 @@ final class Booleans {
 	 * @since   1.0.0
 	 * @version 1.0.0
 	 *
-	 * @param   bool    $boolean1   The first boolean value.
-	 * @param   bool    $boolean2   The second boolean value.
+	 * @param   bool $boolean1   The first boolean value.
+	 * @param   bool $boolean2   The second boolean value.
 	 *
 	 * @return  bool    The result of "and-ing" the two boolean parameters.
 	 */
@@ -127,7 +127,7 @@ final class Booleans {
 	 * @since   1.4.4
 	 * @version 1.4.4
 	 *
-	 * @param   bool    $boolean    Bool to convert.
+	 * @param   bool $boolean    Bool to convert.
 	 *
 	 * @return  string
 	 */

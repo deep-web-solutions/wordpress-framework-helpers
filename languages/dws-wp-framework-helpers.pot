@@ -1,0 +1,40 @@
+# Copyright (C) 2024 Antonius Hegyes
+# This file is distributed under the GPL-3.0+.
+msgid ""
+msgstr ""
+"Project-Id-Version: Deep Web Solutions Framework Helpers 2.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/dws-wp-framework-helpers\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2024-12-13T23:16:31+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.11.0\n"
+"X-Domain: dws-wp-framework-helpers\n"
+
+#. Plugin Name of the plugin
+#: bootstrap.php
+msgid "Deep Web Solutions Framework Helpers"
+msgstr ""
+
+#. Description of the plugin
+#: bootstrap.php
+msgid "A set of related helpers to kick-start WordPress development."
+msgstr ""
+
+#. Author of the plugin
+#: bootstrap.php
+msgid "Antonius Hegyes"
+msgstr ""
+
+#. Author URI of the plugin
+#: bootstrap.php
+msgid "https://github.com/ahegyes"
+msgstr ""
+
+#. translators: %s: Author name
+#: functions.php:83
+msgid "%s Framework Helpers"
+msgstr ""

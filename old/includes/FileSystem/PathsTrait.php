@@ -29,8 +29,8 @@ trait PathsTrait {
 	 * @since   1.5.0
 	 * @version 1.5.0
 	 *
-	 * @param   bool    $absolute           Whether to return an absolute or a relative path.
-	 * @param   bool    $keep_file_name     Whether to keep the filename or not.
+	 * @param   bool $absolute           Whether to return an absolute or a relative path.
+	 * @param   bool $keep_file_name     Whether to keep the filename or not.
 	 *
 	 * @return  string
 	 */
@@ -47,8 +47,8 @@ trait PathsTrait {
 	 * @since   1.5.0
 	 * @version 1.5.0
 	 *
-	 * @param   bool    $relative           Whether to return a relative URL or not.
-	 * @param   bool    $keep_file_name     Whether to keep the filename or not.
+	 * @param   bool $relative           Whether to return a relative URL or not.
+	 * @param   bool $keep_file_name     Whether to keep the filename or not.
 	 *
 	 * @return  string
 	 */

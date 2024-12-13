@@ -57,7 +57,7 @@ trait ReflectionTrait {
 	 * @version 1.0.0
 	 * @link    https://www.php.net/manual/en/language.namespaces.rules.php
 	 *
-	 * @param   bool    $fully      Whether to return a fully-qualified name or just a qualified one.
+	 * @param   bool $fully      Whether to return a fully-qualified name or just a qualified one.
 	 *
 	 * @return  string
 	 */

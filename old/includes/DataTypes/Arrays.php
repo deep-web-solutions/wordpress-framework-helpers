@@ -23,7 +23,7 @@ final class Arrays {
 	 *
 	 * @see     https://www.php.net/manual/en/function.array-is-list.php#126574
 	 *
-	 * @param   array   $array  The array to check.
+	 * @param   array $array  The array to check.
 	 *
 	 * @return  bool    True if the array is a list, false otherwise.
 	 */
@@ -43,8 +43,8 @@ final class Arrays {
 	 * @since   1.4.0
 	 * @version 1.4.0
 	 *
-	 * @param   mixed       $array      Variable to check.
-	 * @param   array|null  $default    The default value to return if check fails. By default, null.
+	 * @param   mixed      $array      Variable to check.
+	 * @param   array|null $default    The default value to return if check fails. By default, null.
 	 *
 	 * @return  array|null
 	 */
@@ -58,8 +58,8 @@ final class Arrays {
 	 * @since   1.4.0
 	 * @version 1.4.0
 	 *
-	 * @param   mixed       $array      Variable to cast.
-	 * @param   array|null  $default    The default value to return if all fails. By default, null.
+	 * @param   mixed      $array      Variable to cast.
+	 * @param   array|null $default    The default value to return if all fails. By default, null.
 	 *
 	 * @return  array|null
 	 */
@@ -81,9 +81,9 @@ final class Arrays {
 	 * @since   1.4.0
 	 * @version 1.4.0
 	 *
-	 * @param   int         $input_type     One of INPUT_GET, INPUT_POST, INPUT_COOKIE, INPUT_SERVER, or INPUT_ENV.
-	 * @param   string      $variable_name  Name of a variable to get.
-	 * @param   array|null  $default        The default value to return if all fails.
+	 * @param   int        $input_type     One of INPUT_GET, INPUT_POST, INPUT_COOKIE, INPUT_SERVER, or INPUT_ENV.
+	 * @param   string     $variable_name  Name of a variable to get.
+	 * @param   array|null $default        The default value to return if all fails.
 	 *
 	 * @return  array|null
 	 */
@@ -102,9 +102,9 @@ final class Arrays {
 	 * @since   1.7.0
 	 * @version 1.7.0
 	 *
-	 * @param   mixed|callable  $array      Potential callable to resolve.
-	 * @param   array|null      $default    Default value to return on failure. By default, null.
-	 * @param   array           $args       Arguments to pass on to the callable. By default, none.
+	 * @param   mixed|callable $array      Potential callable to resolve.
+	 * @param   array|null     $default    Default value to return on failure. By default, null.
+	 * @param   array          $args       Arguments to pass on to the callable. By default, none.
 	 *
 	 * @return  array|null
 	 */
@@ -118,15 +118,15 @@ final class Arrays {
 	 * @since   1.4.0
 	 * @version 1.4.0
 	 *
-	 * @param   array       $entries    Array of entries to validate.
-	 * @param   array       $allowed    Array of allowed entries.
-	 * @param   mixed|null  $default    The value to replace invalid entries with.
+	 * @param   array      $entries    Array of entries to validate.
+	 * @param   array      $allowed    Array of allowed entries.
+	 * @param   mixed|null $default    The value to replace invalid entries with.
 	 *
 	 * @return  array
 	 */
 	public static function validate_allowed( array $entries, array $allowed, $default = null ): array {
 		return \array_map(
-			static function( $entry ) use ( $allowed, $default ) {
+			static function ( $entry ) use ( $allowed, $default ) {
 				$is_allowed = \in_array( $entry, $allowed, true );
 				if ( false === $is_allowed && Strings::validate( $entry ) ) {
 					$entry      = \trim( $entry );
@@ -145,7 +145,7 @@ final class Arrays {
 	 * @since   1.0.0
 	 * @version 1.0.0
 	 *
-	 * @param   array   $array  The array to check.
+	 * @param   array $array  The array to check.
 	 *
 	 * @return  bool    True if it has string keys, false otherwise.
 	 */
@@ -161,9 +161,9 @@ final class Arrays {
 	 * @version 1.0.2
 	 * @see     https://gist.github.com/wpscholar/0deadce1bbfa4adb4e4c
 	 *
-	 * @param   array           $array          Associative array to insert the new entries into.
-	 * @param   string|int      $key            Key to insert the entries after.
-	 * @param   array           $new_entries    The new entries to insert.
+	 * @param   array      $array          Associative array to insert the new entries into.
+	 * @param   string|int $key            Key to insert the entries after.
+	 * @param   array      $new_entries    The new entries to insert.
 	 *
 	 * @return  array
 	 */
@@ -186,10 +186,10 @@ final class Arrays {
 	 * @since   1.0.0
 	 * @version 1.4.0
 	 *
-	 * @param   array           $array      Array to search through.
-	 * @param   mixed           $needle     The value to search for.
-	 * @param   callable|null   $callback   Optional callback to run the value through before needle comparison.
-	 * @param   bool            $strict     Whether to perform type checks or not.
+	 * @param   array         $array      Array to search through.
+	 * @param   mixed         $needle     The value to search for.
+	 * @param   callable|null $callback   Optional callback to run the value through before needle comparison.
+	 * @param   bool          $strict     Whether to perform type checks or not.
 	 *
 	 * @return  array|null
 	 */
@@ -213,10 +213,10 @@ final class Arrays {
 	 * @since   1.0.0
 	 * @version 1.0.0
 	 *
-	 * @param   array           $array      Array whose keys to search through.
-	 * @param   mixed           $needle     The value to search for.
-	 * @param   callable|null   $callback   Optional callback to run the key through before needle comparison.
-	 * @param   bool            $strict     Whether to perform type checks or not.
+	 * @param   array         $array      Array whose keys to search through.
+	 * @param   mixed         $needle     The value to search for.
+	 * @param   callable|null $callback   Optional callback to run the key through before needle comparison.
+	 * @param   bool          $strict     Whether to perform type checks or not.
 	 *
 	 * @return  array|null
 	 */

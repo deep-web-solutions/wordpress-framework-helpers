@@ -39,8 +39,8 @@ final class Constants {
 	 * @since   1.7.0
 	 * @version 1.7.0
 	 *
-	 * @param   string                              $name   The name of the constant.
-	 * @param   null|array|bool|int|float|string    $value  The value of the constant.
+	 * @param   string                           $name   The name of the constant.
+	 * @param   null|array|bool|int|float|string $value  The value of the constant.
 	 */
 	public static function set( string $name, $value ): void {
 		self::$set_constants[ $name ] = $value;
@@ -53,7 +53,7 @@ final class Constants {
 	 * @since   1.7.0
 	 * @version 1.7.0
 	 *
-	 * @param   string  $name   The name of the constant.
+	 * @param   string $name   The name of the constant.
 	 *
 	 * @return  null|array|bool|int|float|string    Null if the constant does not exist or the value of the constant.
 	 */
@@ -75,7 +75,7 @@ final class Constants {
 	 * @since   1.7.0
 	 * @version 1.7.0
 	 *
-	 * @param   string  $name   The name of the constant.
+	 * @param   string $name   The name of the constant.
 	 *
 	 * @return  bool
 	 */
@@ -107,7 +107,7 @@ final class Constants {
 	 * @since   1.7.0
 	 * @version 1.7.0
 	 *
-	 * @param   string  $name   The name of the constant.
+	 * @param   string $name   The name of the constant.
 	 *
 	 * @return  bool
 	 */
@@ -121,7 +121,7 @@ final class Constants {
 	 * @since   1.7.0
 	 * @version 1.7.0
 	 *
-	 * @param   string  $name   The name of the constant.
+	 * @param   string $name   The name of the constant.
 	 *
 	 * @return  bool
 	 */

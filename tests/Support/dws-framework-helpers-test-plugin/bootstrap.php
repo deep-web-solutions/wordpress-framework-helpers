@@ -26,6 +26,8 @@ if ( ! defined( 'DeepWebSolutions\Framework\BOOTSTRAPPER_BASENAME' ) ) {
 	require __DIR__ . '/vendor/deep-web-solutions/wp-framework-helpers/bootstrap.php';
 }
 
+return; // TODO: Debugging code below.
+
 // Trigger helpers externally.
 add_action( 'parse_query', function( &$wp_query ) {
 	if ( false !== strpos( $_SERVER['REQUEST_URI'], 'dws-wp-framework-helpers/users-functions' ) ) {

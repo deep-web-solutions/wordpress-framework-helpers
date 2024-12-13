@@ -25,7 +25,7 @@ final class Request {
 	 *
 	 * @see     WooCommerce::is_request()
 	 *
-	 * @param   string  $type   The type of request to check against. Supported values: admin, ajax, cron, frontend, rest.
+	 * @param   string $type   The type of request to check against. Supported values: admin, ajax, cron, frontend, rest.
 	 *
 	 * @return  bool    True if the current request is of the type passed on, false otherwise.
 	 */
@@ -59,7 +59,7 @@ final class Request {
 	 * @since   1.0.0
 	 * @version 1.7.0
 	 *
-	 * @param   string  $constant   The constant to check for. Default is WP_DEBUG.
+	 * @param   string $constant   The constant to check for. Default is WP_DEBUG.
 	 *
 	 * @return  bool    True if the constant is defined and true.
 	 */

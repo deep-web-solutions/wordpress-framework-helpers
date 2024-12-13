@@ -21,7 +21,7 @@ final class Users {
 	 * @since   1.4.0
 	 * @version 1.5.5
 	 *
-	 * @param   int|null    $user_id    The ID of the user to retrieve. Defaults to the currently logged-in user or the guest user.
+	 * @param   int|null $user_id    The ID of the user to retrieve. Defaults to the currently logged-in user or the guest user.
 	 *
 	 * @return  \WP_User|null
 	 */
@@ -43,7 +43,7 @@ final class Users {
 	 * @since   1.0.0
 	 * @version 1.4.0
 	 *
-	 * @param   int|null    $user_id    The ID of the user to retrieve the roles for. Defaults to the currently logged-in user.
+	 * @param   int|null $user_id    The ID of the user to retrieve the roles for. Defaults to the currently logged-in user.
 	 *
 	 * @return  array|null
 	 */
@@ -58,9 +58,9 @@ final class Users {
 	 * @since   1.0.0
 	 * @version 1.4.6
 	 *
-	 * @param   string[]|string     $roles      The roles to check for.
-	 * @param   int|null            $user_id    The ID of the user to check for. Defaults to the currently logged-in user.
-	 * @param   string              $logic      Whether the user needs to have all the roles mentioned or either of them. Valid values: 'and', 'or'. Default: 'or'.
+	 * @param   string[]|string $roles      The roles to check for.
+	 * @param   int|null        $user_id    The ID of the user to check for. Defaults to the currently logged-in user.
+	 * @param   string          $logic      Whether the user needs to have all the roles mentioned or either of them. Valid values: 'and', 'or'. Default: 'or'.
 	 *
 	 * @return  bool|null
 	 */
@@ -94,10 +94,10 @@ final class Users {
 	 * @since   1.0.0
 	 * @version 1.4.6
 	 *
-	 * @param   string[]|string     $capabilities   The capabilities to check for.
-	 * @param   array               $args           Optional further parameters, typically starting with an object ID. See @user_can.
-	 * @param   int|null            $user_id        The ID of the user to check for. Defaults to the currently logged-in user.
-	 * @param   string              $logic          Whether the user needs to have all the roles mentioned or either of them. Valid values: 'and', 'or'. Default: 'and'.
+	 * @param   string[]|string $capabilities   The capabilities to check for.
+	 * @param   array           $args           Optional further parameters, typically starting with an object ID. See @user_can.
+	 * @param   int|null        $user_id        The ID of the user to check for. Defaults to the currently logged-in user.
+	 * @param   string          $logic          Whether the user needs to have all the roles mentioned or either of them. Valid values: 'and', 'or'. Default: 'and'.
 	 *
 	 * @return  bool|null
 	 */
@@ -128,7 +128,7 @@ final class Users {
 	 * @since   1.0.0
 	 * @version 1.7.0
 	 *
-	 * @param   int|null    $user_id    The ID of the user to log out. Defaults to the currently logged-in user.
+	 * @param   int|null $user_id    The ID of the user to log out. Defaults to the currently logged-in user.
 	 */
 	public static function logout( ?int $user_id = null ): void {
 		$user_id = $user_id ?? \get_current_user_id();

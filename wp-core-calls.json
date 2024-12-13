@@ -1,16 +1,17 @@
 {
     "classes": [
+        "WP_Error",
         "WP_Filesystem_Base",
         "WP_User",
         "WP_Session_Tokens"
     ],
     "functions": [
-        "apply_filters",
-        "did_action",
-        "add_action",
+        "wp_sprintf",
+        "__",
         "remove_filter",
         "current_filter",
         "current_action",
+        "add_action",
         "remove_action",
         "doing_filter",
         "trailingslashit",
@@ -32,9 +33,10 @@
         "wp_is_json_request",
         "rest_get_url_prefix",
         "wp_timezone_string",
-        "wp_sprintf",
         "plugin_basename",
         "plugin_dir_path",
-        "plugin_dir_url"
+        "plugin_dir_url",
+        "load_plugin_textdomain",
+        "validate_plugin_requirements"
     ]
 }

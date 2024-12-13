@@ -21,9 +21,9 @@ final class Hooks {
 	 * @since   1.0.0
 	 * @version 1.0.0
 	 *
-	 * @param   string   $hook       Hook name.
-	 * @param   string   $class      Class name.
-	 * @param   string   $method     Method name.
+	 * @param   string $hook       Hook name.
+	 * @param   string $class      Class name.
+	 * @param   string $method     Method name.
 	 */
 	public static function remove_anonymous_object_hook( string $hook, string $class, string $method ): void {
 		$filters = $GLOBALS['wp_filter'][ $hook ];
@@ -58,10 +58,10 @@ final class Hooks {
 	 * @since   1.0.0
 	 * @version 1.4.0
 	 *
-	 * @param   string      $hook               Hook to enqueue callable on.
-	 * @param   callable    $func               Callable to enqueue.
-	 * @param   int         $priority           The priority to enqueue on.
-	 * @param   int         $accepted_args      The number of accepted arguments of the callable.
+	 * @param   string   $hook               Hook to enqueue callable on.
+	 * @param   callable $func               Callable to enqueue.
+	 * @param   int      $priority           The priority to enqueue on.
+	 * @param   int      $accepted_args      The number of accepted arguments of the callable.
 	 *
 	 * @return  bool
 	 */
@@ -75,8 +75,8 @@ final class Hooks {
 	 * @since   1.0.0
 	 * @version 1.0.0
 	 *
-	 * @param   callable    $func           Function to enqueue.
-	 * @param   int         $accepted_args  The number of arguments the function accepts. Default 1.
+	 * @param   callable $func           Function to enqueue.
+	 * @param   int      $accepted_args  The number of arguments the function accepts. Default 1.
 	 *
 	 * @return  int|null     The priority of the enqueued function or null on failure.
 	 */
@@ -98,8 +98,8 @@ final class Hooks {
 	 * @since   1.0.0
 	 * @version 1.0.0
 	 *
-	 * @param   callable    $func           Function to enqueue.
-	 * @param   int         $accepted_args  The number of arguments the function accepts. Default 1.
+	 * @param   callable $func           Function to enqueue.
+	 * @param   int      $accepted_args  The number of arguments the function accepts. Default 1.
 	 *
 	 * @return  int|null    The priority of the enqueued function or null on failure.
 	 */
@@ -118,10 +118,10 @@ final class Hooks {
 	/**
 	 * Wrapper around WordPress' own 'add_action' function just for the sake of refactoring the other methods in this class.
 	 *
-	 * @param   string      $hook               Hook to enqueue callable on.
-	 * @param   callable    $func               Callable to enqueue.
-	 * @param   int         $priority           The priority to enqueue on.
-	 * @param   int         $accepted_args      The number of accepted arguments of the callable.
+	 * @param   string   $hook               Hook to enqueue callable on.
+	 * @param   callable $func               Callable to enqueue.
+	 * @param   int      $priority           The priority to enqueue on.
+	 * @param   int      $accepted_args      The number of accepted arguments of the callable.
 	 *
 	 * @return  bool
 	 */
@@ -132,16 +132,16 @@ final class Hooks {
 	/**
 	 * Generates a callable that removes another callable from a WP hook.
 	 *
-	 * @param   string      $hook       Hook on which the callable is enqueued.
-	 * @param   callable    $func       Callable to dequeue.
-	 * @param   int         $priority   The priority on which the callable is hooked.
+	 * @param   string   $hook       Hook on which the callable is enqueued.
+	 * @param   callable $func       Callable to dequeue.
+	 * @param   int      $priority   The priority on which the callable is hooked.
 	 *
 	 * @noinspection PhpInconsistentReturnPointsInspection
 	 *
 	 * @return  callable
 	 */
 	protected static function generate_dequeue_callable( string $hook, callable $func, int $priority ): callable {
-		return static function() use ( $hook, $func, $priority ) {
+		return static function () use ( $hook, $func, $priority ) {
 			\remove_action( $hook, $func, $priority );
 
 			if ( ! empty( \func_get_args() ) && \doing_filter() ) {

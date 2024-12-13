@@ -9,8 +9,6 @@ namespace DeepWebSolutions\Framework\Helpers\DataTypes;
  *
  * @since   1.4.0
  * @version 1.4.0
- * @author  Antonius Hegyes <a.hegyes@deep-web-solutions.com>
- * @package DeepWebSolutions\WP-Framework\Helpers\DataTypes
  */
 final class Floats {
 	/**
@@ -19,12 +17,12 @@ final class Floats {
 	 * @since   1.4.0
 	 * @version 1.4.0
 	 *
-	 * @param   mixed       $float      Variable to check.
-	 * @param   float|null  $default    The default value to return if check fails. By default null.
+	 * @param   mixed      $float      Variable to check.
+	 * @param   float|null $default    The default value to return if check fails. Defaults to null.
 	 *
 	 * @return  float|null
 	 */
-	public static function validate( $float, ?float $default = null ): ?float {
+	public static function validate( mixed $float, ?float $default = null ): ?float {
 		return \is_float( $float ) ? $float : $default;
 	}
 
@@ -35,12 +33,12 @@ final class Floats {
 	 * @since   1.4.0   Moved to the Floats class.
 	 * @version 1.4.0
 	 *
-	 * @param   mixed       $float      Variable to cast.
-	 * @param   float|null  $default    The default value to return if all fails. By default null.
+	 * @param   mixed      $float      Variable to cast.
+	 * @param   float|null $default    The default value to return if all fails. Defaults to null.
 	 *
 	 * @return  float|null
 	 */
-	public static function maybe_cast( $float, ?float $default = null ): ?float {
+	public static function maybe_cast( mixed $float, ?float $default = null ): ?float {
 		$result = \filter_var( $float, FILTER_VALIDATE_FLOAT, FILTER_REQUIRE_SCALAR | FILTER_FLAG_ALLOW_THOUSAND );
 		if ( false === $result ) {
 			$result = \filter_var(
@@ -63,9 +61,9 @@ final class Floats {
 	 * @since   1.4.0   Moved to the Floats class.
 	 * @version 1.4.0
 	 *
-	 * @param   int         $input_type     One of INPUT_GET, INPUT_POST, INPUT_COOKIE, INPUT_SERVER, or INPUT_ENV.
-	 * @param   string      $variable_name  Name of a variable to get from the input stream.
-	 * @param   float|null  $default        The default value to return if all fails. By default null.
+	 * @param   int        $input_type     One of INPUT_GET, INPUT_POST, INPUT_COOKIE, INPUT_SERVER, or INPUT_ENV.
+	 * @param   string     $variable_name  Name of a variable to get from the input stream.
+	 * @param   float|null $default        The default value to return if all fails. Defaults to null.
 	 *
 	 * @return  float|null
 	 */

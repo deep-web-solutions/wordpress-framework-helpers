@@ -21,9 +21,9 @@ trait FilesystemAwareTrait {
 	 * @since   1.0.0
 	 * @version 1.0.2
 	 *
-	 * @param   string|null     $form_url       The URL to post the form to.
-	 * @param   string          $context        Full path to the directory that is tested for being writable. Default empty.
-	 * @param   array|null      $extra_fields   Extra `POST` fields to be checked for inclusion in the post. Default null.
+	 * @param   string|null $form_url       The URL to post the form to.
+	 * @param   string      $context        Full path to the directory that is tested for being writable. Default empty.
+	 * @param   array|null  $extra_fields   Extra `POST` fields to be checked for inclusion in the post. Default null.
 	 *
 	 * @return  \WP_Filesystem_Base|null
 	 */

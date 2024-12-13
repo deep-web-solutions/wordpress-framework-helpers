@@ -19,8 +19,8 @@ final class Integers {
 	 * @since   1.4.0
 	 * @version 1.4.0
 	 *
-	 * @param   mixed       $integer    Variable to check.
-	 * @param   int|null    $default    The default value to return if check fails. By default null.
+	 * @param   mixed    $integer    Variable to check.
+	 * @param   int|null $default    The default value to return if check fails. By default null.
 	 *
 	 * @return  int|null
 	 */
@@ -35,8 +35,8 @@ final class Integers {
 	 * @since   1.4.0   Moved to the Integers class.
 	 * @version 1.4.0
 	 *
-	 * @param   mixed       $integer    Variable to cast.
-	 * @param   int|null    $default    The default value to return if all fails. By default null.
+	 * @param   mixed    $integer    Variable to cast.
+	 * @param   int|null $default    The default value to return if all fails. By default null.
 	 *
 	 * @return  int|null
 	 */
@@ -52,9 +52,9 @@ final class Integers {
 	 * @since   1.4.0   Moved to the Integers class.
 	 * @version 1.4.0
 	 *
-	 * @param   int         $input_type     One of INPUT_GET, INPUT_POST, INPUT_COOKIE, INPUT_SERVER, or INPUT_ENV.
-	 * @param   string      $variable_name  Name of a variable to get from the input stream.
-	 * @param   int|null    $default        The default value to return if all fails. By default null.
+	 * @param   int      $input_type     One of INPUT_GET, INPUT_POST, INPUT_COOKIE, INPUT_SERVER, or INPUT_ENV.
+	 * @param   string   $variable_name  Name of a variable to get from the input stream.
+	 * @param   int|null $default        The default value to return if all fails. By default null.
 	 *
 	 * @return  int|null
 	 */
@@ -73,9 +73,9 @@ final class Integers {
 	 * @since   1.4.0
 	 * @version 1.4.0
 	 *
-	 * @param   mixed|callable  $integer    Potential callable to resolve.
-	 * @param   int|null        $default    Default value to return on failure. By default null.
-	 * @param   array           $args       Arguments to pass on to the callable. By default none.
+	 * @param   mixed|callable $integer    Potential callable to resolve.
+	 * @param   int|null       $default    Default value to return on failure. By default null.
+	 * @param   array          $args       Arguments to pass on to the callable. By default none.
 	 *
 	 * @return  int|null
 	 */

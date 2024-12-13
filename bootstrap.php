@@ -35,3 +35,25 @@ if ( ! \defined( 'ABSPATH' ) ) {
 \define( __NAMESPACE__ . '\HELPERS_BASENAME', \plugin_basename( __FILE__ ) );
 \define( __NAMESPACE__ . '\HELPERS_DIR_PATH', \plugin_dir_path( __FILE__ ) );
 \define( __NAMESPACE__ . '\HELPERS_DIR_URL', \plugin_dir_url( __FILE__ ) );
+
+// Load the rest of the bootstrapper.
+require_once __DIR__ . '/functions.php';
+
+// Load component translations, so they are available even for the error admin notices.
+\add_action(
+	'init',
+	static function () {
+		\load_plugin_textdomain(
+			get_helpers_metadata( 'TextDomain' ),
+			false,
+			\dirname( get_helpers_basename() ) . get_helpers_metadata( 'DomainPath' )
+		);
+	}
+);
+
+// Bootstrap the helpers (maybe)!
+\define( __NAMESPACE__ . '\HELPERS_REQUIREMENTS', validate_plugin_requirements( get_helpers_basename() ) );
+if ( true !== is_helpers_initialized() ) {
+	/* @phpstan-ignore argument.type */
+	output_requirements_error( get_helpers_name(), get_helpers_version(), get_helpers_requirements_status() );
+}

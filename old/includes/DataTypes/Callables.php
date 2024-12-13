@@ -19,8 +19,8 @@ final class Callables {
 	 * @since   1.4.0
 	 * @version 1.7.0
 	 *
-	 * @param   mixed           $callable   Variable to check.
-	 * @param   callable|null   $default    The default value to return if check fails.
+	 * @param   mixed         $callable   Variable to check.
+	 * @param   callable|null $default    The default value to return if check fails.
 	 *
 	 * @return  callable|null
 	 */
@@ -44,8 +44,8 @@ final class Callables {
 	 * @since   1.4.0
 	 * @version 1.7.0
 	 *
-	 * @param   callable|mixed  $maybe_callable     Variable to maybe evaluate.
-	 * @param   array           $args               Arguments to pass on to the callable. No arguments by default.
+	 * @param   callable|mixed $maybe_callable     Variable to maybe evaluate.
+	 * @param   array          $args               Arguments to pass on to the callable. No arguments by default.
 	 *
 	 * @return  mixed
 	 */

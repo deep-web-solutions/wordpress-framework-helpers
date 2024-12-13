@@ -22,8 +22,8 @@ final class Misc {
 	 * @since   1.0.0
 	 * @version 1.7.2
 	 *
-	 * @param   array   $args       The arguments to parse.
-	 * @param   array   $defaults   The default arguments.
+	 * @param   array $args       The arguments to parse.
+	 * @param   array $defaults   The default arguments.
 	 *
 	 * @see     https://mekshq.com/recursive-wp-parse-args-wordpress-function/
 	 *
@@ -47,7 +47,7 @@ final class Misc {
 	 * @since   1.0.0
 	 * @version 1.7.0
 	 *
-	 * @param   string|null     $timezone_string    Optional timezone string. If not provided, will use the website's own timezone.
+	 * @param   string|null $timezone_string    Optional timezone string. If not provided, will use the website's own timezone.
 	 *
 	 * @return  int
 	 */

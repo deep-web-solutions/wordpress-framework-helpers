@@ -19,9 +19,9 @@ interface AssetsHelpersAwareInterface {
 	 * @since   1.0.0
 	 * @version 1.5.0
 	 *
-	 * @param   string              $name   The actual descriptor of the asset's purpose. Leave blank for default.
-	 * @param   string|string[]     $extra  Further descriptor of the asset's purpose.
-	 * @param   string              $root   Prepended to all asset handles inside the same class.
+	 * @param   string          $name   The actual descriptor of the asset's purpose. Leave blank for default.
+	 * @param   string|string[] $extra  Further descriptor of the asset's purpose.
+	 * @param   string          $root   Prepended to all asset handles inside the same class.
 	 *
 	 * @return  string
 	 */

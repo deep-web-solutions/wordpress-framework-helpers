@@ -19,8 +19,8 @@ final class Objects {
 	 * @since   1.4.0
 	 * @version 1.4.0
 	 *
-	 * @param   mixed           $object     Variable to check.
-	 * @param   object|null     $default    The default value to return if check fails. By default null.
+	 * @param   mixed       $object     Variable to check.
+	 * @param   object|null $default    The default value to return if check fails. By default null.
 	 *
 	 * @return  object|null
 	 */
@@ -36,8 +36,8 @@ final class Objects {
 	 *
 	 * @SuppressWarnings(PHPMD.UndefinedVariable)
 	 *
-	 * @param   string  $trait          The trait to act upon.
-	 * @param   bool    $autoload       Whether to allow this function to load the class automatically through the __autoload() magic method.
+	 * @param   string $trait          The trait to act upon.
+	 * @param   bool   $autoload       Whether to allow this function to load the class automatically through the __autoload() magic method.
 	 *
 	 * @return  array[]|null
 	 */
@@ -74,8 +74,8 @@ final class Objects {
 	 *
 	 * @SuppressWarnings(PHPMD.UndefinedVariable)
 	 *
-	 * @param   string  $trait          The trait to act upon.
-	 * @param   bool    $autoload       Whether to allow this function to load the class automatically through the __autoload() magic method.
+	 * @param   string $trait          The trait to act upon.
+	 * @param   bool   $autoload       Whether to allow this function to load the class automatically through the __autoload() magic method.
 	 *
 	 * @return  string[]|null
 	 */
@@ -118,8 +118,8 @@ final class Objects {
 	 *
 	 * @see     https://www.php.net/manual/en/function.class-uses.php#122427
 	 *
-	 * @param   object|string   $class          An object (class instance) or a string (class name).
-	 * @param   bool            $autoload       Whether to allow this function to load the class automatically through the __autoload() magic method.
+	 * @param   object|string $class          An object (class instance) or a string (class name).
+	 * @param   bool          $autoload       Whether to allow this function to load the class automatically through the __autoload() magic method.
 	 *
 	 * @return  array[]|null
 	 */
@@ -158,8 +158,8 @@ final class Objects {
 	 *
 	 * @SuppressWarnings(PHPMD.UndefinedVariable)
 	 *
-	 * @param   object|string   $class          An object (class instance) or a string (class name).
-	 * @param   bool            $autoload       Whether to allow this function to load the class automatically through the __autoload() magic method.
+	 * @param   object|string $class          An object (class instance) or a string (class name).
+	 * @param   bool          $autoload       Whether to allow this function to load the class automatically through the __autoload() magic method.
 	 *
 	 * @return  string[]|null
 	 */
@@ -199,9 +199,9 @@ final class Objects {
 	 * @since   1.0.0
 	 * @version 1.7.0
 	 *
-	 * @param   string          $trait              Trait to search for.
-	 * @param   object|string   $class_or_trait     An object (class instance) or a string (class or trait name) to investigate.
-	 * @param   bool            $autoload           Whether to allow this function to load the class automatically through the __autoload() magic method.
+	 * @param   string        $trait              Trait to search for.
+	 * @param   object|string $class_or_trait     An object (class instance) or a string (class or trait name) to investigate.
+	 * @param   bool          $autoload           Whether to allow this function to load the class automatically through the __autoload() magic method.
 	 *
 	 * @return  bool|null
 	 */
@@ -216,9 +216,9 @@ final class Objects {
 	 * @since   1.0.0
 	 * @version 1.7.0
 	 *
-	 * @param   string          $trait          Trait to search for.
-	 * @param   object|string   $class_or_trait An object (class instance) or a string (class or trait name) to investigate.
-	 * @param   bool            $autoload       Whether to allow this function to load the class automatically through the __autoload() magic method.
+	 * @param   string        $trait          Trait to search for.
+	 * @param   object|string $class_or_trait An object (class instance) or a string (class or trait name) to investigate.
+	 * @param   bool          $autoload       Whether to allow this function to load the class automatically through the __autoload() magic method.
 	 *
 	 * @return  bool|null
 	 */

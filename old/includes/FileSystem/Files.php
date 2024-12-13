@@ -21,8 +21,8 @@ final class Files {
 	 * @since   1.0.0
 	 * @version 1.5.0
 	 *
-	 * @param   string  $absolute   The absolute path to prepend.
-	 * @param   string  $relative   The relative path to append to the absolute one.
+	 * @param   string $absolute   The absolute path to prepend.
+	 * @param   string $relative   The relative path to append to the absolute one.
 	 *
 	 * @return  string  Full disk path.
 	 */
@@ -40,8 +40,8 @@ final class Files {
 	 * @version 1.0.0
 	 * @since   1.4.6
 	 *
-	 * @param   string  $filename   The path to the file, or just the filename.
-	 * @param   string  $extension  The extension to check against.
+	 * @param   string $filename   The path to the file, or just the filename.
+	 * @param   string $extension  The extension to check against.
 	 *
 	 * @return  bool    Whether the file has the expected extension or not.
 	 */
@@ -56,7 +56,7 @@ final class Files {
 	 * @version 1.7.2
 	 * @see    https://github.com/wpmetabox/meta-box/blob/023e3ccc08aced428c34b542169b9ac36d3893bd/inc/fields/file.php#L523
 	 *
-	 * @param   string  $absolute_or_relative   Absolute or relative filesystem path within the WordPress directory.
+	 * @param   string $absolute_or_relative   Absolute or relative filesystem path within the WordPress directory.
 	 *
 	 * @return  string
 	 */

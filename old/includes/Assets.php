@@ -24,9 +24,9 @@ final class Assets {
 	 * @since   1.6.0
 	 * @version 1.7.0
 	 *
-	 * @param   string                  $relative_path  Path of the asset relative to the WordPress root directory.
-	 * @param   string                  $constant_name  Constant which, if set and true, the unminified path will always be returned.
-	 * @param \WP_Filesystem_Base|null  $wp_filesystem  WordPress Filesystem object.
+	 * @param   string                   $relative_path  Path of the asset relative to the WordPress root directory.
+	 * @param   string                   $constant_name  Constant which, if set and true, the unminified path will always be returned.
+	 * @param \WP_Filesystem_Base|null $wp_filesystem  WordPress Filesystem object.
 	 *
 	 * @return  string
 	 */
@@ -59,9 +59,9 @@ final class Assets {
 	 * @since   1.6.0
 	 * @version 1.6.1
 	 *
-	 * @param   string  $relative_path      Path of the asset relative to the WordPress root directory.
-	 * @param   string  $fallback_version   Fallback version string to return if retrieving the modified time fails.
-	 * @param   \WP_Filesystem_Base|null    $wp_filesystem  WordPress Filesystem object.
+	 * @param   string                   $relative_path      Path of the asset relative to the WordPress root directory.
+	 * @param   string                   $fallback_version   Fallback version string to return if retrieving the modified time fails.
+	 * @param   \WP_Filesystem_Base|null $wp_filesystem  WordPress Filesystem object.
 	 *
 	 * @return  string
 	 */
@@ -83,7 +83,7 @@ final class Assets {
 	 * @since   1.0.0
 	 * @version 1.7.0
 	 *
-	 * @param   string  $constant_name  The name of the constant to check for truthful values in case the assets should be loaded in a minified state.
+	 * @param   string $constant_name  The name of the constant to check for truthful values in case the assets should be loaded in a minified state.
 	 *
 	 * @return  string
 	 */
