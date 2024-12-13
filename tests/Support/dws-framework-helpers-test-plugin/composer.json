@@ -1,0 +1,45 @@
+{
+  "name": "deep-web-solutions/wp-framework-helpers-test-plugin",
+  "type": "wordpress-plugin",
+
+  "repositories": [
+    {
+      "type": "path",
+      "url": "../dws-framework-helpers",
+      "options": {
+        "symlink": true
+      }
+    },
+    {
+      "type": "path",
+      "url": "../dws-framework-helpers/vendor/deep-web-solutions/wp-framework-bootstrapper",
+      "options": {
+        "symlink": true,
+        "versions": {
+          "deep-web-solutions/wp-framework-bootstrapper": "dev-trunk"
+        }
+      }
+    },
+    {
+      "packagist.org": false
+    }
+  ],
+  "require": {
+    "deep-web-solutions/wp-framework-helpers": "*"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": false,
+
+  "autoload": {
+    "psr-4": {
+      "DeepWebSolutions\\Framework\\Tests\\Helpers\\": "src/includes"
+    }
+  },
+
+  "scripts": {
+    "packages-update": [
+      "@composer clear-cache",
+      "@composer update --ignore-platform-reqs --no-interaction"
+    ]
+  }
+}

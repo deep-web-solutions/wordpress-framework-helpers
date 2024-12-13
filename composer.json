@@ -4,7 +4,6 @@
 
   "description": "A set of related helpers to kick-start WordPress development.",
   "keywords": ["wordpress", "framework", "Deep Web Solutions", "helpers"],
-  "homepage": "https://www.deep-web-solutions.com",
   "license": "GPL-3.0-or-later",
   "authors": [
     {
@@ -25,6 +24,8 @@
 
     "roave/security-advisories": "dev-latest"
   },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
 
   "autoload": {
     "psr-4": {

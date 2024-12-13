@@ -1,17 +1,10 @@
 {
   "phpVersion": "8.3",
-  "env": {
-    "development": {
-      "plugins": [ "." ]
-    },
-    "tests": {
-      "mappings": {
-        "wp-content/plugins/dws-framework-bootstrapper-test-plugin": "./tests/Support/dws-framework-bootstrapper-test-plugin",
-        "project": "."
-      }
-    }
+  "mappings": {
+    "wp-content/plugins/dws-framework-helpers-test-plugin": "./tests/Support/dws-framework-helpers-test-plugin",
+    "wp-content/plugins/dws-framework-helpers": "."
   },
   "lifecycleScripts": {
-    "afterStart": "vendor/deep-web-solutions/wordpress-configs/docker/wp-env-install-pdo_mysql.sh"
+    "afterStart": "vendor/deep-web-solutions/wordpress-configs/docker/wp-env-install-pdo_mysql.sh && wp-env run cli --env-cwd=wp-content/plugins/dws-framework-helpers-test-plugin composer run-script packages-update"
   }
 }

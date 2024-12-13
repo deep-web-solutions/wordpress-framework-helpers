@@ -10,12 +10,12 @@
     "selenium:start": "docker container start selenium-chromium",
     "selenium:stop": "docker container stop selenium-chromium",
 
-    "tests:start": "wp-env start && wp-env run tests-cli --env-cwd=wp-content/plugins/dws-framework-helpers-test-plugin composer run-script packages-update && npm run selenium:start",
-    "tests:run": "npm run tests:start && npm run tests:run:integration && npm run tests:run:end-to-end",
-    "tests:run:integration": "wp-env run tests-wordpress --env-cwd=project composer run-script tests:run:integration",
+    "tests:start": "wp-env start && npm run selenium:start",
+    "tests:run": "npm run tests:start && npm run tests:run:integration",
+    "tests:run:integration": "wp-env run tests-wordpress --env-cwd=wp-content/plugins/dws-framework-helpers composer run-script tests:run:integration",
 
     "tests:output-wp-path": "npm run wp-env install-path",
-    "tests:export-db": "npm run wp-env run tests-cli wp db export project/tests/Support/Data/dump.sql",
+    "tests:export-db": "npm run wp-env run tests-cli wp db export wp-content/plugins/dws-framework-helpers/tests/Support/Data/dump.sql",
 
     "wp-env:start": "wp-env start",
     "wp-env:update": "wp-env start --update",
