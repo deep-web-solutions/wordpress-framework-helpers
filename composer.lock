@@ -4092,12 +4092,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "ef9b4bbe0345917cc7b2e09681ee232e86b2a88c"
+                "reference": "abbccc97f36a9c78f033525c019d310433f22b57"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/ef9b4bbe0345917cc7b2e09681ee232e86b2a88c",
-                "reference": "ef9b4bbe0345917cc7b2e09681ee232e86b2a88c",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/abbccc97f36a9c78f033525c019d310433f22b57",
+                "reference": "abbccc97f36a9c78f033525c019d310433f22b57",
                 "shasum": ""
             },
             "conflict": {
@@ -4685,7 +4685,7 @@
                 "snipe/snipe-it": "<=7.0.13",
                 "socalnick/scn-social-auth": "<1.15.2",
                 "socialiteproviders/steam": "<1.1",
-                "spatie/browsershot": "<5.0.2",
+                "spatie/browsershot": "<5.0.3",
                 "spatie/image-optimizer": "<1.7.3",
                 "spencer14420/sp-php-email-handler": "<1",
                 "spipu/html2pdf": "<5.2.8",
@@ -4937,7 +4937,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-12-20T15:04:42+00:00"
+            "time": "2024-12-20T16:05:39+00:00"
         },
         {
             "name": "sebastian/cli-parser",

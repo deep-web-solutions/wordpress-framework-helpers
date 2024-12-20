@@ -207,10 +207,5 @@ class IntegerDataTypeTest extends WPTestCase {
 		}
 	}
 
-	public function test_lazy(): void {
-
-
-	}
-
 	// endregion
 }

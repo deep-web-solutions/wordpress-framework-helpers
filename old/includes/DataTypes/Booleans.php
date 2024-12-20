@@ -61,18 +61,4 @@ final class Booleans {
 	public static function logical_and( bool $boolean1, bool $boolean2 ): bool {
 		return $boolean1 && $boolean2;
 	}
-
-	/**
-	 * Converts a bool to a 'yes' or 'no'.
-	 *
-	 * @since   1.4.4
-	 * @version 1.4.4
-	 *
-	 * @param   bool $boolean    Bool to convert.
-	 *
-	 * @return  string
-	 */
-	public static function to_string( bool $boolean ): string {
-		return $boolean ? 'yes' : 'no';
-	}
 }
