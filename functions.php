@@ -14,7 +14,7 @@ namespace DeepWebSolutions\Framework;
  *
  * @return  string
  */
-function get_helpers_basename() {
+function get_helpers_component_basename() {
 	$basename = \constant( __NAMESPACE__ . '\HELPERS_BASENAME' );
 	\assert( \is_string( $basename ) );
 
@@ -29,7 +29,7 @@ function get_helpers_basename() {
  *
  * @return  string
  */
-function get_helpers_dir_path() {
+function get_helpers_component_dir_path() {
 	$dir_path = \constant( __NAMESPACE__ . '\HELPERS_DIR_PATH' );
 	\assert( \is_string( $dir_path ) );
 
@@ -44,7 +44,7 @@ function get_helpers_dir_path() {
  *
  * @return  string
  */
-function get_helpers_dir_url() {
+function get_helpers_component_dir_url() {
 	$dir_url = \constant( __NAMESPACE__ . '\HELPERS_DIR_URL' );
 	\assert( \is_string( $dir_url ) );
 
@@ -65,8 +65,8 @@ function get_helpers_dir_url() {
  * @return  ($property is null ? PluginMetaData : ($property is PluginMetaKey ? PluginMetaData[PluginMetaKey] : null))
  * @phpstan-ignore-next-line return.unusedType
  */
-function get_helpers_metadata( $property = null ) {
-	return get_plugin_metadata( get_helpers_basename(), $property );
+function get_helpers_component_metadata( $property = null ) {
+	return get_plugin_metadata( get_helpers_component_basename(), $property );
 }
 
 /**
@@ -77,7 +77,7 @@ function get_helpers_metadata( $property = null ) {
  *
  * @return  string
  */
-function get_helpers_name() {
+function get_helpers_component_name() {
 	return \wp_sprintf(
 		/* translators: %s: Author name */
 		\__( '%s Framework Helpers', 'dws-wp-framework-helpers' ),
@@ -93,8 +93,8 @@ function get_helpers_name() {
  *
  * @return  string
  */
-function get_helpers_version() {
-	$version = get_helpers_metadata( 'Version' );
+function get_helpers_component_version() {
+	$version = get_helpers_component_metadata( 'Version' );
 	\assert( \is_string( $version ) );
 
 	return $version;
@@ -108,7 +108,7 @@ function get_helpers_version() {
  *
  * @return  true|\WP_Error
  */
-function get_helpers_requirements_status() {
+function get_helpers_component_requirements_status() {
 	$requirements = \constant( __NAMESPACE__ . '\HELPERS_REQUIREMENTS' );
 	\assert( $requirements instanceof \WP_Error || true === $requirements );
 
@@ -123,8 +123,8 @@ function get_helpers_requirements_status() {
  *
  * @return  bool
  */
-function is_helpers_initialized() {
-	return true === get_helpers_requirements_status();
+function is_helpers_component_initialized() {
+	return true === get_helpers_component_requirements_status();
 }
 
 // endregion
