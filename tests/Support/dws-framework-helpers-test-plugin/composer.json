@@ -32,11 +32,12 @@
 
   "autoload": {
     "psr-4": {
-      "DeepWebSolutions\\Framework\\Tests\\Helpers\\": "src/includes"
+      "DeepWebSolutions\\Framework\\Helpers\\Tests\\": "src/includes"
     }
   },
 
   "scripts": {
+    "generate-autoloader": "@composer dump-autoload --ignore-platform-reqs -o",
     "packages-update": [
       "@composer clear-cache",
       "@composer update --ignore-platform-reqs --no-interaction"

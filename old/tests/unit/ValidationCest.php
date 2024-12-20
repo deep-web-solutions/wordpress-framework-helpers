@@ -5,7 +5,7 @@ namespace DeepWebSolutions\Framework\tests\unit;
 use Codeception\Example;
 use DeepWebSolutions\Framework\Helpers\DataTypes\Booleans;
 use DeepWebSolutions\Framework\Helpers\DataTypes\Callables;
-use DeepWebSolutions\Framework\Helpers\DataTypes\Floats;
+use DeepWebSolutions\Framework\Helpers\DataTypes\Float;
 use DeepWebSolutions\Framework\Helpers\DataTypes\Integers;
 use DeepWebSolutions\Framework\Helpers\DataTypes\Strings;
 use DeepWebSolutions\Framework\tests\_support\UnitTester;
@@ -77,7 +77,7 @@ class ValidationCest {
 	 * @dataProvider    validate_float_provider
 	 */
 	public function test_validate_float( UnitTester $I, Example $example ) {
-		$I->assertEquals( $example['expected'], Floats::maybe_cast( $example['value'], $example['default'] ) );
+		$I->assertEquals( $example['expected'], Float::maybe_cast( $example['value'], $example['default'] ) );
 	}
 
 	/**

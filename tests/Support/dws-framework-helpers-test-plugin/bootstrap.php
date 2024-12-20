@@ -15,6 +15,7 @@
 
 namespace DeepWebSolutions\Plugins;
 
+use DeepWebSolutions\Framework\Helpers\DataType\IntegerDataType;
 use DeepWebSolutions\Framework\Helpers\Request;
 
 \defined( 'ABSPATH' ) || exit;
@@ -25,6 +26,9 @@ if ( ! defined( 'DeepWebSolutions\Framework\BOOTSTRAPPER_BASENAME' ) ) {
 	require __DIR__ . '/vendor/deep-web-solutions/wp-framework-bootstrapper/bootstrap.php';
 	require __DIR__ . '/vendor/deep-web-solutions/wp-framework-helpers/bootstrap.php';
 }
+
+$test = IntegerDataType::lazy( fn() => 4 );
+var_dump( $test );
 
 return; // TODO: Debugging code below.
 

@@ -14,21 +14,6 @@ namespace DeepWebSolutions\Framework\Helpers\DataTypes;
  */
 final class Objects {
 	/**
-	 * Returns a given variable if it is an object or a default value if not.
-	 *
-	 * @since   1.4.0
-	 * @version 1.4.0
-	 *
-	 * @param   mixed       $object     Variable to check.
-	 * @param   object|null $default    The default value to return if check fails. By default null.
-	 *
-	 * @return  object|null
-	 */
-	public static function validate( $object, ?object $default = null ): ?object {
-		return \is_object( $object ) ? $object : $default;
-	}
-
-	/**
 	 * Returns all the traits used by a trait and its traits as a hierarchical array.
 	 *
 	 * @since   1.2.0

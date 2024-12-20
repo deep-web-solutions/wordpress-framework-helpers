@@ -14,65 +14,6 @@ namespace DeepWebSolutions\Framework\Helpers\DataTypes;
  */
 final class Booleans {
 	/**
-	 * Returns a given variable if it is a boolean or a default value if not.
-	 *
-	 * @since   1.4.0
-	 * @version 1.4.0
-	 *
-	 * @param   mixed     $boolean    Variable to check.
-	 * @param   bool|null $default    The default value to return if check fails. By default null.
-	 *
-	 * @return  bool|null
-	 */
-	public static function validate( $boolean, ?bool $default = null ): ?bool {
-		return \is_bool( $boolean ) ? $boolean : $default;
-	}
-
-	/**
-	 * Attempts to cast a variable of unknown type into a boolean.
-	 *
-	 * @since   1.0.0
-	 * @since   1.4.0   Moved to the Booleans class.
-	 * @version 1.4.2
-	 *
-	 * @param   mixed     $boolean    Variable to cast.
-	 * @param   bool|null $default    The default value to return if all fails. By default null.
-	 *
-	 * @return  bool|null
-	 */
-	public static function maybe_cast( $boolean, ?bool $default = null ): ?bool {
-		if ( \is_null( $boolean ) ) {
-			return $default;
-		}
-
-		$boolean = \filter_var( $boolean, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE );
-
-		return self::validate( $boolean, $default );
-	}
-
-	/**
-	 * Attempts to cast a variable from an input stream into a boolean value.
-	 *
-	 * @since   1.0.0
-	 * @since   1.4.0   Moved to the Booleans class.
-	 * @version 1.4.0
-	 *
-	 * @param   int       $input_type     One of INPUT_GET, INPUT_POST, INPUT_COOKIE, INPUT_SERVER, or INPUT_ENV.
-	 * @param   string    $variable_name  Name of a variable to get from the input stream.
-	 * @param   bool|null $default        The default value to return if all fails. By default null.
-	 *
-	 * @return  bool|null
-	 */
-	public static function maybe_cast_input( int $input_type, string $variable_name, ?bool $default = null ): ?bool {
-		if ( \filter_has_var( $input_type, $variable_name ) ) {
-			$boolean = \filter_input( $input_type, $variable_name, FILTER_UNSAFE_RAW, FILTER_REQUIRE_SCALAR | FILTER_NULL_ON_FAILURE );
-			return self::maybe_cast( $boolean, $default );
-		}
-
-		return $default;
-	}
-
-	/**
 	 * Attempts to resolve a potential callable to a boolean value.
 	 *
 	 * @since   1.3.0
