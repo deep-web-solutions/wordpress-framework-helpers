@@ -57,7 +57,7 @@ final class ArrayDataType implements DataTypeInterface {
 	 */
 	public static function maybe_cast_input( int $input_type, string $var_name, $fallback = null ): ?array {
 		if ( \filter_has_var( $input_type, $var_name ) ) {
-			$input_array = \filter_input( $input_type, $var_name, options: FILTER_FORCE_ARRAY );
+			$input_array = \filter_input( $input_type, $var_name, options: \FILTER_FORCE_ARRAY );
 			return self::maybe_cast( $input_array, $fallback );
 		}
 

@@ -40,7 +40,9 @@ final class IntegerDataType implements DataTypeInterface {
 	 * @version 2.0.0
 	 */
 	public static function maybe_cast( mixed $value, $fallback = null ): ?int {
-		if ( self::check( $value ) || FloatDataType::check( $value ) ) {
+		if ( self::check( $value ) ) {
+			return $value;
+		} elseif ( FloatDataType::check( $value ) ) {
 			return (int) $value;
 		} elseif ( ! StringDataType::check( $value ) ) {
 			return $fallback;

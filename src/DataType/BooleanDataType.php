@@ -48,12 +48,12 @@ final class BooleanDataType implements DataTypeInterface {
 			return $fallback;
 		}
 
-		$value = \str_replace( ' ', '', \trim( $value ) );
+		$value = \trim( $value );
 		if ( '' === $value ) {
 			return $fallback;
 		}
 
-		$maybe_boolean = \filter_var( $value, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE );
+		$maybe_boolean = \filter_var( $value, \FILTER_VALIDATE_BOOLEAN, \FILTER_NULL_ON_FAILURE );
 		if ( \is_null( $maybe_boolean ) && \is_numeric( $value ) ) {
 			$maybe_boolean = ( IntegerDataType::maybe_cast( $value ) > 0 );
 		}
@@ -69,7 +69,7 @@ final class BooleanDataType implements DataTypeInterface {
 	 */
 	public static function maybe_cast_input( int $input_type, string $var_name, $fallback = null ): ?bool {
 		if ( \filter_has_var( $input_type, $var_name ) ) {
-			$maybe_boolean = \filter_input( $input_type, $var_name, options: FILTER_REQUIRE_SCALAR | FILTER_NULL_ON_FAILURE );
+			$maybe_boolean = \filter_input( $input_type, $var_name, options: \FILTER_REQUIRE_SCALAR | \FILTER_NULL_ON_FAILURE );
 			return self::maybe_cast( $maybe_boolean, $fallback );
 		}
 

@@ -44,13 +44,13 @@ final class StringDataType implements DataTypeInterface {
 			return $value;
 		} elseif ( \is_null( $value ) ) {
 			return $fallback;
+		} elseif ( BooleanDataType::check( $value ) ) {
+			return BooleanDataType::stringify( $value );
+		} elseif ( ArrayDataType::check( $value ) || ( ObjectDataType::check( $value ) && ! $value instanceof \Stringable ) ) {
+			return $fallback;
 		}
 
-		if ( ! ArrayDataType::check( $value ) && ( ! ObjectDataType::check( $value ) || \method_exists( $value, '__toString' ) ) ) {
-			return (string) $value;
-		}
-
-		return $fallback;
+		return (string) $value;
 	}
 
 	/**
@@ -61,7 +61,7 @@ final class StringDataType implements DataTypeInterface {
 	 */
 	public static function maybe_cast_input( int $input_type, string $var_name, $fallback = null ): ?string {
 		if ( \filter_has_var( $input_type, $var_name ) ) {
-			$maybe_string = \filter_input( $input_type, $var_name, options: FILTER_REQUIRE_SCALAR );
+			$maybe_string = \filter_input( $input_type, $var_name, options: \FILTER_REQUIRE_SCALAR );
 			return self::maybe_cast( $maybe_string, $fallback );
 		}
 

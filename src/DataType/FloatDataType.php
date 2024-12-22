@@ -40,22 +40,24 @@ final class FloatDataType implements DataTypeInterface {
 	 * @version 2.0.0
 	 */
 	public static function maybe_cast( mixed $value, $fallback = null ): ?float {
-		if ( self::check( $value ) || IntegerDataType::check( $value ) ) {
+		if ( self::check( $value ) ) {
+			return $value;
+		} elseif ( IntegerDataType::check( $value ) ) {
 			return (float) $value;
 		} elseif ( ! StringDataType::check( $value ) ) {
 			return $fallback;
 		}
 
-		$value = \filter_var( $value, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION | FILTER_FLAG_ALLOW_THOUSAND | FILTER_FLAG_ALLOW_SCIENTIFIC );
+		$value = \filter_var( $value, \FILTER_SANITIZE_NUMBER_FLOAT, \FILTER_FLAG_ALLOW_FRACTION | \FILTER_FLAG_ALLOW_THOUSAND | \FILTER_FLAG_ALLOW_SCIENTIFIC );
 		if ( '' === $value ) {
 			return $fallback;
 		}
 
-		$filter_options = array( 'flags' => FILTER_REQUIRE_SCALAR | FILTER_FLAG_ALLOW_THOUSAND );
+		$filter_options = array( 'flags' => \FILTER_REQUIRE_SCALAR | \FILTER_FLAG_ALLOW_THOUSAND );
 
-		$maybe_float = \filter_var( $value, FILTER_VALIDATE_FLOAT, array( 'options' => array( 'decimal' => '.' ) ) + $filter_options );
+		$maybe_float = \filter_var( $value, \FILTER_VALIDATE_FLOAT, array( 'options' => array( 'decimal' => '.' ) ) + $filter_options );
 		if ( false === $maybe_float ) {
-			$maybe_float = \filter_var( $value, FILTER_VALIDATE_FLOAT, array( 'options' => array( 'decimal' => ',' ) ) + $filter_options );
+			$maybe_float = \filter_var( $value, \FILTER_VALIDATE_FLOAT, array( 'options' => array( 'decimal' => ',' ) ) + $filter_options );
 		}
 
 		return self::validate( $maybe_float, $fallback );
@@ -69,7 +71,7 @@ final class FloatDataType implements DataTypeInterface {
 	 */
 	public static function maybe_cast_input( int $input_type, string $var_name, $fallback = null ): ?float {
 		if ( \filter_has_var( $input_type, $var_name ) ) {
-			$input_maybe_float = \filter_input( $input_type, $var_name, options: FILTER_REQUIRE_SCALAR );
+			$input_maybe_float = \filter_input( $input_type, $var_name, options: \FILTER_REQUIRE_SCALAR );
 			return self::maybe_cast( $input_maybe_float, $fallback );
 		}
 

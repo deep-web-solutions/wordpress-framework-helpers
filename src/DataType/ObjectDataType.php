@@ -40,7 +40,26 @@ final class ObjectDataType implements DataTypeInterface {
 	 * @version 2.0.0
 	 */
 	public static function maybe_cast( mixed $value, $fallback = null ): ?object {
-		throw new \LogicException( 'Cannot cast to object.' );
+		if ( self::check( $value ) ) {
+			return $value;
+		} elseif ( ArrayDataType::check( $value ) ) {
+			return (object) $value;
+		} elseif ( ! StringDataType::check( $value ) ) {
+			return $fallback;
+		}
+
+		$value = \trim( $value );
+		if ( '' === $value ) {
+			return $fallback;
+		}
+
+		if ( \json_validate( $value ) ) {
+			$value = \json_decode( $value, associative: false );
+		} else {
+			$value = maybe_unserialize( $value );
+		}
+
+		return self::validate( $value, $fallback );
 	}
 
 	/**
@@ -50,6 +69,11 @@ final class ObjectDataType implements DataTypeInterface {
 	 * @version 2.0.0
 	 */
 	public static function maybe_cast_input( int $input_type, string $var_name, $fallback = null ): ?object {
-		throw new \LogicException( 'Cannot cast to object.' );
+		if ( \filter_has_var( $input_type, $var_name ) ) {
+			$value = \filter_input( $input_type, $var_name, options: \FILTER_REQUIRE_SCALAR );
+			return self::maybe_cast( $value, $fallback );
+		}
+
+		return $fallback;
 	}
 }
