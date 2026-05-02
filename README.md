@@ -1,3 +1,8 @@
+> [!IMPORTANT]
+> **This package is no longer maintained.** Folded into [`ahegyes/wp-framework-core`](https://github.com/ahegyes/wordpress-framework) as part of the v2 framework rewrite. The repository remains available for historical reference.
+
+---
+
 # DWS WordPress Framework - Helpers
 
 [![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)](https://opensource.org/licenses/)
